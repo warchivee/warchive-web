@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 1 999;
+  src: url(/fonts/variable/NotoSansKR-VariableFont_wght.ttf)
+    format('truetype-variations');
+}
+
+*,
+body,
+.text {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+@mixin font-h1 {
+  font-size: $pxr30;
+  font-weight: 600;
+}
+
+@mixin font-h2 {
+  font-size: $pxr20;
+  font-weight: 600;
+}
+
+@mixin font-h3 {
+  font-size: $pxr18;
+  font-weight: 600;
+}
+
+@mixin font-h4 {
+  font-size: $pxr16;
+  font-weight: 600;
+}
+
+@mixin font-content {
+  font-size: $pxr14;
+  font-weight: 500;
+}
+
+@mixin font-caption {
+  font-size: $pxr12;
+  font-weight: 400;
+}
+
+.font-color-black {
+  color: $black;
+}
+.font-color-white {
+  color: $white;
+}
+.font-color-ebony {
+  color: $ebony;
+}
+.font-color-french-lilac {
+  color: $french-lilac;
+}
+.font-color-alabaster {
+  color: $alabaster;
+}
+.font-color-sunglow {
+  color: $sunglow;
+}
+.font-color-blue-violet {
+  color: $blue-violet;
+}
+.font-color-laventer {
+  color: $lavender;
+}
+.font-color-purple {
+  color: $purple;
+}
+.font-color-vivid-violet {
+  color: $vivid-violet;
+}
+.font-color-selago {
+  color: $selago;
+}

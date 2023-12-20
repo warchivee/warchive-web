@@ -1,0 +1,23 @@
+# production
+/build
+
+# dependencies and cache
+/node_modules
+
+# misc
+.DS_Store
+
+# local env files
+.env*.local
+
+# zero-install
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# vite cache
+.vite
