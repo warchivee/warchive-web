@@ -7,6 +7,7 @@ export interface IconButtonProps {
   icon?: IconType;
   iconColor?: ColorType;
   labelColor?: ColorType;
+  background?: ColorType;
   size?: FontSizeType;
   align?: 'default' | 'reverse';
   onClick?: () => void;

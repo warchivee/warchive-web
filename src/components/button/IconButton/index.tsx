@@ -8,8 +8,9 @@ import { IconButtonProps } from './index.type';
 export default function IconButton({
   children,
   icon = undefined,
-  iconColor = 'black',
-  labelColor = 'black',
+  iconColor = 'selago',
+  labelColor = 'selago',
+  background = 'purple',
   size = 'normal',
   align = 'default',
   onClick = () => {},
@@ -17,7 +18,12 @@ export default function IconButton({
   return (
     <button
       type="button"
-      className={classNames('icon-button', { [`${align}`]: align })}
+      className={classNames(
+        'icon-button',
+        { [`${align}`]: align },
+        { [`background-${background}`]: background },
+        { 'only-icon': !children && icon },
+      )}
       onClick={onClick}
     >
       {icon && <Icon type={icon} color={iconColor} size={size} />}
