@@ -1,5 +1,5 @@
+import { FontSizeType } from '@components/text/index.type';
 import { ColorType } from '@utils/color';
-import { FontSize } from '@components/text/index.util';
 
 export type IconType =
   | 'angles-up'
@@ -19,5 +19,5 @@ export type IconType =
 export interface IconProps {
   type: IconType;
   color: ColorType;
-  size: FontSize;
+  size: FontSizeType;
 }

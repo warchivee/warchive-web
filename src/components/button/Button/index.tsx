@@ -1,16 +1,15 @@
 import classNames from 'classnames';
 
-import { renderLabel } from '@components/text/index.util';
-
+import { Text } from '@components/text';
 import { ButtonProps } from './index.type';
 
 export default function Button({
-  label = '',
+  children,
   labelColor = 'white',
   color = 'purple',
   type = 'round',
   size = 'normal',
-  width = 'defult',
+  width = 'default',
   onClick = () => {},
 }: ButtonProps) {
   return (
@@ -20,13 +19,15 @@ export default function Button({
         'button',
         { [`background-${color}`]: color },
         { [`border-${type}`]: type },
+        { 'full-width': width === 'full' },
       )}
       onClick={onClick}
-      style={{
-        width: width === 'full' ? '100%' : 'max-content',
-      }}
     >
-      {renderLabel(size, label, labelColor)}
+      {children && (
+        <Text color={labelColor} size={size}>
+          {children}
+        </Text>
+      )}
     </button>
   );
 }

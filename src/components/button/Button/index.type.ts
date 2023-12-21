@@ -1,12 +1,12 @@
+import { FontSizeType } from '@components/text/index.type';
 import { ColorType } from '@utils/color';
-import { FontSize } from '@components/text/index.util';
 
 export interface ButtonProps {
-  label?: string;
+  children?: React.ReactNode;
   labelColor?: ColorType;
   color?: ColorType;
-  type?: 'square' | 'round';
-  size?: FontSize;
-  width?: 'defult' | 'full';
+  type?: 'default' | 'round';
+  size?: FontSizeType;
+  width?: 'default' | 'full';
   onClick?: () => void;
 }

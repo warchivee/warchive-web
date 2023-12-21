@@ -2,13 +2,13 @@ import classNames from 'classnames';
 
 import Icon from '@components/icon';
 
-import { renderLabel } from '@components/text/index.util';
+import { Text } from '@components/text';
 import { IconButtonProps } from './index.type';
 
 export default function IconButton({
+  children,
   icon = undefined,
   iconColor = 'black',
-  label = '',
   labelColor = 'black',
   size = 'normal',
   align = 'default',
@@ -21,7 +21,11 @@ export default function IconButton({
       onClick={onClick}
     >
       {icon && <Icon type={icon} color={iconColor} size={size} />}
-      {renderLabel(size, label, labelColor)}
+      {children && (
+        <Text size={size} color={labelColor}>
+          {children}
+        </Text>
+      )}
     </button>
   );
 }

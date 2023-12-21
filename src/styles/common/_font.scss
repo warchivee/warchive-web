@@ -12,32 +12,15 @@ body,
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-@mixin font-h1 {
-  font-size: $pxr30;
-  font-weight: 600;
-}
-
-@mixin font-h2 {
-  font-size: $pxr20;
-  font-weight: 600;
-}
-
-@mixin font-h3 {
-  font-size: $pxr18;
-  font-weight: 600;
-}
-
-@mixin font-h4 {
+.font-size-big {
   font-size: $pxr16;
-  font-weight: 600;
+  font-weight: 500;
 }
-
-@mixin font-content {
+.font-size-normal {
   font-size: $pxr14;
   font-weight: 500;
 }
-
-@mixin font-caption {
+.font-size-small {
   font-size: $pxr12;
   font-weight: 400;
 }

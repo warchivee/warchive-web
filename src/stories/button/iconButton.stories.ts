@@ -13,23 +13,20 @@ const meta: Meta<typeof IconButton> = {
 export default meta;
 type Story = StoryObj<typeof IconButton>;
 
-export const OnlyIcon: Story = {
-  args: {
-    icon: 'star',
-  },
-};
-
 export const IconWithText: Story = {
-  args: {
-    icon: 'star',
-    label: '즐겨찾기 목록',
-  },
+  args: { children: '즐겨찾기 목록', icon: 'star' },
 };
 
 export const IconWithTextReverse: Story = {
   args: {
+    children: '즐겨찾기 목록',
     icon: 'star',
-    label: '즐겨찾기 목록',
     align: 'reverse',
+  },
+};
+
+export const OnlyIcon: Story = {
+  args: {
+    icon: 'star',
   },
 };

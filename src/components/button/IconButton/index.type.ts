@@ -1,13 +1,13 @@
 import { ColorType } from '@utils/color';
 import { IconType } from '@components/icon/index.type';
-import { FontSize } from '@components/text/index.util';
+import { FontSizeType } from '@components/text/index.type';
 
 export interface IconButtonProps {
+  children?: React.ReactNode;
   icon?: IconType;
   iconColor?: ColorType;
-  label?: string;
   labelColor?: ColorType;
-  size?: FontSize;
+  size?: FontSizeType;
   align?: 'default' | 'reverse';
   onClick?: () => void;
 }

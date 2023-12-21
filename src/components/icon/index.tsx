@@ -1,4 +1,5 @@
 import { ColorCodes } from '@utils/color';
+import { FontSizeType } from '@components/text/index.type';
 
 import AnglesUp from '@assets/icons/angles-up.svg?react';
 import Bars from '@assets/icons/bars.svg?react';
@@ -15,7 +16,12 @@ import Write from '@assets/icons/write.svg?react';
 import Xmark from '@assets/icons/xmark.svg?react';
 
 import { IconType, IconProps } from './index.type';
-import { fontSize } from '@components/text/index.util';
+
+const IconSizeCodes: Record<FontSizeType, number> = {
+  small: 12,
+  normal: 16,
+  big: 18,
+};
 
 const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   'angles-up': AnglesUp,
@@ -39,8 +45,8 @@ export default function Icon({ type, color, size }: IconProps) {
   return (
     <IconComponent
       fill={ColorCodes[color]}
-      height={fontSize[size]}
-      width={fontSize[size]}
+      height={IconSizeCodes[size]}
+      width={IconSizeCodes[size]}
     />
   );
 }

@@ -12,37 +12,38 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const SquareButton: Story = {
+export const DefaultButton: Story = {
   args: {
-    type: 'square',
-    label: '보내기',
+    children: '버튼',
+    type: 'default',
   },
 };
 
 export const RoundButton: Story = {
   args: {
+    children: '검색초기화',
     type: 'round',
-    label: '검색초기화',
   },
 };
 
 export const Percent100Button: Story = {
   args: {
+    children: '가로를 꽉 채웠어요',
     type: 'round',
-    label: '가로를 꽉 채웠어요',
+    width: 'full',
   },
 };
 
 export const BigLabelButton: Story = {
   args: {
+    children: '큰 라벨 적용했어요',
     size: 'big',
-    label: '큰 라벨 적용했어요',
   },
 };
 
 export const SmallLabelButton: Story = {
   args: {
+    children: '작은 라벨 적용했어요',
     size: 'small',
-    label: '작은 라벨 적용했어요',
   },
 };
