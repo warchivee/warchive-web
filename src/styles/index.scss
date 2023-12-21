@@ -10,10 +10,10 @@
 @import './config/reset', './config/custom-reset';
 
 // 전역스타일(mixin)
-@import './config/font-style', './config/display';
+@import './config/font-style', './config/display', './config/color-style';
 
 // 컴포넌트 스타일
-@import './components/icon-button.scss', './components/text';
+@import './components/icon-button', './components/text', './components/button';
 
 html {
   background-color: $alabaster;
@@ -22,4 +22,8 @@ html {
 body {
   background-color: $alabaster;
   color: $black;
+}
+
+.border-round {
+  border-radius: 20rem;
 }

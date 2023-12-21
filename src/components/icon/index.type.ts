@@ -1,4 +1,5 @@
 import { ColorType } from '@utils/color';
+import { FontSize } from '@components/text/index.util';
 
 export type IconType =
   | 'angles-up'
@@ -15,10 +16,8 @@ export type IconType =
   | 'write'
   | 'xmark';
 
-export type IconSizeType = 'big' | 'normal' | 'small';
-
 export interface IconProps {
   type: IconType;
   color: ColorType;
-  size: IconSizeType;
+  size: FontSize;
 }

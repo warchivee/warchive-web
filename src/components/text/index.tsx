@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ColorType } from 'src/styles/utils/color';
+import { ColorType } from '@utils/color';
 
 type TitleType = 'h1' | 'h2' | 'h3' | 'h4';
 

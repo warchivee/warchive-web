@@ -1,13 +1,12 @@
 import { ColorType } from '@utils/color';
-import { IconType } from '@components/icon/index.type';
 import { FontSize } from '@components/text/index.util';
 
-export interface IconButtonProps {
-  icon?: IconType;
-  iconColor?: ColorType;
+export interface ButtonProps {
   label?: string;
   labelColor?: ColorType;
+  color?: ColorType;
+  type?: 'square' | 'round';
   size?: FontSize;
-  align?: 'default' | 'reverse';
+  width?: 'defult' | 'full';
   onClick?: () => void;
 }
