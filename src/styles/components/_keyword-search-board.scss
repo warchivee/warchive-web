@@ -69,10 +69,14 @@
   }
 
   & .select-keywords {
-    @include flex-row-start;
-    gap: 0.7rem;
-    width: 80%;
-    padding: 1rem 0;
-    flex-wrap: wrap;
+    @include flex-row-center;
+    padding: 1rem 0rem;
+
+    & > .keywords {
+      @include flex-row-start;
+      gap: 0.7rem;
+      width: 80%;
+      flex-wrap: wrap;
+    }
   }
 }

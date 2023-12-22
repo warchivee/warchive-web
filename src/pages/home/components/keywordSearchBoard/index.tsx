@@ -2,6 +2,7 @@ import { CategoryType, ValueLabelType } from '@utils/common.type';
 import { useState } from 'react';
 import { Title } from '@components/text';
 import classNames from 'classnames';
+import Button from '@components/button/Button';
 import Bubbles from './bubbles';
 import Bubble from './bubble';
 
@@ -84,20 +85,35 @@ export default function KeywordSearchBorad({
         </div>
       </div>
 
-      <div className="select-keywords">
-        {selectKeywords?.map((keyword: ValueLabelType) => (
-          <Bubble
-            key={keyword.value}
-            value={`selected-${keyword.value}`} // selected 를 붙여주지 않으면 panel 의 키워드가 같이 조작된다.
-            label={keyword.label}
-            type="remove"
-            size="small"
-            onChange={() => {
-              removeSelectKeyword(keyword);
-            }}
-          />
-        ))}
-      </div>
+      {(tabOpen || selectKeywords?.length !== 0) && (
+        <div className="select-keywords">
+          <div className="keywords">
+            {selectKeywords?.map((keyword: ValueLabelType) => (
+              <Bubble
+                key={keyword.value}
+                value={`selected-${keyword.value}`} // selected 를 붙여주지 않으면 panel 의 키워드가 같이 조작된다.
+                label={keyword.label}
+                type="remove"
+                size="small"
+                onChange={() => {
+                  removeSelectKeyword(keyword);
+                }}
+              />
+            ))}
+          </div>
+
+          {selectKeywords?.length !== 0 && (
+            <Button
+              color="lavender"
+              labelColor="french-lilac"
+              type="round"
+              size="small"
+            >
+              검색 초기화
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
