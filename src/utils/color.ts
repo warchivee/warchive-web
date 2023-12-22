@@ -3,6 +3,7 @@
 export type ColorType =
   | 'black'
   | 'white'
+  | 'gray'
   | 'ebony'
   | 'french-lilac'
   | 'alabaster'
@@ -16,6 +17,7 @@ export type ColorType =
 export const ColorCodes: Record<ColorType, string> = {
   black: '#020202',
   white: '#ffffff',
+  gray: '##A29EA5',
   ebony: '#170c1e',
   'french-lilac': '#ebdbf3',
   alabaster: '#fbfbfb',

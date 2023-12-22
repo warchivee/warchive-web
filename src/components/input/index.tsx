@@ -1,15 +1,7 @@
-import Icon from '@components/icon';
-import { FontSizeType } from '@components/text/index.type';
 import classNames from 'classnames';
 
-interface InputProps {
-  type?: 'default' | 'text' | 'search';
-  style?: 'outline' | 'underline';
-  value: string;
-  placeholder?: string;
-  size?: FontSizeType;
-  onChange?: () => void;
-}
+import Icon from '@components/icon';
+import { InputProps } from './index.type';
 
 export default function Input({
   type = 'text',
@@ -24,8 +16,7 @@ export default function Input({
       <input
         type={type}
         className={classNames(
-          { outline: style === 'outline' },
-          { underline: style === 'underline' },
+          { [`${style}`]: style },
           { [`font-size-${size}`]: size },
         )}
         placeholder={placeholder}

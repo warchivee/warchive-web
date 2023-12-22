@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Bubble from '@components/bubbles/bubble/index';
+import Bubble from 'src/pages/home/components/keywordSearchBoard/bubble/index';
 
 const meta: Meta<typeof Bubble> = {
   component: Bubble,
-  title: 'Bubble/Bubble',
+  title: 'KeywordSearchBorad/Bubble',
   parameters: {
     layout: 'centered',
     backgrounds: {

@@ -2,7 +2,7 @@ import { ColorType } from '@utils/color';
 
 export type FontSizeType = 'small' | 'normal' | 'big';
 
-export type TitleType = 'h1' | 'h2' | 'h3' | 'h4';
+export type TitleType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
 
 export interface TextProps {
   children?: React.ReactNode;
