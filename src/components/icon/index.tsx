@@ -14,6 +14,7 @@ import Star from '@assets/icons/star.svg?react';
 import Twitter from '@assets/icons/twitter.svg?react';
 import Write from '@assets/icons/write.svg?react';
 import Xmark from '@assets/icons/xmark.svg?react';
+import Search from '@assets/icons/search.svg?react';
 
 import { IconType, IconProps } from './index.type';
 
@@ -37,6 +38,7 @@ const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   twitter: Twitter,
   write: Write,
   xmark: Xmark,
+  search: Search,
 };
 
 export default function Icon({ type, color, size }: IconProps) {
@@ -44,6 +46,7 @@ export default function Icon({ type, color, size }: IconProps) {
 
   return (
     <IconComponent
+      className="icon"
       fill={ColorCodes[color]}
       height={IconSizeCodes[size]}
       width={IconSizeCodes[size]}

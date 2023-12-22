@@ -14,7 +14,8 @@ export type IconType =
   | 'star'
   | 'twitter'
   | 'write'
-  | 'xmark';
+  | 'xmark'
+  | 'search';
 
 export interface IconProps {
   type: IconType;
