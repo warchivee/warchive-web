@@ -1,0 +1,40 @@
+.input {
+  input {
+    width: 100%;
+
+    &.outline {
+      padding: 0.5rem 1rem;
+      border: 0.1rem solid $purple;
+      border-radius: 20rem;
+    }
+
+    &.underline {
+      border: none;
+      padding: 0.3rem 0rem;
+      border-bottom: 0.1rem solid $french-lilac;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &[type='search'] {
+      padding-left: 2.3rem;
+    }
+
+    /* search input focus 시 x 버튼 비활성화 */
+    &[type='search']::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+      display: none;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    left: 1.5rem; /* 아이콘의 위치를 조절하세요 */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* 아이콘 영역이 클릭되지 않도록 설정 */
+  }
+}

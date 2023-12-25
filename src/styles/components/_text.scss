@@ -1,25 +1,26 @@
 .text {
   &.h1 {
-    @include font-h1;
+    font-size: $pxr30;
+    font-weight: 600;
   }
 
   &.h2 {
-    @include font-h2;
+    font-size: $pxr20;
+    font-weight: 600;
   }
 
   &.h3 {
-    @include font-h3;
+    font-size: $pxr18;
+    font-weight: 600;
   }
 
   &.h4 {
-    @include font-h4;
+    font-size: $pxr16;
+    font-weight: 600;
   }
 
-  &.content {
-    @include font-content;
-  }
-
-  &.caption {
-    @include font-caption;
+  &.h5 {
+    font-size: $pxr14;
+    font-weight: 600;
   }
 }

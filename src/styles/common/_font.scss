@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 1 999;
+  src: url(/fonts/variable/NotoSansKR-VariableFont_wght.ttf)
+    format('truetype-variations');
+}
+
+*,
+body,
+.text {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.font-size-big {
+  font-size: $pxr16;
+  font-weight: 500;
+}
+.font-size-normal {
+  font-size: $pxr14;
+  font-weight: 500;
+}
+.font-size-small {
+  font-size: $pxr12;
+  font-weight: 400;
+}

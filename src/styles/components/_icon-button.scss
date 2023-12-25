@@ -1,9 +1,0 @@
-.icon-button {
-  @include flex-row-space-between;
-  @include font-h4;
-  gap: $pxr5;
-
-  &.reverse {
-    flex-direction: row-reverse;
-  }
-}

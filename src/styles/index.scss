@@ -3,23 +3,21 @@
   선언 순서에 따라 override 됨을 주의한다.
 */
 
-// 변수
-@import './utils/pxr', './utils/color';
+@import './utils/index.scss';
+@import './common/index.scss';
+@import './components/index.scss';
 
-// reset
-@import './config/reset', './config/custom-reset';
-
-// 전역스타일(mixin)
-@import './config/font-style', './config/display';
-
-// 컴포넌트 스타일
-@import './components/icon-button.scss', './components/text';
-
-html {
-  background-color: $alabaster;
-}
-
+html,
 body {
   background-color: $alabaster;
   color: $black;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
