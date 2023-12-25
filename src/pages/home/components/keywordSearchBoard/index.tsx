@@ -2,7 +2,7 @@ import { CategoryType, ValueLabelType } from '@utils/common.type';
 import { useState } from 'react';
 import { Title } from '@components/text';
 import classNames from 'classnames';
-import Button from '@components/button/Button';
+import Button from '@components/button/index';
 import Bubbles from './bubbles';
 import Bubble from './bubble';
 

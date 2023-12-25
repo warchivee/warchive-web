@@ -1,8 +1,8 @@
 .icon-button {
   @include flex-row-space-between;
-  border-radius: 20rem;
   gap: $pxr5;
   padding: 0.5rem 1rem;
+  width: max-content;
 
   &.reverse {
     flex-direction: row-reverse;
@@ -10,5 +10,9 @@
 
   &.only-icon {
     padding: 0.5rem;
+  }
+
+  &.full-width {
+    width: 100%;
   }
 }

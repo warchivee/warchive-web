@@ -1,20 +1,22 @@
 import classNames from 'classnames';
 
 import Icon from '@components/icon';
-
 import { Text } from '@components/text';
-import { IconButtonProps } from './index.type';
 
-export default function IconButton({
+import { ButtonProps } from './index.type';
+
+export default function Button({
   children,
   icon = undefined,
-  iconColor = 'selago',
-  labelColor = 'selago',
-  background = 'purple',
+  iconColor = 'purple',
+  labelColor = 'black',
+  background = undefined,
+  type = 'default',
   size = 'normal',
   align = 'default',
+  width = 'default',
   onClick = () => {},
-}: IconButtonProps) {
+}: ButtonProps) {
   return (
     <button
       type="button"
@@ -23,6 +25,8 @@ export default function IconButton({
         { [`${align}`]: align },
         { [`background-${background}`]: background },
         { 'only-icon': !children && icon },
+        { [`border-${type}`]: type },
+        { 'full-width': width === 'full' },
       )}
       onClick={onClick}
     >

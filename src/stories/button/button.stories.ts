@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Button from '@components/button/Button';
+import Button from '@components/button/index';
 
 const meta: Meta<typeof Button> = {
   component: Button,
   title: 'Button/Button',
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
-
-  // layout = centered 옵션을 주면 부모 width/height 을 받아오지 못해 width=100% 적용이 안 된다.
 };
 
 export default meta;
@@ -15,7 +16,35 @@ type Story = StoryObj<typeof Button>;
 export const DefaultButton: Story = {
   args: {
     children: '버튼',
+    icon: undefined,
+    iconColor: undefined,
+    labelColor: 'white',
+    background: 'purple',
     type: 'default',
+    align: 'default',
+    width: 'default',
+  },
+};
+
+export const IconWithText: Story = {
+  args: { children: '즐겨찾기 목록', icon: 'star' },
+};
+
+export const IconWithTextReverse: Story = {
+  args: {
+    children: '위로',
+    icon: 'angles-up',
+    align: 'reverse',
+    iconColor: 'purple',
+    labelColor: 'purple',
+  },
+};
+
+export const OnlyIcon: Story = {
+  args: {
+    icon: 'star',
+    background: 'selago',
+    type: 'round',
   },
 };
 
@@ -23,14 +52,17 @@ export const RoundButton: Story = {
   args: {
     children: '검색초기화',
     type: 'round',
+    background: 'purple',
+    labelColor: 'selago',
   },
 };
 
 export const Percent100Button: Story = {
   args: {
     children: '가로를 꽉 채웠어요',
-    type: 'round',
     width: 'full',
+    background: 'purple',
+    labelColor: 'selago',
   },
 };
 
@@ -38,6 +70,8 @@ export const BigLabelButton: Story = {
   args: {
     children: '큰 라벨 적용했어요',
     size: 'big',
+    background: 'purple',
+    labelColor: 'selago',
   },
 };
 
@@ -45,5 +79,7 @@ export const SmallLabelButton: Story = {
   args: {
     children: '작은 라벨 적용했어요',
     size: 'small',
+    background: 'purple',
+    labelColor: 'selago',
   },
 };
