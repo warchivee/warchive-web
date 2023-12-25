@@ -104,7 +104,7 @@ export default function KeywordSearchBorad({
 
           {selectKeywords?.length !== 0 && (
             <Button
-              color="lavender"
+              background="lavender"
               labelColor="french-lilac"
               type="round"
               size="small"
