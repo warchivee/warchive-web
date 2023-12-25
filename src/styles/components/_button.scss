@@ -1,8 +1,16 @@
-.button {
-  @include flex-row-center;
+.icon-button {
+  @include flex-row-space-between;
+  gap: $pxr5;
   padding: 0.5rem 1rem;
-  font-size: 1rem;
   width: max-content;
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
+  &.only-icon {
+    padding: 0.5rem;
+  }
 
   &.full-width {
     width: 100%;
