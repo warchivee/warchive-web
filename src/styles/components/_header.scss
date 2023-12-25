@@ -1,0 +1,39 @@
+.header-background {
+  @include flex-row-center;
+  width: 100%;
+  background-color: $ebony;
+  padding: 2rem 0;
+
+  & header {
+    @include flex-row-start;
+    gap: 2rem;
+
+    width: 65%; //페이지의 콘텐츠 전부 80%를 차지해야 한다. -> todo 공통화
+
+    & .logo {
+      height: 2.8rem;
+
+      & > img {
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    & .menus {
+      @include flex-row-space-between;
+      align-items: flex-end;
+      width: 100%;
+      height: 100%;
+
+      & button {
+        padding: 0;
+        align-items: flex-end;
+      }
+
+      & .menu {
+        @include flex-row-start;
+        gap: 1rem;
+      }
+    }
+  }
+}

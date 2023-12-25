@@ -14,7 +14,7 @@ export default function Bubbles({
         {title}
       </Title>
       <div className="grid">
-        {bubbles?.map((bubble: ValueLabelType) => (
+        {bubbles?.map((bubble: ValueLabelType<string>) => (
           <Bubble
             key={bubble.value}
             value={bubble.value}

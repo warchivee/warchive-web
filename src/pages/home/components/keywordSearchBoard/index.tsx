@@ -8,9 +8,9 @@ import Bubble from './bubble';
 
 interface KeywordSearchBoradProps {
   keywords: CategoryType[];
-  selectKeywords: ValueLabelType[];
-  addSelectKeyword: (keyword: ValueLabelType) => void;
-  removeSelectKeyword: (keyword: ValueLabelType) => void;
+  selectKeywords: ValueLabelType<string>[];
+  addSelectKeyword: (keyword: ValueLabelType<string>) => void;
+  removeSelectKeyword: (keyword: ValueLabelType<string>) => void;
 }
 
 export default function KeywordSearchBorad({
@@ -21,7 +21,7 @@ export default function KeywordSearchBorad({
 }: KeywordSearchBoradProps) {
   const [tab, setTab] = useState<number>(0);
   const [tabOpen, setTabOpen] = useState<boolean>(false);
-  const handleChange = (checked: boolean, keyword: ValueLabelType) => {
+  const handleChange = (checked: boolean, keyword: ValueLabelType<string>) => {
     if (checked) {
       addSelectKeyword(keyword);
     } else {
@@ -43,6 +43,7 @@ export default function KeywordSearchBorad({
             키워드로 검색
           </Title>
         </div>
+
         {keywords?.map((category: CategoryType, index: number) => (
           <div
             className={classNames('tab', { select: tab === index })}
@@ -88,7 +89,7 @@ export default function KeywordSearchBorad({
       {(tabOpen || selectKeywords?.length !== 0) && (
         <div className="select-keywords">
           <div className="keywords">
-            {selectKeywords?.map((keyword: ValueLabelType) => (
+            {selectKeywords?.map((keyword: ValueLabelType<string>) => (
               <Bubble
                 key={keyword.value}
                 value={`selected-${keyword.value}`} // selected 를 붙여주지 않으면 panel 의 키워드가 같이 조작된다.

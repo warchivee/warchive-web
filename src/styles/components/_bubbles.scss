@@ -3,6 +3,7 @@ $bubbles-background: $blue-violet;
 .bubbles {
   background: $bubbles-background;
   padding: 1rem;
+  max-width: 100%;
 
   & > .text {
     padding: 0.3rem 0.7rem;
@@ -28,10 +29,6 @@ $bubbles-background: $blue-violet;
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0.5);
     }
-
-    @media (max-width: 600px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 }
 
@@ -44,6 +41,7 @@ $bubbles-background: $blue-violet;
 
   & > label {
     @include flex-row-center;
+    align-items: center;
     cursor: pointer;
     gap: 0.2rem;
     padding: 0.3rem 0.7rem;

@@ -1,12 +1,15 @@
 .keyword-search-board {
   @include flex-col-center;
+  align-items: center;
 
   background: $purple;
   width: 100%;
 
   & .tabs {
     @include flex-row-center;
-    width: 80%; //페이지의 콘텐츠 전부 80%를 차지해야 한다. -> todo 공통화
+    align-items: center;
+
+    width: 65%; //페이지의 콘텐츠 전부 80%를 차지해야 한다. -> todo 공통화
 
     & .tab,
     & .control {
@@ -34,13 +37,12 @@
     width: 100%;
     background: $blue-violet;
     @include flex-col-center;
+    align-items: center;
 
     & .panel {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: flex-start;
-      width: 80%;
+      @include flex-row-center;
+
+      width: 65%; //페이지의 콘텐츠 전부 80%를 차지해야 한다. -> todo 공통화
 
       & .bubbles {
         flex: 1;
@@ -52,13 +54,25 @@
         height: 15rem;
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 1200px) {
+        & .bubbles > .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 700px) {
         @include flex-col-center;
         & .driven {
           border-bottom: 1px solid #59009180;
           height: 0;
           border-right: 0;
           width: 15rem;
+        }
+      }
+
+      @media (max-width: 500px) {
+        & .bubbles > .grid {
+          grid-template-columns: repeat(1, 1fr);
         }
       }
     }

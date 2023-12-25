@@ -21,7 +21,7 @@ export default function Button({
     <button
       type="button"
       className={classNames(
-        'icon-button',
+        'button',
         { [`${align}`]: align },
         { [`background-${background}`]: background },
         { 'only-icon': !children && icon },

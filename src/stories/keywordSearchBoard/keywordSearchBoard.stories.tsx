@@ -5,9 +5,6 @@ import { testData, testData2 } from './testData';
 const meta: Meta<typeof KeywordSearchBorad> = {
   component: KeywordSearchBorad,
   title: 'KeywordSearchBorad/KeywordSearchBorad',
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
 };
 
