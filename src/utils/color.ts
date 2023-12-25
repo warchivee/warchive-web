@@ -12,7 +12,8 @@ export type ColorType =
   | 'lavender'
   | 'purple'
   | 'vivid-violet'
-  | 'selago';
+  | 'selago'
+  | 'twitter-blue';
 
 export const ColorCodes: Record<ColorType, string> = {
   black: '#020202',
@@ -27,4 +28,5 @@ export const ColorCodes: Record<ColorType, string> = {
   purple: '#590091',
   'vivid-violet': '#783b99',
   selago: '#efe0fd',
+  'twitter-blue': '#1da1f2',
 };

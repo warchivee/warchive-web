@@ -7,11 +7,17 @@
 @import './common/index.scss';
 @import './components/index.scss';
 
-html {
-  background-color: $alabaster;
-}
-
+html,
 body {
   background-color: $alabaster;
   color: $black;
+  min-height: 100vh;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }

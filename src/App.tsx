@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import Header from '@components/layout/header';
+import Footer from '@components/layout/footer';
 
 const Home = lazy(() => import('./pages/home'));
 const BookmarkList = lazy(() => import('./pages/bookmarkList'));
@@ -42,6 +43,8 @@ function App() {
           <Route path="/about" Component={About} />
         </Routes>
       </Suspense>
+
+      <Footer />
     </Router>
   );
 }

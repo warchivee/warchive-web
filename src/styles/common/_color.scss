@@ -35,6 +35,9 @@
 .font-color-selago {
   color: $selago;
 }
+.font-color-twitter-blue {
+  color: $twitter-blue;
+}
 
 /* background-color */
 .background-black {
@@ -44,7 +47,7 @@
   background: $white;
 }
 .background-gray {
-  color: $gray;
+  background: $gray;
 }
 .background-ebony {
   background: $ebony;
@@ -72,4 +75,7 @@
 }
 .background-selago {
   background: $selago;
+}
+.background-twitter-blue {
+  background: $twitter-blue;
 }

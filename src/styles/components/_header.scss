@@ -8,7 +8,7 @@
     @include flex-row-start;
     gap: 2rem;
 
-    width: 65%; //페이지의 콘텐츠 전부 80%를 차지해야 한다. -> todo 공통화
+    width: $page-content-width;
 
     & .logo {
       height: 2.8rem;

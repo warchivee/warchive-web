@@ -1,0 +1,21 @@
+.footer-background {
+  @include flex-row-center;
+
+  width: 100%;
+  background-color: $ebony;
+  padding: 2rem 0;
+
+  & footer {
+    width: $page-content-width;
+    @include flex-row-space-between;
+    align-items: flex-end;
+
+    & .info {
+      line-height: 150%;
+    }
+
+    & .info > div:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}
