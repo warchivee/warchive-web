@@ -1,0 +1,99 @@
+.keyword-search-board {
+  @include flex-col-center;
+  align-items: center;
+
+  background: $purple;
+  width: 100%;
+
+  & .tabs {
+    @include flex-row-center;
+    align-items: center;
+    width: $page-content-width;
+
+    & .tab,
+    & .control {
+      @include flex-row-center;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      padding: 1rem 1rem;
+      text-align: center;
+    }
+
+    & .control {
+      padding: 0rem 1rem;
+    }
+
+    & .tab {
+      flex: 1;
+    }
+
+    & .tab.select {
+      background: $blue-violet;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  }
+
+  & .panel-background {
+    width: 100%;
+    background: $blue-violet;
+    @include flex-col-center;
+    align-items: center;
+
+    & .panel {
+      @include flex-row-center;
+      width: $page-content-width;
+
+      & .bubbles {
+        flex: 1;
+      }
+
+      & .driven {
+        margin-top: 3rem;
+        border-right: 1px solid #59009180;
+        height: 15rem;
+      }
+
+      @media (max-width: 1200px) {
+        & .bubbles > .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 700px) {
+        @include flex-col-center;
+        & .driven {
+          border-bottom: 1px solid #59009180;
+          height: 0;
+          border-right: 0;
+          width: 15rem;
+        }
+      }
+
+      @media (max-width: 500px) {
+        & .bubbles > .grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  & .select-keywords {
+    @include flex-row-space-between;
+    width: $page-content-width;
+    padding: 1rem 0rem;
+
+    & > .keywords {
+      @include flex-row-start;
+      flex: 1;
+      gap: 0.7rem;
+      width: $page-content-width;
+      flex-wrap: wrap;
+    }
+  }
+}
