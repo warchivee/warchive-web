@@ -1,4 +1,8 @@
 .input {
+  @include flex-row-center;
+  align-items: center;
+  width: 100%;
+
   input {
     width: 100%;
 
@@ -31,10 +35,8 @@
   }
 
   .icon {
-    position: absolute;
-    left: 1.5rem; /* 아이콘의 위치를 조절하세요 */
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
+    left: 1.7rem; /* 아이콘의 위치를 조절하세요 */
     pointer-events: none; /* 아이콘 영역이 클릭되지 않도록 설정 */
   }
 }

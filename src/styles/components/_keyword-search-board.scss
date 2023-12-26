@@ -12,6 +12,9 @@
 
     & .tab,
     & .control {
+      @include flex-row-center;
+      align-items: center;
+      gap: 0.3rem;
       cursor: pointer;
       padding: 1rem 1rem;
       text-align: center;
@@ -81,11 +84,13 @@
   }
 
   & .select-keywords {
-    @include flex-row-center;
+    @include flex-row-space-between;
+    width: $page-content-width;
     padding: 1rem 0rem;
 
     & > .keywords {
       @include flex-row-start;
+      flex: 1;
       gap: 0.7rem;
       width: $page-content-width;
       flex-wrap: wrap;

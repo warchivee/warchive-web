@@ -1,36 +1,78 @@
-import { CategoryType, ValueLabelType } from '@utils/common.type';
+import { CategoryType, KeywordType, ValueLabelType } from '@utils/common.type';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+
 import { Title } from '@components/text';
 import classNames from 'classnames';
 import Button from '@components/button/index';
-import Bubbles from './bubbles';
-import Bubble from './bubble';
+import Icon from '@components/icon';
+import { useSearchKeywords } from 'src/hooks/useSearchKeywords';
+import { keywordListState } from 'src/data/keyword.atom';
+import CheckKeywordBubble from './checkKeywordBubble';
+import CheckKeywordBubbles from './checkKeywordBubbles';
 
-interface KeywordSearchBoradProps {
-  keywords: CategoryType[];
-  selectKeywords: ValueLabelType<string>[];
-  addSelectKeyword: (keyword: ValueLabelType<string>) => void;
-  removeSelectKeyword: (keyword: ValueLabelType<string>) => void;
-}
-
-export default function KeywordSearchBorad({
-  keywords,
-  selectKeywords,
-  addSelectKeyword,
-  removeSelectKeyword,
-}: KeywordSearchBoradProps) {
+export default function KeywordSearchBorad() {
+  const wataAllKeywords = useRecoilValue(keywordListState);
   const [tab, setTab] = useState<number>(0);
   const [tabOpen, setTabOpen] = useState<boolean>(false);
-  const handleChange = (checked: boolean, keyword: ValueLabelType<string>) => {
-    if (checked) {
-      addSelectKeyword(keyword);
-    } else {
-      removeSelectKeyword(keyword);
+  const {
+    searchKeywords,
+    updateSearchKeywords,
+    resetSearchKeywords,
+    hasSelectedKeywords,
+  } = useSearchKeywords();
+
+  const handleTab = (index: number) => {
+    // 현재 탭을 한번 더 클릭한 경우 검색어 초기화하지 않고 탭을 열고 닫기만 한다.
+
+    const isCurrentTab = tab === index;
+
+    if (!isCurrentTab) {
+      resetSearchKeywords({
+        label: wataAllKeywords[index].label,
+        value: wataAllKeywords[index].value,
+      });
     }
+
+    setTab(isCurrentTab ? tab : index);
+    setTabOpen(isCurrentTab ? !tabOpen : true);
   };
+
+  const renderBubbles = (
+    key: string,
+    title: string,
+    bubbleType: KeywordType,
+    bubbles: ValueLabelType[],
+  ) => (
+    <CheckKeywordBubbles
+      key={`${key}-${title}`}
+      title={title}
+      bubbleType={bubbleType}
+      bubbles={bubbles}
+      selectedBubbles={searchKeywords[bubbleType]}
+      handleChange={updateSearchKeywords}
+    />
+  );
+
+  const renderRemoveKeywordBubbles = (
+    keywords: ValueLabelType[],
+    type: KeywordType,
+  ) =>
+    keywords?.map((keyword) => (
+      <CheckKeywordBubble
+        key={keyword.value}
+        value={`selected-${keyword.value}`}
+        label={keyword.label}
+        type="remove"
+        onChange={() => {
+          updateSearchKeywords(type, keyword);
+        }}
+      />
+    ));
 
   return (
     <div className="keyword-search-board">
+      {/* 카테고리 탭 */}
       <div className="tabs">
         <div
           className="control"
@@ -42,16 +84,14 @@ export default function KeywordSearchBorad({
           <Title type="h5" color="white">
             키워드로 검색
           </Title>
+          <Icon size="small" color="white" type={tabOpen ? 'up' : 'down'} />
         </div>
 
-        {keywords?.map((category: CategoryType, index: number) => (
+        {wataAllKeywords?.map((category: CategoryType, index: number) => (
           <div
             className={classNames('tab', { select: tab === index })}
             key={category.value}
-            onClick={() => {
-              setTab(index);
-              setTabOpen(true);
-            }}
+            onClick={() => handleTab(index)}
             aria-hidden="true"
           >
             <Title type="h4" color="white">
@@ -61,60 +101,56 @@ export default function KeywordSearchBorad({
         ))}
       </div>
 
+      {/* 키워드 리스트 */}
       <div className={classNames('panel-background', { hidden: !tabOpen })}>
         <div className="panel">
-          <Bubbles
-            key={`${keywords[tab].value}-장르`}
-            title="장르"
-            bubbles={keywords[tab].genres}
-            handleChange={handleChange}
-          />
+          {renderBubbles(
+            wataAllKeywords[tab].value,
+            '장르',
+            'genres',
+            wataAllKeywords[tab].genres,
+          )}
           <div className="driven" />
-          <Bubbles
-            key={`${keywords[tab].value}-플랫폼`}
-            title="플랫폼"
-            bubbles={keywords[tab].platforms}
-            handleChange={handleChange}
-          />
+          {renderBubbles(
+            wataAllKeywords[tab].value,
+            '플랫폼',
+            'platforms',
+            wataAllKeywords[tab].platforms,
+          )}
           <div className="driven" />
-          <Bubbles
-            key={`${keywords[tab].value}-키워드`}
-            title="키워드"
-            bubbles={keywords[tab].keywords}
-            handleChange={handleChange}
-          />
+          {renderBubbles(
+            wataAllKeywords[tab].value,
+            '키워드',
+            'keywords',
+            wataAllKeywords[tab].keywords,
+          )}
         </div>
       </div>
 
-      {(tabOpen || selectKeywords?.length !== 0) && (
+      {/* 선택한 키워드 리스트 */}
+      {tabOpen || hasSelectedKeywords() ? (
         <div className="select-keywords">
           <div className="keywords">
-            {selectKeywords?.map((keyword: ValueLabelType<string>) => (
-              <Bubble
-                key={keyword.value}
-                value={`selected-${keyword.value}`} // selected 를 붙여주지 않으면 panel 의 키워드가 같이 조작된다.
-                label={keyword.label}
-                type="remove"
-                size="small"
-                onChange={() => {
-                  removeSelectKeyword(keyword);
-                }}
-              />
-            ))}
+            {renderRemoveKeywordBubbles(searchKeywords.genres, 'genres')}
+            {renderRemoveKeywordBubbles(searchKeywords.platforms, 'platforms')}
+            {renderRemoveKeywordBubbles(searchKeywords.keywords, 'keywords')}
           </div>
 
-          {selectKeywords?.length !== 0 && (
+          {hasSelectedKeywords() && (
             <Button
               background="lavender"
               labelColor="french-lilac"
               type="round"
               size="small"
+              onClick={() => {
+                resetSearchKeywords();
+              }}
             >
               검색 초기화
             </Button>
           )}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

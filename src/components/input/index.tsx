@@ -13,6 +13,7 @@ export default function Input({
 }: InputProps) {
   return (
     <div className="input">
+      {type === 'search' && <Icon type="search" size={size} color="purple" />}
       <input
         type={type}
         className={classNames(
@@ -23,7 +24,6 @@ export default function Input({
         value={value}
         onChange={onChange}
       />
-      {type === 'search' && <Icon type="search" size={size} color="purple" />}
     </div>
   );
 }

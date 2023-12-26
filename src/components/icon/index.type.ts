@@ -3,6 +3,8 @@ import { ColorType } from '@utils/color';
 
 export type IconType =
   | 'angles-up'
+  | 'angles-left'
+  | 'angles-right'
   | 'bars'
   | 'download'
   | 'facebook'
@@ -15,7 +17,9 @@ export type IconType =
   | 'twitter'
   | 'write'
   | 'xmark'
-  | 'search';
+  | 'search'
+  | 'up'
+  | 'down';
 
 export interface IconProps {
   type: IconType;

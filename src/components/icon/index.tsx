@@ -2,6 +2,8 @@ import { ColorCodes } from '@utils/color';
 import { FontSizeType } from '@components/text/index.type';
 
 import AnglesUp from '@assets/icons/angles-up.svg?react';
+import AnglesLeft from '@assets/icons/angles-left.svg?react';
+import AnglesRight from '@assets/icons/angles-right.svg?react';
 import Bars from '@assets/icons/bars.svg?react';
 import Download from '@assets/icons/download.svg?react';
 import Facebook from '@assets/icons/facebook.svg?react';
@@ -15,6 +17,8 @@ import Twitter from '@assets/icons/twitter.svg?react';
 import Write from '@assets/icons/write.svg?react';
 import Xmark from '@assets/icons/xmark.svg?react';
 import Search from '@assets/icons/search.svg?react';
+import Up from '@assets/icons/up.svg?react';
+import Down from '@assets/icons/down.svg?react';
 
 import { IconType, IconProps } from './index.type';
 
@@ -26,6 +30,8 @@ const IconSizeCodes: Record<FontSizeType, number> = {
 
 const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   'angles-up': AnglesUp,
+  'angles-left': AnglesLeft,
+  'angles-right': AnglesRight,
   bars: Bars,
   download: Download,
   facebook: Facebook,
@@ -39,6 +45,8 @@ const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   write: Write,
   xmark: Xmark,
   search: Search,
+  up: Up,
+  down: Down,
 };
 
 export default function Icon({ type, color, size }: IconProps) {
