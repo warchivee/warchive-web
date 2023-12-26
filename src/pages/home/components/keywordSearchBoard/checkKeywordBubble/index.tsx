@@ -1,18 +1,25 @@
 import Icon from '@components/icon';
 import { Text } from '@components/text';
 import classNames from 'classnames';
-import { BubbleProps } from '../index.type';
+import { CheckKeywordBubbleProps } from '../index.type';
 
-export default function Bubble({
+export default function CheckKeywordBubble({
   value = 'keyword-1',
   label = '키워드',
   type = 'default',
   size = 'normal',
+  checked = false,
   onChange = () => {},
-}: BubbleProps) {
+}: CheckKeywordBubbleProps) {
   return (
     <div className="bubble">
-      <input type="checkbox" name={value} id={value} onChange={onChange} />
+      <input
+        type="checkbox"
+        name={value}
+        id={value}
+        checked={checked}
+        onChange={onChange}
+      />
       <label htmlFor={value} className={classNames({ [`${type}`]: type })}>
         <Text size={size}>{label}</Text>
         {type === 'remove' && (

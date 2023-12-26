@@ -1,14 +1,17 @@
 import { FontSizeType } from '@components/text/index.type';
-import { ValueLabelType } from '@utils/common.type';
+import { KeywordType, ValueLabelType } from '@utils/common.type';
 
-export interface BubbleProps extends ValueLabelType<string> {
+export interface CheckKeywordBubbleProps extends ValueLabelType {
   type?: 'default' | 'border' | 'remove';
   size?: FontSizeType;
+  checked?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface BubblesPoprs {
+export interface CheckKeywordBubblesProps {
   title: string;
-  bubbles: ValueLabelType<string>[];
-  handleChange?: (checked: boolean, bubble: ValueLabelType<string>) => void;
+  bubbles: ValueLabelType[];
+  bubbleType: KeywordType;
+  selectedBubbles: ValueLabelType[];
+  handleChange?: (bubbletype: KeywordType, bubble: ValueLabelType) => void;
 }

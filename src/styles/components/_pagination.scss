@@ -1,0 +1,27 @@
+.pagination {
+  @include flex-row-center;
+  align-items: center;
+  gap: 4rem;
+
+  & .control.hidden {
+    visibility: hidden;
+  }
+
+  & .pages {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 4rem;
+
+    & .text {
+      cursor: pointer;
+      margin: 0.2rem;
+    }
+
+    & .active {
+      border-bottom: 2px solid $blue-violet;
+      color: $blue-violet;
+    }
+  }
+}

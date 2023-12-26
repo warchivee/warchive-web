@@ -6,6 +6,7 @@
 @import './utils/index.scss';
 @import './common/index.scss';
 @import './components/index.scss';
+@import './pages/index.scss';
 
 html,
 body {
@@ -15,9 +16,20 @@ body {
 }
 
 #root {
-  height: 100%;
+  height: max-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
+
+  & .page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    gap: 2rem;
+  }
 }

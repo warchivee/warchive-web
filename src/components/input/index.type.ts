@@ -6,5 +6,5 @@ export interface InputProps {
   value: string;
   placeholder?: string;
   size?: FontSizeType;
-  onChange?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

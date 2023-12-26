@@ -1,0 +1,87 @@
+.wata-card {
+  @include flex-col-center;
+  height: 12.5rem;
+  width: 18.75rem;
+  margin: 1rem;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.25);
+
+  & .header {
+    width: 100%;
+    background-color: $ebony;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0.5rem 0rem;
+
+    & .title {
+      @include flex-row-space-between;
+      margin-bottom: 0.2rem;
+      padding: 0rem 0.3rem 0rem 0.6rem;
+    }
+
+    & .creator {
+      padding: 0rem 0.6rem;
+      margin-bottom: 0.2rem;
+    }
+
+    & .hashTags {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0rem 0.6rem;
+
+      & > div > .text:hover {
+        color: $french-lilac;
+        cursor: pointer;
+      }
+    }
+  }
+
+  & .body {
+    @include flex-col-center;
+    background-size: '100%';
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+
+    & .platforms {
+      @include flex-row-center;
+      align-items: center;
+      align-content: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      background: $ebony;
+      flex: 1;
+      padding: 0.2rem;
+
+      opacity: 0;
+      transition: 0.5s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      & .text {
+        border: 1px solid $selago;
+        border-radius: 20rem;
+        padding: 0.2rem 0.4rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $white;
+          color: $ebony;
+        }
+      }
+    }
+
+    & .cautions {
+      @include flex-row-center;
+      gap: 0.5rem;
+      height: fit-content;
+      background: $ebony;
+      padding: 0.5rem;
+      opacity: 0.9;
+    }
+  }
+}
