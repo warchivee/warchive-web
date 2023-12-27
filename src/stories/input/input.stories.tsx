@@ -17,7 +17,7 @@ export const Example: Story = {
   args: {
     value: '내용',
     type: 'text',
-    style: 'outline',
+    border: 'outline',
     size: 'normal',
     placeholder: '검색 내용을 입력하세요.',
   },
