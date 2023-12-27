@@ -20,7 +20,7 @@ export const DefaultButton: Story = {
     iconColor: undefined,
     labelColor: 'white',
     background: 'purple',
-    type: 'default',
+    border: 'default',
     align: 'default',
     width: 'default',
   },
@@ -44,14 +44,14 @@ export const OnlyIcon: Story = {
   args: {
     icon: 'star',
     background: 'selago',
-    type: 'round',
+    border: 'round',
   },
 };
 
 export const RoundButton: Story = {
   args: {
     children: '검색초기화',
-    type: 'round',
+    border: 'round',
     background: 'purple',
     labelColor: 'selago',
   },

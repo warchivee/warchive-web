@@ -7,7 +7,7 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), svgr()],
   cacheDir: '.vite/',
-  base: '', // 배포 시 빈 화면 오류로 수정 - 파일 경로가 base 를 기준으로 지정됨
+  base: '/warchive-web/', // github page 로 배포 시 레포명 입력
   build: {
     outDir: 'build',
   },

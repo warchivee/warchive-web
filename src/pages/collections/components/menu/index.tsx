@@ -73,7 +73,7 @@ export default function CollectionMenu({
             addCollection(input);
             handleChange(collections.length);
           } catch (e) {
-            console.log(e);
+            // console.log(e);
           }
 
           setIsInputConfirmOpen(false);
@@ -92,7 +92,7 @@ export default function CollectionMenu({
             removeCollection(selectIndex);
             handleChange(selectIndex - 1);
           } catch (e) {
-            console.log(e);
+            // console.log(e);
           }
 
           setIsConfirmOpen(false);
