@@ -1,0 +1,84 @@
+.collections {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: $page-content-width;
+  flex: 1;
+  gap: 2rem;
+
+  & > .menu {
+    background: $ebony;
+    height: 95%;
+    width: 12rem;
+    padding-top: 3rem;
+
+    & > ul {
+      max-height: 80%;
+      overflow-y: scroll;
+
+      & li {
+        padding: 0.8rem 2rem;
+        cursor: pointer;
+
+        & .text {
+          text-align: right;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        &.active {
+          background: $lignt-violet;
+        }
+      }
+    }
+
+    & > .control {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+
+      & .button {
+        border: 1px solid white;
+      }
+    }
+  }
+
+  & > .content {
+    flex: 1;
+    padding: 3rem 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    & > .header {
+      @include flex-row-start;
+      align-items: flex-end;
+      gap: 0.5rem;
+      min-width: 20rem;
+      max-width: 100%;
+
+      & > .edit > .button {
+        padding: 0;
+      }
+
+      & .input {
+        flex: 1;
+      }
+    }
+
+    & > .sns {
+      @include flex-row-start;
+      gap: 0.5rem;
+    }
+
+    & .wata-list {
+      justify-content: flex-start;
+    }
+  }
+}

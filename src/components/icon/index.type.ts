@@ -19,7 +19,8 @@ export type IconType =
   | 'xmark'
   | 'search'
   | 'up'
-  | 'down';
+  | 'down'
+  | 'folder-plus';
 
 export interface IconProps {
   type: IconType;

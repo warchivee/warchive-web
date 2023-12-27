@@ -7,20 +7,20 @@ import Footer from '@components/layout/footer';
 
 import './App.css';
 
-const Home = lazy(() => import('./pages/home'));
-const BookmarkList = lazy(() => import('./pages/bookmarkList'));
-const About = lazy(() => import('./pages/about'));
+const Home = lazy(() => import('@pages/home'));
+const Collections = lazy(() => import('@pages/collections'));
+const About = lazy(() => import('@pages/about'));
 
 function App() {
   return (
     <RecoilRoot>
-      <Router>
+      <Router basename="warchive-web">
         <Header
           leftMenus={[
             {
-              label: '즐겨찾기 목록',
+              label: '컬렉션',
               icon: 'star',
-              path: '/bookmarks',
+              path: '/collections',
               type: 'page',
             },
             {
@@ -42,7 +42,7 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" Component={Home} />
-            <Route path="/bookmarks" Component={BookmarkList} />
+            <Route path="/collections" Component={Collections} />
             <Route path="/about" Component={About} />
           </Routes>
         </Suspense>

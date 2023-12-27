@@ -5,7 +5,7 @@ import { InputProps } from './index.type';
 
 export default function Input({
   type = 'text',
-  style = 'outline',
+  border = 'outline',
   value,
   placeholder,
   size = 'normal',
@@ -17,12 +17,14 @@ export default function Input({
       <input
         type={type}
         className={classNames(
-          { [`${style}`]: style },
+          { [`${border}`]: border },
           { [`font-size-${size}`]: size },
         )}
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange(e.target.value);
+        }}
       />
     </div>
   );
