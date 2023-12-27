@@ -11,7 +11,7 @@ export default function Button({
   iconColor = 'purple',
   labelColor = 'black',
   background = undefined,
-  type = 'default',
+  border = 'default',
   size = 'normal',
   align = 'default',
   width = 'default',
@@ -25,7 +25,7 @@ export default function Button({
         { [`${align}`]: align },
         { [`background-${background}`]: background },
         { 'only-icon': !children && icon },
-        { [`border-${type}`]: type },
+        { [`border-${border}`]: border },
         { 'full-width': width === 'full' },
       )}
       onClick={onClick}

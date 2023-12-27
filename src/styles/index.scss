@@ -22,14 +22,4 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 100%;
-
-  & .page {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    flex: 1;
-    gap: 2rem;
-  }
 }

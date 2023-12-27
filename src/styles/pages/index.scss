@@ -1,16 +1,1 @@
-.home {
-  & .searchbar {
-    width: 31.25rem;
-  }
-
-  & .wata-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 0.1rem;
-    grid-row-gap: 0.1rem;
-  }
-
-  & > .text {
-    flex: 1;
-  }
-}
+@import './home', './collections';
