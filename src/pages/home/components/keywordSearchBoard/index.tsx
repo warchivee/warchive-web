@@ -140,7 +140,7 @@ export default function KeywordSearchBorad() {
             <Button
               background="lavender"
               labelColor="french-lilac"
-              type="round"
+              border="round"
               size="small"
               onClick={() => {
                 resetSearchKeywords();
