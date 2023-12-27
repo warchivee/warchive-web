@@ -1,5 +1,5 @@
 import { WataType } from '@utils/common.type';
-import { atom, selector } from 'recoil';
+import { DefaultValue, atom, selector } from 'recoil';
 
 export const COLLEACTIONS_KEY = 'my-warchive-collections';
 export const DEFAULT_COLLECTIONS_NAME = '미지정';
@@ -53,7 +53,7 @@ export const collectionSelector = selector<CollectionType[]>({
     const stateDatas = get(collectionAtom);
     return stateDatas;
   },
-  set: ({ set }, newValue: CollectionType[]) => {
+  set: ({ set }, newValue: CollectionType[] | DefaultValue) => {
     set(collectionAtom, newValue);
     localStorage.setItem(COLLEACTIONS_KEY, JSON.stringify(newValue));
   },
