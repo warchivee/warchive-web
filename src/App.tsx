@@ -14,7 +14,7 @@ const About = lazy(() => import('@pages/about'));
 function App() {
   return (
     <RecoilRoot>
-      <Router>
+      <Router basename="warchive-web">
         <Header
           leftMenus={[
             {
