@@ -8,7 +8,7 @@ export interface ButtonProps {
   iconColor?: ColorType;
   labelColor?: ColorType;
   background?: ColorType;
-  type?: 'default' | 'round';
+  border?: 'default' | 'round';
   size?: FontSizeType;
   align?: 'default' | 'reverse';
   width?: 'default' | 'full';

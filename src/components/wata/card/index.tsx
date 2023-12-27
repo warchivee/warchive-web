@@ -1,16 +1,51 @@
 import Button from '@components/button';
 import { Text, Title } from '@components/text';
-import { ValueLabelType, WataType } from '@utils/common.type';
+import {
+  KeywordType,
+  SearchKeywordType,
+  ValueLabelType,
+  WataType,
+} from '@utils/common.type';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { searchKeywordState } from 'src/data/search.atom';
 
 interface WataCardProps {
   wata: WataType;
+  handleBookmark: () => void;
 }
 
-export default function WataCard({ wata }: WataCardProps) {
+export default function WataCard({ wata, handleBookmark }: WataCardProps) {
+  const navigate = useNavigate();
   const [searchKeywords, setSearchKeywords] =
     useRecoilState(searchKeywordState);
+
+  const handleClickKeyword = (newValue: SearchKeywordType) => {
+    setSearchKeywords(newValue);
+    navigate('/');
+  };
+
+  const renderHashTag = (type: KeywordType, keyword: ValueLabelType) => {
+    const newValue = {
+      ...searchKeywords,
+      searchInput: '',
+      genres: type === 'genres' ? [keyword] : [],
+      platforms: [],
+      keywords: type === 'keywords' ? [keyword] : [],
+    };
+
+    return (
+      <div
+        key={`wata-card-${type}-${keyword.value}`}
+        onClick={() => handleClickKeyword(newValue)}
+        aria-hidden="true"
+      >
+        <Text key={`hashtag-${keyword.value}`} color="gray">
+          #{keyword.label}
+        </Text>
+      </div>
+    );
+  };
 
   return (
     <div className="wata-card">
@@ -19,7 +54,14 @@ export default function WataCard({ wata }: WataCardProps) {
           <Title type="h3" color="white">
             {wata.title}
           </Title>
-          <Button icon="star" iconColor="white" size="big" />
+          <Button
+            icon="folder-plus"
+            iconColor="white"
+            size="big"
+            onClick={() => {
+              handleBookmark();
+            }}
+          />
         </div>
 
         <div className="creator">
@@ -27,41 +69,10 @@ export default function WataCard({ wata }: WataCardProps) {
         </div>
 
         <div className="hashTags">
-          <div
-            onClick={() =>
-              setSearchKeywords({
-                ...searchKeywords,
-                searchInput: '',
-                genres: [wata.genre],
-                platforms: [],
-                keywords: [],
-              })
-            }
-            aria-hidden="true"
-          >
-            <Text key={`hashtag-${wata.genre.value}`} color="gray">
-              #{wata.genre.label}
-            </Text>
-          </div>
-          {wata?.keywords?.map((keyword: ValueLabelType) => (
-            <div
-              key={`wata-card-keyword-${keyword.value}`}
-              onClick={() =>
-                setSearchKeywords({
-                  ...searchKeywords,
-                  searchInput: '',
-                  genres: [],
-                  platforms: [],
-                  keywords: [keyword],
-                })
-              }
-              aria-hidden="true"
-            >
-              <Text key={`hashtag-${keyword.value}`} color="gray">
-                #{keyword.label}
-              </Text>
-            </div>
-          ))}
+          {renderHashTag('genres', wata.genre)}
+          {wata?.keywords?.map((keyword: ValueLabelType) =>
+            renderHashTag('keywords', keyword),
+          )}
         </div>
       </div>
 

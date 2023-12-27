@@ -19,6 +19,7 @@ import Xmark from '@assets/icons/xmark.svg?react';
 import Search from '@assets/icons/search.svg?react';
 import Up from '@assets/icons/up.svg?react';
 import Down from '@assets/icons/down.svg?react';
+import FloderPlus from '@assets/icons/folder-plus.svg?react';
 
 import { IconType, IconProps } from './index.type';
 
@@ -47,6 +48,7 @@ const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   search: Search,
   up: Up,
   down: Down,
+  'folder-plus': FloderPlus,
 };
 
 export default function Icon({ type, color, size }: IconProps) {
