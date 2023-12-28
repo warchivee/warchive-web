@@ -12,7 +12,7 @@ export const useCollections = () => {
   const addCollection = (title: string) => {
     const trimTitle = title.trim();
 
-    if (!trimTitle) {
+    if (!trimTitle || trimTitle === '') {
       throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
     }
 
@@ -37,15 +37,21 @@ export const useCollections = () => {
   };
 
   const renameCollection = (index: number, changeTitle: string) => {
-    if (changeTitle === DEFAULT_COLLECTIONS_NAME) {
-      throw new Error('전체 컬렉션의 이름은 바꿀 수 없습니다.');
+    const trimTitle = changeTitle.trim();
+
+    if (!trimTitle || trimTitle === '') {
+      throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
+    }
+
+    if (trimTitle === DEFAULT_COLLECTIONS_NAME) {
+      throw new Error('기본 컬렉션의 이름은 바꿀 수 없습니다.');
     }
 
     const newValue = [...collections];
 
     newValue[index] = {
       ...newValue[index],
-      title: changeTitle,
+      title: trimTitle,
     };
 
     setCollections(newValue);
