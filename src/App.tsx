@@ -9,6 +9,7 @@ import './App.css';
 
 const Home = lazy(() => import('@pages/home'));
 const Collections = lazy(() => import('@pages/collections'));
+const ShareCollections = lazy(() => import('@pages/shareCollections'));
 const About = lazy(() => import('@pages/about'));
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Routes>
             <Route path="/" Component={Home} />
             <Route path="/collections" Component={Collections} />
+            <Route path="/shared" Component={ShareCollections} />
             <Route path="/about" Component={About} />
           </Routes>
         </Suspense>

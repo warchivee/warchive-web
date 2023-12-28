@@ -8,6 +8,17 @@
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
 
+  &.sns-share {
+    & > .content {
+      & > .buttons {
+        @include flex-row-center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+    }
+  }
+
   & > .content {
     position: absolute;
     top: 50%;

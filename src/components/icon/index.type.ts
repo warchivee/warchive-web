@@ -20,7 +20,9 @@ export type IconType =
   | 'search'
   | 'up'
   | 'down'
-  | 'folder-plus';
+  | 'folder-plus'
+  | 'share'
+  | 'link';
 
 export interface IconProps {
   type: IconType;
