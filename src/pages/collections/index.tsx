@@ -3,7 +3,7 @@ import useBookmarkList from 'src/hooks/useCollections';
 import WataCardList from '@components/wata/list';
 import CollectionMenu from './components/menu';
 import CollectionTitle from './components/title';
-import ShareCollectionButton from './components/share';
+import ShareCollectionButtons from './components/share';
 
 export default function Collections() {
   const { collections } = useBookmarkList();
@@ -28,7 +28,10 @@ export default function Collections() {
           selectIndex={collectionIndex}
           handleEditMode={setEditMode}
         />
-        <ShareCollectionButton />
+        <ShareCollectionButtons
+          isEditMode={editMode}
+          selectIndex={collectionIndex}
+        />
         <WataCardList watas={collections[collectionIndex].items} />
       </div>
     </div>
