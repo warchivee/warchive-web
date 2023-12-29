@@ -50,7 +50,7 @@ export const getSharedCollectionShortUrl = (collection: CollectionType) => {
 
   const queryString = `p=${binaryToBase62(binaryNumbers.join(''))}t=${title}`;
 
-  return `${import.meta.env.VITE_HOMEPAGE}/shared?${queryString}`;
+  return `${window.location.origin}/shared?${queryString}`;
 };
 
 export const getSharedCollectionToUrl = (

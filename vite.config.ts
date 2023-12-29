@@ -7,7 +7,7 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), svgr()],
   cacheDir: '.vite/',
-  base: '/warchive-web/', // github page 로 배포 시 레포명 입력
+  base: '', // github page 로 배포 시 /warchive-web/ (레포명) 을 여기에 입력하고, Browser Router 의 baseUrl 에도 입력합니다.
   build: {
     outDir: 'build',
   },
