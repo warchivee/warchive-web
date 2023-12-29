@@ -1,4 +1,4 @@
-import{a as y}from"./index-bdMoRk7A.js";import"./jsx-runtime-vNq4Oc-g.js";import"./index-4g5l5LRQ.js";import"./_commonjsHelpers-4gQjN7DL.js";import"./index-uebAiod8.js";const x={component:y,title:"Text/Title",parameters:{layout:"centered"},tags:["autodocs"]},r={args:{type:"h1",children:"제목1"}},e={args:{type:"h2",children:"제목2"}},s={args:{type:"h3",children:"제목3"}},a={args:{type:"h4",children:"제목4"}};var t,o,n;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:`{
+import{a as y}from"./index-WSTTBwfH.js";import"./jsx-runtime-vNq4Oc-g.js";import"./index-4g5l5LRQ.js";import"./_commonjsHelpers-4gQjN7DL.js";import"./index-uebAiod8.js";const x={component:y,title:"Text/Title",parameters:{layout:"centered"},tags:["autodocs"]},r={args:{type:"h1",children:"제목1"}},e={args:{type:"h2",children:"제목2"}},s={args:{type:"h3",children:"제목3"}},a={args:{type:"h4",children:"제목4"}};var t,o,n;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:`{
   args: {
     type: 'h1',
     children: '제목1'
