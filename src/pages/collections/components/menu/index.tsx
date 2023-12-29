@@ -1,14 +1,14 @@
 import Button from '@components/button';
-import ConfirmModal from '@components/modal/confirm';
-import InputConfirmModal from '@components/modal/inputConfirm';
+import Modal from '@components/modal';
+import AddCollectionModal from '@components/modal/addCollection';
 import { Text } from '@components/text';
 import { CollectionMenuProps } from '@pages/collections/index.type';
-import classNames from 'classnames';
-import { useState } from 'react';
 import {
   CollectionType,
   DEFAULT_COLLECTIONS_KEY,
-} from 'src/data/collection.atom';
+} from '@utils/collections/index.type';
+import classNames from 'classnames';
+import { useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 
 export default function CollectionMenu({
@@ -63,14 +63,12 @@ export default function CollectionMenu({
         </div>
       ) : null}
 
-      <InputConfirmModal
-        title="컬렉션 추가"
-        description="새로 만들 컬렉션의 이름을 입력해주세요."
+      <AddCollectionModal
         isOpen={isInputConfirmOpen}
         onClose={() => setIsInputConfirmOpen(false)}
-        onConfirm={(input: string) => {
+        onConfirm={(input?: string) => {
           try {
-            addCollection(input);
+            addCollection(input || '');
             handleChange(collections.length);
           } catch (e) {
             // console.log(e);
@@ -80,9 +78,9 @@ export default function CollectionMenu({
         }}
       />
 
-      <ConfirmModal
-        title="컬렉션 삭제"
-        description="컬렉션을 정말 삭제하시겠습니까? 컬렉션에 추가한 작품들까지 전부 삭제됩니다."
+      <Modal
+        title="컬렉션 삭제하기"
+        message="컬렉션을 정말 삭제하시겠습니까? 컬렉션에 추가한 작품들까지 전부 삭제됩니다."
         isOpen={isConfirmOpen}
         onClose={() => {
           setIsConfirmOpen(false);
@@ -97,6 +95,7 @@ export default function CollectionMenu({
 
           setIsConfirmOpen(false);
         }}
+        buttons={['confirm', 'cancel']}
       />
     </div>
   );

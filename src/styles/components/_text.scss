@@ -1,4 +1,6 @@
 .text {
+  word-break: keep-all;
+
   &.h1 {
     font-size: $pxr25;
     font-weight: 600;

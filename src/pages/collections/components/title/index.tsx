@@ -2,8 +2,11 @@ import Button from '@components/button';
 import Input from '@components/input';
 import { Title } from '@components/text';
 import { CollectionTitleProps } from '@pages/collections/index.type';
-import { useState } from 'react';
-import { DEFAULT_COLLECTIONS_KEY } from 'src/data/collection.atom';
+import {
+  DEFAULT_COLLECTIONS_KEY,
+  TITLE_LIMIT_LENGTH,
+} from '@utils/collections/index.type';
+import { useEffect, useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 
 export default function CollectionTitle({
@@ -14,6 +17,13 @@ export default function CollectionTitle({
   const { collections, renameCollection } = useCollections();
   const [input, setInput] = useState<string>('');
 
+  useEffect(() => {
+    if (isEditMode) {
+      setInput(collections[selectIndex].title);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectIndex, isEditMode]);
+
   return (
     <div className="header">
       {isEditMode ? (
@@ -21,16 +31,16 @@ export default function CollectionTitle({
           value={input}
           type="text"
           border="underline"
-          placeholder={collections[selectIndex].title}
           onChange={setInput}
           size="big"
+          maxLength={TITLE_LIMIT_LENGTH}
         />
       ) : (
         <Title type="h1">{collections[selectIndex].title}</Title>
       )}
 
       {!isEditMode ? (
-        <Title type="h2" color="lignt-violet">
+        <Title type="h2" color="light-violet">
           {collections[selectIndex].items.length}
         </Title>
       ) : null}
@@ -40,7 +50,7 @@ export default function CollectionTitle({
           <Button
             size="small"
             border="round"
-            background="lignt-violet"
+            background="light-violet"
             labelColor="french-lilac"
             onClick={() => {
               renameCollection(selectIndex, input);
@@ -53,7 +63,7 @@ export default function CollectionTitle({
           <Button
             size="small"
             border="round"
-            background="lignt-violet"
+            background="light-violet"
             labelColor="french-lilac"
             onClick={() => {
               handleEditMode(false);
@@ -68,7 +78,7 @@ export default function CollectionTitle({
           <div className="edit">
             <Button
               icon="write"
-              iconColor="lignt-violet"
+              iconColor="light-violet"
               onClick={() => {
                 handleEditMode(true);
               }}

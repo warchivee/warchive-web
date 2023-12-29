@@ -1,4 +1,6 @@
-// className 으로 스타일을 적용할 수 없는 컴포넌트를 위한 color record (svg 등)
+/**
+ * className 으로 스타일을 적용할 수 없는 컴포넌트를 위한 color record (svg 등)
+ * */
 
 export type ColorType =
   | 'black'
@@ -14,7 +16,7 @@ export type ColorType =
   | 'vivid-violet'
   | 'selago'
   | 'twitter-blue'
-  | 'lignt-violet';
+  | 'light-violet';
 
 export const ColorCodes: Record<ColorType, string> = {
   black: '#020202',
@@ -30,5 +32,5 @@ export const ColorCodes: Record<ColorType, string> = {
   'vivid-violet': '#783b99',
   selago: '#efe0fd',
   'twitter-blue': '#1da1f2',
-  'lignt-violet': '#ba5bec',
+  'light-violet': '#ba5bec',
 };

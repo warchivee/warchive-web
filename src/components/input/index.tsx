@@ -9,6 +9,7 @@ export default function Input({
   value,
   placeholder,
   size = 'normal',
+  maxLength = 100,
   onChange = () => {},
 }: InputProps) {
   return (
@@ -16,6 +17,7 @@ export default function Input({
       {type === 'search' && <Icon type="search" size={size} color="purple" />}
       <input
         type={type}
+        maxLength={maxLength}
         className={classNames(
           { [`${border}`]: border },
           { [`font-size-${size}`]: size },

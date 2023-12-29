@@ -10,3 +10,5 @@ export interface CollectionTitleProps extends CollectionDefaultProps {
 export interface CollectionMenuProps extends CollectionDefaultProps {
   handleChange: (index: number) => void;
 }
+
+export interface CollectionShareButtonsProps extends CollectionDefaultProps {}

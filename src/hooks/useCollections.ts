@@ -1,10 +1,10 @@
-import { WataType } from '@utils/common.type';
-import { useRecoilState } from 'recoil';
 import {
   DEFAULT_COLLECTIONS_KEY,
   DEFAULT_COLLECTIONS_NAME,
-  collectionSelector,
-} from 'src/data/collection.atom';
+} from '@utils/collections/index.type';
+import { WataIdType, WataType } from '@utils/watas/index.type';
+import { useRecoilState } from 'recoil';
+import { collectionSelector } from 'src/data/collection.atom';
 
 export const useCollections = () => {
   const [collections, setCollections] = useRecoilState(collectionSelector);
@@ -12,7 +12,7 @@ export const useCollections = () => {
   const addCollection = (title: string) => {
     const trimTitle = title.trim();
 
-    if (!trimTitle) {
+    if (!trimTitle || trimTitle === '') {
       throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
     }
 
@@ -37,22 +37,30 @@ export const useCollections = () => {
   };
 
   const renameCollection = (index: number, changeTitle: string) => {
-    if (changeTitle === DEFAULT_COLLECTIONS_NAME) {
-      throw new Error('전체 컬렉션의 이름은 바꿀 수 없습니다.');
+    const trimTitle = changeTitle.trim();
+
+    if (!trimTitle || trimTitle === '') {
+      throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
+    }
+
+    if (trimTitle === DEFAULT_COLLECTIONS_NAME) {
+      throw new Error('기본 컬렉션의 이름은 바꿀 수 없습니다.');
     }
 
     const newValue = [...collections];
 
     newValue[index] = {
       ...newValue[index],
-      title: changeTitle,
+      title: trimTitle,
     };
 
     setCollections(newValue);
   };
 
   const findItemIndex = (index: number, wata: WataType) =>
-    collections[index].items.findIndex((item: WataType) => wata.id === item.id);
+    collections[index].items.findIndex(
+      (storedWataId: WataIdType) => wata.id === storedWataId,
+    );
   const existCollectionItem = (index: number, item: WataType) =>
     !(findItemIndex(index, item) < 0);
 
@@ -64,7 +72,7 @@ export const useCollections = () => {
         if (!existCollectionItem(index, item)) {
           newValue[index] = {
             ...newValue[index],
-            items: [...newValue[index].items, item],
+            items: [...newValue[index].items, item.id],
           };
         }
       } else if (!command) {

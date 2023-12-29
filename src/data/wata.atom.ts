@@ -1,6 +1,6 @@
 import { selector } from 'recoil';
-import { WataType } from '@utils/common.type';
-import testData from './testData.json';
+import { WataType } from '@utils/watas/index.type';
+import testData from '@assets/testData.json';
 
 const makeValueLabelList = (datas: string[]) =>
   datas?.map((item: string) => ({
@@ -8,8 +8,8 @@ const makeValueLabelList = (datas: string[]) =>
     label: item,
   }));
 
-export const wataListState = selector<WataType[]>({
-  key: 'watasState',
+export const allWataListSelector = selector<WataType[]>({
+  key: 'allWataListSelector',
   get: async () => {
     const { wata_list: datas } = testData;
 
@@ -51,4 +51,4 @@ export const wataListState = selector<WataType[]>({
   },
 });
 
-export default wataListState;
+export default allWataListSelector;
