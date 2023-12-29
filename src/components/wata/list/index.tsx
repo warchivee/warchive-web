@@ -1,8 +1,6 @@
-import { WataType } from '@utils/common.type';
 import { useState } from 'react';
-
-import AddCollectionsModal from '@components/modal/addCollection';
-
+import AddCollectionsModal from '@components/modal/addCollectionItem';
+import { WataType } from '@utils/watas/index.type';
 import WataCard from '../card';
 import { WataCardListProps } from '../index.type';
 
