@@ -1,5 +1,5 @@
 import { CollectionType } from 'src/data/collection.atom';
-import { WataType } from './common.type';
+import { WataIdType, WataType } from './common.type';
 
 const BASE62CODES =
   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -44,8 +44,8 @@ export const getSharedCollectionShortUrl = (collection: CollectionType) => {
   // 2진수로 데이터가 있고 없음을 표현하기 위해 항상 맨 앞 자리는 1로 만들어줌.
   binaryNumbers[0] = 1;
 
-  items.forEach((item: WataType) => {
-    binaryNumbers[item.id] = 1;
+  items.forEach((item: WataIdType) => {
+    binaryNumbers[item] = 1;
   });
 
   const queryString = `p=${binaryToBase62(binaryNumbers.join(''))}t=${title}`;
