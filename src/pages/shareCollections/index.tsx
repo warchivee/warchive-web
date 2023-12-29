@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import wataListState from 'src/data/wata.atom';
 import { Title } from '@components/text';
 import WataCardList from '@components/wata/list';
-import { getSharedCollectionToUrl } from '@utils/urlShroter';
+import { getSharedCollectionToUrl } from '@utils/collections/shareUrlShroter';
 
 export default function ShareCollections() {
   const watas = useRecoilValue(wataListState);

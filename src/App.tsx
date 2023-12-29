@@ -40,7 +40,13 @@ function App() {
           ]}
         />
 
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div>
+              <span className="loader" />
+            </div>
+          }
+        >
           <Routes>
             <Route path="/" Component={Home} />
             <Route path="/collections" Component={Collections} />

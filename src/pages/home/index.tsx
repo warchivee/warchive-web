@@ -1,17 +1,17 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
-import { searchKeywordState, searchWataListState } from 'src/data/search.atom';
 import { Text } from '@components/text';
 import Input from '@components/input';
 import usePagination from 'src/hooks/usePagination';
 import Pagination from '@components/layout/pagination';
 import WataCardList from '@components/wata/list';
+import searchWataListSelector from 'src/data/searchWata.tom';
+import searchKeywordAtom from 'src/data/search.atom';
 import KeywordSearchBorad from './components/keywordSearchBoard';
 
 export default function Home() {
-  const searchWatas = useRecoilValue(searchWataListState);
-  const [searchKeywords, setSearchKeywords] =
-    useRecoilState(searchKeywordState);
+  const searchWatas = useRecoilValue(searchWataListSelector);
+  const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
   const [pageSearchWatas, pageNo, maxPage, handlePageChange] = usePagination(
     searchWatas,
     20,

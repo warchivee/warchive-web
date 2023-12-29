@@ -6,5 +6,6 @@ export interface InputProps {
   value: string;
   placeholder?: string;
   size?: FontSizeType;
+  maxLength?: number;
   onChange?: (input: string) => void;
 }
