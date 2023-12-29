@@ -1,30 +1,26 @@
-import { WataIdType } from '@utils/common.type';
+import {
+  COLLEACTIONS_KEY,
+  CollectionType,
+  DEFAULT_COLLECTIONS_NAME,
+} from '@utils/collections/index.type';
 import { DefaultValue, atom, selector } from 'recoil';
 
-export const COLLEACTIONS_KEY = 'my-warchive-collections';
-export const DEFAULT_COLLECTIONS_NAME = '미지정';
-export const DEFAULT_COLLECTIONS_KEY = 0;
+// todo: 기존 와카이브 북마크 연동
+const init = () => {
+  const newValue = [
+    {
+      title: DEFAULT_COLLECTIONS_NAME,
+      items: [],
+    },
+  ];
 
-export interface CollectionType {
-  title: string;
-  items: WataIdType[];
-}
+  localStorage.setItem(COLLEACTIONS_KEY, JSON.stringify(newValue));
+
+  return newValue;
+};
 
 const getCollectionsToLocalStorage = () => {
   const storedDatas = localStorage.getItem(COLLEACTIONS_KEY);
-
-  const init = () => {
-    const newValue = [
-      {
-        title: DEFAULT_COLLECTIONS_NAME,
-        items: [],
-      },
-    ];
-
-    localStorage.setItem(COLLEACTIONS_KEY, JSON.stringify(newValue));
-
-    return newValue;
-  };
 
   try {
     if (storedDatas) {
@@ -48,7 +44,7 @@ export const collectionAtom = atom<CollectionType[]>({
 });
 
 export const collectionSelector = selector<CollectionType[]>({
-  key: 'bookmarkListState',
+  key: 'collectionSelector',
   get: ({ get }) => {
     const stateDatas = get(collectionAtom);
     return stateDatas;

@@ -2,17 +2,16 @@ import { useEffect, useState } from 'react';
 import useBookmarkList from 'src/hooks/useCollections';
 import WataCardList from '@components/wata/list';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { searchKeywordState } from 'src/data/search.atom';
 import wataListState from 'src/data/wata.atom';
-import { WataIdType, WataType } from '@utils/common.type';
+import searchKeywordAtom from 'src/data/search.atom';
+import { WataIdType, WataType } from '@utils/watas/index.type';
 import CollectionMenu from './components/menu';
 import CollectionTitle from './components/title';
 import ShareCollectionButtons from './components/share';
 
 export default function Collections() {
   const allWatas = useRecoilValue(wataListState);
-  const [searchKeywords, setSearchKeywords] =
-    useRecoilState(searchKeywordState);
+  const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
   const { collections } = useBookmarkList();
   const [collectionIndex, setCollectionIndex] = useState<number>(0);
   const [editMode, setEditMode] = useState<boolean>(false);

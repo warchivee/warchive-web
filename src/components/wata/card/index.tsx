@@ -1,14 +1,14 @@
 import Button from '@components/button';
 import { Text, Title } from '@components/text';
+import { ValueLabelType } from '@utils/common.type';
 import {
-  KeywordType,
-  SearchKeywordType,
-  ValueLabelType,
-  WataType,
-} from '@utils/common.type';
+  SearchKeywordsKeyType,
+  SearchKeywordsType,
+} from '@utils/searchKeywords/index.type';
+import { PlatformType, WataType } from '@utils/watas/index.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { searchKeywordState } from 'src/data/search.atom';
+import searchKeywordAtom from 'src/data/search.atom';
 
 interface WataCardProps {
   wata: WataType;
@@ -17,15 +17,17 @@ interface WataCardProps {
 
 export default function WataCard({ wata, handleBookmark }: WataCardProps) {
   const navigate = useNavigate();
-  const [searchKeywords, setSearchKeywords] =
-    useRecoilState(searchKeywordState);
+  const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
 
-  const handleClickKeyword = (newValue: SearchKeywordType) => {
+  const handleClickKeyword = (newValue: SearchKeywordsType) => {
     setSearchKeywords(newValue);
     navigate('/');
   };
 
-  const renderHashTag = (type: KeywordType, keyword: ValueLabelType) => {
+  const renderHashTag = (
+    type: SearchKeywordsKeyType,
+    keyword: ValueLabelType,
+  ) => {
     const newValue = {
       ...searchKeywords,
       searchInput: '',
@@ -83,19 +85,17 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
         }}
       >
         <div className="platforms">
-          {wata?.platforms?.map(
-            (platform: { value: string; label: string; url: string }) => (
-              <a
-                key={`hashtag-${platform.value}`}
-                href={platform.url}
-                target="_blank"
-                aria-label="플랫폼으로 이동"
-                rel="noreferrer"
-              >
-                <Text color="white">#{platform.label}</Text>
-              </a>
-            ),
-          )}
+          {wata?.platforms?.map((platform: PlatformType) => (
+            <a
+              key={`hashtag-${platform.value}`}
+              href={platform.url}
+              target="_blank"
+              aria-label="플랫폼으로 이동"
+              rel="noreferrer"
+            >
+              <Text color="white">#{platform.label}</Text>
+            </a>
+          ))}
         </div>
 
         {wata?.cautions.length !== 0 && (

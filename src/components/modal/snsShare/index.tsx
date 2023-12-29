@@ -1,6 +1,6 @@
 import Button from '@components/button';
 import { Text, Title } from '@components/text';
-import { getSharedCollectionShortUrl } from '@utils/urlShroter';
+import { getSharedCollectionShortUrl } from '@utils/collections/shareUrlShroter';
 import classNames from 'classnames';
 import useCollections from 'src/hooks/useCollections';
 import CopyToClipboard from 'react-copy-to-clipboard';

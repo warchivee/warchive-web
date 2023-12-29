@@ -2,8 +2,8 @@ import Button from '@components/button';
 import Input from '@components/input';
 import { Title } from '@components/text';
 import { CollectionTitleProps } from '@pages/collections/index.type';
+import { DEFAULT_COLLECTIONS_KEY } from '@utils/collections/index.type';
 import { useEffect, useState } from 'react';
-import { DEFAULT_COLLECTIONS_KEY } from 'src/data/collection.atom';
 import useCollections from 'src/hooks/useCollections';
 
 export default function CollectionTitle({
@@ -36,7 +36,7 @@ export default function CollectionTitle({
       )}
 
       {!isEditMode ? (
-        <Title type="h2" color="lignt-violet">
+        <Title type="h2" color="light-violet">
           {collections[selectIndex].items.length}
         </Title>
       ) : null}
@@ -46,7 +46,7 @@ export default function CollectionTitle({
           <Button
             size="small"
             border="round"
-            background="lignt-violet"
+            background="light-violet"
             labelColor="french-lilac"
             onClick={() => {
               renameCollection(selectIndex, input);
@@ -59,7 +59,7 @@ export default function CollectionTitle({
           <Button
             size="small"
             border="round"
-            background="lignt-violet"
+            background="light-violet"
             labelColor="french-lilac"
             onClick={() => {
               handleEditMode(false);
@@ -74,7 +74,7 @@ export default function CollectionTitle({
           <div className="edit">
             <Button
               icon="write"
-              iconColor="lignt-violet"
+              iconColor="light-violet"
               onClick={() => {
                 handleEditMode(true);
               }}

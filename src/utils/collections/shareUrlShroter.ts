@@ -1,5 +1,5 @@
-import { CollectionType } from 'src/data/collection.atom';
-import { WataIdType, WataType } from './common.type';
+import { WataIdType, WataType } from '@utils/watas/index.type';
+import { CollectionType } from './index.type';
 
 const BASE62CODES =
   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
