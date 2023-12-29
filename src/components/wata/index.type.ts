@@ -1,4 +1,4 @@
-import { WataType } from '@utils/common.type';
+import { WataType } from '@utils/watas/index.type';
 
 export interface WataCardProps {
   wata: WataType;
