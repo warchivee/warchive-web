@@ -3,12 +3,12 @@ import ConfirmModal from '@components/modal/confirm';
 import InputConfirmModal from '@components/modal/inputConfirm';
 import { Text } from '@components/text';
 import { CollectionMenuProps } from '@pages/collections/index.type';
-import classNames from 'classnames';
-import { useState } from 'react';
 import {
   CollectionType,
   DEFAULT_COLLECTIONS_KEY,
-} from 'src/data/collection.atom';
+} from '@utils/collections/index.type';
+import classNames from 'classnames';
+import { useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 
 export default function CollectionMenu({

@@ -1,6 +1,7 @@
-import { KeywordType, ValueLabelType } from '@utils/common.type';
+import { ValueLabelType } from '@utils/common.type';
+import { SearchKeywordsKeyType } from '@utils/searchKeywords/index.type';
 import { useRecoilState } from 'recoil';
-import { searchKeywordState } from 'src/data/search.atom';
+import searchKeywordAtom from 'src/data/search.atom';
 
 const removeItem = (
   items: ValueLabelType[],
@@ -16,10 +17,12 @@ const addItem = (
  * searchKeywords 를 조작하기 위한 hook
  */
 export const useSearchKeywords = () => {
-  const [searchKeywords, setSearchKeywords] =
-    useRecoilState(searchKeywordState);
+  const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
 
-  const updateSearchKeywords = (type: KeywordType, keyword: ValueLabelType) => {
+  const updateSearchKeywords = (
+    type: SearchKeywordsKeyType,
+    keyword: ValueLabelType,
+  ) => {
     const checked = searchKeywords[type].some(
       (searchKeyword) => searchKeyword.value === keyword.value,
     );

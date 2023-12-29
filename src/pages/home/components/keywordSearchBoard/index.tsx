@@ -1,4 +1,4 @@
-import { CategoryType, KeywordType, ValueLabelType } from '@utils/common.type';
+import { ValueLabelType } from '@utils/common.type';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -7,12 +7,16 @@ import classNames from 'classnames';
 import Button from '@components/button/index';
 import Icon from '@components/icon';
 import { useSearchKeywords } from 'src/hooks/useSearchKeywords';
-import { keywordListState } from 'src/data/keyword.atom';
+import keywordListSelector from 'src/data/keyword.atom';
+import {
+  KeywordByCategoryType,
+  SearchKeywordsKeyType,
+} from '@utils/searchKeywords/index.type';
 import CheckKeywordBubble from './checkKeywordBubble';
 import CheckKeywordBubbles from './checkKeywordBubbles';
 
 export default function KeywordSearchBorad() {
-  const wataAllKeywords = useRecoilValue(keywordListState);
+  const wataAllKeywords = useRecoilValue(keywordListSelector);
   const [tab, setTab] = useState<number>(0);
   const [tabOpen, setTabOpen] = useState<boolean>(false);
   const {
@@ -41,7 +45,7 @@ export default function KeywordSearchBorad() {
   const renderBubbles = (
     key: string,
     title: string,
-    bubbleType: KeywordType,
+    bubbleType: SearchKeywordsKeyType,
     bubbles: ValueLabelType[],
   ) => (
     <CheckKeywordBubbles
@@ -56,7 +60,7 @@ export default function KeywordSearchBorad() {
 
   const renderRemoveKeywordBubbles = (
     keywords: ValueLabelType[],
-    type: KeywordType,
+    type: SearchKeywordsKeyType,
   ) =>
     keywords?.map((keyword) => (
       <CheckKeywordBubble
@@ -87,18 +91,21 @@ export default function KeywordSearchBorad() {
           <Icon size="small" color="white" type={tabOpen ? 'up' : 'down'} />
         </div>
 
-        {wataAllKeywords?.map((category: CategoryType, index: number) => (
-          <div
-            className={classNames('tab', { select: tab === index })}
-            key={category.value}
-            onClick={() => handleTab(index)}
-            aria-hidden="true"
-          >
-            <Title type="h4" color="white">
-              {category.label}
-            </Title>
-          </div>
-        ))}
+        {/* 카테고리 탭 */}
+        {wataAllKeywords?.map(
+          (keywordBycategory: KeywordByCategoryType, index: number) => (
+            <div
+              className={classNames('tab', { select: tab === index })}
+              key={keywordBycategory.value}
+              onClick={() => handleTab(index)}
+              aria-hidden="true"
+            >
+              <Title type="h4" color="white">
+                {keywordBycategory.label}
+              </Title>
+            </div>
+          ),
+        )}
       </div>
 
       {/* 키워드 리스트 */}

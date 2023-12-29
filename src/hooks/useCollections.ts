@@ -1,10 +1,10 @@
-import { WataIdType, WataType } from '@utils/common.type';
-import { useRecoilState } from 'recoil';
 import {
   DEFAULT_COLLECTIONS_KEY,
   DEFAULT_COLLECTIONS_NAME,
-  collectionSelector,
-} from 'src/data/collection.atom';
+} from '@utils/collections/index.type';
+import { WataIdType, WataType } from '@utils/watas/index.type';
+import { useRecoilState } from 'recoil';
+import { collectionSelector } from 'src/data/collection.atom';
 
 export const useCollections = () => {
   const [collections, setCollections] = useRecoilState(collectionSelector);

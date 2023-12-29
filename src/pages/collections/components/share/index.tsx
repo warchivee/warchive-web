@@ -1,8 +1,8 @@
 import Button from '@components/button';
 import SnsShareModal from '@components/modal/snsShare';
 import { CollectionShareButtonsProps } from '@pages/collections/index.type';
+import { DEFAULT_COLLECTIONS_KEY } from '@utils/collections/index.type';
 import { useState } from 'react';
-import { DEFAULT_COLLECTIONS_KEY } from 'src/data/collection.atom';
 
 export default function ShareCollectionButtons({
   isEditMode,

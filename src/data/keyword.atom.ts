@@ -1,8 +1,11 @@
 import { selector } from 'recoil';
-import { CategoryType, ValueLabelType, WataType } from '@utils/common.type';
-import testData from './testData.json';
-import { wataListState } from './wata.atom';
+import { ValueLabelType } from '@utils/common.type';
+import { KeywordByCategoryType } from '@utils/searchKeywords/index.type';
+import testData from '@assets/testData.json';
+import { WataType } from '@utils/watas/index.type';
+import { allWataListSelector } from './wata.atom';
 
+// todo: api를 valueLabelType 으로 return 해주도록 수정할 예정
 const findKeywordsByCategory = (
   watas: WataType[],
   category: string,
@@ -63,10 +66,10 @@ const findKeywordsByCategory = (
   return result;
 };
 
-export const keywordListState = selector<CategoryType[]>({
-  key: 'keywordListState',
+export const keywordListSelector = selector<KeywordByCategoryType[]>({
+  key: 'keywordListSelector',
   get: async ({ get }) => {
-    const watas = get(wataListState);
+    const watas = get(allWataListSelector);
 
     const { allKeyword_list: allKeywords } = testData;
     const {
@@ -76,11 +79,13 @@ export const keywordListState = selector<CategoryType[]>({
       keyword_list: keywords,
     } = allKeywords;
 
-    const keywordList: CategoryType[] = categorys?.map((name: string) => ({
-      value: `category-${name}`,
-      label: name,
-      ...findKeywordsByCategory(watas, name, allKeywords),
-    }));
+    const keywordList: KeywordByCategoryType[] = categorys?.map(
+      (name: string) => ({
+        value: `category-${name}`,
+        label: name,
+        ...findKeywordsByCategory(watas, name, allKeywords),
+      }),
+    );
 
     keywordList.unshift({
       value: 'category-전체',
@@ -103,4 +108,4 @@ export const keywordListState = selector<CategoryType[]>({
   },
 });
 
-export default keywordListState;
+export default keywordListSelector;
