@@ -2,7 +2,10 @@ import Button from '@components/button';
 import Input from '@components/input';
 import { Title } from '@components/text';
 import { CollectionTitleProps } from '@pages/collections/index.type';
-import { DEFAULT_COLLECTIONS_KEY } from '@utils/collections/index.type';
+import {
+  DEFAULT_COLLECTIONS_KEY,
+  TITLE_LIMIT_LENGTH,
+} from '@utils/collections/index.type';
 import { useEffect, useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 
@@ -30,6 +33,7 @@ export default function CollectionTitle({
           border="underline"
           onChange={setInput}
           size="big"
+          maxLength={TITLE_LIMIT_LENGTH}
         />
       ) : (
         <Title type="h1">{collections[selectIndex].title}</Title>
