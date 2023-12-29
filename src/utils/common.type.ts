@@ -20,7 +20,7 @@ export interface CategoryType extends ValueLabelType {
 }
 
 export interface WataType {
-  id: number;
+  id: WataIdType;
   title: string;
   creator: string;
   category: ValueLabelType;
@@ -34,3 +34,5 @@ export interface WataType {
   }[];
   thumbnail: string;
 }
+
+export type WataIdType = number;

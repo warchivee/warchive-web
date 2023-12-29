@@ -1,4 +1,4 @@
-import { WataType } from '@utils/common.type';
+import { WataIdType, WataType } from '@utils/common.type';
 import { useRecoilState } from 'recoil';
 import {
   DEFAULT_COLLECTIONS_KEY,
@@ -58,7 +58,9 @@ export const useCollections = () => {
   };
 
   const findItemIndex = (index: number, wata: WataType) =>
-    collections[index].items.findIndex((item: WataType) => wata.id === item.id);
+    collections[index].items.findIndex(
+      (storedWataId: WataIdType) => wata.id === storedWataId,
+    );
   const existCollectionItem = (index: number, item: WataType) =>
     !(findItemIndex(index, item) < 0);
 
@@ -70,7 +72,7 @@ export const useCollections = () => {
         if (!existCollectionItem(index, item)) {
           newValue[index] = {
             ...newValue[index],
-            items: [...newValue[index].items, item],
+            items: [...newValue[index].items, item.id],
           };
         }
       } else if (!command) {

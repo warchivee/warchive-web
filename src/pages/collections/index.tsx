@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import useBookmarkList from 'src/hooks/useCollections';
 import WataCardList from '@components/wata/list';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { searchKeywordState } from 'src/data/search.atom';
+import wataListState from 'src/data/wata.atom';
+import { WataIdType, WataType } from '@utils/common.type';
 import CollectionMenu from './components/menu';
 import CollectionTitle from './components/title';
 import ShareCollectionButtons from './components/share';
 
 export default function Collections() {
+  const allWatas = useRecoilValue(wataListState);
   const [searchKeywords, setSearchKeywords] =
     useRecoilState(searchKeywordState);
   const { collections } = useBookmarkList();
@@ -48,7 +51,13 @@ export default function Collections() {
           isEditMode={editMode}
           selectIndex={collectionIndex}
         />
-        <WataCardList watas={collections[collectionIndex].items} />
+        <WataCardList
+          watas={allWatas.filter((wata: WataType) =>
+            collections[collectionIndex].items.some(
+              (storedWataId: WataIdType) => storedWataId === wata.id,
+            ),
+          )}
+        />
       </div>
     </div>
   );
