@@ -2,9 +2,9 @@ import Input from '@components/input';
 import Icon from '@components/icon';
 import Button from '@components/button';
 import { Text } from '@components/text';
-import classNames from 'classnames';
-
 import { useState } from 'react';
+import classNames from 'classnames';
+import nodemailer from 'nodemailer';
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -14,7 +14,6 @@ interface ReportModalProps {
 interface ReportData {
   name: string;
   contact: string;
-  reportType: string;
   content: string;
 }
 
@@ -27,8 +26,16 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
   );
   const [content2, setContent2] = useState<string>('');
 
+  const resetReportForm = () => {
+    setName('');
+    setContact('');
+    setReportType('report');
+    setContent1('제목: \n키워드: \n플랫폼: \n간단소개:');
+    setContent2('');
+    onClose();
+  };
+
   const handleTypeChange = (selectedType: string) => {
-    console.log(reportType + ' => ' + selectedType); // DEBUG
     setReportType(selectedType);
   };
 
@@ -47,24 +54,36 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
 
     const confirmation = window.confirm('보내시겠습니까?');
     if (confirmation) {
-      const reportData: ReportData = { name, contact, reportType, content };
+      const reportData: ReportData = { name, contact, content };
       sendReport(reportData);
-      console.log('전송 진행');
     } else {
       alert('전송을 취소하였습니다.');
     }
-
-    onClose;
   };
 
-  const sendReport = (reportData: ReportData) => {
-    console.log('전송하기');
+  const sendReport = async (reportData: ReportData) => {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.NODEMAILER_USERNAME,
+        pass: process.env.NODEMAILER_PASSWORD,
+      },
+    });
 
-    {
-      /*
-      '전송에 실패하였습니다. 다시 시도해주세요.'
-      '전송을 취소하였습니다.' 
-      */
+    const mailOptions = {
+      from: reportData.name + reportData.contact,
+      to: 'team.warchive@gmail.com',
+      text: reportData.content,
+    };
+
+    try {
+      await transporter?.sendMail(mailOptions);
+      console.log('Successed to send mail'); // DEBUG
+      alert('전송에 성공하였습니다.');
+      resetReportForm();
+    } catch (error) {
+      console.log('Failed to send mail: ', error); // DEBUG
+      alert('전송에 실패하였습니다. 다시 시도해주세요.');
     }
   };
 

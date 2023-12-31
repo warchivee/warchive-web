@@ -16,11 +16,9 @@ const About = lazy(() => import('@pages/about'));
 function App() {
   const [isReportModal, SetIsReportModal] = useState(false);
   const openReportModal = () => {
-    console.log('Open Report Modal');
     SetIsReportModal(true);
   };
   const closeReportModal = () => {
-    console.log('Close Report Modal');
     SetIsReportModal(false);
   };
 
