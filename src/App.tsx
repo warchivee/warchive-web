@@ -1,9 +1,10 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 import Header from '@components/layout/header';
 import Footer from '@components/layout/footer';
+import ReportModal from '@components/reportModal';
 
 import './App.css';
 
@@ -13,6 +14,16 @@ const ShareCollections = lazy(() => import('@pages/shareCollections'));
 const About = lazy(() => import('@pages/about'));
 
 function App() {
+  const [isReportModal, SetIsReportModal] = useState(false);
+  const openReportModal = () => {
+    console.log('Open Report Modal');
+    SetIsReportModal(true);
+  };
+  const closeReportModal = () => {
+    console.log('Close Report Modal');
+    SetIsReportModal(false);
+  };
+
   return (
     <RecoilRoot>
       <Router>
@@ -28,7 +39,7 @@ function App() {
               label: '추천작 제보/문의',
               icon: 'mail',
               type: 'popup',
-              openPopup: () => {},
+              openPopup: openReportModal,
             },
           ]}
           rightMenus={[
@@ -39,6 +50,8 @@ function App() {
             },
           ]}
         />
+
+        <ReportModal isOpen={isReportModal} onClose={closeReportModal} />
 
         <Suspense
           fallback={
