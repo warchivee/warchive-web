@@ -4,7 +4,6 @@ import Button from '@components/button';
 import { Text } from '@components/text';
 import { useState } from 'react';
 import classNames from 'classnames';
-import nodemailer from 'nodemailer';
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -62,22 +61,7 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
   };
 
   const sendReport = async (reportData: ReportData) => {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.NODEMAILER_USERNAME,
-        pass: process.env.NODEMAILER_PASSWORD,
-      },
-    });
-
-    const mailOptions = {
-      from: reportData.name + reportData.contact,
-      to: 'team.warchive@gmail.com',
-      text: reportData.content,
-    };
-
     try {
-      await transporter?.sendMail(mailOptions);
       console.log('Successed to send mail'); // DEBUG
       alert('전송에 성공하였습니다.');
       resetReportForm();
