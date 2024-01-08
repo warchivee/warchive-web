@@ -16,7 +16,7 @@ export default function SnsShareModal({
 }: SnsShareModalProps) {
   const { collections } = useCollections();
 
-  const makeUrl = () => getSharedCollectionShortUrl(collections[selectIndex]);
+  const shareUrl = getSharedCollectionShortUrl(collections[selectIndex]);
 
   return (
     <Modal
@@ -26,7 +26,7 @@ export default function SnsShareModal({
       message="SNS에 내 컬렉션을 공유해보세요."
     >
       <div className="buttons">
-        <CopyToClipboard text={makeUrl()} onCopy={() => onClose()}>
+        <CopyToClipboard text={shareUrl} onCopy={() => onClose()}>
           <Button
             icon="link"
             background="selago"
@@ -44,10 +44,9 @@ export default function SnsShareModal({
           border="round"
           onClick={() => {
             // 트위터 본문 내용 : 280자 제한
-            const sendUrl = makeUrl();
             const sendText = ' ';
             window.open(
-              `https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}`,
+              `https://twitter.com/intent/tweet?text=${sendText}&url=${shareUrl}`,
             );
           }}
         />
@@ -57,7 +56,6 @@ export default function SnsShareModal({
           labelColor="ebony"
           border="round"
           onClick={() => {
-            const shareUrl = makeUrl();
             window.open(
               `http://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
             );
