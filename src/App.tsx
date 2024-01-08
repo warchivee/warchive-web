@@ -14,12 +14,11 @@ const ShareCollections = lazy(() => import('@pages/shareCollections'));
 const About = lazy(() => import('@pages/about'));
 
 function App() {
-  const [isReportModal, SetIsReportModal] = useState(false);
   const openReportModal = () => {
-    SetIsReportModal(true);
-  };
-  const closeReportModal = () => {
-    SetIsReportModal(false);
+    window.open(
+      'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
+      '_blank',
+    );
   };
 
   return (
@@ -48,8 +47,6 @@ function App() {
             },
           ]}
         />
-
-        <ReportModal isOpen={isReportModal} onClose={closeReportModal} />
 
         <Suspense
           fallback={

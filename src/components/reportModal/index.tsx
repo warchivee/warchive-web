@@ -62,11 +62,22 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
 
   const sendReport = async (reportData: ReportData) => {
     try {
+      const emailParams = {
+        from_name: 'Sender Name',
+        to_email: 'recipient@example.com',
+        subject: 'Report Subject',
+        message: `
+        이름: ${reportData.name}
+        연락처: ${reportData.contact}
+        내용: ${reportData.content}
+      `,
+      };
+
       console.log('Successed to send mail'); // DEBUG
       alert('전송에 성공하였습니다.');
       resetReportForm();
     } catch (error) {
-      console.log('Failed to send mail: ', error); // DEBUG
+      console.error('Failed to send mail: ', error); // DEBUG
       alert('전송에 실패하였습니다. 다시 시도해주세요.');
     }
   };
