@@ -10,6 +10,7 @@ export type ColorType =
   | 'french-lilac'
   | 'alabaster'
   | 'sunglow'
+  | 'light-gray'
   | 'blue-violet'
   | 'lavender'
   | 'purple'
@@ -26,6 +27,7 @@ export const ColorCodes: Record<ColorType, string> = {
   'french-lilac': '#ebdbf3',
   alabaster: '#fbfbfb',
   sunglow: '#ffcd27',
+  'light-gray': '#f5f5f5',
   'blue-violet': '#9023d5',
   lavender: '#b169dd',
   purple: '#590091',

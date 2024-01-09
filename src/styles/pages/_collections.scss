@@ -73,6 +73,7 @@
 
     & > .sns {
       @include flex-row-start;
+      position: relative;
       gap: 0.5rem;
     }
 

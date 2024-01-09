@@ -15,11 +15,13 @@ export default function ShareCollectionButtons({
         {!isEditMode && (
           <>
             <Button
-              background="selago"
-              icon="share"
+              align="reverse"
+              icon="share-up"
+              iconColor="black"
+              background="light-gray"
               onClick={() => setOpenSnsShareModal(true)}
             >
-              SNS에 공유하기
+              나만 보기 아까운 작품이 있다면?
             </Button>
             <SnsShareModal
               isOpen={openSnsShareModal}

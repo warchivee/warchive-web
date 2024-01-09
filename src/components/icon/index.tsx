@@ -17,6 +17,7 @@ import Twitter from '@assets/icons/twitter.svg?react';
 import Write from '@assets/icons/write.svg?react';
 import Xmark from '@assets/icons/xmark.svg?react';
 import Search from '@assets/icons/search.svg?react';
+import ShareUp from '@assets/icons/share-up.svg?react';
 import Up from '@assets/icons/up.svg?react';
 import Down from '@assets/icons/down.svg?react';
 import FloderPlus from '@assets/icons/folder-plus.svg?react';
@@ -48,6 +49,7 @@ const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   write: Write,
   xmark: Xmark,
   search: Search,
+  'share-up': ShareUp,
   up: Up,
   down: Down,
   'folder-plus': FloderPlus,

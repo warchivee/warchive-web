@@ -18,6 +18,7 @@ export type IconType =
   | 'write'
   | 'xmark'
   | 'search'
+  | 'share-up'
   | 'up'
   | 'down'
   | 'folder-plus'
