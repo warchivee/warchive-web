@@ -20,3 +20,11 @@
     }
   }
 }
+
+@media screen {
+  .footer-background {
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+  }
+}
