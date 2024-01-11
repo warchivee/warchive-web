@@ -1,0 +1,1 @@
+import{j as a}from"./index-8lqxq6O5.js";import{g as r}from"./kakao.api-c0RRAiHI.js";function o(){return a.jsx("div",{className:"page",children:a.jsx("a",{href:r(),children:a.jsx("img",{src:"/images/login/kakao.png",alt:"카카오 로그인"})})})}export{o as default};

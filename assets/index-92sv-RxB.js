@@ -1,0 +1,1 @@
+import{j as e,e as i}from"./index-8lqxq6O5.js";function d(){return e.jsxs("div",{children:[e.jsx(i,{type:"h1",children:"키워드 관리"}),e.jsx("div",{children:e.jsx("div",{children:"키워드"})})]})}export{d as default};

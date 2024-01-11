@@ -1,1 +1,0 @@
-import{d as o,u as r,j as a,b as i}from"./index-39hTYAsx.js";import{w as l,W as c}from"./wata.atom-OmgfIt4O.js";import{a as n}from"./shareUrlShroter-Lt5LT4aW.js";function p(){const t=o(l),[e]=r(),s=n(t,e.get("p")||"");return a.jsxs("div",{className:"page share-collections",children:[a.jsx(i,{type:"h1",children:s.title}),a.jsx(c,{watas:s.items})]})}export{p as default};
