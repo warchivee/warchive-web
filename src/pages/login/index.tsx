@@ -4,7 +4,7 @@ export default function Login() {
   return (
     <div className="page">
       <a href={getKakaoLoginPageUrl()}>
-        <img src="public/images/login/kakao.png" alt="카카오 로그인" />
+        <img src="/images/login/kakao.png" alt="카카오 로그인" />
       </a>
     </div>
   );
