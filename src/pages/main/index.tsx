@@ -39,7 +39,16 @@ const adminMenu: MenuInfo[] = [
 export default function Main() {
   return (
     <>
-      <Header leftMenus={getUser().role === 'ADMIN' ? adminMenu : userMenu} />
+      <Header
+        leftMenus={getUser().role === 'ADMIN' ? adminMenu : userMenu}
+        rightMenus={[
+          {
+            icon: 'question',
+            path: '/about',
+            type: 'page',
+          },
+        ]}
+      />
       <Outlet />
       <Footer />
     </>
