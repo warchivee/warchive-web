@@ -1,8 +1,8 @@
 import ModalUtil from '@utils/modal.util';
 import { AxiosError, AxiosResponse } from 'axios';
 
-export const handlerApiError = (error: AxiosError): void => {
-  if (error.response?.status === 401) {
+export const handlerApiError = (error: unknown): void => {
+  if ((error as AxiosError).response?.status === 401) {
     ModalUtil.open({
       title: '요청 실패',
       message:
