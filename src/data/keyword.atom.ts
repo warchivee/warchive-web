@@ -1,8 +1,8 @@
 import { selector } from 'recoil';
-import { ValueLabelType } from '@utils/common.type';
-import { KeywordByCategoryType } from '@utils/searchKeywords/index.type';
+import { ValueLabelType } from 'src/types/common.type';
+import { KeywordByCategoryType } from 'src/types/serchKeyword.type';
 import testData from '@assets/testData.json';
-import { WataType } from '@utils/watas/index.type';
+import { WataType } from 'src/types/wata.type';
 import { allWataListSelector } from './wata.atom';
 
 // todo: api를 valueLabelType 으로 return 해주도록 수정할 예정

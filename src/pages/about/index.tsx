@@ -6,11 +6,7 @@ export default function About() {
     <div className="about-box">
       <div className="col">
         <div className="row item-col-center">
-          <img
-            src="./images/logo/sh-logo.png"
-            alt="와카이브 로고"
-            width={300}
-          />
+          <img src="/images/logo/sh-logo.png" alt="와카이브 로고" width={300} />
           <Title type="h2" color="blue-violet">
             여성서사 아카이브 프로젝트{' '}
           </Title>

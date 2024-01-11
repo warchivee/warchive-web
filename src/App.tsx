@@ -1,53 +1,29 @@
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
 
-import Header from '@components/layout/header';
-import Footer from '@components/layout/footer';
-import ReportModal from '@components/reportModal';
+import { RecoilRoot } from 'recoil';
 
 import './App.css';
 
+import PrivateRoute from 'src/routes/PrivateRoute';
+import PermissionRoute from 'src/routes/PermissionRoute';
+
+const Main = lazy(() => import('@pages/main'));
+const Login = lazy(() => import('@pages/login'));
+const LoginRedirect = lazy(() => import('@pages/login-redirect'));
 const Home = lazy(() => import('@pages/home'));
 const Collections = lazy(() => import('@pages/collections'));
 const ShareCollections = lazy(() => import('@pages/shareCollections'));
 const About = lazy(() => import('@pages/about'));
 
-function App() {
-  const openReportModal = () => {
-    window.open(
-      'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
-      '_blank',
-    );
-  };
+const AdminMain = lazy(() => import('@pages/admin/main'));
+const AdminHome = lazy(() => import('@pages/admin/home'));
+const AdminKeyword = lazy(() => import('@pages/admin/keyword'));
 
+function App() {
   return (
     <RecoilRoot>
       <Router>
-        <Header
-          leftMenus={[
-            {
-              label: '컬렉션',
-              icon: 'star',
-              path: '/collections',
-              type: 'page',
-            },
-            {
-              label: '추천작 제보/문의',
-              icon: 'mail',
-              type: 'popup',
-              openPopup: openReportModal,
-            },
-          ]}
-          rightMenus={[
-            {
-              icon: 'question',
-              path: '/about',
-              type: 'page',
-            },
-          ]}
-        />
-
         <Suspense
           fallback={
             <div>
@@ -56,14 +32,29 @@ function App() {
           }
         >
           <Routes>
-            <Route path="/" Component={Home} />
-            <Route path="/collections" Component={Collections} />
-            <Route path="/shared" Component={ShareCollections} />
-            <Route path="/about" Component={About} />
+            <Route element={<Main />}>
+              <Route path="/" index element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/login/redirect" element={<LoginRedirect />} />
+              <Route path="/shared" element={<ShareCollections />} />
+              <Route path="/about" element={<About />} />
+              {/* 로그인 해야 하는 서비스 */}
+              <Route element={<PrivateRoute />}>
+                {/* 유저 서비스 */}
+                <Route element={<PermissionRoute access="USER" />}>
+                  <Route path="/collections" element={<Collections />} />
+                </Route>
+                {/* 어드민 서비스 */}
+                <Route element={<PermissionRoute access="ADMIN" />}>
+                  <Route path="/admin" element={<AdminMain />}>
+                    <Route index element={<AdminHome />} />
+                    <Route path="/admin/keyword" element={<AdminKeyword />} />
+                  </Route>
+                </Route>
+              </Route>
+            </Route>
           </Routes>
         </Suspense>
-
-        <Footer />
       </Router>
     </RecoilRoot>
   );

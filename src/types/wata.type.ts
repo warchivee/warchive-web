@@ -1,4 +1,4 @@
-import { ValueLabelType } from '@utils/common.type';
+import { ValueLabelType } from 'src/types/common.type';
 
 export interface WataType {
   id: WataIdType;

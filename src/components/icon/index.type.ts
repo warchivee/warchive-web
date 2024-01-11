@@ -1,5 +1,5 @@
 import { FontSizeType } from '@components/text/index.type';
-import { ColorType } from '@utils/color';
+import { ColorType } from '@utils/color.util';
 
 export type IconType =
   | 'angles-up'
@@ -18,6 +18,7 @@ export type IconType =
   | 'write'
   | 'xmark'
   | 'search'
+  | 'share-up'
   | 'up'
   | 'down'
   | 'folder-plus'
