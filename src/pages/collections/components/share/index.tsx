@@ -1,7 +1,7 @@
 import Button from '@components/button';
 import SnsShareModal from '@components/modal/snsShare';
 import { CollectionShareButtonsProps } from '@pages/collections/index.type';
-import { DEFAULT_COLLECTIONS_KEY } from '@utils/collections/index.type';
+import { DEFAULT_COLLECTIONS_KEY } from 'src/types/collection.type';
 import { useState } from 'react';
 
 export default function ShareCollectionButtons({

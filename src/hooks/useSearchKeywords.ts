@@ -1,5 +1,5 @@
-import { ValueLabelType } from '@utils/common.type';
-import { SearchKeywordsKeyType } from '@utils/searchKeywords/index.type';
+import { ValueLabelType } from 'src/types/common.type';
+import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
 import { useRecoilState } from 'recoil';
 import searchKeywordAtom from 'src/data/search.atom';
 

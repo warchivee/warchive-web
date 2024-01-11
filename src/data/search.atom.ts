@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { SearchKeywordsType } from '@utils/searchKeywords/index.type';
+import { SearchKeywordsType } from 'src/types/serchKeyword.type';
 
 export const searchKeywordAtom = atom<SearchKeywordsType>({
   key: 'searchKeywordAtom',

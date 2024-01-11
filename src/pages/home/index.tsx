@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Text } from '@components/text';
 import Input from '@components/input';
 import usePagination from 'src/hooks/usePagination';
-import Pagination from '@components/layout/pagination';
+import Pagination from '@components/pagination';
 import WataCardList from '@components/wata/list';
 import searchWataListSelector from 'src/data/searchWata.tom';
 import searchKeywordAtom from 'src/data/search.atom';

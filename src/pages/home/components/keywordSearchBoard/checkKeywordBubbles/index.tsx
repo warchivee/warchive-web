@@ -1,5 +1,5 @@
 import { Title } from '@components/text';
-import { ValueLabelType } from '@utils/common.type';
+import { ValueLabelType } from 'src/types/common.type';
 import { CheckKeywordBubblesProps } from '../index.type';
 import CheckKeywordBubble from '../checkKeywordBubble';
 

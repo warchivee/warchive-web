@@ -1,4 +1,4 @@
-import { ValueLabelType } from '@utils/common.type';
+import { ValueLabelType } from 'src/types/common.type';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -11,7 +11,7 @@ import keywordListSelector from 'src/data/keyword.atom';
 import {
   KeywordByCategoryType,
   SearchKeywordsKeyType,
-} from '@utils/searchKeywords/index.type';
+} from 'src/types/serchKeyword.type';
 import CheckKeywordBubble from './checkKeywordBubble';
 import CheckKeywordBubbles from './checkKeywordBubbles';
 

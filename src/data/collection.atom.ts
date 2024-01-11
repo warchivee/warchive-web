@@ -2,7 +2,7 @@ import {
   COLLEACTIONS_KEY,
   CollectionType,
   DEFAULT_COLLECTIONS_NAME,
-} from '@utils/collections/index.type';
+} from 'src/types/collection.type';
 import { DefaultValue, atom, selector } from 'recoil';
 
 // todo: 기존 와카이브 북마크 연동

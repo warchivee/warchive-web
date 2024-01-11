@@ -1,4 +1,4 @@
-import { ColorType } from '@utils/color';
+import { ColorType } from '@utils/color.util';
 
 export type FontSizeType = 'small' | 'normal' | 'big';
 

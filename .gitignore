@@ -8,8 +8,9 @@
 # misc
 .DS_Store
 
-# local env files
-.env*.local
+# Ignore .env files
+.env.production
+.env.development
 
 # zero-install
 .yarn/*

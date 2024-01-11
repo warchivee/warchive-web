@@ -1,6 +1,6 @@
 import { Text } from '@components/text';
-import { CollectionType } from '@utils/collections/index.type';
-import { WataType } from '@utils/watas/index.type';
+import { CollectionType } from 'src/types/collection.type';
+import { WataType } from 'src/types/wata.type';
 import { useEffect, useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 import { ModalProps } from '../index.type';
