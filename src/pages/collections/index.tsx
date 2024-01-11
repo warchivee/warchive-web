@@ -4,7 +4,7 @@ import WataCardList from '@components/wata/list';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import wataListState from 'src/data/wata.atom';
 import searchKeywordAtom from 'src/data/search.atom';
-import { WataIdType, WataType } from '@utils/watas/index.type';
+import { WataIdType, WataType } from 'src/types/wata.type';
 import CollectionMenu from './components/menu';
 import CollectionTitle from './components/title';
 import ShareCollectionButtons from './components/share';

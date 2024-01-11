@@ -1,6 +1,6 @@
 import Input from '@components/input';
 import { useEffect, useState } from 'react';
-import { TITLE_LIMIT_LENGTH } from '@utils/collections/index.type';
+import { TITLE_LIMIT_LENGTH } from 'src/types/collection.type';
 import { ModalProps } from '../index.type';
 import Modal from '..';
 

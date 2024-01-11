@@ -39,7 +39,7 @@ export default function Header({
       <header>
         <Link to="/">
           <div className="logo">
-            <img src="./images/logo/logo-text.png" alt="와카이브 로고" />
+            <img src="public/images/logo/logo-text.png" alt="와카이브 로고" />
           </div>
         </Link>
 

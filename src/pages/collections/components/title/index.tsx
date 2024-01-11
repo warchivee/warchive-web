@@ -5,7 +5,7 @@ import { CollectionTitleProps } from '@pages/collections/index.type';
 import {
   DEFAULT_COLLECTIONS_KEY,
   TITLE_LIMIT_LENGTH,
-} from '@utils/collections/index.type';
+} from 'src/types/collection.type';
 import { useEffect, useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 

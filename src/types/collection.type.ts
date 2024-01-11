@@ -1,4 +1,4 @@
-import { WataIdType } from '@utils/watas/index.type';
+import { WataIdType } from 'src/types/wata.type';
 
 export const COLLEACTIONS_KEY = 'my-warchive-collections';
 export const DEFAULT_COLLECTIONS_NAME = '미지정';

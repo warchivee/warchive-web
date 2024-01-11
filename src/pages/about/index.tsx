@@ -7,7 +7,7 @@ export default function About() {
       <div className="col">
         <div className="row item-col-center">
           <img
-            src="./images/logo/sh-logo.png"
+            src="public/images/logo/sh-logo.png"
             alt="와카이브 로고"
             width={300}
           />

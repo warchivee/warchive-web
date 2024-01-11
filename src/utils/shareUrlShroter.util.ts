@@ -1,5 +1,5 @@
-import { WataIdType, WataType } from '@utils/watas/index.type';
-import { CollectionType } from './index.type';
+import { WataIdType, WataType } from 'src/types/wata.type';
+import { CollectionType } from '../types/collection.type';
 
 const BASE62CODES =
   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
