@@ -21,7 +21,7 @@
   }
 }
 
-@media screen {
+@media screen and (max-width: 600px) {
   .footer-background {
     visibility: hidden;
     height: 0;

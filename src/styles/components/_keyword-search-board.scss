@@ -18,14 +18,6 @@
       cursor: pointer;
       padding: 1rem 1rem;
       text-align: center;
-
-      @media screen {
-        .control {
-          .text {
-            display: none;
-          }
-        }
-      }
     }
 
     & .control {
@@ -102,6 +94,18 @@
       gap: 0.7rem;
       width: $page-content-width;
       flex-wrap: wrap;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .keyword-search-board {
+    & .tabs {
+      .control {
+        .text {
+          display: none;
+        }
+      }
     }
   }
 }

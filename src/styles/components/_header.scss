@@ -38,36 +38,18 @@
   }
 }
 
-@media screen {
+@media screen and (max-width: 1199px) {
   .header-background {
+    height: 4.4rem;
     & header {
       display: flex;
       justify-content: center;
       align-items: center;
-
-      & .menus {
-        display: none;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .header-background {
-    & header {
-      & .logo {
-        height: 2.8rem;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .header-background {
-    height: 4.2rem;
-    & header {
       & .logo {
         height: 2rem;
+      }
+      & .menus {
+        display: none;
       }
     }
   }
@@ -77,19 +59,14 @@
   .header-background {
     height: 4rem;
     & header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       & .logo {
         height: 1.6rem;
       }
-    }
-  }
-}
-
-@media screen and (max-width: 300px) {
-  .header-background {
-    height: 3.8rem;
-    & header {
-      & .logo {
-        height: 1.2rem;
+      & .menus {
+        display: none;
       }
     }
   }
