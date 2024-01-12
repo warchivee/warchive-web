@@ -4,6 +4,7 @@ import Button from '@components/button';
 import { Text } from '@components/text';
 import { useState } from 'react';
 import classNames from 'classnames';
+import ModalUtil from '@utils/modal.util';
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -38,30 +39,9 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
     setReportType(selectedType);
   };
 
-  const handleSendReport = () => {
-    let content;
-    if (reportType === 'report') {
-      content = content1;
-    } else {
-      content = content2;
-    }
-
-    if (!name || !contact || !content) {
-      alert('빈칸을 모두 작성해 주세요.');
-      return;
-    }
-
-    const confirmation = window.confirm('보내시겠습니까?');
-    if (confirmation) {
-      const reportData: ReportData = { name, contact, content };
-      sendReport(reportData);
-    } else {
-      alert('전송을 취소하였습니다.');
-    }
-  };
-
   const sendReport = async (reportData: ReportData) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const emailParams = {
         from_name: 'Sender Name',
         to_email: 'recipient@example.com',
@@ -73,13 +53,43 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
       `,
       };
 
-      console.log('Successed to send mail'); // DEBUG
-      alert('전송에 성공하였습니다.');
+      ModalUtil.open({
+        title: '메일 전송',
+        message: '메일 전송에 성공했습니다.',
+      });
       resetReportForm();
     } catch (error) {
-      console.error('Failed to send mail: ', error); // DEBUG
-      alert('전송에 실패하였습니다. 다시 시도해주세요.');
+      ModalUtil.open({
+        title: '메일 전송',
+        message: '전송에 실패하였습니다. 다시 시도해주세요.',
+      });
     }
+  };
+
+  const handleSendReport = () => {
+    let content = '';
+    if (reportType === 'report') {
+      content = content1;
+    } else {
+      content = content2;
+    }
+
+    if (!name || !contact || !content) {
+      ModalUtil.open({
+        title: '메일 전송',
+        message: '빈칸을 모두 작성해 주세요.',
+      });
+      return;
+    }
+
+    ModalUtil.open({
+      title: '메일 전송',
+      message: '메일을 전송하시겠습니까?',
+      onConfirm: () => {
+        const reportData: ReportData = { name, contact, content };
+        sendReport(reportData);
+      },
+    });
   };
 
   return (
@@ -96,12 +106,12 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
         <div className="body">
           <div className="reporter">
             <Text color="purple">문의자 정보</Text>
-            <Input placeholder="이름" value={name} onChange={setName}></Input>
+            <Input placeholder="이름" value={name} onChange={setName} />
             <Input
               placeholder="이메일, 트위터 계정, 그 밖의 다른 연락처"
               value={contact}
               onChange={setContact}
-            ></Input>
+            />
           </div>
 
           <div className="content">
@@ -113,6 +123,7 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
                   selected: reportType === 'report',
                 })}
                 onClick={() => handleTypeChange('report')}
+                type="button"
               >
                 추천작 제보
               </button>
@@ -122,6 +133,7 @@ export default function ReportModal({ isOpen, onClose }: ReportModalProps) {
                   selected: reportType !== 'report',
                 })}
                 onClick={() => handleTypeChange('etc')}
+                type="button"
               >
                 기타 문의
               </button>

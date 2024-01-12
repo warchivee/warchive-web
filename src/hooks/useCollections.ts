@@ -1,8 +1,8 @@
 import {
   DEFAULT_COLLECTIONS_KEY,
   DEFAULT_COLLECTIONS_NAME,
-} from '@utils/collections/index.type';
-import { WataIdType, WataType } from '@utils/watas/index.type';
+} from 'src/types/collection.type';
+import { WataIdType, WataType } from 'src/types/wata.type';
 import { useRecoilState } from 'recoil';
 import { collectionSelector } from 'src/data/collection.atom';
 

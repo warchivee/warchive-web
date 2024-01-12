@@ -1,4 +1,4 @@
-import { ColorType } from '@utils/color';
+import { ColorType } from '@utils/color.util';
 import { IconType } from '@components/icon/index.type';
 import { FontSizeType } from '@components/text/index.type';
 

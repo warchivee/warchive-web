@@ -6,7 +6,7 @@ import { CollectionMenuProps } from '@pages/collections/index.type';
 import {
   CollectionType,
   DEFAULT_COLLECTIONS_KEY,
-} from '@utils/collections/index.type';
+} from 'src/types/collection.type';
 import classNames from 'classnames';
 import { useState } from 'react';
 import useCollections from 'src/hooks/useCollections';

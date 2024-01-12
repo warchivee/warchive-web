@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import { WataType } from '@utils/watas/index.type';
+import { WataType } from 'src/types/wata.type';
 import testData from '@assets/testData.json';
 
 const makeValueLabelList = (datas: string[]) =>

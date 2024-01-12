@@ -1,11 +1,11 @@
 import Button from '@components/button';
 import { Text, Title } from '@components/text';
-import { ValueLabelType } from '@utils/common.type';
+import { ValueLabelType } from 'src/types/common.type';
 import {
   SearchKeywordsKeyType,
   SearchKeywordsType,
-} from '@utils/searchKeywords/index.type';
-import { PlatformType, WataType } from '@utils/watas/index.type';
+} from 'src/types/serchKeyword.type';
+import { PlatformType, WataType } from 'src/types/wata.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import searchKeywordAtom from 'src/data/search.atom';

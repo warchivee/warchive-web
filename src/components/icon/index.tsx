@@ -1,4 +1,4 @@
-import { ColorCodes } from '@utils/color';
+import { ColorCodes } from '@utils/color.util';
 import { FontSizeType } from '@components/text/index.type';
 
 import AnglesUp from '@assets/icons/angles-up.svg?react';

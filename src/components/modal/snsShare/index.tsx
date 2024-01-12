@@ -1,5 +1,5 @@
 import Button from '@components/button';
-import { getSharedCollectionShortUrl } from '@utils/collections/shareUrlShroter';
+import { getSharedCollectionShortUrl } from '@utils/shareUrlShroter.util';
 import useCollections from 'src/hooks/useCollections';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Text } from '@components/text';
@@ -9,6 +9,7 @@ import kakaotalk_logo from '@assets/logos/kakaotalk.png';
 import twitter_logo from '@assets/logos/twitter.png';
 import instagram_logo from '@assets/logos/instagram.png';
 import facebook_logo from '@assets/logos/facebook.png';
+import ModalUtil from '@utils/modal.util';
 
 interface SnsShareModalProps {
   isOpen: boolean;
@@ -31,7 +32,10 @@ export default function SnsShareModal({
   };
 
   const showNotification = () => {
-    alert('주소가 복사되었습니다.');
+    ModalUtil.open({
+      title: 'URL 링크 복사',
+      message: '공유 페이지 url 링크가 복사되었습니다.',
+    });
   };
 
   return (
@@ -46,7 +50,7 @@ export default function SnsShareModal({
         </div>
 
         <div className="body">
-          <button className="share-group">
+          <button className="share-group" type="button">
             <img
               src={kakaotalk_logo}
               alt="카카오톡으로 공유하기"
@@ -64,12 +68,13 @@ export default function SnsShareModal({
                 `https://twitter.com/intent/tweet?text=${sendText}&url=${shareUrl}`,
               );
             }}
+            type="button"
           >
             <img src={twitter_logo} alt="트위터로 공유하기" style={imageSize} />
             <Text size="small">트위터</Text>
           </button>
 
-          <button className="share-group">
+          <button className="share-group" type="button">
             <img
               src={instagram_logo}
               alt="인스타그램으로 공유하기"
@@ -85,6 +90,7 @@ export default function SnsShareModal({
                 `http://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
               );
             }}
+            type="button"
           >
             <img
               src={facebook_logo}
@@ -95,7 +101,7 @@ export default function SnsShareModal({
           </button>
 
           <CopyToClipboard text={shareUrl} onCopy={() => showNotification()}>
-            <button className="share-group">
+            <button className="share-group" type="button">
               <Button
                 background="light-gray"
                 border="round"

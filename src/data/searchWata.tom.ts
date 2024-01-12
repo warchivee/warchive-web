@@ -1,6 +1,6 @@
-import { WataType } from '@utils/watas/index.type';
+import { WataType } from 'src/types/wata.type';
 import { selector } from 'recoil';
-import { ValueLabelType } from '@utils/common.type';
+import { ValueLabelType } from 'src/types/common.type';
 import { allWataListSelector } from './wata.atom';
 import { searchKeywordAtom } from './search.atom';
 
