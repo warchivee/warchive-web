@@ -1,73 +1,110 @@
-.header-background {
-  @include flex-row-center;
-  width: 100%;
-  background-color: $ebony;
-  padding: 2rem 0;
+@media screen and (min-width: 601px) {
+  .header-background {
+    @include flex-row-center;
+    width: 100%;
+    background-color: $ebony;
+    padding: 2rem 0;
 
-  & header {
-    @include flex-row-start;
-    gap: 2rem;
+    & header {
+      @include flex-row-start;
+      gap: 2rem;
 
-    width: $page-content-width;
+      width: $page-content-width;
 
-    & .logo {
-      height: 2.8rem;
+      & .logo {
+        height: 2.8rem;
 
-      & > img {
-        width: auto;
-        height: 100%;
+        & > img {
+          width: auto;
+          height: 100%;
+        }
       }
-    }
 
-    & .menus {
-      @include flex-row-space-between;
-      align-items: flex-end;
-      width: 100%;
-      height: 100%;
-
-      & button {
-        padding: 0;
+      & .menus {
+        @include flex-row-space-between;
         align-items: flex-end;
-      }
+        width: 100%;
+        height: 100%;
 
-      & .menu {
-        @include flex-row-start;
-        gap: 1rem;
+        & button {
+          padding: 0;
+          align-items: flex-end;
+        }
+
+        & .menu {
+          @include flex-row-start;
+          gap: 1rem;
+        }
       }
     }
   }
-}
-
-@media screen and (max-width: 1199px) {
-  .header-background {
-    height: 4.4rem;
-    & header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      & .logo {
-        height: 2rem;
-      }
-      & .menus {
-        display: none;
-      }
-    }
+  .mobile-header-background {
+    display: none;
+  }
+  .mobile-hamburger-side {
+    display: none;
   }
 }
 
 @media screen and (max-width: 600px) {
   .header-background {
-    height: 4rem;
+    display: none;
+  }
+  .mobile-header-background {
+    @include flex-row-center;
+    width: 100%;
+    background-color: $ebony;
+    padding: 0.7rem 0;
+
     & header {
+      @include flex-row-start;
+      width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
+      padding: 0 1rem;
+
       & .logo {
         height: 1.6rem;
+
+        & > img {
+          width: auto;
+          height: 100%;
+        }
       }
-      & .menus {
-        display: none;
+
+      & .menu-hamburger {
       }
+
+      & .menu-collection {
+      }
+    }
+  }
+  .mobile-hamburger-side {
+    display: none;
+  }
+  .mobile-hamburger-side.open {
+    display: block;
+
+    & .hamburger-header {
+      & .close-button {
+      }
+      & .info {
+        & .logo {
+          height: 2rem;
+
+          & > img {
+            width: auto;
+            height: 100%;
+          }
+        }
+        & .text {
+        }
+      }
+    }
+    & .hamburger-menus {
+    }
+    & .hamburger-footer {
     }
   }
 }
