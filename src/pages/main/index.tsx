@@ -36,18 +36,44 @@ const adminMenu: MenuInfo[] = [
   },
 ];
 
+const getRightMenu = (isLogin: boolean): MenuInfo[] => {
+  const about = {
+    icon: 'question',
+    path: '/about',
+    type: 'page',
+  };
+
+  if (isLogin) {
+    return [
+      {
+        path: '/logout',
+        label: '로그아웃',
+        type: 'page',
+      },
+      about,
+    ] as MenuInfo[];
+  }
+
+  return [
+    {
+      path: '/login',
+      label: '로그인',
+      type: 'page',
+    },
+    about,
+  ] as MenuInfo[];
+};
+
 export default function Main() {
+  const user = getUser();
+  const isAdmin = user?.role === 'ADMIN';
+  const isLogin = !!user;
+
   return (
     <>
       <Header
-        leftMenus={getUser().role === 'ADMIN' ? adminMenu : userMenu}
-        rightMenus={[
-          {
-            icon: 'question',
-            path: '/about',
-            type: 'page',
-          },
-        ]}
+        leftMenus={isAdmin ? adminMenu : userMenu}
+        rightMenus={getRightMenu(isLogin)}
       />
       <Outlet />
       <Footer />

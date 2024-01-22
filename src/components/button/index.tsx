@@ -30,7 +30,11 @@ export default function Button({
       )}
       onClick={onClick}
     >
-      {icon && <Icon type={icon} color={iconColor} size={size} />}
+      {icon && (
+        <div className="icon-box">
+          <Icon type={icon} color={iconColor} size={size} />
+        </div>
+      )}
       {children && (
         <Text size={size} color={labelColor}>
           {children}

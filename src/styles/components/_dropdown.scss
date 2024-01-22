@@ -2,31 +2,66 @@
   position: relative;
   display: inline-block;
 
-  button {
-    padding: 8px 12px;
+  & button {
     font-size: 16px;
     cursor: pointer;
+
+    & > .text {
+      max-width: 300px;
+      text-align: left;
+    }
   }
 
-  .dropdown-menu {
+  & .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: $alabaster;
+    border: 1px solid #e2e2e2;
+    border-radius: 0.5rem;
     list-style: none;
-    margin: 0;
+    margin: 0.1rem 0;
     padding: 8px 0;
+    z-index: 1;
+    width: max-content;
+    max-width: 200px;
+    max-height: 300px;
+    overflow-y: scroll;
 
-    li {
+    &.row {
+      flex-direction: row;
+
+      & > :first-child {
+        border-right: 1px solid #ccc;
+      }
+    }
+
+    & li.search {
+      position: sticky;
+      background-color: $alabaster;
+      top: 0;
+    }
+
+    & li {
       padding: 8px 12px;
       font-size: 14px;
       cursor: pointer;
+
+      &.highlighted-item {
+        background-color: #f0f0f0;
+      }
+
       &:hover {
         background-color: #f0f0f0;
+      }
+
+      & label {
+        display: flex;
+
+        & input[type='checkbox']:checked {
+          accent-color: $blue-violet;
+        }
       }
     }
   }

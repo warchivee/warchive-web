@@ -28,9 +28,9 @@ import Share from '@assets/icons/share.svg?react';
 import { IconType, IconProps } from './index.type';
 
 const IconSizeCodes: Record<FontSizeType, number> = {
-  small: 12,
-  normal: 16,
-  big: 18,
+  small: 10,
+  normal: 12,
+  big: 16,
 };
 
 const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
@@ -63,11 +63,12 @@ export default function Icon({ type, color, size }: IconProps) {
   const IconComponent = icons[type];
 
   return (
-    <IconComponent
-      className="icon"
-      fill={ColorCodes[color]}
-      height={IconSizeCodes[size]}
-      width={IconSizeCodes[size]}
-    />
+    <div className="icon" style={{ display: 'flex', justifyContent: 'center' }}>
+      <IconComponent
+        fill={ColorCodes[color]}
+        height={IconSizeCodes[size]}
+        width={IconSizeCodes[size]}
+      />
+    </div>
   );
 }

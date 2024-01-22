@@ -3,12 +3,16 @@
   align-items: center;
   width: 100%;
 
+  label {
+    margin-right: 1rem;
+  }
+
   input {
     width: 100%;
     background: $alabaster;
 
     &.outline {
-      padding: 0.5rem 1rem;
+      padding: 0.3rem 1rem;
       border: 0.1rem solid $purple;
       border-radius: 20rem;
     }
@@ -35,9 +39,14 @@
     }
   }
 
-  .icon {
+  & .reset {
     position: relative;
-    left: 1.7rem; /* 아이콘의 위치를 조절하세요 */
-    pointer-events: none; /* 아이콘 영역이 클릭되지 않도록 설정 */
+    right: 1.7rem;
+  }
+
+  & > .icon {
+    position: relative;
+    left: 1.7rem;
+    pointer-events: none;
   }
 }

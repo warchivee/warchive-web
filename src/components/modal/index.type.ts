@@ -8,4 +8,6 @@ export interface ModalProps {
   onClose: () => void;
   onConfirm?: (value?: string) => void;
   buttons?: ModalButtonType[];
+  onAfterOpen?: () => void;
+  size?: 'small' | 'big';
 }

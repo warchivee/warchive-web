@@ -5,9 +5,9 @@
     background-color: $ebony;
     padding: 2rem 0;
 
-    & header {
-      @include flex-row-start;
-      gap: 2rem;
+  & header {
+    @include flex-row-start;
+    gap: 2rem;
 
       width: $page-content-width;
 
@@ -71,6 +71,9 @@
           width: auto;
           height: 100%;
         }
+
+      & button {
+        padding: 0;
       }
     }
   }
@@ -88,7 +91,7 @@
     z-index: 100;
     overflow: hidden;
     touch-action: none;
-
+    
     & .hamburger-container {
       position: relative;
       left: 0;
@@ -172,6 +175,11 @@
             margin-bottom: 1rem;
           }
         }
+
+      & .menu {
+        @include flex-row-start;
+        gap: 1rem;
+        align-items: center;
       }
     }
   }

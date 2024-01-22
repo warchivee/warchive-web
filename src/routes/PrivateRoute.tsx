@@ -27,7 +27,7 @@ export default function PrivateRoute() {
       });
     } catch (error) {
       setIsLogin({
-        status: 'ERROR',
+        status: 'LOGIN',
       });
     }
   };

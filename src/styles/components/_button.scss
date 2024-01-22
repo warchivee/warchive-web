@@ -1,10 +1,11 @@
 .button {
   @include flex-row-space-between;
   align-items: center;
-  gap: $pxr5;
-  padding: 0.3rem 1rem;
+  gap: 0.2rem;
+  padding: 0.2rem 0.7rem;
   width: fit-content;
   height: fit-content;
+  justify-content: center;
 
   &.reverse {
     flex-direction: row-reverse;
@@ -14,11 +15,13 @@
     padding: 0.3rem;
   }
 
-  & .icon {
-    margin: 0.1rem;
-  }
-
   &.full-width {
     width: 100%;
+  }
+
+  & .icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -5,7 +5,21 @@ export const saveUser = (user: User) => {
   localStorage.setItem('role', user.role);
 };
 
-export const getUser = (): User => ({
-  nickname: localStorage.getItem('nickname') || '',
-  role: (localStorage.getItem('role') as Permissiontype) || '',
-});
+export const getUser = (): User | undefined => {
+  const nickname = localStorage.getItem('nickname');
+  const role = localStorage.getItem('role');
+
+  if (!nickname || !role) {
+    return undefined;
+  }
+
+  return {
+    nickname,
+    role: role as Permissiontype,
+  };
+};
+
+export const deleteUser = () => {
+  localStorage.removeItem('nickname');
+  localStorage.removeItem('role');
+};

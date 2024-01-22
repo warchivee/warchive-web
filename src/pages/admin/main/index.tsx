@@ -1,32 +1,24 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import Button from '@components/button';
-import AdminHeader from './header';
+import AdminHeader from './components/header';
+import AdminSideMenu from './components/sideMenu';
 
 export default function AdminMain() {
-  const [open, toggleDrawer] = useState(true);
+  const [open, toggleDrawer] = useState(false);
 
   return (
     <div className="admin">
-      <AdminHeader openDrawer={() => toggleDrawer(!open)} />
+      <AdminHeader openDrawer={() => toggleDrawer(true)} />
       <div className="body">
-        <div className="side-menu">
-          <ol>
-            <li>
-              <Button labelColor="white" size="big">
-                <Link to="/admin">데이터 관리</Link>
-              </Button>
-            </li>
-            <li>
-              <Button labelColor="white" size="big">
-                <Link to="/admin/keyword">키워드 관리</Link>
-              </Button>
-            </li>
-          </ol>
-        </div>
-        <div className="article">
+        <AdminSideMenu
+          isOpen={open}
+          onClose={() => {
+            toggleDrawer(false);
+          }}
+        />
+        <article>
           <Outlet />
-        </div>
+        </article>
       </div>
     </div>
   );

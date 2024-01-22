@@ -4,6 +4,13 @@ import Button from '@components/button';
 import { Text, Title } from '@components/text';
 import { HeaderProps, MenuInfo } from './index.type';
 
+const openReportModal = () => {
+  window.open(
+    'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
+    '_blank',
+  );
+};
+
 const renderMenus = (menus: MenuInfo[], currentPath: string) =>
   menus?.map((menu: MenuInfo, index: number) =>
     menu.type === 'page' ? (
@@ -21,8 +28,14 @@ const renderMenus = (menus: MenuInfo[], currentPath: string) =>
       <Button
         key={`menu-${index + 1}`}
         icon={menu.icon}
-        iconColor={currentPath === menu.path ? 'lavender' : 'vivid-violet'}
-        labelColor={currentPath === menu.path ? 'white' : 'gray'}
+        iconColor={
+          currentPath.includes(menu.path ?? 'noting')
+            ? 'lavender'
+            : 'vivid-violet'
+        }
+        labelColor={
+          currentPath.includes(menu.path ?? 'noting') ? 'white' : 'gray'
+        }
         size="big"
         onClick={menu.openPopup}
       >
@@ -36,17 +49,11 @@ export default function Header({
   rightMenus = [],
 }: HeaderProps) {
   const { pathname } = useLocation();
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const handleHamburgereMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
-  const openReportModal = () => {
-    window.open(
-      'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
-      '_blank',
-    );
-  };
-
   return (
     <>
       <div className="header-background">

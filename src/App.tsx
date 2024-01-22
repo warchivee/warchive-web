@@ -10,10 +10,11 @@ import PermissionRoute from 'src/routes/PermissionRoute';
 
 const Main = lazy(() => import('@pages/main'));
 const Login = lazy(() => import('@pages/login'));
-const LoginRedirect = lazy(() => import('@pages/login-redirect'));
+const LoginRedirect = lazy(() => import('@pages/login/redirect'));
+const Logout = lazy(() => import('@pages/login/logout'));
 const Home = lazy(() => import('@pages/home'));
 const Collections = lazy(() => import('@pages/collections'));
-const ShareCollections = lazy(() => import('@pages/shareCollections'));
+const ShareCollections = lazy(() => import('@pages/collections/share'));
 const About = lazy(() => import('@pages/about'));
 
 const AdminMain = lazy(() => import('@pages/admin/main'));
@@ -41,6 +42,8 @@ function App() {
               {/* 로그인 해야 하는 서비스 */}
               <Route element={<PrivateRoute />}>
                 {/* 유저 서비스 */}
+                <Route path="/logout" element={<Logout />} />
+
                 <Route element={<PermissionRoute access="USER" />}>
                   <Route path="/collections" element={<Collections />} />
                 </Route>
