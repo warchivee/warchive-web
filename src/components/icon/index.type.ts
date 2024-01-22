@@ -8,7 +8,9 @@ export type IconType =
   | 'bars'
   | 'download'
   | 'facebook'
+  | 'hambuger-menu'
   | 'instagram'
+  | 'link'
   | 'mail'
   | 'minus'
   | 'plus'
@@ -22,8 +24,7 @@ export type IconType =
   | 'up'
   | 'down'
   | 'folder-plus'
-  | 'share'
-  | 'link';
+  | 'share';
 
 export interface IconProps {
   type: IconType;
