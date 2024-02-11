@@ -12,5 +12,6 @@ export interface ButtonProps {
   size?: FontSizeType;
   align?: 'default' | 'reverse';
   width?: 'default' | 'full';
+  isLoading?: boolean;
   onClick?: () => void;
 }

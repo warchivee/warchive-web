@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { NavigateFunction } from 'react-router-dom';
 import ModalUtil from '@utils/modal.util';
-import { failLogin, login } from './auth/auth.api';
+import { failLogin, login } from './auth.api';
 
 const getKakaoToken = async (authCode: string) => {
   const headers = {
@@ -60,14 +59,17 @@ export const kakaoLogin = async (authCode: string) => {
       platform_id: loginInfo.id,
       platform: 'kakao',
     });
+
+    window.location.href = '/';
   } catch (error) {
     ModalUtil.open({
       title: '로그인 실패',
       message: `로그인에 실패하였습니다. (${error})`,
+      onConfirm: () => {
+        window.location.href = '/';
+      },
     });
 
     failLogin();
   }
-
-  window.location.href = '/';
 };

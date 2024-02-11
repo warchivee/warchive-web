@@ -12,7 +12,7 @@ export default function CheckKeywordBubbles({
 }: CheckKeywordBubblesProps) {
   return (
     <div className="bubbles">
-      <Title type="h4" color="french-lilac">
+      <Title type="h5" color="french-lilac">
         {title}
       </Title>
       <div className="grid">

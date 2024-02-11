@@ -1,10 +1,7 @@
 import ModalUtil from '@utils/modal.util';
 import { getUser } from '@utils/user.util';
 import { Navigate, Outlet } from 'react-router-dom';
-import {
-  Permissiontype,
-  permissionLevel,
-} from 'src/services/auth/auth.interface';
+import { Permissiontype, permissionLevel } from 'src/types/auth.type';
 
 export default function PermissionRoute({
   access,
@@ -14,7 +11,8 @@ export default function PermissionRoute({
   const loginUser = getUser();
 
   if (
-    permissionLevel[loginUser.role as Permissiontype] >= permissionLevel[access]
+    permissionLevel[loginUser?.role as Permissiontype] >=
+    permissionLevel[access]
   ) {
     return <Outlet />;
   }

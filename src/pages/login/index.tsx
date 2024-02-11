@@ -19,11 +19,11 @@ export default function Login() {
       <div className="driven" />
 
       <div className="buttons">
-        <div className="button" style={{ background: '#FEE500' }}>
-          <a href={getKakaoLoginPageUrl()}>
+        <a href={getKakaoLoginPageUrl()}>
+          <div className="button" style={{ background: '#FEE500' }}>
             <img src="/images/login/kakao.png" alt="카카오 로그인" />
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
 
       <div className="infos">

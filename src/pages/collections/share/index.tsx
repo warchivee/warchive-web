@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import wataListState from 'src/data/wata.atom';
+import wataListState from 'src/atoms/wata.atom';
 import { Title } from '@components/text';
 import WataCardList from '@components/wata/list';
 import { getSharedCollectionToUrl } from '@utils/shareUrlShroter.util';

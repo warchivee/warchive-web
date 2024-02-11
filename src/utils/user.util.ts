@@ -1,4 +1,4 @@
-import { Permissiontype, User } from 'src/services/auth/auth.interface';
+import { Permissiontype, User } from 'src/types/auth.type';
 
 export const saveUser = (user: User) => {
   localStorage.setItem('nickname', user.nickname);

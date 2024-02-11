@@ -1,4 +1,4 @@
-import { Text } from '@components/text';
+import Loader from '@components/loader';
 import { useEffect } from 'react';
 import { kakaoLogin } from 'src/services/kakao.api';
 
@@ -11,5 +11,5 @@ export default function LoginRedirect() {
     }
   }, [code]);
 
-  return <Text color="gray">로그인 중입니다...</Text>;
+  return <Loader />;
 }

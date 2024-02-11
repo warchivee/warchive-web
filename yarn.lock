@@ -3825,6 +3825,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.20.1":
+  version: 5.20.1
+  resolution: "@tanstack/query-core@npm:5.20.1"
+  checksum: e5d43bb96ae0c744d0f9739d4bc959d82d25d25b4d0e6b02d37b6d688d9bf403e1d3aedcd7063ee3c01ecc5a8d4f29dd053556733fb3ef8d5e5f748e0120081f
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.20.1":
+  version: 5.20.1
+  resolution: "@tanstack/react-query@npm:5.20.1"
+  dependencies:
+    "@tanstack/query-core": "npm:5.20.1"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 53068471ff29312c6933aa1f30815e4200e53423c28f46c9057317030eb6028e194119bc391a426e59e24473fc796f3c73c816eb13bc51f91cedec7ecddbe4d3
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^9.3.1":
   version: 9.3.3
   resolution: "@testing-library/dom@npm:9.3.3"
@@ -12562,6 +12580,7 @@ __metadata:
     "@storybook/react": "npm:7.6.6"
     "@storybook/react-vite": "npm:7.6.6"
     "@storybook/test": "npm:7.6.6"
+    "@tanstack/react-query": "npm:^5.20.1"
     "@types/react": "npm:^18.2.43"
     "@types/react-copy-to-clipboard": "npm:^5"
     "@types/react-dom": "npm:^18.2.17"

@@ -1,8 +1,11 @@
 import Footer from '@components/footer';
 import Header from '@components/header';
 import { MenuInfo } from '@components/header/index.type';
+import Loader from '@components/loader';
 import { getUser } from '@utils/user.util';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { logout } from 'src/services/auth.api';
 
 const openReportModal = () => {
   window.open(
@@ -19,10 +22,10 @@ const userMenu: MenuInfo[] = [
     type: 'page',
   },
   {
-    label: '추천작 제보/문의',
+    label: '추천작 제보',
     icon: 'mail',
-    type: 'popup',
-    openPopup: openReportModal,
+    type: 'button',
+    callback: openReportModal,
   },
 ];
 
@@ -46,9 +49,9 @@ const getRightMenu = (isLogin: boolean): MenuInfo[] => {
   if (isLogin) {
     return [
       {
-        path: '/logout',
         label: '로그아웃',
-        type: 'page',
+        type: 'button',
+        callback: () => logout(),
       },
       about,
     ] as MenuInfo[];
@@ -75,7 +78,9 @@ export default function Main() {
         leftMenus={isAdmin ? adminMenu : userMenu}
         rightMenus={getRightMenu(isLogin)}
       />
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
       <Footer />
     </>
   );

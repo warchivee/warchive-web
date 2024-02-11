@@ -3,9 +3,9 @@ import { IconType } from '@components/icon/index.type';
 export interface MenuInfo {
   icon: IconType;
   label?: string;
-  type: 'popup' | 'page';
+  type: 'page' | 'button';
   path?: string;
-  openPopup?: () => void;
+  callback?: () => void;
 }
 
 export interface HeaderProps {

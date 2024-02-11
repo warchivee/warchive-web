@@ -1,5 +1,5 @@
 .share-collections {
-  width: $page-content-width;
+  @include viewport;
   height: 100%;
 
   display: flex;

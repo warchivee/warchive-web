@@ -2,12 +2,13 @@
   @include flex-row-center;
   align-items: center;
   width: 100%;
+  position: relative;
 
-  label {
+  & label {
     margin-right: 1rem;
   }
 
-  input {
+  & input {
     width: 100%;
     background: $alabaster;
 
@@ -40,13 +41,13 @@
   }
 
   & .reset {
-    position: relative;
-    right: 1.7rem;
+    position: absolute;
+    right: 0.5rem;
   }
 
   & > .icon {
-    position: relative;
-    left: 1.7rem;
+    position: absolute;
+    left: 1rem;
     pointer-events: none;
   }
 }

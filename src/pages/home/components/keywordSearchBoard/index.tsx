@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Button from '@components/button/index';
 import Icon from '@components/icon';
 import { useSearchKeywords } from 'src/hooks/useSearchKeywords';
-import keywordListSelector from 'src/data/keyword.atom';
+import keywordListSelector from 'src/atoms/keyword.atom';
 import {
   KeywordByCategoryType,
   SearchKeywordsKeyType,
@@ -100,7 +100,7 @@ export default function KeywordSearchBorad() {
               onClick={() => handleTab(index)}
               aria-hidden="true"
             >
-              <Title type="h4" color="white">
+              <Title type="h5" color="white">
                 {keywordBycategory.label}
               </Title>
             </div>

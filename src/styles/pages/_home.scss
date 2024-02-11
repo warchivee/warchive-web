@@ -8,7 +8,8 @@
   flex: 1;
 
   & > .content {
-    width: $page-content-width;
+    @include viewport;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -17,6 +18,10 @@
 
     & > .searchbar {
       width: 31.25rem;
+
+      @media (max-width: 500px) {
+        width: 20rem;
+      }
     }
 
     & > .text {

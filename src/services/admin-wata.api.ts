@@ -41,7 +41,7 @@ export interface ApiGetResult<T> {
 }
 
 export interface Keyword {
-  id: number;
+  id: number | string;
   name: string;
 }
 

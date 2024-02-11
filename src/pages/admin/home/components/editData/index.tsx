@@ -1,7 +1,7 @@
 import Button from '@components/button';
 import CategoryDropdown from '@components/depthDropdown';
 import Drawer from '@components/drawer';
-import { DropdownOption } from '@components/dropdown';
+import Dropdown, { DropdownOption } from '@components/dropdown';
 import Input from '@components/input';
 import MultiDropdown from '@components/multiDropdown';
 import { Text, Title } from '@components/text';
@@ -15,18 +15,12 @@ import {
   createWata,
   getKeywords,
   updateWata,
-} from 'src/services/admin/admin-wata.api';
-import uploadImage from 'src/services/imgbb/upload-image';
+} from 'src/services/admin-wata.api';
+import uploadImage from 'src/services/upload-image';
 import EditImage from '../editImage';
 
 export default function AdminEditData({
-  data = {
-    title: '',
-    creators: '',
-    keywords: [],
-    cautions: [],
-    platforms: [],
-  },
+  data,
   isOpen,
   onClose,
   onConfirm,
@@ -36,7 +30,7 @@ export default function AdminEditData({
   onClose: () => void;
   onConfirm: () => void;
 }) {
-  const [editData, setEditData] = useState<EditAdminWata>(data);
+  const [editData, setEditData] = useState<EditAdminWata | undefined>(data);
   const [keywordList, setKeywordList] = useState<KeywordList>({
     categories: [],
     keywords: [],
@@ -44,12 +38,14 @@ export default function AdminEditData({
     cautions: [],
   });
 
-  const [cropImage, setCropImage] = useState(data.thumbnail_url || '#');
+  const [cropImage, setCropImage] = useState(data?.thumbnail_url || '#');
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleEditData = (fieldName: string, updateValue: any) => {
     setEditData({
-      ...editData,
+      ...(editData as EditAdminWata),
       [fieldName]: updateValue,
     });
   };
@@ -72,7 +68,7 @@ export default function AdminEditData({
 
   useEffect(() => {
     if (isOpen) {
-      setCropImage(data.thumbnail_url || '#');
+      setCropImage(data?.thumbnail_url || '#');
       setEditData(data);
       getKeywordList();
     }
@@ -89,11 +85,11 @@ export default function AdminEditData({
       isBackgroundClickClose={false}
     >
       <div className="edit-data">
-        <Title type="h2">📝 데이터 수정</Title>
+        <Title type="h3">{data ? '데이터 수정' : '데이터 입력'}</Title>
         <div className="item">
           <Text color="gray">제목*</Text>
           <Input
-            value={editData.title}
+            value={editData?.title || ''}
             maxLength={250}
             onChange={(value) => {
               handleEditData('title', value);
@@ -116,13 +112,13 @@ export default function AdminEditData({
           <Text color="gray">장르</Text>
           <CategoryDropdown
             selectOption={
-              editData.genre
+              editData?.genre
                 ? {
-                    id: editData.genre?.category?.id,
-                    name: editData.genre?.category?.name,
+                    id: editData?.genre?.category?.id,
+                    name: editData?.genre?.category?.name,
                     subOption: {
-                      id: editData.genre?.id,
-                      name: editData.genre?.name,
+                      id: editData?.genre?.id,
+                      name: editData?.genre?.name,
                     },
                   }
                 : undefined
@@ -149,7 +145,7 @@ export default function AdminEditData({
           <Text color="gray">키워드</Text>
           <MultiDropdown
             isSearch
-            selectedOptions={generateDropdownOptions(editData.keywords)}
+            selectedOptions={generateDropdownOptions(editData?.keywords)}
             options={generateDropdownOptions(keywordList.keywords)}
             onChange={(value) => {
               handleEditData('keywords', value);
@@ -161,7 +157,7 @@ export default function AdminEditData({
           <Text color="gray">주의키워드</Text>
           <MultiDropdown
             isSearch
-            selectedOptions={generateDropdownOptions(editData.cautions)}
+            selectedOptions={generateDropdownOptions(editData?.cautions)}
             options={generateDropdownOptions(keywordList.cautions)}
             onChange={(value) => {
               handleEditData('cautions', value);
@@ -173,14 +169,73 @@ export default function AdminEditData({
           <EditImage
             cropImage={cropImage}
             setCropImage={setCropImage}
-            defaultSrc={data.thumbnail_url}
+            defaultSrc={data?.thumbnail_url}
+          />
+        </div>
+
+        <div className="item">
+          <Text color="gray">플랫폼</Text>
+          {editData?.platforms?.map((platform, index) => (
+            <div className="platforms" key={`platform-input-${index + 1}`}>
+              <Dropdown
+                selectOption={
+                  {
+                    name: platform.name,
+                    id: platform.id,
+                  } as DropdownOption
+                }
+                options={generateDropdownOptions(keywordList.platforms)}
+                onChange={(value) => {
+                  const newPlatforms = [...(editData?.platforms || [])];
+                  newPlatforms.splice(index, 1, {
+                    ...newPlatforms[index],
+                    id: value?.id,
+                    name: value?.name,
+                  });
+                  handleEditData('platforms', newPlatforms);
+                }}
+              />
+              <div className="platform-input">
+                <Input
+                  value={platform?.url}
+                  placeholder="url을 입력해주세요."
+                  onChange={(input) => {
+                    const newPlatforms = [...(editData?.platforms || [])];
+                    newPlatforms.splice(index, 1, {
+                      ...newPlatforms[index],
+                      url: input,
+                    });
+                    handleEditData('platforms', newPlatforms);
+                  }}
+                />
+                <Button
+                  icon="minus"
+                  onClick={() => {
+                    const newPlatforms = [...(editData?.platforms || [])];
+                    newPlatforms.splice(index, 1);
+                    handleEditData('platforms', newPlatforms);
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+          <Button
+            icon="plus"
+            background="athens-gray"
+            border="round"
+            onClick={() => {
+              handleEditData('platforms', [
+                ...(editData?.platforms || []),
+                { id: null, name: '', url: '' },
+              ]);
+            }}
           />
         </div>
 
         <div className="item">
           <Text color="gray">비고</Text>
           <textarea
-            value={editData.note ?? ''}
+            value={editData?.note ?? ''}
             onChange={(e) => {
               e.preventDefault();
               handleEditData('note', e.target.value);
@@ -204,8 +259,14 @@ export default function AdminEditData({
           <Button
             background="french-lilac"
             labelColor="purple"
+            isLoading={isLoading}
             onClick={async () => {
-              if (!editData.title || editData.title?.replace(' ', '') === '') {
+              setIsLoading(true);
+
+              if (
+                !editData?.title ||
+                editData?.title?.replace(' ', '') === ''
+              ) {
                 ModalUtil.open({
                   title: '입력 오류',
                   message:
@@ -214,10 +275,7 @@ export default function AdminEditData({
                 return;
               }
 
-              if (
-                !editData.creators ||
-                editData.creators?.replace(' ', '') === ''
-              ) {
+              if (editData?.creators?.replace(' ', '') === '') {
                 ModalUtil.open({
                   title: '입력 오류',
                   message:
@@ -228,34 +286,39 @@ export default function AdminEditData({
 
               let thumbnailUrl = data?.thumbnail_url;
 
-              if (cropImage !== data.thumbnail_url && cropImage !== '#') {
+              if (cropImage !== data?.thumbnail_url && cropImage !== '#') {
                 const { url } = await uploadImage(
                   cropImage.replace('data:image/png;base64,', ''),
-                  `${editData.title}_${editData.creators}`,
+                  `${editData?.title}_${editData?.creators}`,
                 );
 
                 thumbnailUrl = url;
               }
 
               const updateData = {
-                title: editData.title,
-                creators: editData.creators,
-                platforms: editData.platforms,
-                genre: editData.genre?.id,
-                cautions: editData.cautions?.map((item) => item.id),
-                keywords: editData.keywords?.map((item) => item.id),
+                title: editData?.title,
+                creators: editData?.creators,
+                platforms: editData?.platforms?.map((platform) => ({
+                  id: platform.id,
+                  url: platform.url,
+                })),
+                genre: editData?.genre?.id,
+                cautions: editData?.cautions?.map((item) => item.id),
+                keywords: editData?.keywords?.map((item) => item.id),
                 thumbnail_url: thumbnailUrl,
-                note: editData.note,
+                note: editData?.note,
               } as EditAdminWataDto;
 
-              if (!data.id) {
+              if (!data?.id) {
                 await createWata(updateData);
               } else {
-                await updateWata(data.id, updateData);
+                await updateWata(data?.id, updateData);
               }
 
               onClose();
               onConfirm();
+
+              setIsLoading(false);
             }}
           >
             확인
