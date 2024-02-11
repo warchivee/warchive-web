@@ -3,6 +3,10 @@
   align-items: center;
   gap: 4rem;
 
+  @media (max-width: 500px) {
+    gap: 2rem;
+  }
+
   & .control.hidden {
     visibility: hidden;
   }
@@ -13,6 +17,10 @@
     justify-content: space-around;
     align-items: center;
     gap: 4rem;
+
+    @media (max-width: 500px) {
+      gap: 2rem;
+    }
 
     & .text {
       cursor: pointer;

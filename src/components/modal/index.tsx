@@ -1,6 +1,7 @@
 import Button from '@components/button';
 import { Text, Title } from '@components/text';
 import classNames from 'classnames';
+import { useEffect } from 'react';
 import { ModalButtonType, ModalProps } from './index.type';
 
 export default function Modal({
@@ -9,9 +10,18 @@ export default function Modal({
   message,
   isOpen,
   onClose,
+  size = 'small',
+  onAfterOpen = () => {},
   onConfirm = () => {},
   buttons = [],
 }: ModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      onAfterOpen();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
   const renderButtons = () =>
     buttons.map((button: ModalButtonType, index: number) => {
       if (button === 'confirm') {
@@ -37,7 +47,7 @@ export default function Modal({
 
   return (
     <div className={classNames('modal', { close: !isOpen })}>
-      <div className="inner">
+      <div className={classNames('inner', { [`${size}`]: size })}>
         <div className="header">
           <Title type="h2">{title}</Title>
           <Button icon="xmark" onClick={onClose} />

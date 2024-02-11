@@ -1,21 +1,35 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Text } from '@components/text';
 import Input from '@components/input';
 import usePagination from 'src/hooks/usePagination';
 import Pagination from '@components/pagination';
 import WataCardList from '@components/wata/list';
-import searchWataListSelector from 'src/data/searchWata.tom';
-import searchKeywordAtom from 'src/data/search.atom';
+import searchWataListSelector from 'src/atoms/searchWat.atom';
+import searchKeywordAtom from 'src/atoms/search.atom';
+import { WataType } from 'src/types/wata.type';
 import KeywordSearchBorad from './components/keywordSearchBoard';
 
 export default function Home() {
+  const PAGE_SIZE = 20;
+
   const searchWatas = useRecoilValue(searchWataListSelector);
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
-  const [pageSearchWatas, pageNo, maxPage, handlePageChange] = usePagination(
-    searchWatas,
-    20,
+
+  const [pageSearchWatas, setPageSearchWatas] = useState<WataType[]>([]);
+  const [pageNo, maxPage, handlePageChange] = usePagination(
+    searchWatas?.length,
+    PAGE_SIZE,
   );
+
+  useEffect(() => {
+    const datas = searchWatas.slice(
+      (pageNo - 1) * PAGE_SIZE,
+      pageNo * PAGE_SIZE,
+    );
+    setPageSearchWatas(datas);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchWatas, pageNo]);
 
   useEffect(() => {
     handlePageChange(1);

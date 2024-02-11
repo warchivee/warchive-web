@@ -1,8 +1,11 @@
 import Footer from '@components/footer';
 import Header from '@components/header';
 import { MenuInfo } from '@components/header/index.type';
+import Loader from '@components/loader';
 import { getUser } from '@utils/user.util';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { logout } from 'src/services/auth.api';
 
 const openReportModal = () => {
   window.open(
@@ -19,10 +22,10 @@ const userMenu: MenuInfo[] = [
     type: 'page',
   },
   {
-    label: '추천작 제보/문의',
+    label: '추천작 제보',
     icon: 'mail',
-    type: 'popup',
-    openPopup: openReportModal,
+    type: 'button',
+    callback: openReportModal,
   },
 ];
 
@@ -36,20 +39,48 @@ const adminMenu: MenuInfo[] = [
   },
 ];
 
+const getRightMenu = (isLogin: boolean): MenuInfo[] => {
+  const about = {
+    icon: 'question',
+    path: '/about',
+    type: 'page',
+  };
+
+  if (isLogin) {
+    return [
+      {
+        label: '로그아웃',
+        type: 'button',
+        callback: () => logout(),
+      },
+      about,
+    ] as MenuInfo[];
+  }
+
+  return [
+    {
+      path: '/login',
+      label: '로그인',
+      type: 'page',
+    },
+    about,
+  ] as MenuInfo[];
+};
+
 export default function Main() {
+  const user = getUser();
+  const isAdmin = user?.role === 'ADMIN';
+  const isLogin = !!user;
+
   return (
     <>
       <Header
-        leftMenus={getUser().role === 'ADMIN' ? adminMenu : userMenu}
-        rightMenus={[
-          {
-            icon: 'question',
-            path: '/about',
-            type: 'page',
-          },
-        ]}
+        leftMenus={isAdmin ? adminMenu : userMenu}
+        rightMenus={getRightMenu(isLogin)}
       />
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
       <Footer />
     </>
   );

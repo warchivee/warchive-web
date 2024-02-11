@@ -17,7 +17,13 @@ export type ColorType =
   | 'vivid-violet'
   | 'selago'
   | 'twitter-blue'
-  | 'light-violet';
+  | 'light-violet'
+  | 'athens-gray'
+  | 'cream-brulee'
+  | 'lilac'
+  | 'botticelli'
+  | 'tropical-blue'
+  | 'your-pink';
 
 export const ColorCodes: Record<ColorType, string> = {
   black: '#020202',
@@ -35,4 +41,10 @@ export const ColorCodes: Record<ColorType, string> = {
   selago: '#efe0fd',
   'twitter-blue': '#1da1f2',
   'light-violet': '#ba5bec',
+  'athens-gray': '#e8eaed',
+  'cream-brulee': '#ffe5a0',
+  lilac: '#e6cff2',
+  botticelli: '#c6dbe1',
+  'tropical-blue': '#bfe1f6',
+  'your-pink': '#ffcfc9',
 };

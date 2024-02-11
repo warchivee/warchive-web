@@ -4,7 +4,7 @@ import {
 } from 'src/types/collection.type';
 import { WataIdType, WataType } from 'src/types/wata.type';
 import { useRecoilState } from 'recoil';
-import { collectionSelector } from 'src/data/collection.atom';
+import { collectionSelector } from 'src/atoms/collection.atom';
 
 export const useCollections = () => {
   const [collections, setCollections] = useRecoilState(collectionSelector);

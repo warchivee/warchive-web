@@ -21,3 +21,13 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+@mixin viewport {
+  width: 65%;
+  min-width: 650px;
+
+  @media (max-width: 650px) {
+    width: 95%;
+    min-width: 320px;
+  }
+}

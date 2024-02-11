@@ -5,7 +5,8 @@ export const saveAccessToken = (token: string, expiresIn: number) => {
   localStorage.setItem('expires_date', expiresDate.toString());
 };
 
-export const getAccessToken = (): string => localStorage.getItem('token') || '';
+export const getAccessToken = (): string | null =>
+  localStorage.getItem('token');
 
 export const isExperisAccessToken = () => {
   const expiresDateString = localStorage.getItem('expires_date');
