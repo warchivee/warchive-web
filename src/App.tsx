@@ -42,7 +42,7 @@ function App() {
               <Route element={<PermissionRoute access="ADMIN" />}>
                 <Route path="/admin" element={<AdminMain />}>
                   <Route index element={<AdminHome />} />
-                  <Route path="/admin-keyword" element={<AdminKeyword />} />
+                  <Route path="/admin/keyword" element={<AdminKeyword />} />
                 </Route>
               </Route>
             </Route>
