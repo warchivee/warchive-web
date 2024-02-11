@@ -29,7 +29,12 @@ const ModalUtil = {
           buttons={onConfirm ? ['cancel', 'confirm'] : ['confirm']}
           isOpen={open}
           onClose={close}
-          onConfirm={onConfirm || close}
+          onConfirm={() => {
+            if (onConfirm) {
+              onConfirm();
+            }
+            close();
+          }}
         />
       );
 

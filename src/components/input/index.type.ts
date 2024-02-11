@@ -7,5 +7,7 @@ export interface InputProps {
   placeholder?: string;
   size?: FontSizeType;
   maxLength?: number;
+  isEnterButton?: boolean;
+  onEnter?: () => void;
   onChange?: (input: string) => void;
 }

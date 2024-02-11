@@ -1,37 +1,71 @@
 import Button from '@components/button';
-import { useState } from 'react';
+import { ColorType } from '@utils/color.util';
+import { useEffect, useRef, useState } from 'react';
 
-interface DropdownOption {
-  title: string;
-  onClick?: () => void;
+export interface DropdownOption {
+  id: string | number;
+  name: string;
+  color?: ColorType;
 }
 
 interface DropdownProps {
-  title: string;
+  selectOption?: DropdownOption;
   options: DropdownOption[];
+  onChange: (selectOption: DropdownOption) => void;
 }
 
-export default function Dropdown({ title, options }: DropdownProps) {
+export default function Dropdown({
+  selectOption,
+  options,
+  onChange,
+}: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleDocumentClick = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+
   return (
-    <div className="dropdown">
-      <Button icon="download" onClick={handleButtonClick}>
-        {title}
+    <div className="dropdown" ref={dropdownRef}>
+      <Button
+        icon="down"
+        onClick={handleButtonClick}
+        background={selectOption?.color || 'athens-gray'}
+        iconColor="ebony"
+        align="reverse"
+      >
+        {selectOption?.name ?? '선택'}
       </Button>
       {isOpen && (
         <ul className="dropdown-menu">
-          {options.map(({ title: optionTitle, onClick = () => {} }, index) => (
+          {options.map((value, index) => (
             <li
               key={`dropdown-options-${index + 1}`}
-              onClick={() => onClick()}
+              onClick={() => {
+                onChange(value);
+                handleButtonClick();
+              }}
               aria-hidden="true"
             >
-              {optionTitle}
+              {value.name}
             </li>
           ))}
         </ul>

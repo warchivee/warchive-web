@@ -3825,6 +3825,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.20.1":
+  version: 5.20.1
+  resolution: "@tanstack/query-core@npm:5.20.1"
+  checksum: e5d43bb96ae0c744d0f9739d4bc959d82d25d25b4d0e6b02d37b6d688d9bf403e1d3aedcd7063ee3c01ecc5a8d4f29dd053556733fb3ef8d5e5f748e0120081f
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.20.1":
+  version: 5.20.1
+  resolution: "@tanstack/react-query@npm:5.20.1"
+  dependencies:
+    "@tanstack/query-core": "npm:5.20.1"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 53068471ff29312c6933aa1f30815e4200e53423c28f46c9057317030eb6028e194119bc391a426e59e24473fc796f3c73c816eb13bc51f91cedec7ecddbe4d3
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^9.3.1":
   version: 9.3.3
   resolution: "@testing-library/dom@npm:9.3.3"
@@ -9470,6 +9488,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"moment@npm:^2.30.1":
+  version: 2.30.1
+  resolution: "moment@npm:2.30.1"
+  checksum: 865e4279418c6de666fca7786607705fd0189d8a7b7624e2e56be99290ac846f90878a6f602e34b4e0455c549b85385b1baf9966845962b313699e7cb847543a
+  languageName: node
+  linkType: hard
+
 "mri@npm:^1.2.0":
   version: 1.2.0
   resolution: "mri@npm:1.2.0"
@@ -9705,6 +9730,13 @@ __metadata:
   version: 3.0.0
   resolution: "normalize-path@npm:3.0.0"
   checksum: e008c8142bcc335b5e38cf0d63cfd39d6cf2d97480af9abdbe9a439221fd4d749763bab492a8ee708ce7a194bb00c9da6d0a115018672310850489137b3da046
+  languageName: node
+  linkType: hard
+
+"normalize-wheel@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "normalize-wheel@npm:1.0.1"
+  checksum: 5daf4c97e39f36658a5263a6499bbc148676ae2bd85f12c8d03c46ffe7bc3c68d44564c00413d88d0457ac0d94450559bb1c24c2ce7ae0c107031f82d093ac06
   languageName: node
   linkType: hard
 
@@ -10498,6 +10530,19 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 66dfc5f93e13d0674e78ef41f92ed21dfb80f9c4ac4ac25a4b51046d41d4d2186abc915b897f69d3d0ebbffe6184e7c5876f2af26bfa956f179225d921be713a
+  languageName: node
+  linkType: hard
+
+"react-easy-crop@npm:^5.0.4":
+  version: 5.0.4
+  resolution: "react-easy-crop@npm:5.0.4"
+  dependencies:
+    normalize-wheel: "npm:^1.0.1"
+    tslib: "npm:2.0.1"
+  peerDependencies:
+    react: ">=16.4.0"
+    react-dom: ">=16.4.0"
+  checksum: bea67010a2ff812bb006740ed30a450555ba2890437049796e119aa6397ba9c374a99d047e07fa044f5b518194dc951b7830dda71b61a06e656f525d22fac6b9
   languageName: node
   linkType: hard
 
@@ -11951,6 +11996,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.0.1":
+  version: 2.0.1
+  resolution: "tslib@npm:2.0.1"
+  checksum: 5f370da8ac0e9c7f2440a3fd8013682c042a8eeace93849a44a8d4252770e4830fce3201b0bc5a6045c7e28b80eaebe3a3b48e656aa7b4f9681b9a9d7263cfaf
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^1.13.0, tslib@npm:^1.8.1":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
@@ -12528,6 +12580,7 @@ __metadata:
     "@storybook/react": "npm:7.6.6"
     "@storybook/react-vite": "npm:7.6.6"
     "@storybook/test": "npm:7.6.6"
+    "@tanstack/react-query": "npm:^5.20.1"
     "@types/react": "npm:^18.2.43"
     "@types/react-copy-to-clipboard": "npm:^5"
     "@types/react-dom": "npm:^18.2.17"
@@ -12546,12 +12599,14 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.5"
     eslint-plugin-storybook: "npm:^0.6.15"
+    moment: "npm:^2.30.1"
     node-sass: "npm:^9.0.0"
     prettier: "npm:^3.1.1"
     react: "npm:^18.2.0"
     react-cookie: "npm:^7.0.1"
     react-copy-to-clipboard: "npm:^5.1.0"
     react-dom: "npm:^18.2.0"
+    react-easy-crop: "npm:^5.0.4"
     react-router-dom: "npm:^6.21.0"
     recoil: "npm:^0.7.7"
     sass: "npm:^1.69.5"

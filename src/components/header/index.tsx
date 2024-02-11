@@ -4,49 +4,60 @@ import Button from '@components/button';
 import { Text, Title } from '@components/text';
 import { HeaderProps, MenuInfo } from './index.type';
 
+const openReportModal = () => {
+  window.open(
+    'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
+    '_blank',
+  );
+};
+
 const renderMenus = (menus: MenuInfo[], currentPath: string) =>
-  menus?.map((menu: MenuInfo, index: number) =>
-    menu.type === 'page' ? (
-      <Link key={`menu-${index + 1}`} to={menu.path ?? ''}>
-        <Button
-          icon={menu.icon}
-          iconColor={currentPath === menu.path ? 'lavender' : 'vivid-violet'}
-          labelColor={currentPath === menu.path ? 'white' : 'gray'}
-          size="big"
-        >
-          {menu.label}
-        </Button>
-      </Link>
-    ) : (
+  menus?.map((menu: MenuInfo, index: number) => {
+    if (menu.type === 'page') {
+      return (
+        <Link key={`menu-${index + 1}`} to={menu.path ?? ''}>
+          <Button
+            icon={menu.icon}
+            iconColor={currentPath === menu.path ? 'lavender' : 'vivid-violet'}
+            labelColor={currentPath === menu.path ? 'white' : 'gray'}
+            size="big"
+          >
+            {menu.label}
+          </Button>
+        </Link>
+      );
+    }
+
+    return (
       <Button
         key={`menu-${index + 1}`}
         icon={menu.icon}
-        iconColor={currentPath === menu.path ? 'lavender' : 'vivid-violet'}
-        labelColor={currentPath === menu.path ? 'white' : 'gray'}
+        iconColor={
+          currentPath.includes(menu.path ?? 'noting')
+            ? 'lavender'
+            : 'vivid-violet'
+        }
+        labelColor={
+          currentPath.includes(menu.path ?? 'noting') ? 'white' : 'gray'
+        }
         size="big"
-        onClick={menu.openPopup}
+        onClick={menu.callback}
       >
         {menu.label}
       </Button>
-    ),
-  );
+    );
+  });
 
 export default function Header({
   leftMenus = [],
   rightMenus = [],
 }: HeaderProps) {
   const { pathname } = useLocation();
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const handleHamburgereMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
-  const openReportModal = () => {
-    window.open(
-      'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
-      '_blank',
-    );
-  };
-
   return (
     <>
       <div className="header-background">
@@ -59,7 +70,6 @@ export default function Header({
 
           <div className="menus">
             <div className="menu">{renderMenus(leftMenus, pathname)}</div>
-
             <div className="menu">{renderMenus(rightMenus, pathname)}</div>
           </div>
         </header>
@@ -115,40 +125,7 @@ export default function Header({
           </div>
           <div className="hamburger-menus">
             <div className="menus">
-              <Link to="/collections">
-                <Button
-                  icon="star"
-                  iconColor="white"
-                  labelColor="white"
-                  size="big"
-                  onClick={handleHamburgereMenu}
-                >
-                  북마크 목록
-                </Button>
-              </Link>
-              <Button
-                icon="mail"
-                iconColor="white"
-                labelColor="white"
-                size="big"
-                onClick={() => {
-                  openReportModal();
-                  handleHamburgereMenu();
-                }}
-              >
-                추천작 제보/문의
-              </Button>
-              <Link to="/about">
-                <Button
-                  icon="question"
-                  iconColor="white"
-                  labelColor="white"
-                  size="big"
-                  onClick={handleHamburgereMenu}
-                >
-                  와카이브 소개
-                </Button>
-              </Link>
+              {renderMenus([...leftMenus, ...rightMenus], pathname)}
             </div>
           </div>
           <div className="hamburger-footer">

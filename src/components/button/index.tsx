@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Icon from '@components/icon';
 import { Text } from '@components/text';
 
+import Loader from '@components/loader';
 import { ButtonProps } from './index.type';
 
 export default function Button({
@@ -15,6 +16,7 @@ export default function Button({
   size = 'normal',
   align = 'default',
   width = 'default',
+  isLoading = false,
   onClick = () => {},
 }: ButtonProps) {
   return (
@@ -30,12 +32,17 @@ export default function Button({
       )}
       onClick={onClick}
     >
-      {icon && <Icon type={icon} color={iconColor} size={size} />}
+      {icon && (
+        <div className="icon-box">
+          <Icon type={icon} color={iconColor} size={size} />
+        </div>
+      )}
       {children && (
         <Text size={size} color={labelColor}>
           {children}
         </Text>
       )}
+      {isLoading && <Loader />}
     </button>
   );
 }

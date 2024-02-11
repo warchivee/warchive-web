@@ -1,12 +1,8 @@
 import axios from 'axios';
+import ModalUtil from '@utils/modal.util';
+import { failLogin, login } from './auth.api';
 
-export const getKakaoLoginPageUrl = () =>
-  // step 1. 인가 코드 받기 https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code
-  `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
-    import.meta.env.VITE_KAKAO_API_KEY
-  }&redirect_uri=${import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URL}`;
-
-export const getKakaoToken = async (authCode: string) => {
+const getKakaoToken = async (authCode: string) => {
   const headers = {
     'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
   };
@@ -29,10 +25,7 @@ export const getKakaoToken = async (authCode: string) => {
   return data;
 };
 
-export const getKakaoLoginInfo = async (
-  tokenType: string,
-  accessToken: string,
-) => {
+const getKakaoLoginInfo = async (tokenType: string, accessToken: string) => {
   const headers = {
     Authorization: `${tokenType} ${accessToken}`,
     'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -43,4 +36,40 @@ export const getKakaoLoginInfo = async (
   });
 
   return data;
+};
+
+export const getKakaoLoginPageUrl = () =>
+  // step 1. 인가 코드 받기 https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code
+  `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
+    import.meta.env.VITE_KAKAO_API_KEY
+  }&redirect_uri=${import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URL}`;
+
+export const kakaoLogin = async (authCode: string) => {
+  // step 2. 토큰 받기 https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token
+  const kakaoToken = await getKakaoToken(authCode);
+
+  // step 3. 사용자 로그인 처리
+  const loginInfo = await getKakaoLoginInfo(
+    kakaoToken.token_type,
+    kakaoToken.access_token,
+  );
+
+  try {
+    await login({
+      platform_id: loginInfo.id,
+      platform: 'kakao',
+    });
+
+    window.location.href = '/';
+  } catch (error) {
+    ModalUtil.open({
+      title: '로그인 실패',
+      message: `로그인에 실패하였습니다. (${error})`,
+      onConfirm: () => {
+        window.location.href = '/';
+      },
+    });
+
+    failLogin();
+  }
 };

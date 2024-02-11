@@ -8,11 +8,14 @@
     & header {
       @include flex-row-start;
       gap: 2rem;
-
-      width: $page-content-width;
+      @include viewport;
+      & a {
+        display: flex;
+        align-items: flex-end;
+      }
 
       & .logo {
-        height: 2.8rem;
+        height: 2.5rem;
 
         & > img {
           width: auto;
@@ -25,11 +28,6 @@
         align-items: flex-end;
         width: 100%;
         height: 100%;
-
-        & button {
-          padding: 0;
-          align-items: flex-end;
-        }
 
         & .menu {
           @include flex-row-start;
@@ -46,7 +44,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .header-background {
     display: none;
   }
@@ -149,7 +147,7 @@
         flex-direction: column-reverse;
 
         & footer {
-          width: $page-content-width;
+          @include viewport;
           align-items: flex-end;
           padding: 10px;
 

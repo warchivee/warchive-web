@@ -1,5 +1,10 @@
 .admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
+  flex: 1;
 
   & > .header {
     background: $purple;
@@ -9,13 +14,14 @@
     justify-content: center;
 
     & > .body {
-      width: $page-content-width;
+      @include viewport;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
       & > .left {
+        display: flex;
       }
 
       & > .right {
@@ -30,32 +36,32 @@
     width: 100%;
     height: 100%;
     display: flex;
+    justify-content: center;
 
-    & > .side-menu {
-      background: white;
-      border-right: black 1px solid;
-      height: 100%;
-      width: 300px;
-      background: $black;
-
-      & > ol {
-        padding: 2rem;
-
-        & li {
-          margin-bottom: 1rem;
-        }
-      }
-    }
-
-    & .article {
-      padding: 2rem;
+    & article {
+      padding: 2rem 0;
+      @include viewport;
 
       & > div {
         display: flex;
         justify-content: flex-start;
-        align-items: flex-start;
         flex-direction: column;
         gap: 1rem;
+
+        & .pagination {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    & > .side-menu {
+      & > ol {
+        padding: 2rem;
+        padding-top: 13rem;
+
+        & li {
+          margin-bottom: 1rem;
+        }
       }
     }
   }

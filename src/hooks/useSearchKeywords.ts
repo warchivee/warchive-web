@@ -1,7 +1,7 @@
 import { ValueLabelType } from 'src/types/common.type';
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
 import { useRecoilState } from 'recoil';
-import searchKeywordAtom from 'src/data/search.atom';
+import searchKeywordAtom from 'src/atoms/search.atom';
 
 const removeItem = (
   items: ValueLabelType[],
