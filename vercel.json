@@ -1,7 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/login/redirect", "destination": "/login/redirect" },
-    { "source": "/admin/keyword", "destination": "/keyword" },
-    { "source": "/(.*)", "destination": "/" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }

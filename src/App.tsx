@@ -28,7 +28,7 @@ function App() {
           <Route element={<Main />}>
             <Route path="/" index element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/login/redirect" element={<LoginRedirect />} />
+            <Route path="/login-redirect" element={<LoginRedirect />} />
             <Route path="/shared" element={<ShareCollections />} />
             <Route path="/about" element={<About />} />
 
@@ -42,7 +42,7 @@ function App() {
               <Route element={<PermissionRoute access="ADMIN" />}>
                 <Route path="/admin" element={<AdminMain />}>
                   <Route index element={<AdminHome />} />
-                  <Route path="/admin/keyword" element={<AdminKeyword />} />
+                  <Route path="/admin-keyword" element={<AdminKeyword />} />
                 </Route>
               </Route>
             </Route>
