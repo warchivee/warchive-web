@@ -11,7 +11,7 @@ export default function PermissionRoute({
   const loginUser = getUser();
 
   if (
-    permissionLevel[loginUser?.role as Permissiontype] >=
+    permissionLevel[(loginUser?.role || 'USER') as Permissiontype] >=
     permissionLevel[access]
   ) {
     return <Outlet />;

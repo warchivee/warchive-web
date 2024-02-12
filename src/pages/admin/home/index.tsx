@@ -4,7 +4,7 @@ import Pagination from '@components/pagination';
 import usePagination from 'src/hooks/usePagination';
 import Button from '@components/button';
 import { DropdownOption } from '@components/dropdown';
-import Loader from '@components/loader';
+import { PageLoader } from '@components/loader';
 import { useQueryClient } from '@tanstack/react-query';
 import AdminEditData from './components/editData';
 import AdminDataList from './components/dataList';
@@ -17,9 +17,12 @@ interface SearchConditions {
 }
 
 export default function AdminHome() {
-  const PAGE_SIZE = 20;
+  const PAGE_SIZE = 10;
 
-  const [pageNo, maxPage, handlePageChange] = usePagination(0, PAGE_SIZE);
+  const [pageNo, maxPage, handlePageChange, handleTotalCount] = usePagination(
+    0,
+    PAGE_SIZE,
+  );
 
   const [openAddData, toggleAddData] = useState(false);
 
@@ -74,12 +77,13 @@ export default function AdminHome() {
         handleInitSearch={resetDatas}
       />
 
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<PageLoader />}>
         <AdminDataList
           pageNo={pageNo}
           pageSize={PAGE_SIZE}
           searchConditions={searchConditions}
           refreshDatas={refreshDatas}
+          handleTotalCount={handleTotalCount}
         />
       </Suspense>
 

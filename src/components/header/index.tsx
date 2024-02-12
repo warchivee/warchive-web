@@ -4,14 +4,11 @@ import Button from '@components/button';
 import { Text, Title } from '@components/text';
 import { HeaderProps, MenuInfo } from './index.type';
 
-const openReportModal = () => {
-  window.open(
-    'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
-    '_blank',
-  );
-};
-
-const renderMenus = (menus: MenuInfo[], currentPath: string) =>
+const renderMenus = (
+  menus: MenuInfo[],
+  currentPath: string,
+  mobileCallback?: () => void,
+) =>
   menus?.map((menu: MenuInfo, index: number) => {
     if (menu.type === 'page') {
       return (
@@ -21,6 +18,11 @@ const renderMenus = (menus: MenuInfo[], currentPath: string) =>
             iconColor={currentPath === menu.path ? 'lavender' : 'vivid-violet'}
             labelColor={currentPath === menu.path ? 'white' : 'gray'}
             size="big"
+            onClick={() => {
+              if (mobileCallback) {
+                mobileCallback();
+              }
+            }}
           >
             {menu.label}
           </Button>
@@ -41,7 +43,15 @@ const renderMenus = (menus: MenuInfo[], currentPath: string) =>
           currentPath.includes(menu.path ?? 'noting') ? 'white' : 'gray'
         }
         size="big"
-        onClick={menu.callback}
+        onClick={() => {
+          if (menu.callback) {
+            menu.callback();
+          }
+
+          if (mobileCallback) {
+            mobileCallback();
+          }
+        }}
       >
         {menu.label}
       </Button>
@@ -125,7 +135,9 @@ export default function Header({
           </div>
           <div className="hamburger-menus">
             <div className="menus">
-              {renderMenus([...leftMenus, ...rightMenus], pathname)}
+              {renderMenus([...leftMenus, ...rightMenus], pathname, () => {
+                setMenuOpen(false);
+              })}
             </div>
           </div>
           <div className="hamburger-footer">

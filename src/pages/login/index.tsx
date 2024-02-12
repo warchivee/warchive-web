@@ -5,7 +5,7 @@ export default function Login() {
   return (
     <div className="page login">
       <div className="logo">
-        <img src="public/images/logo/sh-logo.png" alt="로고" />
+        <img src="/images/logo/sh-logo.png" alt="로고" />
       </div>
 
       <div className="title">
