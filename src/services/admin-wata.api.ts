@@ -143,19 +143,11 @@ export const getWata = (
       }),
   };
 
-  try {
-    return getData<ApiGetResult<AdminWata[]>>('admin/wata', {
-      ...params,
-      page: pageNo || 1,
-      page_size: pageSize || 10,
-    });
-  } catch (error) {
-    ModalUtil.open({
-      title: '데이터 업데이트 오류',
-      message: `${((error as AxiosError)?.response?.data as { message: string })?.message}`,
-    });
-    return [];
-  }
+  return getData<ApiGetResult<AdminWata[]>>('admin/wata', {
+    ...params,
+    page: pageNo || 1,
+    page_size: pageSize || 10,
+  });
 };
 
 export const getKeywords = () => getData<KeywordList>('admin/keywords');
