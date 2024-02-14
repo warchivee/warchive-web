@@ -7,14 +7,12 @@ import {
   updateWata,
 } from 'src/services/admin-wata.api';
 import moment from 'moment';
-import Dropdown, {
-  DropdownOption,
-} from '@components/AdminComponents/AdminDropdown';
 import { useEffect, useState } from 'react';
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import Modal from '@components/CommonComponents/modal';
 import AdminDropdown from '@components/AdminComponents/AdminDropdown';
 import AdminEditData from './AdminEditData';
+import { DropdownOption } from './AdminMultiDropdown';
 
 export interface DataCardProps {
   data: AdminWata;

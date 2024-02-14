@@ -1,6 +1,6 @@
-import AdminMultiDropdown, { DropdownOption } from "./AdminMultiDropdown";
+import AdminMultiDropdown, { DropdownOption } from './AdminMultiDropdown';
 
-\interface DropdownProps {
+interface DropdownProps {
   selectedOption?: DropdownOption;
   options: DropdownOption[];
   onChange: (selectOption: DropdownOption) => void;
@@ -20,7 +20,7 @@ export default function AdminDropdown({
       selectedOptions={selectedOption ? [selectedOption] : []}
       options={options}
       onChange={(selectedOptions) => {
-        if (selectedOptions?.length == 1) {
+        if (selectedOptions?.length === 1) {
           onChange(selectedOptions[0]);
         } else {
           onChange(selectedOptions[1]);

@@ -10,14 +10,14 @@ import {
   updateWata,
 } from 'src/services/admin-wata.api';
 import uploadImage from 'src/services/upload-image';
-import AdminDropdown, { DropdownOption } from './AdminDropdown';
 import { Text, Title } from '@components/CommonComponents/text';
 import Input from '@components/CommonComponents/input';
-import AdminMultiDropdown from './AdminMultiDropdown';
-import AdminEditImage from './AdminEditImage';
 import Button from '@components/CommonComponents/button';
-import DepthDropdown from './AdminDepthDropdown';
 import Drawer from '@components/CommonComponents/drawer';
+import AdminMultiDropdown, { DropdownOption } from './AdminMultiDropdown';
+import AdminEditImage from './AdminEditImage';
+import DepthDropdown from './AdminDepthDropdown';
+import AdminDropdown from './AdminDropdown';
 
 export default function AdminEditData({
   data,

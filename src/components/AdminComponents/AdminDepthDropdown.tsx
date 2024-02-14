@@ -1,7 +1,7 @@
 import Button from '@components/CommonComponents/button';
-import { DropdownOption } from '@components/AdminComponents/AdminDropdown';
 import { Text } from '@components/CommonComponents/text';
 import { useEffect, useRef, useState } from 'react';
+import { DropdownOption } from './AdminMultiDropdown';
 
 export interface DepthDropdownOption extends DropdownOption {
   subOptions: DropdownOption[];

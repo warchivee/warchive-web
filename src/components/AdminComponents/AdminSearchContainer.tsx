@@ -1,7 +1,8 @@
 import Button from '@components/CommonComponents/button';
-import { DropdownOption } from '@components/AdminComponents/AdminDropdown';
 import Input from '@components/CommonComponents/input';
-import MultiDropdown from '@components/AdminComponents/AdminMultiDropdown';
+import MultiDropdown, {
+  DropdownOption,
+} from '@components/AdminComponents/AdminMultiDropdown';
 import { Text } from '@components/CommonComponents/text';
 import moment from 'moment';
 import { useState } from 'react';
