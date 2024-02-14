@@ -1,5 +1,7 @@
 import { DropdownOption } from '@components/AdminComponents/AdminMultiDropdown';
 import { getData, patchData, postData } from '@utils/api.util';
+import ModalUtil from '@utils/modal.util';
+import { AxiosError } from 'axios';
 import { Moment } from 'moment';
 
 export const labelOptions: DropdownOption[] = [
@@ -141,18 +143,42 @@ export const getWata = (
       }),
   };
 
-  return getData<ApiGetResult<AdminWata[]>>('admin/wata', {
-    ...params,
-    page: pageNo || 1,
-    page_size: pageSize || 10,
-  });
+  try {
+    return getData<ApiGetResult<AdminWata[]>>('admin/wata', {
+      ...params,
+      page: pageNo || 1,
+      page_size: pageSize || 10,
+    });
+  } catch (error) {
+    ModalUtil.open({
+      title: '데이터 업데이트 오류',
+      message: `${((error as AxiosError)?.response?.data as { message: string })?.message}`,
+    });
+    return [];
+  }
 };
 
 export const getKeywords = () => getData<KeywordList>('admin/keywords');
 export default getWata;
 
-export const createWata = async (data: EditAdminWataDto) =>
-  postData<number>('admin/wata', data);
+export const createWata = async (data: EditAdminWataDto) => {
+  try {
+    await postData<number>('admin/wata', data);
+  } catch (error) {
+    ModalUtil.open({
+      title: '데이터 업데이트 오류',
+      message: `${((error as AxiosError)?.response?.data as { message: string })?.message}`,
+    });
+  }
+};
 
-export const updateWata = async (id: number, data: EditAdminWataDto) =>
-  patchData(`admin/wata/${id}`, data);
+export const updateWata = async (id: number, data: EditAdminWataDto) => {
+  try {
+    await patchData(`admin/wata/${id}`, data);
+  } catch (error) {
+    ModalUtil.open({
+      title: '데이터 업데이트 오류',
+      message: `${((error as AxiosError)?.response?.data as { message: string })?.message}`,
+    });
+  }
+};

@@ -14,6 +14,7 @@ import { Text, Title } from '@components/CommonComponents/text';
 import Input from '@components/CommonComponents/input';
 import Button from '@components/CommonComponents/button';
 import Drawer from '@components/CommonComponents/drawer';
+import { AxiosError } from 'axios';
 import AdminMultiDropdown, { DropdownOption } from './AdminMultiDropdown';
 import AdminEditImage from './AdminEditImage';
 import DepthDropdown from './AdminDepthDropdown';
@@ -287,13 +288,23 @@ export default function AdminEditData({
 
               let thumbnailUrl = data?.thumbnail_url;
 
-              if (cropImage !== data?.thumbnail_url && cropImage !== '#') {
-                const { url } = await uploadImage(
-                  cropImage.replace('data:image/png;base64,', ''),
-                  `${editData?.title}_${editData?.creators}`,
-                );
+              try {
+                if (cropImage !== data?.thumbnail_url && cropImage !== '#') {
+                  const { url } = await uploadImage(
+                    cropImage.replace('data:image/png;base64,', ''),
+                    `${editData?.title}_${editData?.creators}`,
+                  );
 
-                thumbnailUrl = url;
+                  thumbnailUrl = url;
+                }
+              } catch (error) {
+                ModalUtil.open({
+                  title: '이미지 업로드 오류',
+                  message: `${(error as AxiosError)?.response}`,
+                });
+
+                setIsLoading(false);
+                return;
               }
 
               const updateData = {
@@ -315,7 +326,6 @@ export default function AdminEditData({
               } else {
                 await updateWata(data?.id, updateData);
               }
-
               onClose();
               onConfirm();
 
