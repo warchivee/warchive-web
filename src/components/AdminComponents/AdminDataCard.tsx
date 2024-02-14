@@ -13,8 +13,8 @@ import Dropdown, {
 import { useEffect, useState } from 'react';
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import Modal from '@components/CommonComponents/modal';
-import AdminEditData from './AdminEditData';
 import AdminDropdown from '@components/AdminComponents/AdminDropdown';
+import AdminEditData from './AdminEditData';
 
 export interface DataCardProps {
   data: AdminWata;
@@ -71,14 +71,7 @@ export default function AdminDataCard({
     id,
     title = '제목 미등록',
     creators = '작가/감독 미등록',
-    genre = {
-      id: -1,
-      name: '장르 미등록',
-      category: {
-        id: -1,
-        name: '카테고리 미등록',
-      },
-    },
+    genre,
     keywords,
     cautions,
     platforms,
@@ -178,7 +171,9 @@ export default function AdminDataCard({
               </div>
               <div className="keyword">
                 <Text color="gray">장르</Text>
-                <Text>{`${genre?.category.name} > ${genre?.name}`}</Text>
+                <Text>
+                  {genre && `${genre?.category?.name} > ${genre?.name}`}
+                </Text>
               </div>
               <div className="keyword">
                 <Text color="gray">작가/감독</Text>
