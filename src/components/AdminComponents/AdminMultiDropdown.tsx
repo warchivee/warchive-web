@@ -3,7 +3,13 @@ import Button from '@components/CommonComponents/button';
 import { Text } from '@components/CommonComponents/text';
 import Input from '@components/CommonComponents/input';
 import classNames from 'classnames';
-import { DropdownOption } from './AdminDropdown';
+import { ColorType } from '@utils/color.util';
+
+export interface DropdownOption {
+  id: string | number;
+  name: string;
+  color?: ColorType;
+}
 
 interface DropdownProps {
   selectedOptions: DropdownOption[];
@@ -172,6 +178,7 @@ export default function AdminMultiDropdown({
                   <div
                     id={`multi-dropdown-option-${value.id}-${value.name}`}
                     onClick={() => toggleOption(value)}
+                    aria-hidden="true"
                   >
                     <Text
                       color={

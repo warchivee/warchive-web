@@ -1,13 +1,6 @@
-import { ColorType } from '@utils/color.util';
-import AdminMultiDropdown from './AdminMultiDropdown';
+import AdminMultiDropdown, { DropdownOption } from "./AdminMultiDropdown";
 
-export interface DropdownOption {
-  id: string | number;
-  name: string;
-  color?: ColorType;
-}
-
-interface DropdownProps {
+\interface DropdownProps {
   selectedOption?: DropdownOption;
   options: DropdownOption[];
   onChange: (selectOption: DropdownOption) => void;
