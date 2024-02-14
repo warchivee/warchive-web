@@ -22,7 +22,6 @@ export default function AdminDropdown({
   isSearch = false,
   isAdd = false,
 }: DropdownProps) {
-  console.log(selectedOption ? [selectedOption] : []);
   return (
     <AdminMultiDropdown
       selectedOptions={selectedOption ? [selectedOption] : []}

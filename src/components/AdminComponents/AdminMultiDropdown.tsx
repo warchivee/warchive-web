@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { DropdownOption } from './AdminDropdown';
 import Button from '@components/CommonComponents/button';
 import { Text } from '@components/CommonComponents/text';
 import Input from '@components/CommonComponents/input';
 import classNames from 'classnames';
+import { DropdownOption } from './AdminDropdown';
 
 interface DropdownProps {
   selectedOptions: DropdownOption[];
@@ -102,9 +102,11 @@ export default function AdminMultiDropdown({
               !multiple,
           },
           {
-            ['background-athens-gray']: multiple,
+            'background-athens-gray': multiple,
           },
         )}
+        onClick={handleButtonClick}
+        aria-hidden="true"
       >
         {selectedOptions?.length <= 0 ? (
           <Text>선택</Text>
@@ -112,17 +114,26 @@ export default function AdminMultiDropdown({
           selectedOptions?.map((option) => {
             if (multiple) {
               return (
-                <Button
-                  icon="xmark"
-                  align="reverse"
-                  onClick={() => toggleOption(option)}
+                <div
+                  className="option"
+                  key={`dropdown-select-options-${option.id}`}
                 >
-                  {option.name}
-                </Button>
+                  <Text>{option.name}</Text>
+                  <Button
+                    key={`dropdown-select-options-${option.id}`}
+                    icon="xmark"
+                    align="reverse"
+                    onClick={() => toggleOption(option)}
+                  />
+                </div>
               );
-            } else {
-              return <Text>{option.name}</Text>;
             }
+
+            return (
+              <Text key={`dropdown-select-options-${option.id}`}>
+                {option.name}
+              </Text>
+            );
           })
         )}
         <Button icon="down" onClick={handleButtonClick} iconColor="ebony" />

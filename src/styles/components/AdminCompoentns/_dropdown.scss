@@ -11,6 +11,12 @@
     border-radius: 0.4rem;
     padding: 0 0.7rem;
     min-height: 1.5rem;
+    cursor: pointer;
+
+    & .option {
+      display: flex;
+      align-items: center;
+    }
 
     & .button {
       padding-left: 0;
