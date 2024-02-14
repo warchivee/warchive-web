@@ -161,6 +161,7 @@ export const createWata = async (data: EditAdminWataDto) => {
       title: '데이터 업데이트 오류',
       message: `${((error as AxiosError)?.response?.data as { message: string })?.message}`,
     });
+    throw error;
   }
 };
 
@@ -172,5 +173,6 @@ export const updateWata = async (id: number, data: EditAdminWataDto) => {
       title: '데이터 업데이트 오류',
       message: `${((error as AxiosError)?.response?.data as { message: string })?.message}`,
     });
+    throw error;
   }
 };

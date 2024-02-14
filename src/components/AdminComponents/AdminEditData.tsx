@@ -321,13 +321,18 @@ export default function AdminEditData({
                 note: editData?.note,
               } as EditAdminWataDto;
 
-              if (!data?.id) {
-                await createWata(updateData);
-              } else {
-                await updateWata(data?.id, updateData);
+              try {
+                if (!data?.id) {
+                  await createWata(updateData);
+                } else {
+                  await updateWata(data?.id, updateData);
+                }
+
+                onClose();
+                onConfirm();
+              } catch (error) {
+                setIsLoading(false);
               }
-              onClose();
-              onConfirm();
 
               setIsLoading(false);
             }}
