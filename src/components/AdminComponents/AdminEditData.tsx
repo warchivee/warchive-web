@@ -183,10 +183,12 @@ export default function AdminEditData({
                 isSearch
                 isAdd
                 selectedOption={
-                  {
-                    name: platform.name,
-                    id: platform.id,
-                  } as DropdownOption
+                  platform.id === null
+                    ? undefined
+                    : ({
+                        name: platform.name,
+                        id: platform.id,
+                      } as DropdownOption)
                 }
                 options={generateDropdownOptions(keywordList.platforms)}
                 onChange={(value) => {
