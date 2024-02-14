@@ -21,3 +21,7 @@ _node_modules
 
 # vite cache
 .vite
+
+# env
+.env
+.env.*
