@@ -14,7 +14,7 @@ const searchDatas = async (
     {
       ...searchConditions,
       label: searchConditions.label?.map((item) => item.id as string),
-      isPublished: searchConditions.isPublished?.id,
+      isPublished: searchConditions.isPublished?.id as string,
       needWriteItems: searchConditions.needWriteItems?.map(
         (item) => item.id as string,
       ),
@@ -54,7 +54,6 @@ export default function AdminDataList({
     <div>
       <div>
         {datas?.result?.map((data, index) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
           <AdminDataCard
             key={`data-card-${index + 1}`}
             data={data}

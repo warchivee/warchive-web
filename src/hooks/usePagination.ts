@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const usePagination = (initTotalCount: number, pageSize: number) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(initTotalCount);

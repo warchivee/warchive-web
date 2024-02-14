@@ -1,10 +1,8 @@
 /* eslint no-underscore-dangle: 0 */
 
-import axios from 'axios';
 import { getAccessToken, saveAccessToken } from '@utils/token.util';
+import axios, { AxiosResponse } from 'axios';
 import { TokenResult } from 'src/types/auth.type';
-
-import { AxiosResponse } from 'axios';
 
 export interface ApiResult<T> {
   success: boolean;

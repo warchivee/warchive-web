@@ -28,7 +28,6 @@ export default function UserHome() {
       pageNo * PAGE_SIZE,
     );
     setPageSearchWatas(datas);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchWatas, pageNo]);
 
   useEffect(() => {

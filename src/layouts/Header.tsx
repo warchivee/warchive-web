@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Button from '@components/CommonComponents/button';
 import { logout } from 'src/services/auth.api';
 import { IconType } from '@components/CommonComponents/icon/index.type';
-import { Permissiontype } from 'src/types/auth.type';
 import Drawer from '@components/CommonComponents/drawer';
 import { Text, Title } from '@components/CommonComponents/text';
 import Footer from './Footer';
@@ -64,7 +63,7 @@ const renderMenus = (menus: MenuInfo[], currentPath: string) =>
     );
   });
 
-const LoginButton = ({ isLogin }: { isLogin: boolean }) => {
+function LoginButton({ isLogin }: { isLogin: boolean }) {
   if (isLogin) {
     return (
       <Button onClick={logout} labelColor="gray" size="big">
@@ -74,15 +73,15 @@ const LoginButton = ({ isLogin }: { isLogin: boolean }) => {
   }
 
   return (
-    <Link to={'/login'}>
+    <Link to="/login">
       <Button labelColor="gray" size="big">
         로그인
       </Button>
     </Link>
   );
-};
+}
 
-const Logo = () => {
+function Logo() {
   return (
     <Link to="/">
       <div className="logo">
@@ -90,17 +89,17 @@ const Logo = () => {
       </div>
     </Link>
   );
-};
+}
 
-const AboutButton = () => {
+function AboutButton() {
   return (
-    <Link to={'/about'}>
+    <Link to="/about">
       <Button icon="question" iconColor="vivid-violet" size="big" />
     </Link>
   );
-};
+}
 
-const MobileMenuDrawer = ({
+function MobileMenuDrawer({
   menus = [],
   isLogin,
   isOpen,
@@ -110,11 +109,11 @@ const MobileMenuDrawer = ({
   isLogin: boolean;
   isOpen: boolean;
   onClose: () => void;
-}) => {
+}) {
   const { pathname } = useLocation();
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} background={'ebony'}>
+    <Drawer isOpen={isOpen} onClose={onClose} background="ebony">
       <div className="mobile-menu">
         <div>
           <div className="header">
@@ -145,18 +144,16 @@ const MobileMenuDrawer = ({
                   icon: 'question',
                   path: '/about',
                 } as MenuInfo,
-              ].map((menu) => {
-                return {
-                  ...menu,
-                  callback: () => {
-                    onClose();
+              ].map((menu) => ({
+                ...menu,
+                callback: () => {
+                  onClose();
 
-                    if (menu.callback) {
-                      menu.callback();
-                    }
-                  },
-                };
-              }),
+                  if (menu.callback) {
+                    menu.callback();
+                  }
+                },
+              })),
               pathname,
             )}
           </div>
@@ -169,9 +166,9 @@ const MobileMenuDrawer = ({
       </div>
     </Drawer>
   );
-};
+}
 
-const MobileHeader = ({ menus, isLogin }: HeaderProps) => {
+function MobileHeader({ menus, isLogin }: HeaderProps) {
   const [isOpenMobileMenu, toggleMobileMenu] = useState(false);
 
   return (
@@ -195,9 +192,9 @@ const MobileHeader = ({ menus, isLogin }: HeaderProps) => {
       />
     </div>
   );
-};
+}
 
-const PCHeader = ({ menus = [], isLogin }: HeaderProps) => {
+function PCHeader({ menus = [], isLogin }: HeaderProps) {
   const { pathname } = useLocation();
 
   return (
@@ -213,7 +210,7 @@ const PCHeader = ({ menus = [], isLogin }: HeaderProps) => {
       </nav>
     </div>
   );
-};
+}
 
 export default function Header({ isLogin, menus = [] }: HeaderProps) {
   return (

@@ -44,7 +44,6 @@ export default function AdminEditImage({
     }
     const reader = new FileReader();
     reader.onload = () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setCropImage(reader.result as string);
       setImage(reader.result as string);
     };
