@@ -11,7 +11,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'eslint-config-prettier',
-    'plugin:storybook/recommended',
   ],
   overrides: [
     {

@@ -1,4 +1,4 @@
-import { postData } from '@utils/api/api.util';
+import { postData } from '@utils/api.util';
 import { removeToken, saveAccessToken } from '@utils/token.util';
 import { deleteUser, saveUser } from '@utils/user.util';
 import { LoginInfo, LoginResult } from '../types/auth.type';

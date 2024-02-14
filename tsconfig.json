@@ -30,6 +30,6 @@
     "noUnusedParameters": false, //turn off for deploy
     "noFallthroughCasesInSwitch": true
   },
-  "include": [".eslintrc.cjs", "src", "svg.d.ts", ".storybook/*"],
+  "include": [".eslintrc.cjs", "src", "svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

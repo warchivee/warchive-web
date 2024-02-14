@@ -3,10 +3,11 @@
   선언 순서에 따라 override 됨을 주의한다.
 */
 
-@import './utils/index.scss';
-@import './common/index.scss';
-@import './components/index.scss';
-@import './pages/index.scss';
+@import './abstracts/index';
+@import './common/index';
+@import './components/index';
+@import './pages/index';
+@import './layouts/index';
 
 html,
 body {
@@ -16,11 +17,6 @@ body {
 }
 
 #root {
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   height: 100%;
   width: 100%;
 }

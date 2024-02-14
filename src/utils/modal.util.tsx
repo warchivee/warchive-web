@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import Modal from '@components/modal';
+import Modal from '@components/CommonComponents/modal';
 
 interface MocalComponentProps {
   removeToDom: () => void;

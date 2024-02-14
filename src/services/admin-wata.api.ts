@@ -1,5 +1,5 @@
-import { DropdownOption } from '@components/dropdown';
-import { getData, patchData, postData } from '@utils/api/api.util';
+import { DropdownOption } from '@components/AdminComponents/AdminDropdown';
+import { getData, patchData, postData } from '@utils/api.util';
 import { Moment } from 'moment';
 
 export const labelOptions: DropdownOption[] = [

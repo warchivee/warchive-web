@@ -1,0 +1,28 @@
+footer {
+  width: 100%;
+  background-color: $ebony;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+
+  margin-top: 2rem;
+
+  & .content {
+    @include viewport;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    & .info {
+      line-height: 150%;
+    }
+
+    & .info > div:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+}

@@ -1,0 +1,8 @@
+.layout {
+  height: 100%;
+
+  & .page {
+    height: auto;
+    min-height: 100%;
+  }
+}

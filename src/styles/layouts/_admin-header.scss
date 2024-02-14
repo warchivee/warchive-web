@@ -1,0 +1,20 @@
+.admin {
+  & header {
+    background: $purple;
+    width: 100%;
+    padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+
+    & .content {
+      @include viewport;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      & > .item {
+        display: flex;
+      }
+    }
+  }
+}
