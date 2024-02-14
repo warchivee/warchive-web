@@ -1,4 +1,4 @@
-import Loader from '@components/CommonComponents/loader';
+import { PageLoader } from '@components/CommonComponents/loader';
 import { useEffect } from 'react';
 import { kakaoLogin } from 'src/services/kakao.api';
 
@@ -11,5 +11,5 @@ export default function LoginRedirect() {
     }
   }, [code]);
 
-  return <Loader />;
+  return <PageLoader />;
 }

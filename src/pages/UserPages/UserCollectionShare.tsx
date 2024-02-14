@@ -15,7 +15,7 @@ export default function ShareCollections() {
   );
 
   return (
-    <div className="page share-collections">
+    <div className="share-collections">
       <Title type="h1">{sharedCollection.title}</Title>
       <WataCardList watas={sharedCollection.items} />
     </div>

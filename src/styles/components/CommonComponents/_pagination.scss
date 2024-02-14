@@ -2,6 +2,7 @@
   @include flex-row-center;
   align-items: center;
   gap: 4rem;
+  margin-bottom: 2rem;
 
   @media (max-width: 500px) {
     gap: 2rem;

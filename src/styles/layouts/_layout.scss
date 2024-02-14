@@ -2,7 +2,9 @@
   height: 100%;
 
   & .page {
-    height: auto;
-    min-height: 100%;
+    padding-bottom: 150px;
+
+    display: flex;
+    justify-content: center;
   }
 }
