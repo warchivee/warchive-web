@@ -1,4 +1,4 @@
-import { DropdownOption } from '@components/AdminComponents/AdminDropdown';
+import { DropdownOption } from '@components/AdminComponents/AdminMultiDropdown';
 import { getData, patchData, postData } from '@utils/api.util';
 import { Moment } from 'moment';
 
@@ -111,6 +111,8 @@ export interface FindWataConditions {
   label?: string[];
   updateStartDate?: Moment;
   updateEndDate?: Moment;
+  isPublished?: string;
+  needWriteItems?: string[];
 }
 
 export const getWata = (
@@ -118,13 +120,25 @@ export const getWata = (
   pageNo: number,
   pageSize: number,
 ) => {
-  const { title, label, updateStartDate, updateEndDate } = conditions;
+  const {
+    title,
+    label,
+    updateStartDate,
+    updateEndDate,
+    isPublished,
+    needWriteItems,
+  } = conditions;
 
   const params = {
     ...(title && { title }),
     ...(label && label.length !== 0 && { label: label.join(',') }),
     ...(updateStartDate && { updateStartDate }),
     ...(updateEndDate && { updateEndDate }),
+    ...(isPublished && { isPublished }),
+    ...(needWriteItems &&
+      needWriteItems.length !== 0 && {
+        needWriteItems: needWriteItems.join(','),
+      }),
   };
 
   return getData<ApiGetResult<AdminWata[]>>('admin/wata', {

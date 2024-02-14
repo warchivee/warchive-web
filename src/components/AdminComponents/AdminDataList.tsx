@@ -1,8 +1,9 @@
 import getWata, { AdminWata, ApiGetResult } from 'src/services/admin-wata.api';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import { SearchConditions } from '@pages/AdminPages/AdminDatas';
 import AdminDataCard from './AdminDataCard';
-import { SearchConditions, periodKeyValues } from './AdminSearchContainer';
+import { periodKeyValues } from './AdminSearchContainer';
 
 const searchDatas = async (
   searchConditions: SearchConditions,
@@ -13,6 +14,10 @@ const searchDatas = async (
     {
       ...searchConditions,
       label: searchConditions.label?.map((item) => item.id as string),
+      isPublished: searchConditions.isPublished?.id,
+      needWriteItems: searchConditions.needWriteItems?.map(
+        (item) => item.id as string,
+      ),
       ...periodKeyValues[searchConditions.updatePeriod?.id as number],
     },
     pageNo,

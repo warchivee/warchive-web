@@ -6,5 +6,12 @@
       display: flex;
       justify-content: space-between;
     }
+
+    & .publish-filter {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+    }
   }
 }

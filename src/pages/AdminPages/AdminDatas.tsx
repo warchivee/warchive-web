@@ -10,10 +10,12 @@ import AdminEditData from '../../components/AdminComponents/AdminEditData';
 import AdminDataList from '../../components/AdminComponents/AdminDataList';
 import AdminSearchContainer from '../../components/AdminComponents/AdminSearchContainer';
 
-interface SearchConditions {
+export interface SearchConditions {
   title?: string;
   label?: DropdownOption[];
   updatePeriod?: DropdownOption;
+  isPublished?: DropdownOption;
+  needWriteItems?: DropdownOption[];
 }
 
 export default function AdminHome() {
@@ -79,7 +81,6 @@ export default function AdminHome() {
         }}
         handleInitSearch={resetDatas}
       />
-
       <Suspense fallback={<PageLoader />}>
         <AdminDataList
           pageNo={pageNo}

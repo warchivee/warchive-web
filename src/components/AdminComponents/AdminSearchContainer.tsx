@@ -8,12 +8,7 @@ import moment from 'moment';
 import { useState } from 'react';
 import { labelOptions } from 'src/services/admin-wata.api';
 import AdminDropdown from '@components/AdminComponents/AdminDropdown';
-
-export interface SearchConditions {
-  title?: string;
-  label?: DropdownOption[];
-  updatePeriod?: DropdownOption;
-}
+import { SearchConditions } from '@pages/AdminPages/AdminDatas';
 
 const periodOptions: DropdownOption[] = [
   {
@@ -85,7 +80,6 @@ export default function AdminSearchContainer({
           onChange={(value) => {
             setSearchConditions({
               ...searchConditions,
-              title: '',
               label: value,
             });
           }}
@@ -101,6 +95,68 @@ export default function AdminSearchContainer({
             setSearchConditions({
               ...searchConditions,
               updatePeriod: selectOption,
+            });
+          }}
+        />
+      </div>
+
+      <div className="item">
+        <Text color="gray">미입력항목</Text>
+        <MultiDropdown
+          selectedOptions={searchConditions?.needWriteItems ?? []}
+          options={[
+            {
+              id: 'title',
+              name: '제목',
+            },
+            {
+              id: 'creator',
+              name: '작가/감독',
+            },
+            {
+              id: 'genre',
+              name: '장르',
+            },
+            {
+              id: 'keywords',
+              name: '키워드',
+            },
+            {
+              id: 'platforms',
+              name: '플랫폼',
+            },
+            {
+              id: 'thumbnail',
+              name: '썸네일',
+            },
+          ]}
+          onChange={(value) => {
+            setSearchConditions({
+              ...searchConditions,
+              needWriteItems: value,
+            });
+          }}
+        />
+      </div>
+
+      <div className="item">
+        <Text color="gray">게시상태</Text>
+        <AdminDropdown
+          selectedOption={searchConditions?.isPublished}
+          options={[
+            {
+              id: 'true',
+              name: '게시됨',
+            },
+            {
+              id: 'false',
+              name: '게시되지 않음',
+            },
+          ]}
+          onChange={(value) => {
+            setSearchConditions({
+              ...searchConditions,
+              isPublished: value,
             });
           }}
         />

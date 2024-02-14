@@ -160,41 +160,46 @@ export default function AdminMultiDropdown({
           )}
 
           <ul>
-            {options.map((value, index) => (
-              <li
-                key={`dropdown-options-${index + 1}`}
-                id={`multi-dropdown-option-${value.name}`}
-                aria-hidden="true"
-                onClick={() => toggleOption(value)}
-              >
-                <label
-                  htmlFor={`multi-dropdown-option-${value.id}-${value.name}`}
+            {options.map((value, index) => {
+              const isSelected = selectedOptions?.some(
+                (selected) => selected.id === value.id,
+              );
+              return (
+                <li
+                  key={`dropdown-options-${index + 1}`}
+                  id={`multi-dropdown-option-${value.name}`}
                   aria-hidden="true"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleOption(value);
-                  }}
+                  onClick={() => toggleOption(value)}
                 >
-                  <div
-                    id={`multi-dropdown-option-${value.id}-${value.name}`}
-                    onClick={() => toggleOption(value)}
+                  <label
+                    htmlFor={`multi-dropdown-option-${value.id}-${value.name}`}
                     aria-hidden="true"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleOption(value);
+                    }}
                   >
-                    <Text
-                      color={
-                        selectedOptions?.some(
-                          (selected) => selected.id === value.id,
-                        )
-                          ? 'athens-gray'
-                          : 'black'
-                      }
+                    <div
+                      id={`multi-dropdown-option-${value.id}-${value.name}`}
+                      onClick={() => toggleOption(value)}
+                      aria-hidden="true"
+                      className="option"
                     >
-                      {value.name}
-                    </Text>
-                  </div>
-                </label>
-              </li>
-            ))}
+                      {multiple && (
+                        <input
+                          type="checkbox"
+                          onChange={() => toggleOption(value)}
+                          checked={isSelected}
+                        />
+                      )}
+                      <Text color={isSelected ? 'gray' : 'black'}>
+                        {value.name}
+                      </Text>
+                    </div>
+                  </label>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
