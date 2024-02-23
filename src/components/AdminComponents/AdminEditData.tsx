@@ -1,5 +1,5 @@
 import ModalUtil from '@utils/modal.util';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   EditAdminWata,
   EditAdminWataDto,
@@ -39,7 +39,15 @@ export default function AdminEditData({
     cautions: [],
   });
 
-  const [cropImage, setCropImage] = useState(data?.thumbnail_url || '#');
+  const imgInput = useRef<HTMLInputElement | null>(null);
+
+  const [image, setImage] = useState('#');
+  const [cardCropImage, setCardCropImage] = useState(
+    data?.thumbnail_card || '#',
+  );
+  const [bookCropImage, setBookCropImage] = useState(
+    data?.thumbnail_book || '#',
+  );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -69,10 +77,13 @@ export default function AdminEditData({
 
   useEffect(() => {
     if (isOpen) {
-      setCropImage(data?.thumbnail_url || '#');
+      setCardCropImage(data?.thumbnail_card || '#');
+      setBookCropImage(data?.thumbnail_book || data?.thumbnail_card || '#');
+      setImage('#');
       setEditData(data);
       getKeywordList();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
@@ -169,10 +180,57 @@ export default function AdminEditData({
         </div>
 
         <div className="item">
+          <Text color="gray">썸네일</Text>
+          <Button
+            icon="download"
+            onClick={() => {
+              if (imgInput.current) {
+                imgInput.current.click();
+              }
+            }}
+          >
+            업로드
+            <input
+              type="file"
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              onChange={(e: any) => {
+                e.preventDefault();
+                let files;
+                if (e.dataTransfer) {
+                  files = e.dataTransfer.files;
+                } else if (e.target) {
+                  files = e.target.files;
+                }
+                const reader = new FileReader();
+                reader.onload = () => {
+                  setCardCropImage(reader.result as string);
+                  setBookCropImage(reader.result as string);
+                  setImage(reader.result as string);
+                };
+                reader.readAsDataURL(files[0]);
+              }}
+              ref={imgInput}
+              style={{ display: 'none' }}
+            />
+          </Button>
+        </div>
+
+        <div className="item">
           <AdminEditImage
-            cropImage={cropImage}
-            setCropImage={setCropImage}
-            defaultSrc={data?.thumbnail_url}
+            type="card"
+            cropImage={cardCropImage}
+            setCropImage={setCardCropImage}
+            originImage={image !== '#' ? image : data?.thumbnail_card}
+          />
+          <AdminEditImage
+            type="book"
+            cropImage={bookCropImage}
+            setCropImage={setBookCropImage}
+            originImage={
+              image !== '#'
+                ? image
+                : data?.thumbnail_book || data?.thumbnail_card
+            }
           />
         </div>
 
@@ -286,16 +344,32 @@ export default function AdminEditData({
                 return;
               }
 
-              let thumbnailUrl = data?.thumbnail_url;
+              let thumbnailCard = cardCropImage;
+              let thumbnailBook = bookCropImage;
 
               try {
-                if (cropImage !== data?.thumbnail_url && cropImage !== '#') {
+                if (
+                  thumbnailCard !== data?.thumbnail_card &&
+                  thumbnailCard !== '#'
+                ) {
                   const { url } = await uploadImage(
-                    cropImage.replace('data:image/png;base64,', ''),
-                    `${editData?.title}_${editData?.creators}`,
+                    thumbnailCard.replace('data:image/jpeg;base64,', ''),
+                    `${editData?.title}-card`,
                   );
 
-                  thumbnailUrl = url;
+                  thumbnailCard = url;
+                }
+
+                if (
+                  thumbnailBook !== data?.thumbnail_book &&
+                  thumbnailBook !== '#'
+                ) {
+                  const { url } = await uploadImage(
+                    thumbnailBook.replace('data:image/jpeg;base64,', ''),
+                    `${editData?.title}-book`,
+                  );
+
+                  thumbnailBook = url;
                 }
               } catch (error) {
                 ModalUtil.open({
@@ -317,7 +391,8 @@ export default function AdminEditData({
                 genre: editData?.genre?.id,
                 cautions: editData?.cautions?.map((item) => item.id),
                 keywords: editData?.keywords?.map((item) => item.id),
-                thumbnail_url: thumbnailUrl,
+                thumbnail_card: thumbnailCard,
+                thumbnail_book: thumbnailBook,
                 note: editData?.note,
               } as EditAdminWataDto;
 

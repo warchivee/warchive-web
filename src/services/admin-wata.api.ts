@@ -74,7 +74,8 @@ export interface EditAdminWata {
   keywords?: Keyword[];
   cautions?: Keyword[];
   platforms?: Platform[];
-  thumbnail_url?: string;
+  thumbnail_card?: string;
+  thumbnail_book?: string;
   note?: string;
   label?: string;
 }
@@ -103,7 +104,8 @@ export interface EditAdminWataDto {
     id: number;
     url: string;
   };
-  thumbnail_url?: string;
+  thumbnail_card?: string;
+  thumbnail_book?: string;
   note?: string;
   label?: string;
 }
