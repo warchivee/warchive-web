@@ -73,7 +73,8 @@ export default function AdminDataCard({
     keywords,
     cautions,
     platforms,
-    thumbnail_url: thumbnailUrl,
+    thumbnail_card: thumbnailCard,
+    // thumbnail_book: thumbnailBook,
     updater,
     label,
     note,
@@ -150,7 +151,7 @@ export default function AdminDataCard({
               <div className="thumbnail">
                 <img
                   src={
-                    thumbnailUrl ||
+                    thumbnailCard ||
                     'https://www.freeiconspng.com/uploads/no-image-icon-4.png'
                   }
                   alt="썸네일"

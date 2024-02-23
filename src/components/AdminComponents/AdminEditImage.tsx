@@ -1,17 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '@components/CommonComponents/modal';
 import Button from '@components/CommonComponents/button';
 import Cropper, { Area } from 'react-easy-crop';
 import { Text } from '@components/CommonComponents/text';
+import resizeImage from '@utils/resizeImage.utils';
 import getCroppedImg from '../../utils/cropImage.utils';
 
 export default function AdminEditImage({
-  defaultSrc = '',
+  type,
+  originImage = '#',
   cropImage = '#',
   setCropImage,
 }: {
-  defaultSrc?: string;
-  cropImage: string;
+  type: 'book' | 'card';
+  originImage?: string;
+  cropImage?: string;
   setCropImage: (image: string) => void;
 }) {
   const [openEditImage, toggleEditImage] = useState<boolean>(false);
@@ -23,73 +26,39 @@ export default function AdminEditImage({
   });
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [image, setImage] = useState('');
   const [zoom, setZoom] = useState(1);
-  const [aspect, setAspect] = useState(2 / 3);
-
-  const imgInput = useRef<HTMLInputElement | null>(null);
 
   const onCropComplete = (area: Area, areaPixels: Area) => {
     setCroppedAreaPixels(areaPixels);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onChange = (e: any) => {
-    e.preventDefault();
-    let files;
-    if (e.dataTransfer) {
-      files = e.dataTransfer.files;
-    } else if (e.target) {
-      files = e.target.files;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      setCropImage(reader.result as string);
-      setImage(reader.result as string);
-    };
-    reader.readAsDataURL(files[0]);
-  };
-
   const handleModalConfirm = async () => {
-    const croppedImage = await getCroppedImg(image, croppedAreaPixels, 0);
+    const croppedImage = await getCroppedImg(originImage, croppedAreaPixels, 0);
 
-    setCropImage(croppedImage);
+    const resizedImage = await resizeImage(croppedImage, {
+      width: 500,
+      aspectRatio: type === 'book' ? 2 / 3 : 16 / 9,
+    });
+
+    setCropImage(resizedImage);
+
     toggleEditImage(false);
   };
 
   const handleModalClose = () => {
-    setAspect(2 / 3);
     toggleEditImage(false);
   };
 
   useEffect(() => {
-    setImage(defaultSrc || '#');
-    setCropImage(defaultSrc || '#');
+    setCropImage(originImage || '#');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [defaultSrc]);
+  }, [originImage]);
 
   return (
     <div className="image-editor">
       <div className="controller">
-        <Text color="gray">썸네일</Text>
+        <Text color="gray">{type === 'book' ? '책표지' : '카드'}</Text>
         <div>
-          <Button
-            icon="download"
-            onClick={() => {
-              if (imgInput.current) {
-                imgInput.current.click();
-              }
-            }}
-          >
-            업로드
-            <input
-              type="file"
-              onChange={onChange}
-              ref={imgInput}
-              style={{ display: 'none' }}
-            />
-          </Button>
-
           <Button
             onClick={() => {
               if (cropImage !== '#') {
@@ -112,9 +81,6 @@ export default function AdminEditImage({
         title="이미지 편집"
         onConfirm={handleModalConfirm}
         onClose={handleModalClose}
-        onAfterOpen={() => {
-          setImage(() => image);
-        }}
         buttons={['cancel', 'confirm']}
       >
         <div>
@@ -127,43 +93,15 @@ export default function AdminEditImage({
             }}
           >
             <Cropper
-              image={image}
+              image={originImage}
               crop={crop}
               zoom={zoom}
-              aspect={aspect}
+              aspect={type === 'book' ? 2 / 3 : 16 / 9}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}
             />
           </div>
-        </div>
-
-        <div
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            margin: '1rem',
-            justifyContent: 'center',
-          }}
-        >
-          <Button
-            background="selago"
-            size="big"
-            onClick={() => {
-              setAspect(2 / 3);
-            }}
-          >
-            2:3
-          </Button>
-          <Button
-            background="selago"
-            size="big"
-            onClick={() => {
-              setAspect(16 / 9);
-            }}
-          >
-            16:9
-          </Button>
         </div>
       </Modal>
     </div>
