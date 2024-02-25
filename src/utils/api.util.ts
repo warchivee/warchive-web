@@ -24,6 +24,7 @@ export const reissueApi = axios.create({
 const reissueToken = async () => {
   const response = await reissueApi.get<ApiResult<TokenResult>>('auth/reissue');
   const result = handleApiResult(response);
+
   saveAccessToken(result.token, result.expires_in);
 };
 
@@ -43,11 +44,18 @@ const reissueToken = async () => {
 
 export const api = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_HOST}/`,
-  headers: {
-    Authorization: `Bearer ${getAccessToken()}`,
-  },
   withCredentials: true,
 });
+
+api.interceptors.request.use(
+  (config) => {
+    const newConfig = { ...config };
+    newConfig.headers.Authorization = `Bearer ${getAccessToken()}`;
+    console.log(getAccessToken());
+    return newConfig;
+  },
+  (error) => Promise.reject(error),
+);
 
 api.interceptors.response.use(
   (response) => response,
@@ -59,12 +67,15 @@ api.interceptors.response.use(
 
       try {
         await reissueToken();
+        console.log(getAccessToken());
         originalRequest.headers.Authorization = `Bearer ${getAccessToken()}`;
         return await api(originalRequest);
       } catch (reissueError) {
         window.location.href = '/login';
         return Promise.reject(reissueError);
       }
+    } else {
+      delete originalRequest._retry;
     }
 
     return Promise.reject(error);
