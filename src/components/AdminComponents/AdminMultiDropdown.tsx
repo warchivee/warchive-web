@@ -32,19 +32,26 @@ export default function AdminMultiDropdown({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState('');
 
-  const handleDocumentClick = (event: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setInput('');
-      setIsOpen(false);
-    }
-  };
-
   const handleButtonClick = () => {
     setInput('');
     setIsOpen(!isOpen);
+  };
+
+  const handleClose = () => {
+    setInput('');
+    setIsOpen(false);
+  };
+
+  const handleDocumentClick = (event: MouseEvent) => {
+    if (dropdownRef.current) {
+      const isClickDropdown = dropdownRef.current.contains(
+        event.target as Node,
+      );
+
+      if (multiple && !isClickDropdown) {
+        handleClose();
+      }
+    }
   };
 
   const toggleOption = (option: DropdownOption) => {
@@ -169,7 +176,12 @@ export default function AdminMultiDropdown({
                   key={`dropdown-options-${index + 1}`}
                   id={`multi-dropdown-option-${value.name}`}
                   aria-hidden="true"
-                  onClick={() => toggleOption(value)}
+                  onClick={() => {
+                    toggleOption(value);
+                    if (!multiple) {
+                      handleClose();
+                    }
+                  }}
                 >
                   <label
                     htmlFor={`multi-dropdown-option-${value.id}-${value.name}`}
