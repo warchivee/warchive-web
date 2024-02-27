@@ -38,7 +38,7 @@ export default async function getCroppedImg(
   const ctx = canvas.getContext('2d');
 
   if (!ctx) {
-    return '#';
+    return '';
   }
 
   const rotRad = getRadianAngle(rotation);
@@ -68,7 +68,7 @@ export default async function getCroppedImg(
   const croppedCtx = croppedCanvas.getContext('2d');
 
   if (!croppedCtx) {
-    return '#';
+    return '';
   }
 
   // Set the size of the cropped canvas

@@ -8,8 +8,8 @@ import getCroppedImg from '../../utils/cropImage.utils';
 
 export default function AdminEditImage({
   type,
-  originImage = '#',
-  cropImage = '#',
+  originImage = '',
+  cropImage = '',
   setCropImage,
 }: {
   type: 'book' | 'card';
@@ -50,7 +50,7 @@ export default function AdminEditImage({
   };
 
   useEffect(() => {
-    setCropImage(originImage || '#');
+    setCropImage(originImage || '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [originImage]);
 
@@ -61,7 +61,7 @@ export default function AdminEditImage({
         <div>
           <Button
             onClick={() => {
-              if (cropImage !== '#') {
+              if (cropImage !== '') {
                 toggleEditImage(true);
               }
             }}
@@ -72,7 +72,7 @@ export default function AdminEditImage({
         </div>
       </div>
 
-      {cropImage && cropImage !== '#' && (
+      {cropImage && cropImage !== '' && (
         <img style={{ width: '140px' }} src={cropImage} alt="cropped" />
       )}
 

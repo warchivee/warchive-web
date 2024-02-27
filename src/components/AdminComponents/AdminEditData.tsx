@@ -41,12 +41,12 @@ export default function AdminEditData({
 
   const imgInput = useRef<HTMLInputElement | null>(null);
 
-  const [image, setImage] = useState('#');
+  const [image, setImage] = useState('');
   const [cardCropImage, setCardCropImage] = useState(
-    data?.thumbnail_card || '#',
+    data?.thumbnail_card || '',
   );
   const [bookCropImage, setBookCropImage] = useState(
-    data?.thumbnail_book || '#',
+    data?.thumbnail_book || '',
   );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -77,9 +77,9 @@ export default function AdminEditData({
 
   useEffect(() => {
     if (isOpen) {
-      setCardCropImage(data?.thumbnail_card || '#');
-      setBookCropImage(data?.thumbnail_book || data?.thumbnail_card || '#');
-      setImage('#');
+      setCardCropImage(data?.thumbnail_card || '');
+      setBookCropImage(data?.thumbnail_book || data?.thumbnail_card || '');
+      setImage('');
       setEditData(data);
       getKeywordList();
     }
@@ -220,14 +220,14 @@ export default function AdminEditData({
             type="card"
             cropImage={cardCropImage}
             setCropImage={setCardCropImage}
-            originImage={image !== '#' ? image : data?.thumbnail_card}
+            originImage={image !== '' ? image : data?.thumbnail_card}
           />
           <AdminEditImage
             type="book"
             cropImage={bookCropImage}
             setCropImage={setBookCropImage}
             originImage={
-              image !== '#'
+              image !== ''
                 ? image
                 : data?.thumbnail_book || data?.thumbnail_card
             }
@@ -350,7 +350,7 @@ export default function AdminEditData({
               try {
                 if (
                   thumbnailCard !== data?.thumbnail_card &&
-                  thumbnailCard !== '#'
+                  thumbnailCard !== ''
                 ) {
                   const { url } = await uploadImage(
                     thumbnailCard.replace('data:image/jpeg;base64,', ''),
@@ -362,7 +362,7 @@ export default function AdminEditData({
 
                 if (
                   thumbnailBook !== data?.thumbnail_book &&
-                  thumbnailBook !== '#'
+                  thumbnailBook !== ''
                 ) {
                   const { url } = await uploadImage(
                     thumbnailBook.replace('data:image/jpeg;base64,', ''),
