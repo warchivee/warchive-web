@@ -153,7 +153,7 @@ export default function KeywordSearchBorad() {
                 resetSearchKeywords();
               }}
             >
-              검색 초기화
+              초기화
             </Button>
           )}
         </div>
