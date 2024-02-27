@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import Modal from '@components/CommonComponents/modal';
 import AdminDropdown from '@components/AdminComponents/AdminDropdown';
+import { LoadingOverlay } from '@components/CommonComponents/loader';
 import AdminEditData from './AdminEditData';
 import { DropdownOption } from './AdminMultiDropdown';
 
@@ -65,6 +66,8 @@ export default function AdminDataCard({
 }: DataCardProps) {
   const [openEditData, toggleEditData] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     id,
     title = '제목 미등록',
@@ -91,6 +94,8 @@ export default function AdminDataCard({
 
   return (
     <>
+      <LoadingOverlay isLoading={isLoading} />
+
       <div className="card-container">
         <div className="card">
           <div className="header">
@@ -119,10 +124,12 @@ export default function AdminDataCard({
                       isOpen: true,
                     });
                   } else if (id) {
+                    setIsLoading(true);
                     await updateWata(id, {
                       label: `${selectOption.id}`,
                     } as EditAdminWataDto);
 
+                    setIsLoading(false);
                     refreshDatas();
                   }
                 }}
@@ -237,6 +244,7 @@ export default function AdminDataCard({
           }}
           onConfirm={async (editNote?: string) => {
             if (id) {
+              setIsLoading(true);
               await updateWata(id, {
                 label: `${labelModalProps.label.id}`,
                 note: editNote,
@@ -244,6 +252,7 @@ export default function AdminDataCard({
 
               setLabelModalProps({ ...labelModalProps, isOpen: false });
               refreshDatas();
+              setIsLoading(false);
             }
           }}
         />

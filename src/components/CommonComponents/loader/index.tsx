@@ -1,7 +1,7 @@
 export default function Loader() {
   return (
     <div>
-      <span className="loader" />
+      <div className="loader" />
     </div>
   );
 }
@@ -16,7 +16,15 @@ export function PageLoader() {
         alignItems: 'center',
       }}
     >
-      <span className="loader" />
+      <div className="loader" />
+    </div>
+  );
+}
+
+export function LoadingOverlay({ isLoading }: { isLoading: boolean }) {
+  return (
+    <div className={`loading-overlay ${isLoading ? 'visible' : ''}`}>
+      <div className="loader" />
     </div>
   );
 }
