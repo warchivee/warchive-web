@@ -17,15 +17,17 @@ export default function About() {
           <Title type="h2" color="blue-violet">
             Womyn + archive
           </Title>
-          <Text>
-            지금까지 트위터, 구글시트, 게시글 등 다양한 방식으로 여성서사들에
-            대한 추천과 공유가 이루어졌으나
-          </Text>
-          <Text>
-            플랫폼의 한계로 데이터의 축척이 어려운 환경에서 소실되는 정보가
-            많음을 고려,
-          </Text>
-          <Text>여성서사의 계보를 기록하기 위해 발족한 프로젝트 입니다.</Text>
+          <div className="text-center">
+            <Text>
+              지금까지 트위터, 구글시트, 게시글 등 다양한 방식으로 여성서사들에
+              대한 추천과 공유가 이루어졌으나
+              <br />
+              플랫폼의 한계로 데이터의 축척이 어려운 환경에서 소실되는 정보가
+              많음을 고려,
+              <br />
+              여성서사의 계보를 기록하기 위해 발족한 프로젝트 입니다.
+            </Text>
+          </div>
         </div>
       </div>
       <div className="col mobile">
