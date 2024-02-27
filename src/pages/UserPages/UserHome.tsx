@@ -11,7 +11,7 @@ import { WataType } from 'src/types/wata.type';
 import KeywordSearchBorad from '../../components/UserComponents/keywordSearchBoard';
 
 export default function UserHome() {
-  const PAGE_SIZE = 20;
+  const PAGE_SIZE = 18;
 
   const searchWatas = useRecoilValue(searchWataListSelector);
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
