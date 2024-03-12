@@ -77,7 +77,7 @@ export default function AdminDataCard({
     cautions,
     platforms,
     thumbnail_card: thumbnailCard,
-    // thumbnail_book: thumbnailBook,
+    thumbnail_book: thumbnailBook,
     updater,
     label,
     note,

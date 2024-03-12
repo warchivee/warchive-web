@@ -28,6 +28,11 @@ export default function AdminEditImage({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
+  const previewOption =
+    type === 'card'
+      ? { width: '300px', height: '117px' }
+      : { width: '90px', height: '128px' };
+
   const onCropComplete = (area: Area, areaPixels: Area) => {
     setCroppedAreaPixels(areaPixels);
   };
@@ -73,7 +78,11 @@ export default function AdminEditImage({
       </div>
 
       {cropImage && cropImage !== '' && (
-        <img style={{ width: '140px' }} src={cropImage} alt="cropped" />
+        <img
+          style={{ ...previewOption, objectFit: 'cover' }}
+          src={cropImage}
+          alt="cropped"
+        />
       )}
 
       <Modal
