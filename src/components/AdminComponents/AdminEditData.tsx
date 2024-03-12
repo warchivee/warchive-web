@@ -78,7 +78,7 @@ export default function AdminEditData({
   useEffect(() => {
     if (isOpen) {
       setCardCropImage(data?.thumbnail_card || '');
-      setBookCropImage(data?.thumbnail_book || data?.thumbnail_card || '');
+      setBookCropImage(data?.thumbnail_book || '');
       setImage('');
       setEditData(data);
       getKeywordList();
@@ -226,11 +226,7 @@ export default function AdminEditData({
             type="book"
             cropImage={bookCropImage}
             setCropImage={setBookCropImage}
-            originImage={
-              image !== ''
-                ? image
-                : data?.thumbnail_book || data?.thumbnail_card
-            }
+            originImage={image !== '' ? image : data?.thumbnail_book}
           />
         </div>
 
