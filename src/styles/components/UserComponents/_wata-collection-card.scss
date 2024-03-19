@@ -47,6 +47,10 @@
         font-weight: 500;
         align-items: flex-end;
         color: $gray;
+
+        & .tags {
+          @include flex-row-start;
+        }
       }
 
       & .info-button {

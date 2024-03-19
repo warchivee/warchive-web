@@ -1,7 +1,7 @@
 import Button from '@components/CommonComponents/button';
 import Input from '@components/CommonComponents/input';
-import { Title } from '@components/CommonComponents/text';
-import { CollectionTitleProps } from 'src/types/collections.type';
+import { Text } from '@components/CommonComponents/text';
+import { CollectionCommentProps } from 'src/types/collections.type';
 import {
   DEFAULT_COLLECTIONS_KEY,
   TITLE_LIMIT_LENGTH,
@@ -9,44 +9,42 @@ import {
 import { useEffect, useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 
-export default function CollectionTitle({
+export default function CollectionComment({
   isEditMode,
   selectIndex,
   handleEditMode,
-}: CollectionTitleProps) {
+}: CollectionCommentProps) {
   const { collections, renameCollection } = useCollections();
   const [isHovered, setIsHovered] = useState(false);
   const [input, setInput] = useState<string>('');
 
   useEffect(() => {
     if (isEditMode) {
-      setInput(collections[selectIndex].title);
+      setInput('설명을 입력해주세요.');
+      // setInput(collections[selectIndex].comment);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectIndex, isEditMode]);
 
   return (
-    <div className="header" onMouseLeave={() => setIsHovered(false)}>
-      {selectIndex == DEFAULT_COLLECTIONS_KEY ? (
-        <div className="title-area">
-          <Title type="h1">{collections[selectIndex].title}</Title>
-        </div>
-      ) : null}
-
+    <div className="comment" onMouseLeave={() => setIsHovered(false)}>
       {!isEditMode && selectIndex !== DEFAULT_COLLECTIONS_KEY ? (
-        <div className="title-area" onMouseEnter={() => setIsHovered(true)}>
-          <Title type="h1">{collections[selectIndex].title}</Title>
+        <div className="comment-area" onMouseEnter={() => setIsHovered(true)}>
+          <Text color="black" size="big">
+            설명을 입력하세요.
+            {/* {collections[selectIndex].title} */}
+          </Text>
         </div>
       ) : null}
 
       {isEditMode && selectIndex !== DEFAULT_COLLECTIONS_KEY ? (
-        <div className="title-area">
+        <div className="comment-area">
           <Input
             value={input}
             type="text"
             border="underline"
             onChange={setInput}
-            size="big"
+            size="small"
             maxLength={TITLE_LIMIT_LENGTH}
           />
           <div className="buttons">

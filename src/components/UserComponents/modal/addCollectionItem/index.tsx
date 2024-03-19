@@ -45,7 +45,7 @@ export default function AddCollectionItemModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="컬렉션에 추가하기"
+      title="컬렉션 이동하기"
       onConfirm={() => {
         if (wata) {
           handleCollectionItems(commands, wata);

@@ -1,9 +1,14 @@
 interface CollectionDefaultProps {
-  isEditMode: boolean;
   selectIndex: number;
 }
 
 export interface CollectionTitleProps extends CollectionDefaultProps {
+  isEditMode: boolean;
+  handleEditMode: (editMode: boolean) => void;
+}
+
+export interface CollectionCommentProps extends CollectionDefaultProps {
+  isEditMode: boolean;
   handleEditMode: (editMode: boolean) => void;
 }
 
