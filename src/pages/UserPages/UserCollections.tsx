@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useBookmarkList from 'src/hooks/useCollections';
-import WataCardList from '@components/UserComponents/wata/list';
+import WataCardCollectionList from '@components/UserComponents/wata/list/CollectionList';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import wataListState from 'src/atoms/wata.atom';
 import searchKeywordAtom from 'src/atoms/search.atom';
@@ -50,7 +50,7 @@ export default function Collections() {
           isEditMode={editMode}
           selectIndex={collectionIndex}
         />
-        <WataCardList
+        <WataCardCollectionList
           watas={watas.filter((wata: WataType) =>
             collections[collectionIndex].items.some(
               (storedWataId: WataIdType) => storedWataId === wata.id,
