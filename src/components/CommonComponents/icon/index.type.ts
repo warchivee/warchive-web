@@ -24,7 +24,9 @@ export type IconType =
   | 'up'
   | 'down'
   | 'folder-plus'
-  | 'share';
+  | 'share'
+  | 'vertical-dots'
+  | 'caret-down';
 
 export interface IconProps {
   type: IconType;

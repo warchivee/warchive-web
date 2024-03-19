@@ -1,0 +1,8 @@
+.wata-col-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, auto));
+  column-gap: 0.8rem;
+  row-gap: 8rem;
+  width: 100%;
+  justify-content: flex-start;
+}

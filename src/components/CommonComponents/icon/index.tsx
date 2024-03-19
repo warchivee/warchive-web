@@ -24,6 +24,8 @@ import Up from '@assets/icons/up.svg?react';
 import Down from '@assets/icons/down.svg?react';
 import FloderPlus from '@assets/icons/folder-plus.svg?react';
 import Share from '@assets/icons/share.svg?react';
+import VerticalDots from '@assets/icons/vertical-dots.svg?react';
+import CaretDown from '@assets/icons/caret-down.svg?react';
 
 import { IconType, IconProps } from './index.type';
 
@@ -57,6 +59,8 @@ const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   down: Down,
   'folder-plus': FloderPlus,
   share: Share,
+  'vertical-dots': VerticalDots,
+  'caret-down': CaretDown,
 };
 
 export default function Icon({ type, color, size }: IconProps) {
