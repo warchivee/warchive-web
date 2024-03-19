@@ -15,8 +15,7 @@ export default function ShareCollectionButtons({
         {!isEditMode && (
           <>
             <Button
-              align="reverse"
-              icon="share-up"
+              icon="share"
               iconColor="black"
               background="light-gray"
               onClick={() => setOpenSnsShareModal(true)}

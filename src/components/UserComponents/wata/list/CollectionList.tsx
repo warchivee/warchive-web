@@ -9,6 +9,10 @@ export default function WataCollectionList({ watas = [] }: WataCardListProps) {
     useState<boolean>(false);
   const [selectWata, setSelectWata] = useState<WataType>();
 
+  const removeFromCollection = (index: number) => {
+    console.log(`작품 번호 ${index}번의 작품 제거 (기능 미구현)`);
+  };
+
   return (
     <>
       <div className="wata-col-list">
@@ -16,9 +20,12 @@ export default function WataCollectionList({ watas = [] }: WataCardListProps) {
           <WataCollectionCard
             key={`wata-${wata.id}`}
             wata={wata}
-            handleBookmark={() => {
+            handleCollection={() => {
               setSelectWata(wata);
               setIsOpenBookmarkModal(true);
+            }}
+            deleteCollection={() => {
+              removeFromCollection(wata.id);
             }}
           />
         ))}

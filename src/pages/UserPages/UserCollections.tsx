@@ -7,6 +7,7 @@ import searchKeywordAtom from 'src/atoms/search.atom';
 import { WataIdType, WataType } from 'src/types/wata.type';
 import CollectionMenu from '../../components/UserComponents/menu';
 import CollectionTitle from '../../components/UserComponents/title';
+import CollectionComment from '@components/UserComponents/comment';
 import ShareCollectionButtons from '../../components/UserComponents/share';
 
 export default function Collections() {
@@ -14,10 +15,12 @@ export default function Collections() {
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
   const { collections } = useBookmarkList();
   const [collectionIndex, setCollectionIndex] = useState<number>(0);
-  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editTitle, setEditTitle] = useState<boolean>(false);
+  const [editComment, setEditComment] = useState<boolean>(false);
 
   useEffect(() => {
-    setEditMode(false);
+    setEditTitle(false);
+    setEditComment(false);
   }, [collectionIndex]);
 
   // 키워드 클릭 시 메인 페이지로 이동하며, 이전 카테고리 검색 기록이 남아있는 현상 수정
@@ -35,21 +38,22 @@ export default function Collections() {
   return (
     <div className="collections">
       <CollectionMenu
-        isEditMode={editMode}
         selectIndex={collectionIndex}
         handleChange={setCollectionIndex}
       />
 
       <div className="content">
         <CollectionTitle
-          isEditMode={editMode}
+          isEditMode={editTitle}
           selectIndex={collectionIndex}
-          handleEditMode={setEditMode}
+          handleEditMode={setEditTitle}
         />
-        <ShareCollectionButtons
-          isEditMode={editMode}
+        <CollectionComment
+          isEditMode={editComment}
           selectIndex={collectionIndex}
+          handleEditMode={setEditComment}
         />
+        <ShareCollectionButtons selectIndex={collectionIndex} />
         <WataCardCollectionList
           watas={watas.filter((wata: WataType) =>
             collections[collectionIndex].items.some(

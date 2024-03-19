@@ -13,7 +13,6 @@ import useCollections from 'src/hooks/useCollections';
 
 export default function CollectionMenu({
   selectIndex,
-  isEditMode,
   handleChange,
 }: CollectionMenuProps) {
   const { collections, addCollection, removeCollection } = useCollections();
@@ -36,32 +35,28 @@ export default function CollectionMenu({
           </li>
         ))}
       </ul>
-      {!isEditMode ? (
-        <div className="control">
+      <div className="control">
+        <Button
+          icon="plus"
+          iconColor="white"
+          border="round"
+          size="small"
+          onClick={() => {
+            setIsInputConfirmOpen(true);
+          }}
+        />
+        {selectIndex !== DEFAULT_COLLECTIONS_KEY && (
           <Button
-            icon="plus"
+            icon="minus"
             iconColor="white"
-            labelColor="white"
             border="round"
             size="small"
             onClick={() => {
-              setIsInputConfirmOpen(true);
+              setIsConfirmOpen(true);
             }}
           />
-          {selectIndex !== DEFAULT_COLLECTIONS_KEY && (
-            <Button
-              icon="minus"
-              iconColor="white"
-              labelColor="white"
-              border="round"
-              size="small"
-              onClick={() => {
-                setIsConfirmOpen(true);
-              }}
-            />
-          )}
-        </div>
-      ) : null}
+        )}
+      </div>
 
       <AddCollectionModal
         isOpen={isInputConfirmOpen}

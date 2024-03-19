@@ -10,16 +10,17 @@ import { PlatformType, WataType } from 'src/types/wata.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import searchKeywordAtom from 'src/atoms/search.atom';
-import Icon from '@components/CommonComponents/icon';
 
 interface WataCardProps {
   wata: WataType;
-  handleBookmark: () => void;
+  handleCollection: () => void;
+  deleteCollection: () => void;
 }
 
 export default function WataCollectionCard({
   wata,
-  handleBookmark,
+  handleCollection,
+  deleteCollection,
 }: WataCardProps) {
   const navigate = useNavigate();
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
@@ -29,9 +30,11 @@ export default function WataCollectionCard({
 
   const openEditModal = () => {
     setIsEditModalVisible(!isEditModalVisible);
+    setIsInfoModalVisible(false);
   };
 
   const openInfoModal = () => {
+    setIsEditModalVisible(false);
     setIsInfoModalVisible(!isInfoModalVisible);
   };
 
@@ -42,10 +45,10 @@ export default function WataCollectionCard({
 
   const renderTag = (type: SearchKeywordsKeyType, keyword: ValueLabelType) => {
     return (
-      <>
+      <div key={`wata-card-${type}-${keyword.value}`}>
         {type !== 'genres' && '/'}
         {keyword.label}
-      </>
+      </div>
     );
   };
 
@@ -74,8 +77,15 @@ export default function WataCollectionCard({
     );
   };
 
-  const deleteFromCollection = () => {};
-  const moveCollection = () => {};
+  const deleteFromCollection = () => {
+    deleteCollection();
+    openEditModal();
+  };
+
+  const moveCollection = () => {
+    handleCollection();
+    openEditModal();
+  };
 
   return (
     <div className="wata-col-card">
