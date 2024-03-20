@@ -1,5 +1,6 @@
 import Button from '@components/CommonComponents/button';
 import { Text, Title } from '@components/CommonComponents/text';
+import Icon from '@components/CommonComponents/icon';
 import { ValueLabelType } from 'src/types/common.type';
 import {
   SearchKeywordsKeyType,
@@ -106,7 +107,22 @@ export default function WataCollectionCard({
             </div>
           </div>
           <div className="info-button">
-            <Button
+            <button
+              type="button"
+              className="custom-button"
+              onClick={() => {
+                openInfoModal();
+              }}
+            >
+              <div className="icon-box">
+                <Icon type="caret-down" color="black" size="big" />
+              </div>
+              <Text size="big" color="black">
+                작품 정보
+              </Text>
+            </button>
+
+            {/* <Button
               children="작품 정보"
               icon="caret-down"
               iconColor="black"
@@ -116,7 +132,7 @@ export default function WataCollectionCard({
               onClick={() => {
                 openInfoModal();
               }}
-            ></Button>
+            ></Button> */}
             {isInfoModalVisible && (
               <div className="info-modal">
                 <div className="modal-area">

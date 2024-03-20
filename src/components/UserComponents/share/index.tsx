@@ -15,6 +15,7 @@ export default function ShareCollectionButtons({
           icon="share"
           iconColor="black"
           background="light-gray"
+          border="round"
           onClick={() => setOpenSnsShareModal(true)}
         >
           나만 보기 아까운 작품이 있다면?
