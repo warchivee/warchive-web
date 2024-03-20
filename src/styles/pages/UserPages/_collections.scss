@@ -65,7 +65,7 @@
       max-width: 30rem;
 
       & .title-area {
-        height: 60px;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
@@ -94,7 +94,7 @@
       max-width: 30rem;
 
       & .comment-area {
-        height: 30px;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
