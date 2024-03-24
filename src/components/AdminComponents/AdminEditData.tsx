@@ -238,6 +238,7 @@ export default function AdminEditData({
                   platform.id === null
                     ? undefined
                     : ({
+                        mappingId: platform.mapping_id,
                         name: platform.name,
                         id: platform.id,
                       } as DropdownOption)

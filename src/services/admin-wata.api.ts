@@ -48,6 +48,7 @@ export interface Keyword {
 }
 
 interface Platform extends Keyword {
+  mapping_id: number;
   url: string;
 }
 
