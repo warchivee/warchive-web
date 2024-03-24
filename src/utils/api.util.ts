@@ -51,7 +51,7 @@ api.interceptors.request.use(
   (config) => {
     const newConfig = { ...config };
     newConfig.headers.Authorization = `Bearer ${getAccessToken()}`;
-    console.log(getAccessToken());
+    // console.log(getAccessToken());
     return newConfig;
   },
   (error) => Promise.reject(error),
@@ -67,7 +67,7 @@ api.interceptors.response.use(
 
       try {
         await reissueToken();
-        console.log(getAccessToken());
+        // console.log(getAccessToken());
         originalRequest.headers.Authorization = `Bearer ${getAccessToken()}`;
         return await api(originalRequest);
       } catch (reissueError) {

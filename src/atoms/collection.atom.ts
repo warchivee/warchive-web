@@ -1,5 +1,7 @@
 import {
-  COLLEACTIONS_KEY,
+  COLLEACTIONS_KEY, //
+  COLLECTION_KEY,
+  COLLECTION_LIST_KEY,
   CollectionType,
   DEFAULT_COLLECTIONS_NAME,
 } from 'src/types/collection.type';
@@ -9,7 +11,10 @@ import { DefaultValue, atom, selector } from 'recoil';
 const init = () => {
   const newValue = [
     {
+      id: 0,
       title: DEFAULT_COLLECTIONS_NAME,
+      note: '',
+      shared_id: '',
       items: [],
     },
   ];
@@ -46,11 +51,12 @@ export const collectionAtom = atom<CollectionType[]>({
 export const collectionSelector = selector<CollectionType[]>({
   key: 'collectionSelector',
   get: ({ get }) => {
+    init();
     const stateDatas = get(collectionAtom);
     return stateDatas;
   },
   set: ({ set }, newValue: CollectionType[] | DefaultValue) => {
     set(collectionAtom, newValue);
-    localStorage.setItem(COLLEACTIONS_KEY, JSON.stringify(newValue));
+    localStorage.setItem(COLLECTION_LIST_KEY, JSON.stringify(newValue));
   },
 });

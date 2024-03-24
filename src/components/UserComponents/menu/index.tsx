@@ -5,35 +5,38 @@ import { Text } from '@components/CommonComponents/text';
 import { CollectionMenuProps } from 'src/types/collections.type';
 import {
   CollectionType,
+  CollectionListType,
   DEFAULT_COLLECTIONS_KEY,
 } from 'src/types/collection.type';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useCollections from 'src/hooks/useCollections';
 
 export default function CollectionMenu({
   selectIndex,
   handleChange,
 }: CollectionMenuProps) {
-  const { collections, addCollection, removeCollection } = useCollections();
+  const { collectionLists, addCollection, removeCollection } = useCollections();
   const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
   const [isInputConfirmOpen, setIsInputConfirmOpen] = useState<boolean>(false);
 
   return (
     <div className="menu">
       <ul>
-        {collections?.map((collection: CollectionType, index: number) => (
-          <li
-            className={classNames({
-              active: collection.title === collections[selectIndex].title,
-            })}
-            key={`bookmark-list-${collection.title}`}
-            onClick={() => handleChange(index)}
-            aria-hidden="true"
-          >
-            <Text color="white">{collection.title}</Text>
-          </li>
-        ))}
+        {collectionLists?.map(
+          (collection: CollectionListType, index: number) => (
+            <li
+              className={classNames({
+                active: collection.title === collectionLists[selectIndex].title,
+              })}
+              key={`bookmark-list-${collection.title}`}
+              onClick={() => handleChange(index)}
+              aria-hidden="true"
+            >
+              <Text color="white">{collection.title}</Text>
+            </li>
+          ),
+        )}
       </ul>
       <div className="control">
         <Button
@@ -64,7 +67,7 @@ export default function CollectionMenu({
         onConfirm={(input?: string) => {
           try {
             addCollection(input || '');
-            handleChange(collections.length);
+            handleChange(collectionLists.length);
           } catch (e) {
             // console.log(e);
           }
@@ -82,7 +85,7 @@ export default function CollectionMenu({
         }}
         onConfirm={() => {
           try {
-            removeCollection(selectIndex);
+            removeCollection(collectionLists[selectIndex].id);
             handleChange(selectIndex - 1);
           } catch (e) {
             // console.log(e);

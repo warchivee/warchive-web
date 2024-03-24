@@ -15,13 +15,13 @@ import searchKeywordAtom from 'src/atoms/search.atom';
 interface WataCardProps {
   wata: WataType;
   handleCollection: () => void;
-  deleteCollection: () => void;
+  deleteItem: () => void;
 }
 
 export default function WataCollectionCard({
   wata,
   handleCollection,
-  deleteCollection,
+  deleteItem,
 }: WataCardProps) {
   const navigate = useNavigate();
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
@@ -79,7 +79,7 @@ export default function WataCollectionCard({
   };
 
   const deleteFromCollection = () => {
-    deleteCollection();
+    deleteItem();
     openEditModal();
   };
 
