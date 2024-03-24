@@ -24,6 +24,7 @@ import Up from '@assets/icons/up.svg?react';
 import Down from '@assets/icons/down.svg?react';
 import FloderPlus from '@assets/icons/folder-plus.svg?react';
 import Share from '@assets/icons/share.svg?react';
+import News from '@assets/icons/news.svg?react';
 
 import { IconType, IconProps } from './index.type';
 
@@ -31,6 +32,7 @@ const IconSizeCodes: Record<FontSizeType, number> = {
   small: 10,
   normal: 12,
   big: 16,
+  bigger: 20,
 };
 
 const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
@@ -57,6 +59,7 @@ const icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   down: Down,
   'folder-plus': FloderPlus,
   share: Share,
+  news: News,
 };
 
 export default function Icon({ type, color, size }: IconProps) {

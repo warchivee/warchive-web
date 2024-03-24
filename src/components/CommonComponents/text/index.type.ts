@@ -1,6 +1,6 @@
 import { ColorType } from '@utils/color.util';
 
-export type FontSizeType = 'small' | 'normal' | 'big';
+export type FontSizeType = 'small' | 'normal' | 'big' | 'bigger';
 
 export type TitleType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
 
