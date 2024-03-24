@@ -22,7 +22,6 @@ const UserCollectionShare = lazy(
 
 const AdminLayout = lazy(() => import('src/layouts/AdminLayout'));
 const AdminHome = lazy(() => import('@pages/AdminPages/AdminDatas'));
-const AdminKeyword = lazy(() => import('@pages/AdminPages/AdminKeywords'));
 
 function App() {
   return (
@@ -44,7 +43,6 @@ function App() {
               <Route element={<PermissionRoute access="ADMIN" />}>
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminHome />} />
-                  <Route path="/admin/keyword" element={<AdminKeyword />} />
                 </Route>
               </Route>
             </Route>

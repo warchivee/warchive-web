@@ -157,7 +157,6 @@ export default function AdminEditData({
           <Text color="gray">키워드</Text>
           <AdminMultiDropdown
             isSearch
-            isAdd
             selectedOptions={generateDropdownOptions(editData?.keywords)}
             options={generateDropdownOptions(keywordList.keywords)}
             onChange={(value) => {
@@ -170,7 +169,6 @@ export default function AdminEditData({
           <Text color="gray">주의키워드</Text>
           <AdminMultiDropdown
             isSearch
-            isAdd
             selectedOptions={generateDropdownOptions(editData?.cautions)}
             options={generateDropdownOptions(keywordList.cautions)}
             onChange={(value) => {
@@ -236,7 +234,6 @@ export default function AdminEditData({
             <div className="platforms" key={`platform-input-${index + 1}`}>
               <AdminDropdown
                 isSearch
-                isAdd
                 selectedOption={
                   platform.id === null
                     ? undefined
@@ -270,7 +267,6 @@ export default function AdminEditData({
                   }}
                 />
                 <Button
-                  icon="minus"
                   onClick={() => {
                     const newPlatforms = [...(editData?.platforms || [])];
                     newPlatforms.splice(index, 1);
