@@ -41,6 +41,8 @@ export default function AddCollectionItemModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
+  // 요소 제거 함수
+
   return (
     <Modal
       isOpen={isOpen}
@@ -76,6 +78,8 @@ export default function AddCollectionItemModal({
                 <Text color="lavender">({collection.items.length})</Text>
               </div>
             </label>
+
+            {/* 버튼 들어가는 곳 */}
           </li>
         ))}
       </ul>
