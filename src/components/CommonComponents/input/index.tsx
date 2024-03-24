@@ -13,7 +13,7 @@ export default function Input({
   placeholder,
   size = 'normal',
   isResetButton = true,
-  maxLength = 100,
+  maxLength = 2500,
   onChange = () => {},
 }: {
   type?: 'default' | 'text' | 'search';
