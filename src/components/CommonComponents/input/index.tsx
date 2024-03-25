@@ -15,17 +15,19 @@ export default function Input({
   isResetButton = true,
   maxLength = 2500,
   onChange = () => {},
+  width = '',
 }: {
-  type?: 'default' | 'text' | 'search';
+  type?: 'default' | 'text' | 'search' | 'number';
   border?: 'outline' | 'underline';
-  value: string;
+  value: string | number;
   placeholder?: string;
   size?: FontSizeType;
   maxLength?: number;
   isEnterButton?: boolean;
   isResetButton?: boolean;
   onEnter?: () => void;
-  onChange?: (input: string) => void;
+  onChange?: (input: string | number) => void;
+  width?: string;
 }) {
   return (
     <div className="input">
@@ -49,6 +51,13 @@ export default function Input({
             onEnter();
           }
         }}
+        style={
+          width
+            ? {
+                width,
+              }
+            : {}
+        }
       />
 
       {isResetButton && (

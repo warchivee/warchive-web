@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import Button from '@components/CommonComponents/button';
 import { Text } from '@components/CommonComponents/text';
 import classNames from 'classnames';
 import { PaginationProps } from './index.type';
+import Input from '../input';
 
 const getPageArange = (currentPage: number, maxPage: number): number[] => {
   const size = 5;
@@ -21,7 +23,10 @@ export default function Pagination({
   currentPage,
   maxPage,
   onChange = () => {},
+  input = false,
 }: PaginationProps) {
+  const [inputPage, setInputPage] = useState<number>(0);
+
   return (
     <div className="pagination">
       <div className={classNames('control', { hidden: currentPage <= 3 })}>
@@ -46,6 +51,19 @@ export default function Pagination({
             <Text size="big">{page}</Text>
           </div>
         ))}
+
+        {input && (
+          <Input
+            type="number"
+            value={inputPage}
+            isResetButton={false}
+            onChange={(value) => setInputPage(+value)}
+            onEnter={() => {
+              onChange(inputPage);
+            }}
+            width="60px"
+          />
+        )}
       </div>
       <div
         className={classNames('control', {

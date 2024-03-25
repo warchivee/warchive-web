@@ -94,6 +94,7 @@ export default function AdminHome() {
           currentPage={pageNo}
           onChange={handlePageChange}
           maxPage={maxPage}
+          input
         />
       </Suspense>
     </div>
