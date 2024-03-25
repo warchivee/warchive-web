@@ -4,6 +4,7 @@ import Button from '@components/CommonComponents/button';
 import Cropper, { Area } from 'react-easy-crop';
 import { Text } from '@components/CommonComponents/text';
 import resizeImage from '@utils/resizeImage.utils';
+import WataCard from '@components/UserComponents/wata/card';
 import getCroppedImg from '../../utils/cropImage.utils';
 
 export default function AdminEditImage({
@@ -77,13 +78,30 @@ export default function AdminEditImage({
         </div>
       </div>
 
-      {cropImage && cropImage !== '' && (
-        <img
-          style={{ ...previewOption, objectFit: 'cover' }}
-          src={cropImage}
-          alt="cropped"
-        />
-      )}
+      {cropImage &&
+        cropImage !== '' &&
+        (type === 'book' ? (
+          <img
+            style={{ ...previewOption, objectFit: 'cover' }}
+            src={cropImage}
+            alt="cropped"
+          />
+        ) : (
+          <WataCard
+            handleBookmark={() => {}}
+            wata={{
+              id: 1,
+              title: 'test',
+              creator: 'test',
+              category: { value: '1', label: 'test' },
+              genre: { value: '1', label: 'test' },
+              keywords: [],
+              cautions: [],
+              platforms: [],
+              thumbnail: cropImage,
+            }}
+          />
+        ))}
 
       <Modal
         isOpen={openEditImage}
