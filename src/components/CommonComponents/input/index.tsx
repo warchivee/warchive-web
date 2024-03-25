@@ -26,7 +26,7 @@ export default function Input({
   isEnterButton?: boolean;
   isResetButton?: boolean;
   onEnter?: () => void;
-  onChange?: (input: string | number) => void;
+  onChange?: (input: string) => void;
   width?: string;
 }) {
   return (

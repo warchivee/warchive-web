@@ -47,7 +47,7 @@ export default function UserHome() {
             value={searchKeywords.searchInput}
             type="search"
             placeholder="제목/작가/감독명으로 검색"
-            onChange={(value: string) => {
+            onChange={(value) => {
               setSearchKeywords({
                 ...searchKeywords,
                 searchInput: value,
