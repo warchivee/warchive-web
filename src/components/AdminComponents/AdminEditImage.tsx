@@ -18,6 +18,8 @@ export default function AdminEditImage({
   cropImage?: string;
   setCropImage: (image: string) => void;
 }) {
+  const ratio = type === 'card' ? 300 / 124 : 105 / 150;
+
   const [openEditImage, toggleEditImage] = useState<boolean>(false);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>({
     width: 0,
@@ -31,8 +33,8 @@ export default function AdminEditImage({
 
   const previewOption =
     type === 'card'
-      ? { width: '300px', height: '117px' }
-      : { width: '90px', height: '128px' };
+      ? { width: '300px', height: '124px' }
+      : { width: '105px', height: '150px' };
 
   const onCropComplete = (area: Area, areaPixels: Area) => {
     setCroppedAreaPixels(areaPixels);
@@ -43,7 +45,7 @@ export default function AdminEditImage({
 
     const resizedImage = await resizeImage(croppedImage, {
       width: 500,
-      aspectRatio: type === 'book' ? 2 / 3 : 16 / 9,
+      aspectRatio: ratio,
     });
 
     setCropImage(resizedImage);
@@ -123,7 +125,7 @@ export default function AdminEditImage({
               image={originImage}
               crop={crop}
               zoom={zoom}
-              aspect={type === 'book' ? 2 / 3 : 16 / 9}
+              aspect={ratio}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}
