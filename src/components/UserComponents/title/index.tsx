@@ -3,6 +3,7 @@ import Input from '@components/CommonComponents/input';
 import { Title } from '@components/CommonComponents/text';
 import { CollectionTitleProps } from 'src/types/collections.type';
 import {
+  CollectionListType,
   DEFAULT_COLLECTIONS_KEY,
   TITLE_LIMIT_LENGTH,
 } from 'src/types/collection.type';
@@ -14,13 +15,14 @@ export default function CollectionTitle({
   selectIndex,
   handleEditMode,
 }: CollectionTitleProps) {
-  const { collections, renameCollection } = useCollections();
+  const { collectionLists, renameCollection } = useCollections();
+
   const [isHovered, setIsHovered] = useState(false);
   const [input, setInput] = useState<string>('');
 
   useEffect(() => {
     if (isEditMode) {
-      setInput(collections[selectIndex].title);
+      setInput(collectionLists[selectIndex].title);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectIndex, isEditMode]);
@@ -29,13 +31,13 @@ export default function CollectionTitle({
     <div className="header" onMouseLeave={() => setIsHovered(false)}>
       {selectIndex == DEFAULT_COLLECTIONS_KEY ? (
         <div className="title-area">
-          <Title type="h1">{collections[selectIndex].title}</Title>
+          <Title type="h1">{collectionLists[selectIndex].title}</Title>
         </div>
       ) : null}
 
       {!isEditMode && selectIndex !== DEFAULT_COLLECTIONS_KEY ? (
         <div className="title-area" onMouseEnter={() => setIsHovered(true)}>
-          <Title type="h1">{collections[selectIndex].title}</Title>
+          <Title type="h1">{collectionLists[selectIndex].title}</Title>
         </div>
       ) : null}
 
@@ -66,7 +68,7 @@ export default function CollectionTitle({
               background="white"
               labelColor="blue-violet"
               onClick={() => {
-                renameCollection(selectIndex, input);
+                renameCollection(selectIndex, input, true);
                 handleEditMode(false);
                 setInput('');
               }}

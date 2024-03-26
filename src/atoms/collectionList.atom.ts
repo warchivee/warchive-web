@@ -3,15 +3,24 @@ import {
   CollectionListType,
   DEFAULT_COLLECTIONS_NAME,
 } from 'src/types/collection.type';
-import { DefaultValue, atom, selector } from 'recoil';
 import { api } from '@utils/api.util';
 
-const init = async () => {
+export const getCollectionList = async () => {
   try {
     const collectionsResponse = await api.get(
       'https://admin-warchive.koyeb.app/api/v1/collection/list?page=1&page_size=100',
     );
     const collections = collectionsResponse.data.result.result;
+    collections.sort(
+      (
+        a: { created_at: string | number | Date },
+        b: { created_at: string | number | Date },
+      ) => {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+        return dateA.getTime() - dateB.getTime();
+      },
+    );
 
     const newValue = [
       {
@@ -23,51 +32,69 @@ const init = async () => {
         updated_at: '',
       },
     ];
-
     newValue.push(...collections);
-    localStorage.setItem(COLLECTION_LIST_KEY, JSON.stringify(newValue));
-
-    console.log('saved collection lists: ', newValue); // DEBUG
+    // console.log('get collection list result: ', newValue); // DEBUG
     return newValue;
   } catch (error) {
-    console.error('getting collection lists error: ', error); // ERROR
+    console.error('get collection list error', error); // ERROR
     throw error;
   }
 };
 
-const getCollectionListsToLocalStorage = () => {
-  const storedDatas = localStorage.getItem(COLLECTION_LIST_KEY);
-
+export const requestAddCollection = async (title: string, note: string) => {
   try {
-    if (storedDatas) {
-      const datas = JSON.parse(storedDatas);
+    const requestData = {
+      title: title,
+      note: note,
+    };
 
-      if (datas && datas instanceof Array && datas.length !== 0) {
-        return datas;
-      }
-      return init();
-    }
+    const response = await api.post(
+      'https://admin-warchive.koyeb.app/api/v1/collection',
+      requestData,
+    );
 
-    return init();
-  } catch (e) {
-    return init();
+    console.log('POST request response:', response.data.result); // DEBUG
+    return response.data.result;
+  } catch (error) {
+    console.error('POST request error:', error); // ERROR
+    throw error;
   }
 };
 
-export const collectionListAtom = atom<CollectionListType[]>({
-  key: 'collectionListAtom',
-  default: getCollectionListsToLocalStorage(),
-});
+export const requestRemoveCollection = async (id: number) => {
+  try {
+    const response = await api.delete(
+      `https://admin-warchive.koyeb.app/api/v1/collection/${id}`,
+    );
+    console.log('DELETE request response:', response); // DEBUG
+    return response;
+  } catch (error) {
+    console.error('DELETE request error:', error); // ERROR
+    throw error;
+  }
+};
 
-export const collectionListSelector = selector<CollectionListType[]>({
-  key: 'collectionListSelector',
-  get: ({ get }) => {
-    init();
-    const stateDatas = get(collectionListAtom);
-    return stateDatas;
-  },
-  set: ({ set }, newValue: CollectionListType[] | DefaultValue) => {
-    set(collectionListAtom, newValue);
-    localStorage.setItem(COLLECTION_LIST_KEY, JSON.stringify(newValue));
-  },
-});
+export const requestRenameCollection = async (
+  id: number,
+  title: string,
+  note: string,
+) => {
+  try {
+    console.log('수정 요청: ', title, '/', note); // DEBUG
+    const requestData = {
+      title: title,
+      // note: note,
+    };
+
+    const response = await api.patch(
+      `https://admin-warchive.koyeb.app/api/v1/collection/${id}`,
+      requestData,
+    );
+
+    console.log('PATCH request response:', response); // DEBUG
+    return response;
+  } catch (error) {
+    console.error('PATCH request error:', error); // ERROR
+    throw error;
+  }
+};

@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import AddCollectionsModal from '@components/UserComponents/modal/addCollectionItem';
-import { WataType } from 'src/types/wata.type';
+import { WataIdType, WataType } from 'src/types/wata.type';
 import WataCollectionCard from '../card/CollectionCard';
 import { WataCardListProps } from '../index.type';
+import { removeFromCollection } from 'src/atoms/collection.atom';
 
-export default function WataCollectionList({ watas = [] }: WataCardListProps) {
+export default function WataCollectionList({
+  watas = [],
+  selectIndex,
+}: WataCardListProps) {
   const [isOpenBookmarkModel, setIsOpenBookmarkModal] =
     useState<boolean>(false);
   const [selectWata, setSelectWata] = useState<WataType>();
 
-  const removeFromCollection = (index: number) => {
-    console.log(`작품 번호 ${index}번의 작품 제거 (기능 미구현)`); //
+  const deleteItem = (id: WataIdType) => {
+    removeFromCollection(selectIndex, id);
+    // console.log(
+    //   `${selectIndex}번째, 작품 번호 ${id}번의 작품 제거 (기능 미구현)`,
+    // );
   };
 
   return (
@@ -25,7 +32,7 @@ export default function WataCollectionList({ watas = [] }: WataCardListProps) {
               setIsOpenBookmarkModal(true);
             }}
             deleteItem={() => {
-              removeFromCollection(wata.id);
+              deleteItem(wata.id);
             }}
           />
         ))}

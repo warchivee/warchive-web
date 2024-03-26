@@ -42,7 +42,7 @@ export default function Collections() {
         handleChange={setCollectionIndex}
       />
 
-      {/* <div className="content">
+      <div className="content">
         <CollectionTitle
           isEditMode={editTitle}
           selectIndex={collectionIndex}
@@ -60,8 +60,9 @@ export default function Collections() {
               (storedWataId: WataIdType) => storedWataId === wata.id,
             ),
           )}
+          selectIndex={collectionIndex}
         />
-      </div> */}
+      </div>
     </div>
   );
 }
