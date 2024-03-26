@@ -1,11 +1,10 @@
 import Button from '@components/CommonComponents/button';
 import { Text, Title } from '@components/CommonComponents/text';
-import { ValueLabelType } from 'src/types/common.type';
 import {
   SearchKeywordsKeyType,
   SearchKeywordsType,
 } from 'src/types/serchKeyword.type';
-import { PlatformType, WataType } from 'src/types/wata.type';
+import { KeywordType, PlatformType, WataType } from 'src/types/wata.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import searchKeywordAtom from 'src/atoms/search.atom';
@@ -24,10 +23,7 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
     navigate('/');
   };
 
-  const renderHashTag = (
-    type: SearchKeywordsKeyType,
-    keyword: ValueLabelType,
-  ) => {
+  const renderHashTag = (type: SearchKeywordsKeyType, keyword: KeywordType) => {
     const newValue = {
       ...searchKeywords,
       searchInput: '',
@@ -38,12 +34,12 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
 
     return (
       <div
-        key={`wata-card-${type}-${keyword.value}`}
+        key={`wata-card-${type}-${keyword.id}`}
         onClick={() => handleClickKeyword(newValue)}
         aria-hidden="true"
       >
-        <Text key={`hashtag-${keyword.value}`} color="gray">
-          #{keyword.label}
+        <Text key={`hashtag-${keyword.id}`} color="gray">
+          #{keyword.name}
         </Text>
       </div>
     );
@@ -67,12 +63,12 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
         </div>
 
         <div className="creator">
-          <Text color="gray">{wata.creator}</Text>
+          <Text color="gray">{wata.creators}</Text>
         </div>
 
         <div className="hashTags">
           {renderHashTag('genres', wata.genre)}
-          {wata?.keywords?.map((keyword: ValueLabelType) =>
+          {wata?.keywords?.map((keyword: KeywordType) =>
             renderHashTag('keywords', keyword),
           )}
         </div>
@@ -81,28 +77,28 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
       <div
         className="body"
         style={{
-          backgroundImage: `url(${wata.thumbnail})`,
+          backgroundImage: `url(${wata.thumbnail_card})`,
         }}
       >
         <div className="platforms">
           {wata?.platforms?.map((platform: PlatformType) => (
             <a
-              key={`hashtag-${platform.value}`}
+              key={`hashtag-${platform.id}`}
               href={platform.url}
               target="_blank"
               aria-label="플랫폼으로 이동"
               rel="noreferrer"
             >
-              <Text color="white">#{platform.label}</Text>
+              <Text color="white">#{platform.name}</Text>
             </a>
           ))}
         </div>
 
         {wata?.cautions.length !== 0 && (
           <div className="cautions">
-            {wata?.cautions?.map((caution: ValueLabelType) => (
-              <Text key={`hashtag-${caution.value}`} color="selago">
-                #{caution.label}
+            {wata?.cautions?.map((caution: KeywordType) => (
+              <Text key={`hashtag-${caution.id}`} color="selago">
+                #{caution.name}
               </Text>
             ))}
           </div>

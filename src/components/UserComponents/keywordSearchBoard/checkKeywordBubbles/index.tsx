@@ -1,5 +1,5 @@
 import { Title } from '@components/CommonComponents/text';
-import { ValueLabelType } from 'src/types/common.type';
+import { KeywordType } from 'src/types/wata.type';
 import { CheckKeywordBubblesProps } from '../index.type';
 import CheckKeywordBubble from '../checkKeywordBubble';
 
@@ -16,15 +16,15 @@ export default function CheckKeywordBubbles({
         {title}
       </Title>
       <div className="grid">
-        {bubbles?.map((bubble: ValueLabelType) => (
+        {bubbles?.map((keyword: KeywordType) => (
           <CheckKeywordBubble
-            key={`bubble-${bubble.value}`}
-            value={bubble.value}
-            label={bubble.label}
+            key={`${bubbleType}-${keyword.id}`}
+            value={`${bubbleType}-${keyword.id}`}
+            label={keyword.name}
             checked={selectedBubbles.some(
-              (selectedBubble) => selectedBubble.value === bubble.value,
+              (selectedBubble) => selectedBubble.id === keyword.id,
             )}
-            onChange={() => handleChange(bubbleType, bubble)}
+            onChange={() => handleChange(bubbleType, keyword)}
           />
         ))}
       </div>

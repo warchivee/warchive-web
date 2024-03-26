@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { CheckKeywordBubbleProps } from '../index.type';
 
 export default function CheckKeywordBubble({
-  value = 'keyword-1',
+  value = '',
   label = '키워드',
   type = 'default',
   size = 'normal',

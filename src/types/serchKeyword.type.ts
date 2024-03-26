@@ -1,17 +1,11 @@
-import { ValueLabelType } from 'src/types/common.type';
-
-export interface KeywordByCategoryType extends ValueLabelType {
-  genres: ValueLabelType[];
-  platforms: ValueLabelType[];
-  keywords: ValueLabelType[];
-}
+import { KeywordType } from './wata.type';
 
 export interface SearchKeywordsType {
   searchInput: string;
-  category: ValueLabelType;
-  genres: ValueLabelType[];
-  platforms: ValueLabelType[];
-  keywords: ValueLabelType[];
+  category: KeywordType;
+  genres: KeywordType[];
+  platforms: KeywordType[];
+  keywords: KeywordType[];
 }
 
 export type SearchKeywordsKeyType = 'genres' | 'platforms' | 'keywords';

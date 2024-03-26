@@ -23,11 +23,11 @@
 }
 
 @mixin viewport {
-  width: 65%;
+  width: 90%;
+  max-width: 1000px;
   min-width: 650px;
 
   @media (max-width: 650px) {
-    width: 95%;
     min-width: 320px;
   }
 }

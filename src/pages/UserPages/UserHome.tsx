@@ -5,7 +5,7 @@ import Input from '@components/CommonComponents/input';
 import usePagination from 'src/hooks/usePagination';
 import Pagination from '@components/CommonComponents/pagination';
 import WataCardList from '@components/UserComponents/wata/list';
-import searchWataListSelector from 'src/atoms/searchWat.atom';
+import searchWatasSelector from 'src/atoms/searchWata.atom';
 import searchKeywordAtom from 'src/atoms/search.atom';
 import { WataType } from 'src/types/wata.type';
 import KeywordSearchBorad from '../../components/UserComponents/keywordSearchBoard';
@@ -13,12 +13,12 @@ import KeywordSearchBorad from '../../components/UserComponents/keywordSearchBoa
 export default function UserHome() {
   const PAGE_SIZE = 18;
 
-  const searchWatas = useRecoilValue(searchWataListSelector);
+  const searchWatas = useRecoilValue(searchWatasSelector);
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
 
   const [pageSearchWatas, setPageSearchWatas] = useState<WataType[]>([]);
-  const [pageNo, maxPage, handlePageChange] = usePagination(
-    searchWatas?.length,
+  const [pageNo, maxPage, handlePageChange, handleTotalCount] = usePagination(
+    0,
     PAGE_SIZE,
   );
 
@@ -27,7 +27,9 @@ export default function UserHome() {
       (pageNo - 1) * PAGE_SIZE,
       pageNo * PAGE_SIZE,
     );
+    handleTotalCount(searchWatas?.length);
     setPageSearchWatas(datas);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchWatas, pageNo]);
 
   useEffect(() => {

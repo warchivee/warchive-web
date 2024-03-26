@@ -1,8 +1,10 @@
 import { FontSizeType } from '@components/CommonComponents/text/index.type';
-import { ValueLabelType } from 'src/types/common.type';
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
+import { KeywordType } from 'src/types/wata.type';
 
-export interface CheckKeywordBubbleProps extends ValueLabelType {
+export interface CheckKeywordBubbleProps {
+  value: string;
+  label: string;
   type?: 'default' | 'border' | 'remove';
   size?: FontSizeType;
   checked?: boolean;
@@ -11,11 +13,11 @@ export interface CheckKeywordBubbleProps extends ValueLabelType {
 
 export interface CheckKeywordBubblesProps {
   title: string;
-  bubbles: ValueLabelType[];
+  bubbles: KeywordType[];
   bubbleType: SearchKeywordsKeyType;
-  selectedBubbles: ValueLabelType[];
+  selectedBubbles: KeywordType[];
   handleChange?: (
     bubbletype: SearchKeywordsKeyType,
-    bubble: ValueLabelType,
+    bubble: KeywordType,
   ) => void;
 }

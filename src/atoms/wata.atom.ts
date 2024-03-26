@@ -1,54 +1,48 @@
+import { getData } from '@utils/api.util';
+import moment from 'moment-timezone';
 import { selector } from 'recoil';
-import { WataType } from 'src/types/wata.type';
-import testData from '@assets/testData.json';
+import { WataListType } from 'src/types/wata.type';
+import { loadLocalStorage, saveLocalstorage } from 'src/utils/localStorage';
 
-const makeValueLabelList = (datas: string[]) =>
-  datas?.map((item: string) => ({
-    value: `keyword-${item}`,
-    label: item,
-  }));
+const wataLocalStorageKey = 'SAVED_WATA';
 
-export const allWataListSelector = selector<WataType[]>({
-  key: 'allWataListSelector',
+interface SavedWataType {
+  updated_at: Date;
+  watas: WataListType;
+}
+
+const updateWata = async (updateAt: moment.Moment) => {
+  const data = await getData('publish-wata');
+  saveLocalstorage(wataLocalStorageKey, {
+    updated_at: updateAt,
+    watas: data,
+  });
+};
+
+const getWata = () =>
+  loadLocalStorage(wataLocalStorageKey) as SavedWataType | null;
+
+export const wataListSelector = selector<WataListType>({
+  key: 'wataListSelector',
   get: async () => {
-    const { wata_list: datas } = testData;
+    const savedWatas = getWata();
 
-    return datas?.map(
-      ({
-        id,
-        title,
-        creator,
-        category,
-        genre,
-        keywords,
-        cautions,
-        platforms,
-        thumnail,
-      }) => ({
-        id,
-        title,
-        creator,
-        category: {
-          value: `category-${category}`,
-          label: category,
-        },
-        genre: {
-          value: `genre-${genre}`,
-          label: genre,
-        },
-        keywords: makeValueLabelList(keywords),
-        cautions: makeValueLabelList(cautions),
-        platforms: platforms?.map(
-          ({ name, url }: { name: string; url: string }) => ({
-            value: `platform-${name}`,
-            label: name,
-            url,
-          }),
-        ),
-        thumbnail: thumnail,
-      }),
+    const updateTime = moment(import.meta.env.VITE_DATA_UPDATE_AT).tz(
+      'Asia/Seoul',
     );
+
+    if (!savedWatas || !savedWatas?.updated_at || !savedWatas?.watas) {
+      await updateWata(updateTime);
+    }
+
+    const lastUpdateTime = moment(savedWatas?.updated_at).tz('Asia/Seoul');
+
+    if (!updateTime.isSame(lastUpdateTime)) {
+      await updateWata(updateTime);
+    }
+
+    return getWata()?.watas as WataListType;
   },
 });
 
-export default allWataListSelector;
+export default wataListSelector;

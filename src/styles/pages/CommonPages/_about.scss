@@ -10,12 +10,13 @@
   }
 
   & > button {
-    margin-top: 3rem;
+    margin: 3rem 0 2rem 0;
   }
 
   & .col {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
 
     @media (max-width: 450px) {

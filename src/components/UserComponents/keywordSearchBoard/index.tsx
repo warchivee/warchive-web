@@ -1,4 +1,3 @@
-import { ValueLabelType } from 'src/types/common.type';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -7,16 +6,14 @@ import classNames from 'classnames';
 import Button from '@components/CommonComponents/button/index';
 import Icon from '@components/CommonComponents/icon';
 import { useSearchKeywords } from 'src/hooks/useSearchKeywords';
-import keywordListSelector from 'src/atoms/keyword.atom';
-import {
-  KeywordByCategoryType,
-  SearchKeywordsKeyType,
-} from 'src/types/serchKeyword.type';
+import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
+import wataListSelector from 'src/atoms/wata.atom';
+import { KeywordListType, KeywordType } from 'src/types/wata.type';
 import CheckKeywordBubble from './checkKeywordBubble';
 import CheckKeywordBubbles from './checkKeywordBubbles';
 
 export default function KeywordSearchBorad() {
-  const wataAllKeywords = useRecoilValue(keywordListSelector);
+  const { categories } = useRecoilValue(wataListSelector);
   const [tab, setTab] = useState<number>(0);
   const [tabOpen, setTabOpen] = useState<boolean>(false);
   const {
@@ -32,10 +29,7 @@ export default function KeywordSearchBorad() {
     const isCurrentTab = tab === index;
 
     if (!isCurrentTab) {
-      resetSearchKeywords({
-        label: wataAllKeywords[index].label,
-        value: wataAllKeywords[index].value,
-      });
+      resetSearchKeywords(categories[index]);
     }
 
     setTab(isCurrentTab ? tab : index);
@@ -43,13 +37,13 @@ export default function KeywordSearchBorad() {
   };
 
   const renderBubbles = (
-    key: string,
+    id: number,
     title: string,
     bubbleType: SearchKeywordsKeyType,
-    bubbles: ValueLabelType[],
+    bubbles: KeywordType[],
   ) => (
     <CheckKeywordBubbles
-      key={`${key}-${title}`}
+      key={`list-${bubbleType}`}
       title={title}
       bubbleType={bubbleType}
       bubbles={bubbles}
@@ -57,16 +51,15 @@ export default function KeywordSearchBorad() {
       handleChange={updateSearchKeywords}
     />
   );
-
   const renderRemoveKeywordBubbles = (
-    keywords: ValueLabelType[],
+    keywords: KeywordType[],
     type: SearchKeywordsKeyType,
   ) =>
     keywords?.map((keyword) => (
       <CheckKeywordBubble
-        key={keyword.value}
-        value={`selected-${keyword.value}`}
-        label={keyword.label}
+        key={`selected-${type}-${keyword.id}`}
+        value={`selected-${type}-${keyword.id}`}
+        label={keyword.name}
         type="remove"
         onChange={() => {
           updateSearchKeywords(type, keyword);
@@ -92,44 +85,42 @@ export default function KeywordSearchBorad() {
         </div>
 
         {/* 카테고리 탭 */}
-        {wataAllKeywords?.map(
-          (keywordBycategory: KeywordByCategoryType, index: number) => (
-            <div
-              className={classNames('tab', { select: tab === index })}
-              key={keywordBycategory.value}
-              onClick={() => handleTab(index)}
-              aria-hidden="true"
-            >
-              <Title type="h5" color="white">
-                {keywordBycategory.label}
-              </Title>
-            </div>
-          ),
-        )}
+        {categories?.map((category: KeywordListType, index: number) => (
+          <div
+            className={classNames('tab', { select: tab === index })}
+            key={`category-${category.id}`}
+            onClick={() => handleTab(index)}
+            aria-hidden="true"
+          >
+            <Title type="h5" color="white">
+              {category.name}
+            </Title>
+          </div>
+        ))}
       </div>
 
       {/* 키워드 리스트 */}
       <div className={classNames('panel-background', { hidden: !tabOpen })}>
         <div className="panel">
           {renderBubbles(
-            wataAllKeywords[tab].value,
+            categories[tab].id,
             '장르',
             'genres',
-            wataAllKeywords[tab].genres,
+            categories[tab].genres,
           )}
           <div className="driven" />
           {renderBubbles(
-            wataAllKeywords[tab].value,
+            categories[tab].id,
             '플랫폼',
             'platforms',
-            wataAllKeywords[tab].platforms,
+            categories[tab].platforms,
           )}
           <div className="driven" />
           {renderBubbles(
-            wataAllKeywords[tab].value,
+            categories[tab].id,
             '키워드',
             'keywords',
-            wataAllKeywords[tab].keywords,
+            categories[tab].keywords,
           )}
         </div>
       </div>

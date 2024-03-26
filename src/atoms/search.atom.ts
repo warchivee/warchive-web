@@ -5,7 +5,7 @@ export const searchKeywordAtom = atom<SearchKeywordsType>({
   key: 'searchKeywordAtom',
   default: {
     searchInput: '',
-    category: { label: '전체', value: 'category-전체' },
+    category: { id: 0, name: '전체' },
     genres: [],
     platforms: [],
     keywords: [],

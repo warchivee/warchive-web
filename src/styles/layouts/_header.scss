@@ -119,10 +119,15 @@ header {
         align-items: flex-start;
         gap: 1rem;
         padding: 1rem;
+      }
 
-        & .connect {
-          border-bottom: 1px solid $gray;
-          padding-bottom: 1rem;
+      & .contact {
+        &.info {
+          align-items: flex-start;
+        }
+
+        & * {
+          text-align: left;
         }
       }
     }

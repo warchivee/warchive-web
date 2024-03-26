@@ -1,17 +1,13 @@
-import { ValueLabelType } from 'src/types/common.type';
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
 import { useRecoilState } from 'recoil';
 import searchKeywordAtom from 'src/atoms/search.atom';
+import { KeywordType } from 'src/types/wata.type';
 
-const removeItem = (
-  items: ValueLabelType[],
-  item: ValueLabelType,
-): ValueLabelType[] => items.filter((i) => i.value !== item.value);
+const removeItem = (items: KeywordType[], item: KeywordType): KeywordType[] =>
+  items.filter((i) => i.id !== item.id);
 
-const addItem = (
-  items: ValueLabelType[],
-  item: ValueLabelType,
-): ValueLabelType[] => [...items, item];
+const addItem = (items: KeywordType[], item: KeywordType): KeywordType[] =>
+  items?.concat(item);
 
 /**
  * searchKeywords 를 조작하기 위한 hook
@@ -21,10 +17,10 @@ export const useSearchKeywords = () => {
 
   const updateSearchKeywords = (
     type: SearchKeywordsKeyType,
-    keyword: ValueLabelType,
+    keyword: KeywordType,
   ) => {
     const checked = searchKeywords[type].some(
-      (searchKeyword) => searchKeyword.value === keyword.value,
+      (searchKeyword) => searchKeyword.id === keyword.id,
     );
 
     const operation = checked ? removeItem : addItem;
@@ -35,7 +31,7 @@ export const useSearchKeywords = () => {
     });
   };
 
-  const resetSearchKeywords = (selectCategory?: ValueLabelType) => {
+  const resetSearchKeywords = (selectCategory?: KeywordType) => {
     setSearchKeywords({
       searchInput: '',
       category: selectCategory || searchKeywords.category,

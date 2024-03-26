@@ -1,9 +1,0 @@
-@mixin viewport {
-  width: 65%;
-  min-width: 600px;
-
-  @media (max-width: 600px) {
-    width: 95%;
-    min-width: 320px;
-  }
-}

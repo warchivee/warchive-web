@@ -62,6 +62,10 @@
 
       @media (max-width: 700px) {
         @include flex-col-center;
+        & .bubbles > .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
         & .driven {
           border-bottom: 1px solid #59009180;
           height: 0;
@@ -72,7 +76,7 @@
 
       @media (max-width: 500px) {
         & .bubbles > .grid {
-          grid-template-columns: repeat(1, 1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     }
@@ -89,9 +93,7 @@
 
     & > .keywords {
       @include flex-row-start;
-      flex: 1;
       gap: 0.7rem;
-      @include viewport;
       flex-wrap: wrap;
     }
   }
