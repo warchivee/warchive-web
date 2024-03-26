@@ -10,7 +10,7 @@ import twitter_logo from '@assets/logos/twitter.png';
 import instagram_logo from '@assets/logos/instagram.png';
 import facebook_logo from '@assets/logos/facebook.png';
 import ModalUtil from '@utils/modal.util';
-
+import { useEffect, useState } from 'react';
 interface SnsShareModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -23,8 +23,15 @@ export default function SnsShareModal({
   selectIndex,
 }: SnsShareModalProps) {
   const { collections } = useCollections();
+  const [shareUrl, setShareUrl] = useState('');
 
-  const shareUrl = getSharedCollectionShortUrl(collections[selectIndex]);
+  useEffect(() => {
+    const fetchData = async () => {
+      setShareUrl(getSharedCollectionShortUrl(collections[selectIndex]));
+    };
+
+    fetchData();
+  }, [collections, selectIndex]);
 
   const imageSize = {
     width: '28px',

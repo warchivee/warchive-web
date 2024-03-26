@@ -6,4 +6,5 @@ export interface WataCardProps {
 }
 export interface WataCardListProps {
   watas: WataType[];
+  selectIndex: number;
 }

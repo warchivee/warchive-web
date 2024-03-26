@@ -14,14 +14,13 @@ export default function CollectionComment({
   selectIndex,
   handleEditMode,
 }: CollectionCommentProps) {
-  const { collections, renameCollection } = useCollections();
+  const { collectionLists, renameCollection } = useCollections();
   const [isHovered, setIsHovered] = useState(false);
   const [input, setInput] = useState<string>('');
 
   useEffect(() => {
     if (isEditMode) {
-      setInput('설명을 입력해주세요.');
-      // setInput(collections[selectIndex].comment);
+      setInput(collectionLists[selectIndex].note);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectIndex, isEditMode]);
@@ -31,8 +30,9 @@ export default function CollectionComment({
       {!isEditMode && selectIndex !== DEFAULT_COLLECTIONS_KEY ? (
         <div className="comment-area" onMouseEnter={() => setIsHovered(true)}>
           <Text color="black" size="big">
-            설명을 입력하세요.
-            {/* {collections[selectIndex].title} */}
+            {collectionLists[selectIndex].note !== ''
+              ? collectionLists[selectIndex].note
+              : '설명을 입력하세요.'}
           </Text>
         </div>
       ) : null}
@@ -64,7 +64,7 @@ export default function CollectionComment({
               background="white"
               labelColor="blue-violet"
               onClick={() => {
-                renameCollection(selectIndex, input);
+                renameCollection(selectIndex, input, false);
                 handleEditMode(false);
                 setInput('');
               }}
