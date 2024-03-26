@@ -6,7 +6,7 @@ import WataCardList from '@components/UserComponents/wata/list';
 import { getSharedCollectionToUrl } from '@utils/shareUrlShroter.util';
 
 export default function ShareCollections() {
-  const watas = useRecoilValue(wataListState);
+  const { watas } = useRecoilValue(wataListState);
   const [searchParams] = useSearchParams();
 
   const sharedCollection = getSharedCollectionToUrl(

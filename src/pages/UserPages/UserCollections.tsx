@@ -10,7 +10,7 @@ import CollectionTitle from '../../components/UserComponents/title';
 import ShareCollectionButtons from '../../components/UserComponents/share';
 
 export default function Collections() {
-  const allWatas = useRecoilValue(wataListState);
+  const { watas } = useRecoilValue(wataListState);
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
   const { collections } = useBookmarkList();
   const [collectionIndex, setCollectionIndex] = useState<number>(0);
@@ -25,8 +25,8 @@ export default function Collections() {
     setSearchKeywords({
       ...searchKeywords,
       category: {
-        label: '전체',
-        value: 'category-전체',
+        name: '전체',
+        id: 0,
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,7 +51,7 @@ export default function Collections() {
           selectIndex={collectionIndex}
         />
         <WataCardList
-          watas={allWatas.filter((wata: WataType) =>
+          watas={watas.filter((wata: WataType) =>
             collections[collectionIndex].items.some(
               (storedWataId: WataIdType) => storedWataId === wata.id,
             ),
