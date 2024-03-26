@@ -94,13 +94,14 @@ export default function AdminEditImage({
             wata={{
               id: 1,
               title: 'test',
-              creator: 'test',
-              category: { value: '1', label: 'test' },
-              genre: { value: '1', label: 'test' },
+              creators: 'test',
+              category: { id: 1, name: 'test' },
+              genre: { id: 1, name: 'test' },
               keywords: [],
               cautions: [],
               platforms: [],
-              thumbnail: cropImage,
+              thumbnail_card: cropImage,
+              thumbnail_book: '',
             }}
           />
         ))}

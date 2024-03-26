@@ -365,9 +365,14 @@ export default function AdminEditData({
                   thumbnailBook = url;
                 }
               } catch (error) {
+                const { error: imgbbError } = (error as AxiosError)?.response
+                  ?.data as {
+                  error: { code: number; message: string };
+                };
+
                 ModalUtil.open({
                   title: '이미지 업로드 오류',
-                  message: `${(error as AxiosError)?.response}`,
+                  message: `담당자에게 문의해주세요 - [${imgbbError?.code}] ${imgbbError?.message}`,
                 });
 
                 setIsLoading(false);
