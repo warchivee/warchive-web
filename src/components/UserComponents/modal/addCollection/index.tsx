@@ -9,12 +9,13 @@ export default function AddCollectionModal({
   onConfirm = () => {},
   onClose,
 }: ModalProps) {
-  const [input, setInput] = useState<string>('');
+  const [title, setTitle] = useState('');
 
   useEffect(() => {
     if (isOpen) {
-      setInput('');
+      setTitle('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
@@ -22,13 +23,13 @@ export default function AddCollectionModal({
       isOpen={isOpen}
       title="컬렉션 추가하기"
       message="새로 만들 컬렉션의 이름을 입력해주세요."
-      onConfirm={() => onConfirm(input)}
+      onConfirm={() => onConfirm(title)}
       onClose={onClose}
       buttons={['confirm', 'cancel']}
     >
       <Input
-        value={input}
-        onChange={setInput}
+        value={title}
+        onChange={(input) => setTitle(input)}
         border="underline"
         maxLength={TITLE_LIMIT_LENGTH}
       />

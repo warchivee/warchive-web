@@ -131,8 +131,11 @@ export const patchData = async <T>(
   return handleApiResult(response);
 };
 
-export const deleteData = async <T>(path: string): Promise<T> => {
-  const response = await api.delete<ApiResult<T>>(path);
+export const deleteData = async <T>(path: string, params?: any): Promise<T> => {
+  const response = await api.delete<ApiResult<T>>(
+    path,
+    params ? { data: params } : undefined,
+  );
 
   return handleApiResult(response);
 };

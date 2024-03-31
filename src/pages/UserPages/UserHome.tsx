@@ -5,8 +5,8 @@ import Input from '@components/CommonComponents/input';
 import usePagination from 'src/hooks/usePagination';
 import Pagination from '@components/CommonComponents/pagination';
 import WataCardList from '@components/UserComponents/wata/list';
-import searchWatasSelector from 'src/atoms/searchWata.atom';
-import searchKeywordAtom from 'src/atoms/search.atom';
+import searchWatasSelector from 'src/stores/searchWata.atom';
+import searchKeywordAtom from 'src/stores/search.atom';
 import { WataType } from 'src/types/wata.type';
 import KeywordSearchBorad from '../../components/UserComponents/keywordSearchBoard';
 

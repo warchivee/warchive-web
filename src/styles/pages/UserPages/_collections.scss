@@ -1,21 +1,56 @@
 .collections {
+  @include viewport;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  @include viewport;
   flex: 1;
 
-  & > .menu {
+  & .menu {
     background: $ebony;
     min-height: fit-content;
     height: 100%;
-    width: 12rem;
     padding: 3rem 0rem;
+    z-index: 2;
 
-    & > ul {
+    display: flex;
+
+    & .pc {
+      width: 12rem;
+    }
+
+    & .mobile {
+      width: 2rem;
+      height: 100%;
+      display: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      & {
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 64px; /* header height */
+      }
+      & .pc {
+        display: none;
+      }
+
+      & .pc.show {
+        display: block;
+      }
+
+      & .mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    & ul {
       & li {
         padding: 0.8rem 1rem;
         cursor: pointer;
@@ -34,7 +69,7 @@
       }
     }
 
-    & > .control {
+    & .control {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
@@ -49,20 +84,28 @@
 
   & > .content {
     width: 100%;
-    max-width: 1030px;
     flex: 1;
-    padding: 3rem 0rem;
-    margin-left: 2rem;
+    padding: 1.5rem 1rem 1rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
 
+    @media (max-width: 600px) {
+      padding-left: 3rem;
+    }
+
     & > .header {
       @include flex-row-start;
       align-items: center;
-      gap: 0.5rem;
-      max-width: 30rem;
+      gap: 1rem;
+      width: 100%;
+
+      & .content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
 
       & .title-area {
         height: fit-content;
@@ -70,35 +113,7 @@
         flex-direction: column;
         align-items: flex-end;
         justify-content: center;
-
-        & .buttons {
-          width: fit-content;
-          display: flex;
-          justify-content: flex-end;
-        }
-      }
-
-      & > .edit > .button {
-        padding: 0;
-      }
-
-      & .input {
-        flex: 1;
-      }
-    }
-
-    & > .comment {
-      @include flex-row-start;
-      align-items: center;
-      gap: 0.5rem;
-      max-width: 30rem;
-
-      & .comment-area {
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: center;
+        width: 100%;
 
         & .buttons {
           width: fit-content;

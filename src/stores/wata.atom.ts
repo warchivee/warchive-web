@@ -4,7 +4,7 @@ import { selector } from 'recoil';
 import { WataListType } from 'src/types/wata.type';
 import { loadLocalStorage, saveLocalstorage } from 'src/utils/localStorage';
 
-const wataLocalStorageKey = 'SAVED_WATA';
+export const wataLocalStorageKey = 'SAVED_WATA';
 
 interface SavedWataType {
   updated_at: Date;

@@ -58,7 +58,7 @@ export default function Modal({
         </div>
         <div className="content">{children}</div>
 
-        <div className="control">{renderButtons()}</div>
+        <div className="modal-control">{renderButtons()}</div>
       </div>
     </div>
   );

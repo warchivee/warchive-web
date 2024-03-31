@@ -1,10 +1,10 @@
 import { Text } from '@components/CommonComponents/text';
-import { CollectionType } from 'src/types/collection.type';
 import { WataType } from 'src/types/wata.type';
-import { useEffect, useState } from 'react';
 import useCollections from 'src/hooks/useCollections';
 import Modal from '@components/CommonComponents/modal';
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
+import { useEffect, useState } from 'react';
+import { UpdateCollectionItemParam } from 'src/services/collection.api';
 
 interface AddCollectionItemModalProps extends ModalProps {
   wata?: WataType;
@@ -15,73 +15,80 @@ export default function AddCollectionItemModal({
   isOpen,
   onClose,
 }: AddCollectionItemModalProps) {
-  const { collections, existCollectionItem, handleCollectionItems } =
-    useCollections();
+  const { getCollections, updateCollectionItems } = useCollections();
 
-  const [commands, setCommands] = useState<boolean[]>([]);
-
-  const initCommands = () => {
-    const newCommands = [] as boolean[];
-
-    collections.forEach((_, index: number) => {
-      if (wata && existCollectionItem(index, wata)) {
-        newCommands.push(true);
-      } else {
-        newCommands.push(false);
-      }
-    });
-
-    setCommands(newCommands);
-  };
+  const [originalInfo, setOriginalInfo] = useState<boolean[]>([]);
+  const [editInfo, setEditInfo] = useState<boolean[]>([]);
 
   useEffect(() => {
-    if (isOpen) {
-      initCommands();
+    if (isOpen && wata) {
+      const info = getCollections()?.map(({ items }) =>
+        items?.includes(wata.id),
+      );
+
+      setOriginalInfo(info);
+      setEditInfo(info);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
-
-  // 요소 제거 함수
+  }, [isOpen, wata]);
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="컬렉션 이동하기"
-      onConfirm={() => {
-        if (wata) {
-          handleCollectionItems(commands, wata);
+      title="컬렉션에 추가하기"
+      onConfirm={async () => {
+        const updateItems: UpdateCollectionItemParam[] = [];
+
+        editInfo?.forEach((info, index) => {
+          if (wata && info !== originalInfo[index]) {
+            updateItems.push({
+              wata_id: wata.id,
+              collection_id: getCollections()[index].id,
+              action: info ? 'ADD' : 'DELETE',
+            });
+          }
+        });
+
+        try {
+          await updateCollectionItems(updateItems);
+        } catch (error) {
+          console.error(error);
         }
+
         onClose();
       }}
       buttons={['confirm', 'cancel']}
     >
       <ul className="list">
-        {collections.map((collection: CollectionType, index: number) => (
-          <li key={collection.title}>
-            <input
-              type="checkbox"
-              name={`add-collection-modal-${index}`}
-              id={`add-collection-modal-${index}`}
-              checked={commands[index]}
-              onChange={() => {
-                const newCommands = [...commands];
-                newCommands[index] = !commands[index];
-                setCommands(newCommands);
-              }}
-            />
-            <label htmlFor={`add-collection-modal-${index}`}>
-              <div className="name">
-                <Text>{collection.title}</Text>
-              </div>
-              <div className="count">
-                <Text color="lavender">({collection.items.length})</Text>
-              </div>
-            </label>
+        {wata &&
+          getCollections()?.map(({ title, items }, index: number) => (
+            <li key={title}>
+              <input
+                type="checkbox"
+                name={`add-collection-modal-${index}`}
+                id={`add-collection-modal-${index}`}
+                checked={editInfo[index]}
+                onChange={(event) => {
+                  const info = [...editInfo];
 
-            {/* 버튼 들어가는 곳 */}
-          </li>
-        ))}
+                  info[index] = event.target.checked;
+
+                  setEditInfo(info);
+                }}
+              />
+              <label htmlFor={`add-collection-modal-${index}`}>
+                <div className="name">
+                  <Text>{title}</Text>
+                </div>
+                <div className="count">
+                  <Text color="lavender">({items?.length ?? 0})</Text>
+                </div>
+              </label>
+
+              {/* 버튼 들어가는 곳 */}
+            </li>
+          ))}
       </ul>
     </Modal>
   );

@@ -1,5 +1,6 @@
 .text {
   word-break: keep-all;
+  line-height: 1.2;
 
   &.h1 {
     font-size: $pxr25;

@@ -1,6 +1,6 @@
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
 import { useRecoilState } from 'recoil';
-import searchKeywordAtom from 'src/atoms/search.atom';
+import searchKeywordAtom from 'src/stores/search.atom';
 import { KeywordType } from 'src/types/wata.type';
 
 const removeItem = (items: KeywordType[], item: KeywordType): KeywordType[] =>

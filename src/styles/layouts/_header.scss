@@ -3,6 +3,8 @@ header {
   background-color: $ebony;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 99;
 
   & .content {
     @include viewport;

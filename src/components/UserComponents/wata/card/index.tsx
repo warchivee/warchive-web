@@ -7,7 +7,8 @@ import {
 import { KeywordType, PlatformType, WataType } from 'src/types/wata.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import searchKeywordAtom from 'src/atoms/search.atom';
+import searchKeywordAtom from 'src/stores/search.atom';
+import { isLogin } from 'src/services/auth.api';
 
 interface WataCardProps {
   wata: WataType;

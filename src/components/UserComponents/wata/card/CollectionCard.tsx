@@ -1,33 +1,31 @@
 import Button from '@components/CommonComponents/button';
 import { Text, Title } from '@components/CommonComponents/text';
-import Icon from '@components/CommonComponents/icon';
-import { ValueLabelType } from 'src/types/common.type';
 import {
   SearchKeywordsKeyType,
   SearchKeywordsType,
 } from 'src/types/serchKeyword.type';
-import { useState } from 'react';
-import { PlatformType, WataType } from 'src/types/wata.type';
+import { useEffect, useRef, useState } from 'react';
+import { KeywordType, PlatformType, WataType } from 'src/types/wata.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import searchKeywordAtom from 'src/atoms/search.atom';
+import searchKeywordAtom from 'src/stores/search.atom';
 
 interface WataCardProps {
   wata: WataType;
   handleCollection: () => void;
-  deleteItem: () => void;
 }
 
 export default function WataCollectionCard({
   wata,
   handleCollection,
-  deleteItem,
 }: WataCardProps) {
   const navigate = useNavigate();
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
 
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
+
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const openEditModal = () => {
     setIsEditModalVisible(!isEditModalVisible);
@@ -44,19 +42,7 @@ export default function WataCollectionCard({
     navigate('/');
   };
 
-  const renderTag = (type: SearchKeywordsKeyType, keyword: ValueLabelType) => {
-    return (
-      <div key={`wata-card-${type}-${keyword.value}`}>
-        {type !== 'genres' && '/'}
-        {keyword.label}
-      </div>
-    );
-  };
-
-  const renderHashTag = (
-    type: SearchKeywordsKeyType,
-    keyword: ValueLabelType,
-  ) => {
+  const renderHashTag = (type: SearchKeywordsKeyType, keyword: KeywordType) => {
     const newValue = {
       ...searchKeywords,
       searchInput: '',
@@ -67,20 +53,16 @@ export default function WataCollectionCard({
 
     return (
       <div
-        key={`wata-card-${type}-${keyword.value}`}
+        key={`wata-card-${type}-${keyword.id}`}
         onClick={() => handleClickKeyword(newValue)}
         style={{ cursor: 'pointer' }}
+        aria-hidden
       >
-        <Text key={`hashtag-${keyword.value}`} color="gray" size="small">
-          #{keyword.label}
+        <Text key={`hashtag-${keyword.id}`} color="gray" size="small">
+          #{keyword.name}
         </Text>
       </div>
     );
-  };
-
-  const deleteFromCollection = () => {
-    deleteItem();
-    openEditModal();
   };
 
   const moveCollection = () => {
@@ -88,198 +70,113 @@ export default function WataCollectionCard({
     openEditModal();
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      popupRef.current &&
+      !popupRef?.current?.contains(event.target as Node)
+    ) {
+      openInfoModal();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="wata-col-card">
       <div className="body">
-        <div className="left">
-          <img className="image" src={wata.thumbnail} alt={wata.title}></img>
-        </div>
+        <img className="image" src={wata.thumbnail_card} alt={wata.title} />
+
         <div className="center">
-          <div className="title">{wata.title}</div>
-          <div className="info">
-            <div className="creator">{wata.creator}</div>
-            <div className="division">|</div>
-            <div className="tags">
-              {renderTag('genres', wata.genre)}
-              {wata?.keywords?.map((keyword: ValueLabelType) =>
-                renderTag('keywords', keyword),
-              )}
+          <div className="infos">
+            <Title type={wata.title.length > 15 ? 'h4' : 'h3'}>
+              {wata.title}
+            </Title>
+            <Text color="gray">{wata.creators}</Text>
+            <div className="info">
+              <Text color="gray">{wata.category.name}</Text>
+              <Text color="gray">|</Text>
+              <Text color="gray">{wata.genre.name}</Text>
             </div>
           </div>
+
           <div className="info-button">
-            <button
-              type="button"
-              className="custom-button"
+            <Button
+              background="light-gray"
+              icon="caret-down"
+              width="full"
               onClick={() => {
                 openInfoModal();
               }}
             >
-              <div className="icon-box">
-                <Icon type="caret-down" color="black" size="big" />
-              </div>
-              <Text size="big" color="black">
-                작품 정보
-              </Text>
-            </button>
-
-            {/* <Button
-              children="작품 정보"
-              icon="caret-down"
-              iconColor="black"
-              background="light-gray"
-              size="big"
-              width="full"
-              onClick={() => {
-                openInfoModal();
-              }}
-            ></Button> */}
+              작품 정보
+            </Button>
             {isInfoModalVisible && (
-              <div className="info-modal">
+              <div className="info-modal" ref={popupRef}>
                 <div className="modal-area">
                   <div className="keyword">
                     <div className="title">
-                      <Text children="키워드" color="black" size="big"></Text>
+                      <Text color="black" size="big">
+                        키워드
+                      </Text>
                     </div>
                     <div className="content">
                       {renderHashTag('genres', wata.genre)}
-                      {wata?.keywords?.map((keyword: ValueLabelType) =>
+                      {wata?.keywords?.map((keyword: KeywordType) =>
                         renderHashTag('keywords', keyword),
                       )}
                     </div>
                   </div>
-                  <div className="warning">
-                    <div className="title">
-                      <Text
-                        children="주의 키워드"
-                        color="black"
-                        size="big"
-                      ></Text>
-                    </div>
-                    <div className="content">
-                      {wata?.cautions.length !== 0 && (
+                  {wata?.cautions.length !== 0 && (
+                    <div className="warning">
+                      <div className="title">
+                        <Text color="black" size="big">
+                          주의 키워드
+                        </Text>
+                      </div>
+                      <div className="content">
                         <div className="cautions">
-                          {wata?.cautions?.map((caution: ValueLabelType) => (
+                          {wata?.cautions?.map((caution: KeywordType) => (
                             <Text
-                              key={`hashtag-${caution.value}`}
+                              key={`hashtag-${caution.id}`}
                               color="gray"
                               size="small"
                             >
-                              #{caution.label}
+                              #{caution.name}
                             </Text>
                           ))}
                         </div>
-                      )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                   <div className="platform">
                     <div className="title">
-                      <Text
-                        children="볼 수 있는 곳"
-                        color="black"
-                        size="big"
-                      ></Text>
+                      <Text color="black" size="big">
+                        볼 수 있는 곳
+                      </Text>
                     </div>
                     <div className="content">
                       {wata?.platforms?.map((platform: PlatformType) => (
                         <a
-                          key={`hashtag-${platform.value}`}
+                          key={`hashtag-${platform.id}`}
                           href={platform.url}
                           target="_blank"
                           aria-label="플랫폼으로 이동"
                           rel="noreferrer"
                         >
                           <Button
-                            key={`hashtag-${platform.label}`}
+                            key={`hashtag-${platform.id}`}
                             labelColor="black"
                             background="light-gray"
                             border="round"
                             size="small"
                           >
-                            {platform.label}
-                          </Button>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="info-button-mobile">
-            <Button
-              children="작품 정보"
-              icon="caret-down"
-              iconColor="black"
-              background="light-gray"
-              size="small"
-              width="full"
-              onClick={() => {
-                openInfoModal();
-              }}
-            ></Button>
-            {isInfoModalVisible && (
-              <div className="info-modal">
-                <div className="modal-area">
-                  <div className="keyword">
-                    <div className="title">
-                      <Text children="키워드" color="black" size="big"></Text>
-                    </div>
-                    <div className="content">
-                      {renderHashTag('genres', wata.genre)}
-                      {wata?.keywords?.map((keyword: ValueLabelType) =>
-                        renderHashTag('keywords', keyword),
-                      )}
-                    </div>
-                  </div>
-                  <div className="warning">
-                    <div className="title">
-                      <Text
-                        children="주의 키워드"
-                        color="black"
-                        size="big"
-                      ></Text>
-                    </div>
-                    <div className="content">
-                      {wata?.cautions.length !== 0 && (
-                        <div className="cautions">
-                          {wata?.cautions?.map((caution: ValueLabelType) => (
-                            <Text
-                              key={`hashtag-${caution.value}`}
-                              color="gray"
-                              size="small"
-                            >
-                              #{caution.label}
-                            </Text>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="platform">
-                    <div className="title">
-                      <Text
-                        children="볼 수 있는 곳"
-                        color="black"
-                        size="big"
-                      ></Text>
-                    </div>
-                    <div className="content">
-                      {wata?.platforms?.map((platform: PlatformType) => (
-                        <a
-                          key={`hashtag-${platform.value}`}
-                          href={platform.url}
-                          target="_blank"
-                          aria-label="플랫폼으로 이동"
-                          rel="noreferrer"
-                        >
-                          <Button
-                            key={`hashtag-${platform.label}`}
-                            labelColor="black"
-                            background="light-gray"
-                            border="round"
-                            size="small"
-                          >
-                            {platform.label}
+                            {platform.name}
                           </Button>
                         </a>
                       ))}
@@ -296,32 +193,11 @@ export default function WataCollectionCard({
             iconColor="gray"
             size="big"
             onClick={() => {
-              openEditModal();
+              moveCollection();
             }}
           />
-          {isEditModalVisible && (
-            <div className="edit-modal">
-              <div className="modal-area">
-                <div className="modal-text">
-                  <Button
-                    size="big"
-                    children="이 컬렉션에서 삭제하기"
-                    onClick={() => deleteFromCollection()}
-                  ></Button>
-                </div>
-                <div className="modal-text">
-                  <Button
-                    size="big"
-                    children="컬렉션 이동하기"
-                    onClick={() => moveCollection()}
-                  ></Button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
-      <div className="bottom"></div>
     </div>
   );
 }

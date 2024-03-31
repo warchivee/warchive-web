@@ -1,209 +1,181 @@
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  CollectionListType,
-  CollectionType,
-  DEFAULT_COLLECTIONS_KEY,
-  DEFAULT_COLLECTIONS_NAME,
-  defaultCollectionListValue,
-  defaultCollectionValue,
-} from 'src/types/collection.type';
-import { WataIdType, WataType } from 'src/types/wata.type';
-import { useEffect, useState } from 'react';
-import { getCollection } from 'src/atoms/collection.atom';
+  UpdateCollectionItemParam,
+  createCollectionApi,
+  deleteCollectionApi,
+  deleteCollectionItemsApi,
+  updateCollectionApi,
+  updateCollectionItemApi,
+} from 'src/services/collection.api';
 import {
-  getCollectionList,
-  requestAddCollection,
-  requestRemoveCollection,
-  requestRenameCollection,
-} from 'src/atoms/collectionList.atom';
+  collectionSelector,
+  selectCollectionIndexState,
+} from 'src/stores/collectionList.atom';
+import wataListSelector from 'src/stores/wata.atom';
+import { WataIdType } from 'src/types/wata.type';
 
-export const useCollections = () => {
-  const [collectionLists, setCollectionLists] = useState<CollectionListType[]>(
-    defaultCollectionListValue,
-  );
-  const [collections, setCollections] = useState<CollectionType[]>(
-    defaultCollectionValue,
+export const useCollection = () => {
+  const { watas } = useRecoilValue(wataListSelector);
+  const [collections, setCollections] = useRecoilState(collectionSelector);
+  const [selectIndex, setSelectIndex] = useRecoilState(
+    selectCollectionIndexState,
   );
 
-  const [recallLists, setRecallLists] = useState(false);
-  const [recallContents, setRecallContents] = useState(false);
-  useEffect(() => {
-    const fetchCollectionLists = async () => {
-      try {
-        const fetchedCollectionLists = await getCollectionList();
-        if (fetchedCollectionLists && fetchedCollectionLists.length > 0) {
-          setCollectionLists(fetchedCollectionLists);
-          setRecallContents(!recallContents);
-        }
-      } catch (error) {
-        console.error('useEffect - fetching collection lists error:', error); // ERROR
-      }
-    };
+  const getSelectCollectionIndex = () => selectIndex;
 
-    fetchCollectionLists();
-  }, [recallLists]);
+  const getCollections = () => collections;
 
-  useEffect(() => {
-    const fetchCollections = async () => {
-      try {
-        const fetchedCollections = await Promise.all(
-          collectionLists.map(async (collection) => {
-            if (collection.id === 0) return null;
-            const fetchedCollection = await getCollection(
-              1,
-              18,
-              collection.shared_id,
-            );
-            return fetchedCollection;
-          }),
-        );
+  const getCollection = () => collections[selectIndex];
 
-        const filteredCollections = fetchedCollections.filter(
-          (collection) => collection !== null,
-        ) as CollectionType[];
-        setCollections([...collections, ...filteredCollections]);
-      } catch (error) {
-        console.error('useEffect - fetching collection contents error:', error); // ERROR
-      }
-    };
+  const getCollectionItems = () => {
+    const collection = { ...collections[selectIndex] };
 
-    if (
-      !(
-        collectionLists.length == 1 &&
-        collectionLists[0].title === DEFAULT_COLLECTIONS_NAME
-      )
-    ) {
-      fetchCollections();
+    if (!collection || !collection?.items || collection?.items?.length === 0) {
+      return [];
     }
-  }, [recallContents]);
-
-  const addCollection = async (title: string) => {
-    const trimTitle = title.trim();
-
-    if (!trimTitle || trimTitle === '') {
-      throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
-    }
-
-    // 컬렉션 코멘트(note) 입력 및 전송 프로세스 필요
-
-    requestAddCollection(trimTitle, '');
-    setCollectionLists([
-      ...collectionLists,
-      {
-        id: 0,
-        title: trimTitle,
-        note: '',
-        shared_id: '',
-        created_at: '',
-        updated_at: '',
-      },
-    ]);
-    // 생성 후 reloading 필요
-    setRecallLists(!recallLists);
+    return watas?.filter((wata) => collection?.items?.includes(wata.id));
   };
 
-  const removeCollection = async (id: number) => {
-    if (id === DEFAULT_COLLECTIONS_KEY) {
-      throw new Error('전체 컬렉션은 삭제할 수 없습니다.');
+  const selectCollection = (index: number) => {
+    setSelectIndex(index);
+  };
+
+  const updateCollection = async (params: { title: string; note: string }) => {
+    if (
+      getCollection().title === params.title &&
+      getCollection().note === params.note
+    ) {
+      return;
+    }
+
+    const result = await updateCollectionApi(getCollection()?.id, params);
+
+    const newCollections = [...collections];
+
+    newCollections[selectIndex] = {
+      ...collections[selectIndex],
+      title: result?.title,
+      note: result?.note,
+    };
+
+    setCollections(newCollections);
+  };
+
+  const addCollection = async (title: string) => {
+    if (title?.replace(' ', '') === '') {
+      return;
     }
 
     try {
-      // 로딩 화면 필요
-      await requestRemoveCollection(id);
-      setRecallLists(!recallLists);
+      const result = await createCollectionApi({
+        title,
+        note: '',
+      });
+
+      const newCollections = collections.concat(result);
+
+      setSelectIndex(newCollections.length - 1);
+      setCollections(newCollections);
     } catch (error) {
-      console.error('Error removing collection: ', error); // ERROR
+      console.error(error);
     }
   };
 
-  const renameCollection = async (
-    index: number,
-    changeText: string,
-    isTitle: boolean,
+  const deleteCollection = async () => {
+    try {
+      await deleteCollectionApi(getCollection().id);
+
+      const newCollections = [...collections];
+      newCollections?.splice(selectIndex, 1);
+
+      setSelectIndex(selectIndex - 1);
+      setCollections(newCollections);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addCollectionItem = (wataIds: WataIdType[]) => {
+    const newCollections = [...collections];
+
+    newCollections[selectIndex] = {
+      ...newCollections[selectIndex],
+      items: newCollections[selectIndex].items.concat(wataIds),
+    };
+
+    setCollections(newCollections);
+  };
+
+  const deleteCollectionItem = async (wataIds: WataIdType[]) => {
+    try {
+      await deleteCollectionItemsApi(getCollection()?.id, wataIds);
+
+      const newCollections = [...collections];
+
+      const newItems = newCollections[selectIndex]?.items?.filter(
+        (item) => !wataIds.includes(item),
+      );
+
+      newCollections[selectIndex] = {
+        ...newCollections[selectIndex],
+        items: newItems,
+      };
+
+      setCollections(newCollections);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const findIndexByCollectionId = (collectionId: number) =>
+    collections?.findIndex((collection) => collection.id === collectionId);
+
+  const updateCollectionItems = async (
+    updateItems: UpdateCollectionItemParam[],
   ) => {
-    if (isTitle) {
-      // 컬렉션 이름 수정
-      const trimTitle = changeText.trim();
-      if (!trimTitle || trimTitle === '') {
-        throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
-      }
-      if (trimTitle === DEFAULT_COLLECTIONS_NAME) {
-        throw new Error('기본 컬렉션의 이름은 바꿀 수 없습니다.');
-      }
+    try {
+      await updateCollectionItemApi(updateItems);
 
-      try {
-        await requestRenameCollection(
-          collectionLists[index].id,
-          trimTitle,
-          collectionLists[index].note,
-        );
-        setRecallLists(!recallLists);
-      } catch (error) {
-        console.error('Error patch name collection: ', error); // ERROR
-      }
-    } else {
-      // 컬렉션 메모 수정
-      const trimNote = changeText.trim();
+      const newCollections = [...collections];
 
-      try {
-        await requestRenameCollection(
-          collectionLists[index].id,
-          collectionLists[index].title,
-          trimNote,
-        );
-        setRecallLists(!recallLists);
-      } catch (error) {
-        console.error('Error patch note collection: ', error); // ERROR
-      }
-    }
-  };
+      updateItems?.forEach((updateItem) => {
+        const index = findIndexByCollectionId(updateItem.collection_id);
+        const items = newCollections[index].items ?? [];
 
-  // 서버와 통신하는 코드로 수정할 것
-  const findItemIndex = (index: number, wata: WataType) =>
-    collections[index].items.findIndex(
-      (storedWataId: WataIdType) => wata.id === storedWataId,
-    );
-
-  const existCollectionItem = (index: number, item: WataType) =>
-    !(findItemIndex(index, item) < 0);
-
-  const handleCollectionItems = (commands: boolean[], item: WataType) => {
-    const newValue = [...collections];
-
-    commands.forEach((command: boolean, index: number) => {
-      if (command) {
-        if (!existCollectionItem(index, item)) {
-          newValue[index] = {
-            ...newValue[index],
-            items: [...newValue[index].items, item.id],
+        if (updateItem.action === 'ADD') {
+          newCollections[index] = {
+            ...newCollections[index],
+            items: items.concat(updateItem.wata_id),
           };
-        }
-      } else if (!command) {
-        const itemIndex = findItemIndex(index, item);
+        } else if (updateItem.action === 'DELETE') {
+          const newItems = items?.filter((item) => item !== updateItem.wata_id);
 
-        if (itemIndex >= 0) {
-          const newItems = [...newValue[index].items];
-          newItems.splice(itemIndex, 1);
-
-          newValue[index] = {
-            ...newValue[index],
+          newCollections[index] = {
+            ...newCollections[index],
             items: newItems,
           };
         }
-      }
-    });
+      });
 
-    setCollections(newValue);
+      setCollections(newCollections);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {
-    collections,
-    collectionLists,
+    getSelectCollectionIndex,
+    getCollection,
+    getCollections,
+    getCollectionItems,
+    selectCollection,
+    updateCollection,
     addCollection,
-    removeCollection,
-    renameCollection,
-    existCollectionItem,
-    handleCollectionItems,
+    deleteCollection,
+    addCollectionItem,
+    deleteCollectionItem,
+    updateCollectionItems,
   };
 };
 
-export default useCollections;
+export default useCollection;

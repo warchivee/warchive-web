@@ -7,7 +7,7 @@ import Button from '@components/CommonComponents/button/index';
 import Icon from '@components/CommonComponents/icon';
 import { useSearchKeywords } from 'src/hooks/useSearchKeywords';
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
-import wataListSelector from 'src/atoms/wata.atom';
+import wataListSelector from 'src/stores/wata.atom';
 import { KeywordListType, KeywordType } from 'src/types/wata.type';
 import CheckKeywordBubble from './checkKeywordBubble';
 import CheckKeywordBubbles from './checkKeywordBubbles';

@@ -1,6 +1,6 @@
 import Button from '@components/CommonComponents/button';
 import { getSharedCollectionShortUrl } from '@utils/shareUrlShroter.util';
-import useCollections from 'src/hooks/useCollections';
+import useCollections from 'src/hooks/useCollectionss';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Text } from '@components/CommonComponents/text';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ import instagram_logo from '@assets/logos/instagram.png';
 import facebook_logo from '@assets/logos/facebook.png';
 import ModalUtil from '@utils/modal.util';
 import { useEffect, useState } from 'react';
+
 interface SnsShareModalProps {
   isOpen: boolean;
   onClose: () => void;
