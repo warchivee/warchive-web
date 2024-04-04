@@ -1,8 +1,8 @@
 /* eslint no-underscore-dangle: 0 */
 
-import { getAccessToken, saveAccessToken } from '@utils/token.util';
 import axios, { AxiosResponse } from 'axios';
 import { TokenResult } from 'src/types/auth.type';
+import tokenUtil from './token.util';
 
 export interface ApiResult<T> {
   success: boolean;
@@ -16,7 +16,7 @@ const handleApiResult = <T>(
 export const reissueApi = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_HOST}/`,
   headers: {
-    Authorization: `Bearer ${getAccessToken()}`,
+    Authorization: `Bearer ${tokenUtil.get()}`,
   },
   withCredentials: true,
 });
@@ -25,22 +25,8 @@ const reissueToken = async () => {
   const response = await reissueApi.get<ApiResult<TokenResult>>('auth/reissue');
   const result = handleApiResult(response);
 
-  saveAccessToken(result.token, result.expires_in);
+  tokenUtil.save(result.token, result.expires_in);
 };
-
-// todo 요청 줄이기 위해 유효기간 지낫는지 한번 체크하는 로직 추가...
-// const autoLogin = async () => {
-//   const hasAccessToken = getAccessToken() !== null;
-//   const isExperis = isExperisAccessToken();
-
-//   if (!hasAccessToken || isExperis) {
-//     try {
-//       await reissueToken();
-//     } catch (error) {
-//       window.location.href = '/';
-//     }
-//   }
-// };
 
 export const api = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_HOST}/`,
@@ -48,9 +34,27 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(
-  (config) => {
+  async (config) => {
     const newConfig = { ...config };
-    newConfig.headers.Authorization = `Bearer ${getAccessToken()}`;
+
+    if (
+      !(
+        newConfig.url?.includes('/login') ||
+        newConfig.url?.includes('/publish-wata')
+      )
+    ) {
+      if (tokenUtil.isExperis()) {
+        try {
+          await reissueToken(); // 토큰 재발급 요청
+        } catch (reissueError) {
+          window.location.href = '/login'; // 재발급 실패 시 로그인 페이지로 이동
+          return Promise.reject(reissueError); // 에러 반환
+        }
+      }
+
+      newConfig.headers.Authorization = `Bearer ${tokenUtil.get()}`;
+    }
+
     return newConfig;
   },
   (error) => Promise.reject(error),
@@ -66,7 +70,7 @@ api.interceptors.response.use(
 
       try {
         await reissueToken();
-        originalRequest.headers.Authorization = `Bearer ${getAccessToken()}`;
+        originalRequest.headers.Authorization = `Bearer ${tokenUtil.get()}`;
         return await api(originalRequest);
       } catch (reissueError) {
         window.location.href = '/login';
@@ -131,7 +135,11 @@ export const patchData = async <T>(
   return handleApiResult(response);
 };
 
-export const deleteData = async <T>(path: string, params?: any): Promise<T> => {
+export const deleteData = async <T>(
+  path: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params?: any,
+): Promise<T> => {
   const response = await api.delete<ApiResult<T>>(
     path,
     params ? { data: params } : undefined,

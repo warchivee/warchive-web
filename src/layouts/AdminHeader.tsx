@@ -1,6 +1,6 @@
 import Button from '@components/CommonComponents/button';
 import { Title } from '@components/CommonComponents/text';
-import { getUser } from '@utils/user.util';
+import userUtil from '@utils/user.util';
 import { Link } from 'react-router-dom';
 
 export default function AdminHeader() {
@@ -18,7 +18,7 @@ export default function AdminHeader() {
 
         <div className="item">
           <Title type="h4" color="selago">
-            {getUser()?.nickname}
+            {userUtil.get()?.nickname}
           </Title>
         </div>
       </div>

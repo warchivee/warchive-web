@@ -1,38 +1,23 @@
 import Button from '@components/CommonComponents/button';
-import { getSharedCollectionShortUrl } from '@utils/shareUrlShroter.util';
-import useCollections from 'src/hooks/useCollectionss';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Text } from '@components/CommonComponents/text';
 import classNames from 'classnames';
 
 import kakaotalk_logo from '@assets/logos/kakaotalk.png';
 import twitter_logo from '@assets/logos/twitter.png';
-import instagram_logo from '@assets/logos/instagram.png';
 import facebook_logo from '@assets/logos/facebook.png';
 import ModalUtil from '@utils/modal.util';
-import { useEffect, useState } from 'react';
+import useCollection from 'src/hooks/useCollections';
 
 interface SnsShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  selectIndex: number;
 }
 
-export default function SnsShareModal({
-  isOpen,
-  onClose,
-  selectIndex,
-}: SnsShareModalProps) {
-  const { collections } = useCollections();
-  const [shareUrl, setShareUrl] = useState('');
+export default function SnsShareModal({ isOpen, onClose }: SnsShareModalProps) {
+  const { getCollection } = useCollection();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setShareUrl(getSharedCollectionShortUrl(collections[selectIndex]));
-    };
-
-    fetchData();
-  }, [collections, selectIndex]);
+  const shareUrlBase = window.location.href;
 
   const imageSize = {
     width: '28px',
@@ -73,7 +58,7 @@ export default function SnsShareModal({
               // 트위터 본문 내용 : 280자 제한
               const sendText = ' ';
               window.open(
-                `https://twitter.com/intent/tweet?text=${sendText}&url=${shareUrl}`,
+                `https://twitter.com/intent/tweet?text=${sendText}&url=${shareUrlBase}/${getCollection()?.shared_id}`,
               );
             }}
             type="button"
@@ -82,20 +67,11 @@ export default function SnsShareModal({
             <Text size="small">트위터</Text>
           </button>
 
-          <button className="share-group" type="button">
-            <img
-              src={instagram_logo}
-              alt="인스타그램으로 공유하기"
-              style={imageSize}
-            />
-            <Text size="small">인스타그램</Text>
-          </button>
-
           <button
             className="share-group"
             onClick={() => {
               window.open(
-                `http://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
+                `http://www.facebook.com/sharer/sharer.php?u=${shareUrlBase}/${getCollection()?.shared_id}`,
               );
             }}
             type="button"
@@ -108,7 +84,10 @@ export default function SnsShareModal({
             <Text size="small">페이스북</Text>
           </button>
 
-          <CopyToClipboard text={shareUrl} onCopy={() => showNotification()}>
+          <CopyToClipboard
+            text={`${shareUrlBase}/${getCollection()?.shared_id}`}
+            onCopy={() => showNotification()}
+          >
             <button className="share-group" type="button">
               <Button
                 background="light-gray"

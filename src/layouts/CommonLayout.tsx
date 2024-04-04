@@ -1,9 +1,10 @@
 import Footer from 'src/layouts/Footer';
 import Header, { MenuInfo } from 'src/layouts/Header';
 import { PageLoader } from '@components/CommonComponents/loader';
-import { getUser } from '@utils/user.util';
+import userUtil from '@utils/user.util';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { isLogin } from 'src/services/auth.api';
 
 const userMenus: MenuInfo[] = [
   {
@@ -33,13 +34,12 @@ const adminMenus: MenuInfo[] = [
 ];
 
 export default function CommonLayout() {
-  const user = getUser();
-  const isAdmin = user?.role === 'ADMIN';
-  const isLogin = !!user;
-
   return (
     <div className="layout">
-      <Header isLogin={isLogin} menus={isAdmin ? adminMenus : userMenus} />
+      <Header
+        isLogin={isLogin()}
+        menus={userUtil.isAdmin() ? adminMenus : userMenus}
+      />
 
       <div className="page">
         <Suspense fallback={<PageLoader />}>

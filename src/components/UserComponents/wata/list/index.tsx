@@ -37,6 +37,7 @@ export default function WataCardList({ watas = [] }: WataCardListProps) {
       </div>
 
       <AddCollectionsModal
+        title="컬렉션에 추가하기"
         wata={selectWata}
         isOpen={isOpenBookmarkModel}
         onClose={() => setIsOpenBookmarkModal(false)}

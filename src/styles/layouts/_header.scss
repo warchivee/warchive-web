@@ -17,6 +17,7 @@ header {
 
     & .logo {
       height: 2.5rem;
+      margin-right: 1rem;
 
       & > img {
         width: auto;
@@ -31,7 +32,12 @@ header {
 
       & .menus {
         display: flex;
+        gap: 1rem;
         align-items: flex-end;
+
+        & button {
+          padding: 0;
+        }
       }
     }
 

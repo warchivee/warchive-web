@@ -1,5 +1,3 @@
-import Button from '@components/CommonComponents/button';
-import Input from '@components/CommonComponents/input';
 import { Text, Title } from '@components/CommonComponents/text';
 import {
   COMMENT_LIMIT_LENGTH,
@@ -7,6 +5,17 @@ import {
 } from 'src/types/collection.type';
 import { useEffect, useState } from 'react';
 import useCollection from 'src/hooks/useCollections';
+import RecoverableError from 'src/types/error/RecoverableError';
+import {
+  Button,
+  ButtonGroup,
+  FormHelperText,
+  Input,
+  Stack,
+  Textarea,
+  Typography,
+} from '@mui/joy';
+import Icon from '@components/CommonComponents/icon';
 
 export default function CollectionHeader() {
   const [isHovered, setIsHovered] = useState(false);
@@ -14,12 +23,43 @@ export default function CollectionHeader() {
 
   const [isEditMode, setIsEditMode] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    isError: false,
+    message: '',
+  });
+
   const { getCollection, getSelectCollectionIndex, updateCollection } =
     useCollection();
 
+  const handleConfirm = async () => {
+    try {
+      setLoading(true);
+
+      await updateCollection(editInfo);
+
+      setIsEditMode(false);
+    } catch (e) {
+      if (e instanceof RecoverableError) {
+        setError({ isError: true, message: e.message });
+      } else {
+        console.error(error);
+
+        setIsEditMode(false);
+      }
+    }
+
+    setLoading(false);
+  };
+
   useEffect(() => {
     if (getCollection()) {
+      setLoading(false);
       setIsEditMode(false);
+      setError({
+        isError: false,
+        message: '',
+      });
       setEditInfo({ title: getCollection().title, note: getCollection().note });
     }
 
@@ -29,88 +69,128 @@ export default function CollectionHeader() {
   return !getCollection() ? (
     <div />
   ) : (
-    <div className="header" onMouseLeave={() => setIsHovered(false)}>
+    <Stack
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+      gap={3}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {!isEditMode ? (
-        <div
-          className="content"
+        <Stack
           onMouseEnter={() => setIsHovered(true)}
           onClick={() => {
             setIsEditMode(true);
             setIsHovered(false);
           }}
-          aria-hidden
+          sx={{
+            cursor: 'pointer',
+          }}
         >
-          <Title type="h1">{getCollection()?.title}</Title>
-          <Text color="gray">
+          <Typography level="h3">{getCollection()?.title}</Typography>
+
+          <Typography level="body-sm" textColor="text.tertiary">
             {!getCollection()?.note || getCollection()?.note === ''
               ? '설명을 입력하세요.'
               : getCollection()?.note}
-          </Text>
-        </div>
+          </Typography>
+        </Stack>
       ) : null}
 
       {isEditMode ? (
-        <div className="title-area">
-          <Input
-            value={editInfo.title}
-            type="text"
-            border="underline"
-            onChange={(input) => setEditInfo({ ...editInfo, title: input })}
-            width="100%"
-            size="big"
-            maxLength={TITLE_LIMIT_LENGTH}
-          />
-          <Input
-            value={editInfo.note}
-            type="text"
-            border="underline"
-            onChange={(input) => setEditInfo({ ...editInfo, note: input })}
-            width="100%"
-            maxLength={COMMENT_LIMIT_LENGTH}
-          />
-          <div className="buttons">
+        <Stack width="100%" alignItems="flex-end">
+          <Stack sx={{ width: '100%', gap: '5px' }}>
+            <Input
+              fullWidth
+              variant="soft"
+              value={editInfo.title}
+              onChange={(event) =>
+                setEditInfo({ ...editInfo, title: event.target.value })
+              }
+              color="neutral"
+              startDecorator={
+                <Typography level="body-sm" textColor="tertiary">
+                  이름
+                </Typography>
+              }
+              endDecorator={
+                <Typography level="body-sm" textColor="tertiary">
+                  {editInfo.title.length}/{TITLE_LIMIT_LENGTH}
+                </Typography>
+              }
+              slotProps={{
+                input: {
+                  maxLength: TITLE_LIMIT_LENGTH,
+                },
+              }}
+            />
+
+            <Textarea
+              sx={{ width: '100%' }}
+              variant="soft"
+              maxRows={2}
+              minRows={2}
+              value={editInfo.note}
+              onChange={(event) =>
+                setEditInfo({ ...editInfo, note: event.target.value })
+              }
+              color="neutral"
+              endDecorator={
+                <Typography
+                  level="body-sm"
+                  textColor="tertiary"
+                  sx={{ ml: 'auto' }}
+                >
+                  {editInfo.note?.length ?? 0}/{COMMENT_LIMIT_LENGTH}
+                </Typography>
+              }
+              slotProps={{
+                textarea: {
+                  maxLength: COMMENT_LIMIT_LENGTH,
+                },
+              }}
+            />
+            <FormHelperText>{error?.isError && error?.message}</FormHelperText>
+          </Stack>
+          <ButtonGroup variant="plain" spacing={1}>
             <Button
-              size="small"
-              background="white"
-              labelColor="gray"
+              size="sm"
+              variant="plain"
+              color="neutral"
               onClick={() => {
+                if (loading) {
+                  return;
+                }
+
                 setIsEditMode(false);
               }}
             >
               취소
             </Button>
             <Button
-              size="small"
-              background="white"
-              labelColor="blue-violet"
-              onClick={async () => {
-                try {
-                  await updateCollection(editInfo);
-                } catch (error) {
-                  console.error(error);
-                }
-
-                setIsEditMode(false);
-              }}
+              loading={loading}
+              size="sm"
+              variant="plain"
+              color="primary"
+              onClick={handleConfirm}
             >
               완료
             </Button>
-          </div>
-        </div>
+          </ButtonGroup>
+        </Stack>
       ) : null}
 
       {isHovered && (
-        <div className="edit">
-          <Button
-            icon="write"
-            iconColor="gray"
-            onClick={() => {
-              setIsEditMode(true);
-              setIsHovered(false);
-            }}
-          />
+        <div
+          onClick={() => {
+            setIsEditMode(true);
+            setIsHovered(false);
+          }}
+          aria-hidden
+        >
+          <Icon type="write" color="gray" size="normal" />
         </div>
       )}
-    </div>
+    </Stack>
   );
 }

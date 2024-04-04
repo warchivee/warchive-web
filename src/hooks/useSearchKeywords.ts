@@ -1,6 +1,6 @@
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
 import { useRecoilState } from 'recoil';
-import searchKeywordAtom from 'src/stores/search.atom';
+import searchKeywordAtom from 'src/stores/searchKeyword.atom';
 import { KeywordType } from 'src/types/wata.type';
 
 const removeItem = (items: KeywordType[], item: KeywordType): KeywordType[] =>
@@ -14,6 +14,13 @@ const addItem = (items: KeywordType[], item: KeywordType): KeywordType[] =>
  */
 export const useSearchKeywords = () => {
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
+
+  const updateSearchInput = (value: string) => {
+    setSearchKeywords({
+      ...searchKeywords,
+      searchInput: value,
+    });
+  };
 
   const updateSearchKeywords = (
     type: SearchKeywordsKeyType,
@@ -48,6 +55,7 @@ export const useSearchKeywords = () => {
 
   return {
     searchKeywords,
+    updateSearchInput,
     updateSearchKeywords,
     resetSearchKeywords,
     hasSelectedKeywords,

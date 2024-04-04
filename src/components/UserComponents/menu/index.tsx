@@ -6,20 +6,29 @@ import { CollectionType } from 'src/types/collection.type';
 import classNames from 'classnames';
 import { useState } from 'react';
 import useCollection from 'src/hooks/useCollections';
+import useModal from 'src/hooks/useModal';
 
 export default function CollectionMenu() {
-  const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
   const [isInputConfirmOpen, setIsInputConfirmOpen] = useState<boolean>(false);
 
   const [openMenu, setOpenMenu] = useState(false);
+
+  const [openConfirmModal] = useModal();
 
   const {
     getCollections,
     getSelectCollectionIndex,
     selectCollection,
-    addCollection,
     deleteCollection,
   } = useCollection();
+
+  const handleDelete = async () => {
+    try {
+      await deleteCollection();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="menu">
@@ -31,7 +40,7 @@ export default function CollectionMenu() {
                 className={classNames({
                   active: index === getSelectCollectionIndex(),
                 })}
-                key={`bookmark-list-${collection.title}`}
+                key={`bookmark-list-${collection.id}`}
                 onClick={() => selectCollection(index)}
                 aria-hidden="true"
               >
@@ -56,7 +65,12 @@ export default function CollectionMenu() {
             border="round"
             size="small"
             onClick={() => {
-              setIsConfirmOpen(true);
+              openConfirmModal({
+                title: '컬렉션 삭제하기',
+                message:
+                  '컬렉션을 정말 삭제하시겠습니까?\n컬렉션에 추가한 작품들까지 전부 삭제됩니다.',
+                onConfirm: handleDelete,
+              });
             }}
           />
         </div>
@@ -73,36 +87,6 @@ export default function CollectionMenu() {
       <AddCollectionModal
         isOpen={isInputConfirmOpen}
         onClose={() => setIsInputConfirmOpen(false)}
-        onConfirm={async (value) => {
-          try {
-            if (value) {
-              addCollection(value);
-            }
-          } catch (error) {
-            console.error(error);
-          }
-
-          setIsInputConfirmOpen(false);
-        }}
-      />
-
-      <Modal
-        title="컬렉션 삭제하기"
-        message="컬렉션을 정말 삭제하시겠습니까? 컬렉션에 추가한 작품들까지 전부 삭제됩니다."
-        isOpen={isConfirmOpen}
-        onClose={() => {
-          setIsConfirmOpen(false);
-        }}
-        onConfirm={async () => {
-          try {
-            deleteCollection();
-          } catch (error) {
-            console.error(error);
-          }
-
-          setIsConfirmOpen(false);
-        }}
-        buttons={['confirm', 'cancel']}
       />
     </div>
   );

@@ -9,17 +9,50 @@
 @import './pages/index';
 @import './layouts/index';
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-break: break-all;
+}
+
 html,
 body {
   background-color: $alabaster;
   color: $black;
 
-  margin: 0;
-  padding: 0;
-  height: 100%;
+  min-height: 100vh;
 }
 
 #root {
-  min-height: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+
+  --font-content: 'Noto Sans KR', sans-serif;
+  --black: #020202;
+  --white: white;
+  --gray: #a29ea5;
+  --ebony: #170c1e;
+  --french-lilac: #ebdbf3;
+  --alabaster: #fbfbfb;
+  --sunglow: #ffcd27;
+  --light-gray: #f5f5f5;
+
+  /* purple palette */
+  --blue-violet: #9023d5;
+  --lavender: #b169dd;
+  --purple: #590091;
+  --vivid-violet: #783b99;
+  --selago: #efe0fd;
+  --light-violet: #ba5bec;
+
+  /* label */
+  --athens-gray: #e8eaed;
+  --cream-brulee: #ffe5a0;
+  --lilac: #e6cff2;
+  --botticelli: #c6dbe1;
+  --tropical-blue: #bfe1f6;
+  --your-pink: #ffcfc9;
 }

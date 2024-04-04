@@ -6,11 +6,17 @@ export const usePagination = (initTotalCount: number, pageSize: number) => {
 
   const maxPage = Math.ceil(totalCount / pageSize);
 
-  const goToPage = (pageNumber: number) => {
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(Math.max(1, Math.min(pageNumber, maxPage)));
   };
 
-  return [currentPage, maxPage, goToPage, setTotalCount] as const;
+  return {
+    pageNo: currentPage,
+    maxPage,
+    handlePageChange,
+    totalCount,
+    handleTotalCount: setTotalCount,
+  };
 };
 
 export default usePagination;

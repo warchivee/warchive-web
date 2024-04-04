@@ -11,7 +11,7 @@ export interface UpdateCollectionItemParam {
 export const getCollectionsApi = async () =>
   getData<CollectionType[]>('collection');
 
-export const getCollectionDetails = async (sharedId: string) =>
+export const getSharedCollectionApi = async (sharedId: string) =>
   getData<CollectionType>(`collection/${sharedId}`);
 
 export const createCollectionApi = async (params: {

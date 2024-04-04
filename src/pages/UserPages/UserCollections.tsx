@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import searchKeywordAtom from 'src/stores/search.atom';
-import Loader from '@components/CommonComponents/loader';
+import searchKeywordAtom from 'src/stores/searchKeyword.atom';
 import WataCollectionList from '@components/UserComponents/collection/CollectionList';
-import CollectionMenu from '../../components/UserComponents/menu';
+import ShareCollectionButtons from '@components/UserComponents/share';
+import useCollection from 'src/hooks/useCollections';
+import { Stack } from '@mui/joy';
 import CollectionHeader from '../../components/UserComponents/collection/CollectionHeader';
+import CollectionMenu from '../../components/UserComponents/menu';
 
 export default function Collections() {
-  const [loading, setLoading] = useState(false);
-
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
+
+  const { getCollectionItems } = useCollection();
 
   useEffect(() => {
     // 키워드 클릭 시 메인 페이지로 이동하며, 이전 카테고리 검색 기록이 남아있는 현상 수정
@@ -25,29 +27,24 @@ export default function Collections() {
 
   return (
     <div className="collections">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <CollectionMenu />
-          <div className="content">
-            <CollectionHeader />
-            <WataCollectionList />
-          </div>
-        </>
-      )}
+      <Stack
+        flexDirection="row"
+        gap={3}
+        width="100%"
+        sx={{
+          '@media (max-width: 600px)': {
+            paddingLeft: '2rem',
+          },
+        }}
+      >
+        <CollectionMenu />
+        <Stack paddingTop="1rem" marginTop="1rem" width="100%" gap={2}>
+          <CollectionHeader />
+          <ShareCollectionButtons />
 
-      {/* <div className="content">
-        <ShareCollectionButtons selectIndex={collectionIndex} />
-        <WataCardCollectionList
-          watas={watas.filter((wata: WataType) =>
-            collections[collectionIndex].items.some(
-              (storedWataId: WataIdType) => storedWataId === wata.id,
-            ),
-          )}
-          selectIndex={collectionIndex}
-        />
-      </div> */}
+          <WataCollectionList watas={getCollectionItems()} />
+        </Stack>
+      </Stack>
     </div>
   );
 }

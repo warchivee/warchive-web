@@ -63,17 +63,39 @@ const renderMenus = (menus: MenuInfo[], currentPath: string) =>
     );
   });
 
-function LoginButton({ isLogin }: { isLogin: boolean }) {
+function LoginButton({
+  isLogin,
+  callback,
+}: {
+  isLogin: boolean;
+  callback?: () => void;
+}) {
   if (isLogin) {
     return (
-      <Button onClick={logout} labelColor="gray" size="big">
+      <Button
+        onClick={() => {
+          if (callback) {
+            callback();
+          }
+          logout();
+        }}
+        labelColor="gray"
+        size="big"
+      >
         로그아웃
       </Button>
     );
   }
 
   return (
-    <Link to="/login">
+    <Link
+      to="/login"
+      onClick={() => {
+        if (callback) {
+          callback();
+        }
+      }}
+    >
       <Button labelColor="gray" size="big">
         로그인
       </Button>
@@ -158,7 +180,7 @@ function MobileMenuDrawer({
             )}
           </div>
           <div>
-            <LoginButton isLogin={isLogin} />
+            <LoginButton isLogin={isLogin} callback={onClose} />
           </div>
         </div>
 
