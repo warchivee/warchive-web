@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { WataType } from 'src/types/wata.type';
 import useModal from 'src/hooks/useModal';
-import { isLogin } from 'src/services/auth.api';
+import { checkLogin } from 'src/services/auth.api';
 import WataCollectionCard from './CollectionCard';
 import AddCollectionItemModal from '../modal/addCollectionItem';
 import { WataCardListProps } from '../wata/index.type';
@@ -21,7 +21,7 @@ export default function WataCollectionList({ watas }: WataCardListProps) {
             key={`wata-${wata.id}`}
             wata={wata}
             handleCollection={() => {
-              if (!isLogin()) {
+              if (!checkLogin()) {
                 openLoginModal({
                   title: '로그인 필요',
                   message: '로그인이 필요합니다.',

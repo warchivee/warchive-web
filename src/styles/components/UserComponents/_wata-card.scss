@@ -17,6 +17,7 @@
 
     & .title {
       @include flex-row-space-between;
+      align-items: flex-start;
       margin-bottom: 0.2rem;
       padding: 0rem 0.3rem 0rem 0.6rem;
       line-height: 150%;

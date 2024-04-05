@@ -1,10 +1,9 @@
 import Button from '@components/CommonComponents/button';
-import Modal from '@components/CommonComponents/modal';
 import AddCollectionModal from '@components/UserComponents/modal/addCollection';
 import { Text } from '@components/CommonComponents/text';
 import { CollectionType } from 'src/types/collection.type';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useCollection from 'src/hooks/useCollections';
 import useModal from 'src/hooks/useModal';
 
@@ -14,6 +13,9 @@ export default function CollectionMenu() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const [openConfirmModal] = useModal();
+  const [openModal, setOpenModal] = useState(false);
+
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const {
     getCollections,
@@ -30,9 +32,32 @@ export default function CollectionMenu() {
     }
   };
 
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      console.log(openModal);
+
+      if (
+        popupRef.current &&
+        !popupRef?.current?.contains(event.target as Node) &&
+        !openModal
+      ) {
+        setOpenMenu(false);
+      }
+    },
+    [openModal, popupRef],
+  );
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openModal]);
+
   return (
     <div className="menu">
-      <div className={openMenu ? 'pc show' : 'pc'}>
+      <div className={openMenu ? 'pc show' : 'pc'} ref={popupRef}>
         <ul>
           {getCollections()?.map(
             (collection: CollectionType, index: number) => (
@@ -41,7 +66,10 @@ export default function CollectionMenu() {
                   active: index === getSelectCollectionIndex(),
                 })}
                 key={`bookmark-list-${collection.id}`}
-                onClick={() => selectCollection(index)}
+                onClick={() => {
+                  selectCollection(index);
+                  setOpenMenu(!openMenu);
+                }}
                 aria-hidden="true"
               >
                 <Text color="white">{collection.title}</Text>
@@ -57,6 +85,7 @@ export default function CollectionMenu() {
             size="small"
             onClick={() => {
               setIsInputConfirmOpen(true);
+              setOpenModal(true);
             }}
           />
           <Button
@@ -65,11 +94,18 @@ export default function CollectionMenu() {
             border="round"
             size="small"
             onClick={() => {
+              setOpenModal(true);
               openConfirmModal({
                 title: '컬렉션 삭제하기',
                 message:
                   '컬렉션을 정말 삭제하시겠습니까?\n컬렉션에 추가한 작품들까지 전부 삭제됩니다.',
-                onConfirm: handleDelete,
+                onCancel: () => {
+                  setOpenModal(false);
+                },
+                onConfirm: () => {
+                  handleDelete();
+                  setOpenModal(false);
+                },
               });
             }}
           />
@@ -86,7 +122,10 @@ export default function CollectionMenu() {
 
       <AddCollectionModal
         isOpen={isInputConfirmOpen}
-        onClose={() => setIsInputConfirmOpen(false)}
+        onClose={() => {
+          setIsInputConfirmOpen(false);
+          setOpenModal(false);
+        }}
       />
     </div>
   );

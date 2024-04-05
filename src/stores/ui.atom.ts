@@ -6,6 +6,7 @@ export const modalState = atom<{
   message: string;
   loading: boolean;
   onConfirm?: () => void;
+  onCancel?: () => void;
 }>({
   key: 'modalState',
   default: { open: false, title: '', message: '', loading: false },

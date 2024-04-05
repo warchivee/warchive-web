@@ -8,12 +8,14 @@ export const useModal = () => {
     title = '',
     message = '',
     onConfirm,
+    onCancel,
   }: {
     title: string;
     message: string;
     onConfirm?: () => void;
+    onCancel?: () => void;
   }) => {
-    setModal({ ...modal, title, message, onConfirm, open: true });
+    setModal({ ...modal, title, message, onConfirm, onCancel, open: true });
   };
 
   return [open] as const;

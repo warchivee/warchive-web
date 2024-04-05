@@ -1,4 +1,3 @@
-import Button from '@components/CommonComponents/button';
 import { Text, Title } from '@components/CommonComponents/text';
 import {
   SearchKeywordsKeyType,
@@ -8,7 +7,9 @@ import { KeywordType, PlatformType, WataType } from 'src/types/wata.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import searchKeywordAtom from 'src/stores/searchKeyword.atom';
-import { isLogin } from 'src/services/auth.api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookBookmark } from '@fortawesome/free-solid-svg-icons';
+import { IconButton } from '@mui/joy';
 
 interface WataCardProps {
   wata: WataType;
@@ -53,14 +54,13 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
           <Title type="h3" color="white">
             {wata.title}
           </Title>
-          <Button
-            icon="folder-plus"
-            iconColor="white"
-            size="big"
+          <IconButton
             onClick={() => {
               handleBookmark();
             }}
-          />
+          >
+            <FontAwesomeIcon color="white" icon={faBookBookmark} />
+          </IconButton>
         </div>
 
         <div className="creator">

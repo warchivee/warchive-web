@@ -56,3 +56,10 @@ body {
   --tropical-blue: #bfe1f6;
   --your-pink: #ffcfc9;
 }
+
+.share-collections {
+  & header {
+    position: absolute;
+    background-color: transparent;
+  }
+}

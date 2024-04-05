@@ -1,7 +1,7 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import './App.css';
 
-import { lazy, useEffect, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { useRecoilState } from 'recoil';
@@ -15,9 +15,11 @@ import Typography from '@mui/joy/Typography';
 import ModalClose from '@mui/joy/ModalClose';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
+import { Snackbar } from '@mui/joy';
 import ErrorFallback from './layouts/ErrorFallback';
-import { modalState } from './stores/ui.atom';
+import { modalState, snackbarState } from './stores/ui.atom';
 
+const NoHeaderLayout = lazy(() => import('src/layouts/NoHeaderLayout'));
 const CommonLayout = lazy(() => import('src/layouts/CommonLayout'));
 
 const About = lazy(() => import('@pages/CommonPages/About'));
@@ -35,10 +37,22 @@ const AdminHome = lazy(() => import('@pages/AdminPages/AdminDatas'));
 
 function App() {
   const [modal, setModal] = useRecoilState(modalState);
+  const [snackbar, setSnackbar] = useRecoilState(snackbarState);
 
   return (
     <Router>
       <Routes>
+        <Route element={<NoHeaderLayout />}>
+          <Route
+            path="/collections/:sharedId"
+            element={
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <UserCollectionShare />
+              </ErrorBoundary>
+            }
+          />
+        </Route>
+
         <Route element={<CommonLayout />}>
           <Route
             path="/"
@@ -52,15 +66,19 @@ function App() {
           <Route path="/login" element={<Login />} />
           {/* 링크를 입력해 직접 접근하는 경우 2depth (ex: login/redirect ) 경로로 접근 불가능 이슈로 login-redirect 로 명명함 => vercel.json 설정 참고 */}
           <Route path="/login-redirect" element={<LoginRedirect />} />
-          <Route
-            path="/collections/:sharedId"
-            element={<UserCollectionShare />}
-          />
+
           <Route path="/about" element={<About />} />
 
           <Route element={<LoginRoute />}>
             <Route element={<PermissionRoute access="USER" />}>
-              <Route path="/collections" element={<UserCollections />} />
+              <Route
+                path="/collections"
+                element={
+                  <ErrorBoundary FallbackComponent={ErrorFallback}>
+                    <UserCollections />
+                  </ErrorBoundary>
+                }
+              />
             </Route>
             <Route element={<PermissionRoute access="ADMIN" />}>
               <Route path="/admin" element={<AdminLayout />}>
@@ -70,6 +88,23 @@ function App() {
           </Route>
         </Route>
       </Routes>
+
+      <Snackbar
+        autoHideDuration={3000}
+        open={snackbar.open}
+        variant="soft"
+        color="primary"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        onClose={(event, reason) => {
+          if (reason === 'clickaway') {
+            setSnackbar({ ...snackbar, open: false });
+          }
+
+          setSnackbar({ ...snackbar, open: false });
+        }}
+      >
+        {snackbar.message}
+      </Snackbar>
 
       <Modal
         open={modal.open}
@@ -111,6 +146,11 @@ function App() {
                   if (modal.loading) {
                     return;
                   }
+
+                  if (modal.onCancel) {
+                    modal.onCancel();
+                  }
+
                   setModal({ ...modal, open: false });
                 }}
               >

@@ -1,6 +1,4 @@
 import { postData } from '@utils/api.util';
-import { wataLocalStorageKey } from 'src/stores/wata.atom';
-import { collectionLocalStorageKey } from 'src/stores/collectionList.atom';
 import tokenUtil from '@utils/token.util';
 import userUtil from '@utils/user.util';
 import localStorageUtil from '@utils/localStorage/localstorage.util';
@@ -25,4 +23,4 @@ export const logout = () => {
   window.location.href = '/';
 };
 
-export const isLogin = () => userUtil.exist();
+export const checkLogin = () => userUtil.exist();

@@ -78,7 +78,11 @@ export const useCollection = () => {
 
     const result = await updateCollectionApi(getCollection()?.id, params);
 
-    await indexedDB.updateItem(COLLECTION_STORE, result);
+    await indexedDB.updateItem(COLLECTION_STORE, {
+      ...getCollection(),
+      title: result.title,
+      note: result.note,
+    });
 
     setCollectionState({
       ...collectionState,

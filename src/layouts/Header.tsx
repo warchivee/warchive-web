@@ -1,17 +1,27 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { cloneElement, startTransition, useState } from 'react';
 import Button from '@components/CommonComponents/button';
-import { logout } from 'src/services/auth.api';
-import { IconType } from '@components/CommonComponents/icon/index.type';
+import { checkLogin, logout } from 'src/services/auth.api';
 import Drawer from '@components/CommonComponents/drawer';
 import { Text, Title } from '@components/CommonComponents/text';
+import userUtil from '@utils/user.util';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBookBookmark,
+  faCircleQuestion,
+  faEnvelope,
+  faHammer,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
+import { faUser as faUserSolid } from '@fortawesome/free-regular-svg-icons';
+import { IconButton, Typography } from '@mui/joy';
 import Footer from './Footer';
 
 export interface MenuInfo {
-  icon: IconType;
+  icon: JSX.Element;
   label: string;
   path?: string;
-  callback?: () => void;
+  callback: () => void;
 }
 
 interface HeaderProps {
@@ -21,103 +31,111 @@ interface HeaderProps {
 
 const renderMenus = (menus: MenuInfo[], currentPath: string) =>
   menus?.map((menu: MenuInfo, index: number) => {
-    const isCurrent = currentPath.includes(menu.path ?? 'noting');
-    const iconColor = isCurrent ? 'lavender' : 'vivid-violet';
-    const labelCOlor = isCurrent ? 'white' : 'gray';
-
-    if (menu.path) {
-      return (
-        <Link key={`menu-${index + 1}`} to={menu.path}>
-          <Button
-            icon={menu.icon}
-            iconColor={iconColor}
-            labelColor={labelCOlor}
-            size="big"
-            onClick={() => {
-              if (menu.callback) {
-                menu.callback();
-              }
-            }}
-          >
-            {menu.label}
-          </Button>
-        </Link>
-      );
-    }
+    const isCurrent = currentPath === menu.path;
+    const iconColor = isCurrent ? '#b169dd' : '#783b99';
+    const labelColor = isCurrent ? 'white' : '#A29EA5';
 
     return (
-      <Button
+      <IconButton
+        size="sm"
         key={`menu-${index + 1}`}
-        icon={menu.icon}
-        iconColor={iconColor}
-        labelColor={labelCOlor}
-        size="big"
+        sx={{
+          gap: '0.5rem',
+        }}
         onClick={() => {
-          if (menu.callback) {
+          startTransition(() => {
             menu.callback();
-          }
+          });
         }}
       >
-        {menu.label}
-      </Button>
+        {cloneElement(menu.icon, { color: iconColor })}
+        <Typography textColor={labelColor}>{menu.label}</Typography>
+      </IconButton>
     );
   });
-
 function LoginButton({
   isLogin,
   callback,
+  mobile = false,
 }: {
   isLogin: boolean;
   callback?: () => void;
+  mobile?: boolean;
 }) {
+  const navigate = useNavigate();
+
   if (isLogin) {
     return (
-      <Button
-        onClick={() => {
-          if (callback) {
-            callback();
-          }
-          logout();
+      <IconButton
+        sx={{
+          gap: '0.5rem',
         }}
-        labelColor="gray"
-        size="big"
+        onClick={() => {
+          startTransition(() => {
+            if (callback) {
+              callback();
+            }
+            logout();
+          });
+        }}
       >
-        로그아웃
-      </Button>
+        <FontAwesomeIcon style={{ color: '#b169dd' }} icon={faUser} />
+        {mobile && <Typography textColor="white">로그아웃</Typography>}
+      </IconButton>
     );
   }
 
   return (
-    <Link
-      to="/login"
+    <IconButton
+      sx={{
+        gap: '0.5rem',
+      }}
       onClick={() => {
-        if (callback) {
-          callback();
-        }
+        startTransition(() => {
+          if (callback) {
+            callback();
+          }
+          navigate('/login');
+        });
       }}
     >
-      <Button labelColor="gray" size="big">
-        로그인
-      </Button>
-    </Link>
+      <FontAwesomeIcon style={{ color: '#b169dd' }} icon={faUserSolid} />
+      {mobile && <Typography textColor="white">로그인</Typography>}
+    </IconButton>
   );
 }
 
 function Logo() {
+  const navigate = useNavigate();
+
   return (
-    <Link to="/">
+    <IconButton
+      onClick={() => {
+        startTransition(() => {
+          navigate('/');
+        });
+      }}
+    >
       <div className="logo">
         <img src="/images/logo/logo-text.png" alt="와카이브 로고" />
       </div>
-    </Link>
+    </IconButton>
   );
 }
 
 function AboutButton() {
+  const navigate = useNavigate();
+
   return (
-    <Link to="/about">
-      <Button icon="question" iconColor="vivid-violet" size="big" />
-    </Link>
+    <IconButton
+      onClick={() => {
+        startTransition(() => {
+          navigate('/about');
+        });
+      }}
+    >
+      <FontAwesomeIcon style={{ color: '#b169dd' }} icon={faCircleQuestion} />
+    </IconButton>
   );
 }
 
@@ -163,7 +181,7 @@ function MobileMenuDrawer({
                 ...menus,
                 {
                   label: '와카이브 소개',
-                  icon: 'question',
+                  icon: <FontAwesomeIcon icon={faCircleQuestion} />,
                   path: '/about',
                 } as MenuInfo,
               ].map((menu) => ({
@@ -179,8 +197,8 @@ function MobileMenuDrawer({
               pathname,
             )}
           </div>
-          <div>
-            <LoginButton isLogin={isLogin} callback={onClose} />
+          <div className="menus">
+            <LoginButton isLogin={isLogin} callback={onClose} mobile />
           </div>
         </div>
 
@@ -234,11 +252,48 @@ function PCHeader({ menus = [], isLogin }: HeaderProps) {
   );
 }
 
-export default function Header({ isLogin, menus = [] }: HeaderProps) {
+export default function Header() {
+  const navigate = useNavigate();
+  const userMenus: MenuInfo[] = [
+    {
+      label: '컬렉션',
+      icon: <FontAwesomeIcon color="white" icon={faBookBookmark} />,
+      path: '/collections',
+      callback: () => {
+        navigate('/collections');
+      },
+    },
+    {
+      label: '추천작 제보',
+      icon: <FontAwesomeIcon icon={faEnvelope} />,
+      callback: () => {
+        window.open(
+          'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
+          '_blank',
+        );
+      },
+    },
+  ];
+
+  const adminMenus: MenuInfo[] = [
+    ...userMenus,
+    {
+      label: '관리자',
+      icon: <FontAwesomeIcon icon={faHammer} />,
+      path: '/admin',
+      callback: () => {
+        navigate('/admin');
+      },
+    },
+  ];
+
+  const login = checkLogin();
+  const menus = userUtil.isAdmin() ? adminMenus : userMenus;
+
   return (
     <header>
-      <PCHeader isLogin={isLogin} menus={menus} />
-      <MobileHeader isLogin={isLogin} menus={menus} />
+      <PCHeader isLogin={login} menus={menus} />
+      <MobileHeader isLogin={login} menus={menus} />
     </header>
   );
 }

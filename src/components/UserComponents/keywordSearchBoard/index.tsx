@@ -9,6 +9,7 @@ import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
 import { KeywordListType, KeywordType } from 'src/types/wata.type';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import IndexedDBUtil, { KEYWORD_STORE } from '@utils/indexedDB/indexedDB.util';
+import { Typography } from '@mui/joy';
 import CheckKeywordBubble from './checkKeywordBubble';
 import CheckKeywordBubbles from './checkKeywordBubbles';
 
@@ -107,9 +108,9 @@ export default function KeywordSearchBorad() {
             onClick={() => handleTab(index)}
             aria-hidden="true"
           >
-            <Title type="h5" color="white">
+            <Typography level="body-sm" textColor="white" noWrap>
               {category.name}
-            </Title>
+            </Typography>
           </div>
         ))}
       </div>

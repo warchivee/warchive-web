@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { isLogin } from 'src/services/auth.api';
+import { checkLogin } from 'src/services/auth.api';
 
 export default function LoginRoute() {
-  if (isLogin()) {
+  if (checkLogin()) {
     return <Outlet />;
   }
 

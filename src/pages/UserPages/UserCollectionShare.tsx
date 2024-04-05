@@ -6,6 +6,8 @@ import { CollectionType } from 'src/types/collection.type';
 import WataCollectionList from '@components/UserComponents/collection/CollectionList';
 import { Box, Stack, Typography } from '@mui/joy';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import Header from 'src/layouts/Header';
+import Footer from 'src/layouts/Footer';
 
 const getDatas = async (id: string | undefined): Promise<CollectionType> => {
   if (id) {
@@ -34,6 +36,7 @@ export default function ShareCollections() {
 
   return (
     <div className="share-collections">
+      <Header />
       <Box
         sx={{
           height: '350px',
