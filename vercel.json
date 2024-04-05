@@ -1,6 +1,3 @@
 {
-  "rewrites": [
-    { "src": "/collections/(.*)", "dest": "/collections/:1" },
-    { "source": "/(.*)", "destination": "/" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
