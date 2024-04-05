@@ -11,7 +11,4 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
-  vercel: {
-    outDir: 'build',
-  },
 });
