@@ -10,6 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import useSnackbar from 'src/hooks/useSnackbar';
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Kakao: any;
+  }
+}
+
 export default function ShareCollectionButtons() {
   const { getCollection } = useCollection();
   const popupRef = useRef<HTMLDivElement>(null);

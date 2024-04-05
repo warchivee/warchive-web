@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 
-function ErrorFallback({ error, resetErrorBoundary }) {
+function ErrorFallback({ error }: { error: Error }) {
   if (error instanceof AxiosError) {
     const er = error as AxiosError;
 

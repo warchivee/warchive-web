@@ -51,7 +51,7 @@ export default function AddCollectionItemModal({
     onClose();
   };
 
-  const handleChecked = (index, value) => {
+  const handleChecked = (index: number, value: boolean) => {
     const info = [...editInfo];
 
     info[index] = value;
