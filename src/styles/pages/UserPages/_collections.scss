@@ -1,24 +1,42 @@
 .collections {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
   @include viewport;
-  flex: 1;
-  gap: 2rem;
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 5rem;
 
-  & > .menu {
+  & .menu {
     background: $ebony;
-    height: 95%;
-    width: 12rem;
-    padding-top: 3rem;
+    min-height: fit-content;
+    height: 100%;
+    max-height: 100vh;
+    padding: 3rem 0rem 5rem 0;
+    z-index: 2;
 
-    & > ul {
-      max-height: 80%;
+    display: flex;
+
+    & .pc {
+      width: 12rem;
+    }
+
+    & .mobile {
+      width: 2rem;
+      height: 100%;
+      display: none;
+      cursor: pointer;
+    }
+
+    ul {
+      height: 100%;
       overflow-y: scroll;
+    }
 
+    ul::-webkit-scrollbar {
+      display: none;
+    }
+
+    & ul {
       & li {
-        padding: 0.8rem 2rem;
+        padding: 0.8rem 1rem;
         cursor: pointer;
 
         & .text {
@@ -35,50 +53,39 @@
       }
     }
 
-    & > .control {
+    & .control {
+      position: sticky;
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
       gap: 0.5rem;
-      padding: 0.8rem 2rem;
+      padding: 0.8rem 1rem;
 
       & .button {
         border: 1px solid white;
       }
     }
-  }
 
-  & > .content {
-    flex: 1;
-    padding: 3rem 0rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-
-    & > .header {
-      @include flex-row-start;
-      align-items: flex-end;
-      gap: 0.5rem;
-      max-width: 30rem;
-
-      & > .edit > .button {
-        padding: 0;
+    @media (max-width: 600px) {
+      & {
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 64px; /* header height */
+      }
+      & .pc {
+        display: none;
       }
 
-      & .input {
-        flex: 1;
+      & .pc.show {
+        display: block;
       }
-    }
 
-    & > .sns {
-      @include flex-row-start;
-      position: relative;
-      gap: 0.5rem;
-    }
-
-    & .wata-list {
-      justify-content: flex-start;
+      & .mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

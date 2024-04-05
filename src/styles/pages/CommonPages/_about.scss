@@ -2,8 +2,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  line-height: 24px;
   align-items: center;
+
+  .text {
+    line-height: 1.8;
+  }
 
   & .text-center > .text {
     text-align: center;
@@ -16,11 +19,12 @@
   & .col {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
 
-    @media (max-width: 450px) {
+    @media (max-width: 500px) {
       flex-direction: column;
+      align-items: center;
     }
   }
 

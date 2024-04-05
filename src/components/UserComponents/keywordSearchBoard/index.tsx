@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 
 import { Title } from '@components/CommonComponents/text';
 import classNames from 'classnames';
@@ -7,41 +6,27 @@ import Button from '@components/CommonComponents/button/index';
 import Icon from '@components/CommonComponents/icon';
 import { useSearchKeywords } from 'src/hooks/useSearchKeywords';
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
-import wataListSelector from 'src/atoms/wata.atom';
 import { KeywordListType, KeywordType } from 'src/types/wata.type';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import IndexedDBUtil, { KEYWORD_STORE } from '@utils/indexedDB/indexedDB.util';
+import { Typography } from '@mui/joy';
 import CheckKeywordBubble from './checkKeywordBubble';
 import CheckKeywordBubbles from './checkKeywordBubbles';
 
-export default function KeywordSearchBorad() {
-  const { categories } = useRecoilValue(wataListSelector);
-  const [tab, setTab] = useState<number>(0);
-  const [tabOpen, setTabOpen] = useState<boolean>(false);
-  const {
-    searchKeywords,
-    updateSearchKeywords,
-    resetSearchKeywords,
-    hasSelectedKeywords,
-  } = useSearchKeywords();
+const indexedDB = IndexedDBUtil.getInstance();
 
-  const handleTab = (index: number) => {
-    // 현재 탭을 한번 더 클릭한 경우 검색어 초기화하지 않고 탭을 열고 닫기만 한다.
+function Bubbles({
+  title,
+  bubbleType,
+  bubbles,
+}: {
+  title: string;
+  bubbleType: SearchKeywordsKeyType;
+  bubbles: KeywordType[];
+}) {
+  const { searchKeywords, updateSearchKeywords } = useSearchKeywords();
 
-    const isCurrentTab = tab === index;
-
-    if (!isCurrentTab) {
-      resetSearchKeywords(categories[index]);
-    }
-
-    setTab(isCurrentTab ? tab : index);
-    setTabOpen(isCurrentTab ? !tabOpen : true);
-  };
-
-  const renderBubbles = (
-    id: number,
-    title: string,
-    bubbleType: SearchKeywordsKeyType,
-    bubbles: KeywordType[],
-  ) => (
+  return (
     <CheckKeywordBubbles
       key={`list-${bubbleType}`}
       title={title}
@@ -51,21 +36,52 @@ export default function KeywordSearchBorad() {
       handleChange={updateSearchKeywords}
     />
   );
-  const renderRemoveKeywordBubbles = (
-    keywords: KeywordType[],
-    type: SearchKeywordsKeyType,
-  ) =>
-    keywords?.map((keyword) => (
-      <CheckKeywordBubble
-        key={`selected-${type}-${keyword.id}`}
-        value={`selected-${type}-${keyword.id}`}
-        label={keyword.name}
-        type="remove"
-        onChange={() => {
-          updateSearchKeywords(type, keyword);
-        }}
-      />
-    ));
+}
+
+const SelectedBubbles = ({
+  selectedKeywords,
+  type,
+}: {
+  selectedKeywords: KeywordType[];
+  type: SearchKeywordsKeyType;
+}) => {
+  const { updateSearchKeywords } = useSearchKeywords();
+
+  return selectedKeywords?.map((keyword) => (
+    <CheckKeywordBubble
+      key={`selected-${type}-${keyword.id}`}
+      value={`selected-${type}-${keyword.id}`}
+      label={keyword.name}
+      type="remove"
+      onChange={() => {
+        updateSearchKeywords(type, keyword);
+      }}
+    />
+  ));
+};
+
+export default function KeywordSearchBorad() {
+  const { data: keywords } = useSuspenseQuery<KeywordListType[]>({
+    queryKey: ['getKeywords'],
+    queryFn: () => indexedDB.getItems<KeywordListType[]>(KEYWORD_STORE),
+  });
+
+  const [tab, setTab] = useState<number>(0);
+  const [tabOpen, setTabOpen] = useState<boolean>(false);
+  const { searchKeywords, resetSearchKeywords, hasSelectedKeywords } =
+    useSearchKeywords();
+  const handleTab = (index: number) => {
+    // 현재 탭을 한번 더 클릭한 경우 검색어 초기화하지 않고 탭을 열고 닫기만 한다.
+
+    const isCurrentTab = tab === index;
+
+    if (!isCurrentTab) {
+      resetSearchKeywords(keywords[index]);
+    }
+
+    setTab(isCurrentTab ? tab : index);
+    setTabOpen(isCurrentTab ? !tabOpen : true);
+  };
 
   return (
     <div className="keyword-search-board">
@@ -85,16 +101,16 @@ export default function KeywordSearchBorad() {
         </div>
 
         {/* 카테고리 탭 */}
-        {categories?.map((category: KeywordListType, index: number) => (
+        {keywords?.map((category: KeywordListType, index: number) => (
           <div
             className={classNames('tab', { select: tab === index })}
             key={`category-${category.id}`}
             onClick={() => handleTab(index)}
             aria-hidden="true"
           >
-            <Title type="h5" color="white">
+            <Typography level="body-sm" textColor="white" noWrap>
               {category.name}
-            </Title>
+            </Typography>
           </div>
         ))}
       </div>
@@ -102,26 +118,27 @@ export default function KeywordSearchBorad() {
       {/* 키워드 리스트 */}
       <div className={classNames('panel-background', { hidden: !tabOpen })}>
         <div className="panel">
-          {renderBubbles(
-            categories[tab].id,
-            '장르',
-            'genres',
-            categories[tab].genres,
-          )}
+          <Bubbles
+            title="장르"
+            bubbleType="genres"
+            bubbles={keywords[tab].genres}
+          />
+
           <div className="driven" />
-          {renderBubbles(
-            categories[tab].id,
-            '플랫폼',
-            'platforms',
-            categories[tab].platforms,
-          )}
+
+          <Bubbles
+            title="플랫폼"
+            bubbleType="platforms"
+            bubbles={keywords[tab].platforms}
+          />
+
           <div className="driven" />
-          {renderBubbles(
-            categories[tab].id,
-            '키워드',
-            'keywords',
-            categories[tab].keywords,
-          )}
+
+          <Bubbles
+            title="키워드"
+            bubbleType="keywords"
+            bubbles={keywords[tab].keywords}
+          />
         </div>
       </div>
 
@@ -129,9 +146,18 @@ export default function KeywordSearchBorad() {
       {tabOpen || hasSelectedKeywords() ? (
         <div className="select-keywords">
           <div className="keywords">
-            {renderRemoveKeywordBubbles(searchKeywords.genres, 'genres')}
-            {renderRemoveKeywordBubbles(searchKeywords.platforms, 'platforms')}
-            {renderRemoveKeywordBubbles(searchKeywords.keywords, 'keywords')}
+            <SelectedBubbles
+              selectedKeywords={searchKeywords.genres}
+              type="genres"
+            />
+            <SelectedBubbles
+              selectedKeywords={searchKeywords.platforms}
+              type="platforms"
+            />
+            <SelectedBubbles
+              selectedKeywords={searchKeywords.keywords}
+              type="keywords"
+            />
           </div>
 
           {hasSelectedKeywords() && (

@@ -1,12 +1,12 @@
 import { WataIdType } from 'src/types/wata.type';
 
-export const COLLEACTIONS_KEY = 'my-warchive-collections';
-export const DEFAULT_COLLECTIONS_NAME = '미지정';
-export const DEFAULT_COLLECTIONS_KEY = 0;
-
-export const TITLE_LIMIT_LENGTH = 20;
+export const TITLE_LIMIT_LENGTH = 50;
+export const COMMENT_LIMIT_LENGTH = 200;
 
 export interface CollectionType {
+  id: number;
+  shared_id: string;
   title: string;
+  note: string;
   items: WataIdType[];
 }

@@ -1,25 +1,46 @@
-import { Permissiontype, User } from 'src/types/auth.type';
+import { User } from 'src/types/auth.type';
+import localStorageUtil, {
+  LS_USER_KEY,
+} from './localStorage/localstorage.util';
 
-export const saveUser = (user: User) => {
-  localStorage.setItem('nickname', user.nickname);
-  localStorage.setItem('role', user.role);
+const userUtil = {
+  save: (user: User) => {
+    localStorageUtil.save(LS_USER_KEY, user);
+  },
+
+  get: (): User | undefined => {
+    try {
+      const user = localStorageUtil.get<User>(LS_USER_KEY);
+
+      return user;
+    } catch (error) {
+      return undefined;
+    }
+  },
+
+  exist: (): boolean => {
+    try {
+      const user = userUtil.get();
+
+      return user !== undefined;
+    } catch (error) {
+      return false;
+    }
+  },
+
+  isAdmin: (): boolean => {
+    try {
+      const user = userUtil.get();
+
+      return user?.role === 'ADMIN';
+    } catch (error) {
+      return false;
+    }
+  },
+
+  remove: () => {
+    localStorageUtil.remove(LS_USER_KEY);
+  },
 };
 
-export const getUser = (): User | undefined => {
-  const nickname = localStorage.getItem('nickname');
-  const role = localStorage.getItem('role');
-
-  if (!nickname || !role) {
-    return undefined;
-  }
-
-  return {
-    nickname,
-    role: role as Permissiontype,
-  };
-};
-
-export const deleteUser = () => {
-  localStorage.removeItem('nickname');
-  localStorage.removeItem('role');
-};
+export default userUtil;

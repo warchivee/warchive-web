@@ -1,106 +1,224 @@
+import IndexedDBUtil, {
+  COLLECTION_STORE,
+} from '@utils/indexedDB/indexedDB.util';
+import fetchCollections from '@utils/indexedDB/fetchCollectionFromIndexedDB.util';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  DEFAULT_COLLECTIONS_KEY,
-  DEFAULT_COLLECTIONS_NAME,
+  UpdateCollectionItemParam,
+  createCollectionApi,
+  deleteCollectionApi,
+  updateCollectionApi,
+  updateCollectionItemApi,
+} from 'src/services/collection.api';
+import { collectionAtom } from 'src/stores/collection.atom';
+import wataAtom from 'src/stores/wata.atom';
+import RecoverableError from 'src/types/error/RecoverableError';
+import { validInputText } from '@utils/stringValid.util';
+import {
+  COMMENT_LIMIT_LENGTH,
+  TITLE_LIMIT_LENGTH,
 } from 'src/types/collection.type';
-import { WataIdType, WataType } from 'src/types/wata.type';
-import { useRecoilState } from 'recoil';
-import { collectionSelector } from 'src/atoms/collection.atom';
 
-export const useCollections = () => {
-  const [collections, setCollections] = useRecoilState(collectionSelector);
+export const collectionLocalStorageKey = 'COLLECTION_SAVED_AT';
 
-  const addCollection = (title: string) => {
-    const trimTitle = title.trim();
+const COLLECTIONS_LIMMIT_COUNT = 20;
+const COLLECTION_ITEMS_LIMIT_COUNT = 50;
 
-    if (!trimTitle || trimTitle === '') {
-      throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
+const indexedDB = IndexedDBUtil.getInstance();
+
+export const useCollection = () => {
+  const watas = useRecoilValue(wataAtom);
+  const [collectionState, setCollectionState] = useRecoilState(collectionAtom);
+
+  const getSelectCollectionIndex = () => collectionState.selectedIndex;
+
+  const getCollections = () => collectionState.collections;
+
+  const getCollection = () => getCollections()[getSelectCollectionIndex()];
+
+  const getCollectionItems = () => {
+    const collection = getCollection();
+
+    if (!collection || !collection?.items || collection?.items?.length === 0) {
+      return [];
     }
-
-    setCollections([
-      ...collections,
-      {
-        title: trimTitle,
-        items: [],
-      },
-    ]);
+    return watas?.filter((wata) => collection?.items?.includes(wata.id));
   };
 
-  const removeCollection = (index: number) => {
-    if (index === DEFAULT_COLLECTIONS_KEY) {
-      throw new Error('전체 컬렉션은 삭제할 수 없습니다.');
-    }
-
-    const newValue = [...collections];
-    newValue.splice(index, 1);
-
-    setCollections(newValue);
+  const selectCollection = (index: number) => {
+    setCollectionState({ ...collectionState, selectedIndex: index });
   };
 
-  const renameCollection = (index: number, changeTitle: string) => {
-    const trimTitle = changeTitle.trim();
-
-    if (!trimTitle || trimTitle === '') {
-      throw new Error('공백을 컬렉션의 이름으로 사용할 수 없습니다.');
+  const updateCollection = async (params: { title: string; note: string }) => {
+    if (
+      getCollection().title === params.title &&
+      getCollection().note === params.note
+    ) {
+      return;
     }
 
-    if (trimTitle === DEFAULT_COLLECTIONS_NAME) {
-      throw new Error('기본 컬렉션의 이름은 바꿀 수 없습니다.');
+    if (params.title?.replace(' ', '')?.length < 2) {
+      throw new RecoverableError('컬렉션 이름은 두 글자 이상이어야 합니다.');
     }
 
-    const newValue = [...collections];
+    if (validInputText(params.title) || validInputText(params.note)) {
+      throw new RecoverableError(
+        '컬렉션 이름과 코멘트에는 괄호, &, 따옴표, 외부 주소를 입력할 수 없습니다.',
+      );
+    }
 
-    newValue[index] = {
-      ...newValue[index],
-      title: trimTitle,
-    };
+    if (
+      params.title.length > TITLE_LIMIT_LENGTH ||
+      params.note.length > COMMENT_LIMIT_LENGTH
+    ) {
+      throw new RecoverableError(
+        '컬렉션 이름은 50자, 코멘트는 200자까지만 입력할 수 있습니다.',
+      );
+    }
 
-    setCollections(newValue);
+    const result = await updateCollectionApi(getCollection()?.id, params);
+
+    await indexedDB.updateItem(COLLECTION_STORE, {
+      ...getCollection(),
+      title: result.title,
+      note: result.note,
+    });
+
+    setCollectionState({
+      ...collectionState,
+      collections: await fetchCollections(),
+    });
   };
 
-  const findItemIndex = (index: number, wata: WataType) =>
-    collections[index].items.findIndex(
-      (storedWataId: WataIdType) => wata.id === storedWataId,
-    );
-  const existCollectionItem = (index: number, item: WataType) =>
-    !(findItemIndex(index, item) < 0);
+  const addCollection = async (title: string) => {
+    if (getCollections()?.length >= COLLECTIONS_LIMMIT_COUNT) {
+      throw new RecoverableError(
+        `컬렉션은 ${COLLECTIONS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
+      );
+    }
 
-  const handleCollectionItems = (commands: boolean[], item: WataType) => {
-    const newValue = [...collections];
+    if (title?.replace(' ', '')?.length < 2) {
+      throw new RecoverableError('컬렉션 이름은 두 글자 이상이어야 합니다.');
+    }
 
-    commands.forEach((command: boolean, index: number) => {
-      if (command) {
-        if (!existCollectionItem(index, item)) {
-          newValue[index] = {
-            ...newValue[index],
-            items: [...newValue[index].items, item.id],
-          };
+    if (title.length > TITLE_LIMIT_LENGTH) {
+      throw new RecoverableError(
+        '컬렉션 이름은 50자까지만 입력할 수 있습니다.',
+      );
+    }
+
+    if (validInputText(title)) {
+      throw new RecoverableError(
+        '컬렉션 이름에는 괄호, &, 따옴표, 외부 주소를 입력할 수 없습니다.',
+      );
+    }
+
+    const result = await createCollectionApi({
+      title,
+      note: '',
+    });
+
+    await indexedDB.addItem(COLLECTION_STORE, result);
+
+    setCollectionState({
+      ...collectionState,
+      selectedIndex: getCollections().length,
+      collections: await fetchCollections(),
+    });
+  };
+
+  const deleteCollection = async () => {
+    try {
+      const { id } = getCollection();
+
+      await deleteCollectionApi(id);
+
+      await indexedDB.deleteItem(COLLECTION_STORE, id);
+
+      setCollectionState({
+        ...collectionState,
+        selectedIndex: getSelectCollectionIndex() - 1,
+        collections: await fetchCollections(),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const findIndexByCollectionId = (collectionId: number) =>
+    getCollections()?.findIndex((collection) => collection.id === collectionId);
+
+  const updateCollectionItems = async (
+    updateItems: UpdateCollectionItemParam[],
+  ) => {
+    let addCount: Record<number, number> = {};
+
+    updateItems.forEach((item) => {
+      if (item.action === 'ADD') {
+        let count = 0;
+
+        if (!addCount[item.collection_id]) {
+          const index = findIndexByCollectionId(item.collection_id);
+          count = getCollections()[index].items.length + 1;
+        } else {
+          count = addCount[item.collection_id] + 1;
         }
-      } else if (!command) {
-        const itemIndex = findItemIndex(index, item);
 
-        if (itemIndex >= 0) {
-          const newItems = [...newValue[index].items];
-          newItems.splice(itemIndex, 1);
-
-          newValue[index] = {
-            ...newValue[index],
-            items: newItems,
-          };
+        if (count > COLLECTION_ITEMS_LIMIT_COUNT) {
+          throw new RecoverableError(
+            `한 컬렉션에는 작품을 ${COLLECTION_ITEMS_LIMIT_COUNT} 까지만 추가할 수 있습니다.`,
+          );
         }
+
+        addCount = { ...addCount, [item.collection_id]: count };
       }
     });
 
-    setCollections(newValue);
+    try {
+      await updateCollectionItemApi(updateItems);
+
+      updateItems?.forEach(async (updateItem) => {
+        const index = findIndexByCollectionId(updateItem.collection_id);
+        const collection = getCollections()[index];
+        const items = collection.items ?? [];
+
+        if (updateItem.action === 'ADD') {
+          const updated = {
+            ...collection,
+            items: items.concat(updateItem.wata_id),
+          };
+
+          await indexedDB.updateItem(COLLECTION_STORE, updated);
+        } else if (updateItem.action === 'DELETE') {
+          const updated = {
+            ...collection,
+            items: items?.filter((item) => item !== updateItem.wata_id),
+          };
+
+          await indexedDB.updateItem(COLLECTION_STORE, updated);
+        }
+      });
+
+      setCollectionState({
+        ...collectionState,
+        collections: await fetchCollections(),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {
-    collections,
+    getSelectCollectionIndex,
+    getCollection,
+    getCollections,
+    getCollectionItems,
+    selectCollection,
+    updateCollection,
     addCollection,
-    removeCollection,
-    renameCollection,
-    existCollectionItem,
-    handleCollectionItems,
+    deleteCollection,
+    updateCollectionItems,
   };
 };
 
-export default useCollections;
+export default useCollection;

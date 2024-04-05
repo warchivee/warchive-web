@@ -21,10 +21,8 @@ export interface SearchConditions {
 export default function AdminHome() {
   const PAGE_SIZE = 10;
 
-  const [pageNo, maxPage, handlePageChange, handleTotalCount] = usePagination(
-    0,
-    PAGE_SIZE,
-  );
+  const { pageNo, maxPage, handlePageChange, totalCount, handleTotalCount } =
+    usePagination(0, PAGE_SIZE);
 
   const [openAddData, toggleAddData] = useState(false);
 

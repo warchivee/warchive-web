@@ -1,9 +1,21 @@
+import { CollectionType } from './collection.type';
+
 interface CollectionDefaultProps {
-  isEditMode: boolean;
+  collections: CollectionType[];
   selectIndex: number;
 }
 
-export interface CollectionTitleProps extends CollectionDefaultProps {
+export interface CollectionTitleProps {
+  isEditMode: boolean;
+  collection?: CollectionType;
+  selectIndex: number;
+  handleEditMode: (editMode: boolean) => void;
+}
+
+export interface CollectionNoteProps {
+  isEditMode: boolean;
+  collection?: CollectionType;
+  selectIndex: number;
   handleEditMode: (editMode: boolean) => void;
 }
 

@@ -1,6 +1,7 @@
 import { postData } from '@utils/api.util';
-import { removeToken, saveAccessToken } from '@utils/token.util';
-import { deleteUser, saveUser } from '@utils/user.util';
+import tokenUtil from '@utils/token.util';
+import userUtil from '@utils/user.util';
+import localStorageUtil from '@utils/localStorage/localstorage.util';
 import { LoginInfo, LoginResult } from '../types/auth.type';
 
 export const login = async (loginInfo: LoginInfo) => {
@@ -8,17 +9,18 @@ export const login = async (loginInfo: LoginInfo) => {
     ...loginInfo,
   });
 
-  saveAccessToken(result.token, result.expires_in);
-  saveUser(result.user);
+  tokenUtil.save(result.token, result.expires_in);
+  userUtil.save(result.user);
 };
 
 export const failLogin = () => {
-  removeToken();
-  deleteUser();
+  tokenUtil.remove();
+  userUtil.remove();
 };
 
 export const logout = () => {
-  removeToken();
-  deleteUser();
+  localStorageUtil.clearAll();
   window.location.href = '/';
 };
+
+export const checkLogin = () => userUtil.exist();

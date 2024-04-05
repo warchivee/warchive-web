@@ -1,101 +1,131 @@
 import Button from '@components/CommonComponents/button';
-import Modal from '@components/CommonComponents/modal';
 import AddCollectionModal from '@components/UserComponents/modal/addCollection';
 import { Text } from '@components/CommonComponents/text';
-import { CollectionMenuProps } from 'src/types/collections.type';
-import {
-  CollectionType,
-  DEFAULT_COLLECTIONS_KEY,
-} from 'src/types/collection.type';
+import { CollectionType } from 'src/types/collection.type';
 import classNames from 'classnames';
-import { useState } from 'react';
-import useCollections from 'src/hooks/useCollections';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import useCollection from 'src/hooks/useCollections';
+import useModal from 'src/hooks/useModal';
 
-export default function CollectionMenu({
-  selectIndex,
-  isEditMode,
-  handleChange,
-}: CollectionMenuProps) {
-  const { collections, addCollection, removeCollection } = useCollections();
-  const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
+export default function CollectionMenu() {
   const [isInputConfirmOpen, setIsInputConfirmOpen] = useState<boolean>(false);
+
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const [openConfirmModal] = useModal();
+  const [openModal, setOpenModal] = useState(false);
+
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  const {
+    getCollections,
+    getSelectCollectionIndex,
+    selectCollection,
+    deleteCollection,
+  } = useCollection();
+
+  const handleDelete = async () => {
+    try {
+      await deleteCollection();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      console.log(openModal);
+
+      if (
+        popupRef.current &&
+        !popupRef?.current?.contains(event.target as Node) &&
+        !openModal
+      ) {
+        setOpenMenu(false);
+      }
+    },
+    [openModal, popupRef],
+  );
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openModal]);
 
   return (
     <div className="menu">
-      <ul>
-        {collections?.map((collection: CollectionType, index: number) => (
-          <li
-            className={classNames({
-              active: collection.title === collections[selectIndex].title,
-            })}
-            key={`bookmark-list-${collection.title}`}
-            onClick={() => handleChange(index)}
-            aria-hidden="true"
-          >
-            <Text color="white">{collection.title}</Text>
-          </li>
-        ))}
-      </ul>
-      {!isEditMode ? (
+      <div className={openMenu ? 'pc show' : 'pc'} ref={popupRef}>
+        <ul>
+          {getCollections()?.map(
+            (collection: CollectionType, index: number) => (
+              <li
+                className={classNames({
+                  active: index === getSelectCollectionIndex(),
+                })}
+                key={`bookmark-list-${collection.id}`}
+                onClick={() => {
+                  selectCollection(index);
+                  setOpenMenu(!openMenu);
+                }}
+                aria-hidden="true"
+              >
+                <Text color="white">{collection.title}</Text>
+              </li>
+            ),
+          )}
+        </ul>
         <div className="control">
           <Button
             icon="plus"
             iconColor="white"
-            labelColor="white"
             border="round"
             size="small"
             onClick={() => {
               setIsInputConfirmOpen(true);
+              setOpenModal(true);
             }}
           />
-          {selectIndex !== DEFAULT_COLLECTIONS_KEY && (
-            <Button
-              icon="minus"
-              iconColor="white"
-              labelColor="white"
-              border="round"
-              size="small"
-              onClick={() => {
-                setIsConfirmOpen(true);
-              }}
-            />
-          )}
+          <Button
+            icon="minus"
+            iconColor="white"
+            border="round"
+            size="small"
+            onClick={() => {
+              setOpenModal(true);
+              openConfirmModal({
+                title: '컬렉션 삭제하기',
+                message:
+                  '컬렉션을 정말 삭제하시겠습니까?\n컬렉션에 추가한 작품들까지 전부 삭제됩니다.',
+                onCancel: () => {
+                  setOpenModal(false);
+                },
+                onConfirm: () => {
+                  handleDelete();
+                  setOpenModal(false);
+                },
+              });
+            }}
+          />
         </div>
-      ) : null}
+      </div>
+
+      <div
+        className="mobile"
+        onClick={() => setOpenMenu(!openMenu)}
+        aria-hidden
+      >
+        <Text color="light-gray">{openMenu ? '《　' : '　》'}</Text>
+      </div>
 
       <AddCollectionModal
         isOpen={isInputConfirmOpen}
-        onClose={() => setIsInputConfirmOpen(false)}
-        onConfirm={(input?: string) => {
-          try {
-            addCollection(input || '');
-            handleChange(collections.length);
-          } catch (e) {
-            // console.log(e);
-          }
-
-          setIsInputConfirmOpen(false);
-        }}
-      />
-
-      <Modal
-        title="컬렉션 삭제하기"
-        message="컬렉션을 정말 삭제하시겠습니까? 컬렉션에 추가한 작품들까지 전부 삭제됩니다."
-        isOpen={isConfirmOpen}
         onClose={() => {
-          setIsConfirmOpen(false);
+          setIsInputConfirmOpen(false);
+          setOpenModal(false);
         }}
-        onConfirm={() => {
-          try {
-            removeCollection(selectIndex);
-            handleChange(selectIndex - 1);
-          } catch (e) {
-            // console.log(e);
-          }
-
-          setIsConfirmOpen(false);
-        }}
-        buttons={['confirm', 'cancel']}
       />
     </div>
   );

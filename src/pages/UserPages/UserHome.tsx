@@ -1,41 +1,15 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { useEffect, useState } from 'react';
 import { Text } from '@components/CommonComponents/text';
 import Input from '@components/CommonComponents/input';
-import usePagination from 'src/hooks/usePagination';
 import Pagination from '@components/CommonComponents/pagination';
 import WataCardList from '@components/UserComponents/wata/list';
-import searchWatasSelector from 'src/atoms/searchWata.atom';
-import searchKeywordAtom from 'src/atoms/search.atom';
-import { WataType } from 'src/types/wata.type';
+import useSearchKeywords from 'src/hooks/useSearchKeywords';
+import useSearchWata from 'src/hooks/useSearchWata';
 import KeywordSearchBorad from '../../components/UserComponents/keywordSearchBoard';
 
 export default function UserHome() {
-  const PAGE_SIZE = 18;
-
-  const searchWatas = useRecoilValue(searchWatasSelector);
-  const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
-
-  const [pageSearchWatas, setPageSearchWatas] = useState<WataType[]>([]);
-  const [pageNo, maxPage, handlePageChange, handleTotalCount] = usePagination(
-    0,
-    PAGE_SIZE,
-  );
-
-  useEffect(() => {
-    const datas = searchWatas.slice(
-      (pageNo - 1) * PAGE_SIZE,
-      pageNo * PAGE_SIZE,
-    );
-    handleTotalCount(searchWatas?.length);
-    setPageSearchWatas(datas);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchWatas, pageNo]);
-
-  useEffect(() => {
-    handlePageChange(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchKeywords]);
+  const { searchWatas, pageNo, maxPage, totalCount, handlePageChange } =
+    useSearchWata();
+  const { searchKeywords, updateSearchInput } = useSearchKeywords();
 
   return (
     <div className="home">
@@ -49,19 +23,14 @@ export default function UserHome() {
             value={searchKeywords.searchInput}
             type="search"
             placeholder="제목/작가/감독명으로 검색"
-            onChange={(value) => {
-              setSearchKeywords({
-                ...searchKeywords,
-                searchInput: value,
-              });
-            }}
+            onChange={updateSearchInput}
           />
         </div>
 
         {/* 검색 결과 */}
-        <Text size="big">검색 결과는 총 {searchWatas.length} 개 입니다.</Text>
+        <Text size="big">검색 결과는 총 {totalCount} 개 입니다.</Text>
 
-        <WataCardList watas={pageSearchWatas} />
+        <WataCardList watas={searchWatas} />
 
         <Pagination
           currentPage={pageNo}
