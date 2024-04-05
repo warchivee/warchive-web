@@ -1,4 +1,3 @@
-import Button from '@components/CommonComponents/button';
 import { Text, Title } from '@components/CommonComponents/text';
 import {
   AdminWata,
@@ -12,6 +11,8 @@ import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import Modal from '@components/CommonComponents/modal';
 import AdminDropdown from '@components/AdminComponents/AdminDropdown';
 import { LoadingOverlay } from '@components/CommonComponents/loader';
+import Button from '@mui/joy/Button';
+import { IconButton } from '@mui/joy';
 import AdminEditData from './AdminEditData';
 import { DropdownOption } from './AdminMultiDropdown';
 
@@ -142,9 +143,8 @@ export default function AdminDataCard({
               </div>
             </div>
             <div className="right">
-              <Button labelColor="gray">삭제</Button>
+              <Button>삭제</Button>
               <Button
-                labelColor="blue-violet"
                 onClick={() => {
                   toggleEditData(true);
                 }}
@@ -194,14 +194,7 @@ export default function AdminDataCard({
               {platforms?.map((platform) => (
                 <li key={`admin-keyword-${id}-${platform.id}`}>
                   <a href={platform.url} target="_blank" rel="noreferrer">
-                    <Button
-                      background="french-lilac"
-                      labelColor="purple"
-                      size="small"
-                      icon="link"
-                    >
-                      {platform.name}
-                    </Button>
+                    <IconButton>{platform.name}</IconButton>
                   </a>
                 </li>
               ))}

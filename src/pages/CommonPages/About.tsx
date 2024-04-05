@@ -1,5 +1,7 @@
-import Button from '@components/CommonComponents/button';
 import { Text, Title } from '@components/CommonComponents/text';
+import { faAnglesUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconButton } from '@mui/joy';
 
 export default function About() {
   return (
@@ -107,16 +109,14 @@ export default function About() {
         </div>
       </div>
 
-      <Button
-        icon="angles-up"
-        iconColor="blue-violet"
-        labelColor="blue-violet"
+      <IconButton
         onClick={() => {
           window.scrollTo(0, 0);
         }}
       >
+        <FontAwesomeIcon icon={faAnglesUp} />
         맨위로
-      </Button>
+      </IconButton>
     </div>
   );
 }

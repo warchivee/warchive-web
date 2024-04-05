@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import Button from '@components/CommonComponents/button';
 import { Text } from '@components/CommonComponents/text';
 import Input from '@components/CommonComponents/input';
 import classNames from 'classnames';
 import { ColorType } from '@utils/color.util';
+import { IconButton } from '@mui/joy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export interface DropdownOption {
   id: string | number;
@@ -132,12 +134,12 @@ export default function AdminMultiDropdown({
                   key={`dropdown-select-options-${option.id}`}
                 >
                   <Text>{option.name}</Text>
-                  <Button
-                    key={`dropdown-select-options-${option.id}`}
-                    icon="xmark"
-                    align="reverse"
+                  <IconButton
                     onClick={() => toggleOption(option)}
-                  />
+                    key={`dropdown-select-options-${option.id}`}
+                  >
+                    <FontAwesomeIcon icon={faXmark} />
+                  </IconButton>
                 </div>
               );
             }
@@ -149,7 +151,9 @@ export default function AdminMultiDropdown({
             );
           })
         )}
-        <Button icon="down" onClick={handleButtonClick} iconColor="ebony" />
+        <IconButton>
+          <FontAwesomeIcon icon={faAngleDown} onClick={handleButtonClick} />
+        </IconButton>
       </div>
       {isOpen && (
         <div className="options">
@@ -162,7 +166,7 @@ export default function AdminMultiDropdown({
                 isResetButton={false}
                 onChange={(value) => setInput(value)}
               />
-              {isAdd && <Button icon="plus">추가</Button>}
+              {isAdd && <div>추가</div>}
             </div>
           )}
 

@@ -1,4 +1,3 @@
-import Button from '@components/CommonComponents/button';
 import AddCollectionModal from '@components/UserComponents/modal/addCollection';
 import { Text } from '@components/CommonComponents/text';
 import { CollectionType } from 'src/types/collection.type';
@@ -6,6 +5,9 @@ import classNames from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useCollection from 'src/hooks/useCollections';
 import useModal from 'src/hooks/useModal';
+import { IconButton } from '@mui/joy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function CollectionMenu() {
   const [isInputConfirmOpen, setIsInputConfirmOpen] = useState<boolean>(false);
@@ -78,21 +80,15 @@ export default function CollectionMenu() {
           )}
         </ul>
         <div className="control">
-          <Button
-            icon="plus"
-            iconColor="white"
-            border="round"
-            size="small"
+          <IconButton
             onClick={() => {
               setIsInputConfirmOpen(true);
               setOpenModal(true);
             }}
-          />
-          <Button
-            icon="minus"
-            iconColor="white"
-            border="round"
-            size="small"
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </IconButton>
+          <IconButton
             onClick={() => {
               setOpenModal(true);
               openConfirmModal({
@@ -108,7 +104,9 @@ export default function CollectionMenu() {
                 },
               });
             }}
-          />
+          >
+            <FontAwesomeIcon icon={faMinus} />
+          </IconButton>
         </div>
       </div>
 

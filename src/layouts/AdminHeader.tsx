@@ -1,4 +1,3 @@
-import Button from '@components/CommonComponents/button';
 import { Title } from '@components/CommonComponents/text';
 import userUtil from '@utils/user.util';
 import { Link } from 'react-router-dom';
@@ -8,12 +7,7 @@ export default function AdminHeader() {
     <header>
       <div className="content">
         <div className="item">
-          <Button labelColor="white" size="big">
-            <Link to="/admin">데이터 관리</Link>
-          </Button>
-          <Button labelColor="white" size="big">
-            <Link to="/admin/keyword">키워드 관리</Link>
-          </Button>
+          <Link to="/admin">데이터 관리</Link>
         </div>
 
         <div className="item">

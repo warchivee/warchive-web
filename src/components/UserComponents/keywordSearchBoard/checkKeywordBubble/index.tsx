@@ -1,6 +1,7 @@
-import Icon from '@components/CommonComponents/icon';
 import { Text } from '@components/CommonComponents/text';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { CheckKeywordBubbleProps } from '../index.type';
 
 export default function CheckKeywordBubble({
@@ -22,9 +23,7 @@ export default function CheckKeywordBubble({
       />
       <label htmlFor={value} className={classNames({ [`${type}`]: type })}>
         <Text size={size}>{label}</Text>
-        {type === 'remove' && (
-          <Icon type="xmark" size={size} color="french-lilac" />
-        )}
+        {type === 'remove' && <FontAwesomeIcon icon={faXmark} />}
       </label>
     </div>
   );

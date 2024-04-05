@@ -2,14 +2,14 @@ import { useState } from 'react';
 
 import { Title } from '@components/CommonComponents/text';
 import classNames from 'classnames';
-import Button from '@components/CommonComponents/button/index';
-import Icon from '@components/CommonComponents/icon';
 import { useSearchKeywords } from 'src/hooks/useSearchKeywords';
 import { SearchKeywordsKeyType } from 'src/types/serchKeyword.type';
 import { KeywordListType, KeywordType } from 'src/types/wata.type';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import IndexedDBUtil, { KEYWORD_STORE } from '@utils/indexedDB/indexedDB.util';
-import { Typography } from '@mui/joy';
+import { Button, Typography } from '@mui/joy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import CheckKeywordBubble from './checkKeywordBubble';
 import CheckKeywordBubbles from './checkKeywordBubbles';
 
@@ -97,7 +97,11 @@ export default function KeywordSearchBorad() {
           <Title type="h5" color="white">
             키워드로 검색
           </Title>
-          <Icon size="small" color="white" type={tabOpen ? 'up' : 'down'} />
+          {tabOpen ? (
+            <FontAwesomeIcon icon={faAngleUp} />
+          ) : (
+            <FontAwesomeIcon icon={faAngleDown} />
+          )}
         </div>
 
         {/* 카테고리 탭 */}
@@ -162,10 +166,6 @@ export default function KeywordSearchBorad() {
 
           {hasSelectedKeywords() && (
             <Button
-              background="lavender"
-              labelColor="french-lilac"
-              border="round"
-              size="small"
               onClick={() => {
                 resetSearchKeywords();
               }}

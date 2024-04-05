@@ -4,10 +4,9 @@ import useCollection from 'src/hooks/useCollections';
 import kakaotalk_logo from '@assets/logos/kakaotalk.png';
 import twitter_logo from '@assets/logos/twitter.png';
 import facebook_logo from '@assets/logos/facebook.png';
-import Icon from '@components/CommonComponents/icon';
 import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import useSnackbar from 'src/hooks/useSnackbar';
 
 declare global {
@@ -194,7 +193,7 @@ export default function ShareCollectionButtons() {
           setOpenInfo(!openInfo);
         }}
       >
-        <Icon type="share" color="black" size="normal" />
+        <FontAwesomeIcon icon={faShareNodes} />
         <Typography level="body-xs" textColor="black">
           나만 보기 아까운 작품이 있다면?
         </Typography>

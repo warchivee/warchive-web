@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 
-import Icon from '@components/CommonComponents/icon';
-import Button from '@components/CommonComponents/button';
+import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, IconButton } from '@mui/joy';
 import { FontSizeType } from '../text/index.type';
 
 export default function Input({
@@ -31,7 +32,7 @@ export default function Input({
 }) {
   return (
     <div className="input">
-      {type === 'search' && <Icon type="search" size={size} color="purple" />}
+      {type === 'search' && <FontAwesomeIcon icon={faMagnifyingGlass} />}
       <input
         type={type}
         maxLength={maxLength}
@@ -62,20 +63,17 @@ export default function Input({
 
       {isResetButton && (
         <div className="reset">
-          <Button
-            icon="xmark"
+          <IconButton
             onClick={() => {
               onChange('');
             }}
-          />
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </IconButton>
         </div>
       )}
 
-      {isEnterButton && (
-        <Button onClick={() => onEnter()} background="selago">
-          검색
-        </Button>
-      )}
+      {isEnterButton && <Button onClick={() => onEnter()}>검색</Button>}
     </div>
   );
 }

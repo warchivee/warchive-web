@@ -14,8 +14,10 @@ import Typography from '@mui/joy/Typography';
 import Stack from '@mui/joy/Stack';
 import Chip from '@mui/joy/Chip';
 import { Box, IconButton, Tooltip } from '@mui/joy';
-import Icon from '@components/CommonComponents/icon';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretDown,
+  faEllipsisVertical,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface WataCardProps {
   wata: WataType;
@@ -208,7 +210,7 @@ export default function WataCollectionCard({
               setOpenInfo(!openInfo);
             }}
           >
-            <Icon type="caret-down" color="black" size="normal" />
+            <FontAwesomeIcon icon={faCaretDown} />
             작품 정보
           </IconButton>
         </Tooltip>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import Button from '@components/CommonComponents/button';
 import { Text } from '@components/CommonComponents/text';
 import classNames from 'classnames';
-import { PaginationProps } from './index.type';
+import { IconButton } from '@mui/joy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import Input from '../input';
+import { PaginationProps } from './index.type';
 
 const getPageArange = (currentPage: number, maxPage: number): number[] => {
   const size = 5;
@@ -30,12 +32,13 @@ export default function Pagination({
   return (
     <div className="pagination">
       <div className={classNames('control', { hidden: currentPage <= 3 })}>
-        <Button
-          icon="angles-left"
+        <IconButton
           onClick={() => {
             onChange(1);
           }}
-        />
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </IconButton>
       </div>
 
       <div className="pages">
@@ -70,12 +73,13 @@ export default function Pagination({
           hidden: currentPage + 2 >= maxPage,
         })}
       >
-        <Button
-          icon="angles-right"
+        <IconButton
           onClick={() => {
             onChange(maxPage);
           }}
-        />
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </IconButton>
       </div>
     </div>
   );

@@ -12,9 +12,11 @@ import {
 import uploadImage from 'src/services/upload-image';
 import { Text, Title } from '@components/CommonComponents/text';
 import Input from '@components/CommonComponents/input';
-import Button from '@components/CommonComponents/button';
 import Drawer from '@components/CommonComponents/drawer';
 import { AxiosError } from 'axios';
+import { Button, IconButton } from '@mui/joy';
+import { faPlus, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdminMultiDropdown, { DropdownOption } from './AdminMultiDropdown';
 import AdminEditImage from './AdminEditImage';
 import DepthDropdown from './AdminDepthDropdown';
@@ -179,14 +181,14 @@ export default function AdminEditData({
 
         <div className="item">
           <Text color="gray">썸네일</Text>
-          <Button
-            icon="download"
+          <IconButton
             onClick={() => {
               if (imgInput.current) {
                 imgInput.current.click();
               }
             }}
           >
+            <FontAwesomeIcon icon={faUpload} />
             업로드
             <input
               type="file"
@@ -210,7 +212,7 @@ export default function AdminEditData({
               ref={imgInput}
               style={{ display: 'none' }}
             />
-          </Button>
+          </IconButton>
         </div>
 
         <div className="item">
@@ -279,10 +281,8 @@ export default function AdminEditData({
               </div>
             </div>
           ))}
-          <Button
-            icon="plus"
-            background="athens-gray"
-            border="round"
+
+          <IconButton
             onClick={() => {
               handleEditData('platforms', [
                 ...(editData?.platforms || []),
@@ -290,8 +290,9 @@ export default function AdminEditData({
               ]);
             }}
           >
+            <FontAwesomeIcon icon={faPlus} />
             추가
-          </Button>
+          </IconButton>
         </div>
 
         <div className="item">
@@ -307,7 +308,6 @@ export default function AdminEditData({
 
         <div className="controller">
           <Button
-            background="athens-gray"
             onClick={() => {
               ModalUtil.open({
                 title: '데이터 입력 취소',
@@ -319,9 +319,7 @@ export default function AdminEditData({
             취소
           </Button>
           <Button
-            background="french-lilac"
-            labelColor="purple"
-            isLoading={isLoading}
+            loading={isLoading}
             onClick={async () => {
               setIsLoading(true);
 

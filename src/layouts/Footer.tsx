@@ -1,5 +1,6 @@
-import Button from '@components/CommonComponents/button';
 import { Text } from '@components/CommonComponents/text';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function Footer() {
   return (
@@ -22,6 +23,15 @@ export default function Footer() {
             <Text color="gray">후원계좌</Text>
             <Text color="gray">신한은행 110-428-228720 ㅇㅈㅇ</Text>
           </div>
+
+          <a
+            href="https://article.womynarchive.com/"
+            target="_blank"
+            aria-label="와카이브-아티클로 이동"
+            rel="noreferrer"
+          >
+            와카이브 아티클
+          </a>
         </div>
 
         <div className="info sns">
@@ -31,7 +41,7 @@ export default function Footer() {
             aria-label="트위터로 이동"
             rel="noreferrer"
           >
-            <Button icon="twitter" iconColor="gray" size="bigger" />
+            <FontAwesomeIcon icon={faXTwitter} />
           </a>
           <a
             href="https://www.instagram.com/womynarchive/"
@@ -39,15 +49,7 @@ export default function Footer() {
             aria-label="인스타그램으로 이동"
             rel="noreferrer"
           >
-            <Button icon="instagram" iconColor="gray" size="bigger" />
-          </a>
-          <a
-            href="https://article.womynarchive.com/"
-            target="_blank"
-            aria-label="와카이브-아티클로 이동"
-            rel="noreferrer"
-          >
-            <Button icon="news" iconColor="gray" size="bigger" />
+            <FontAwesomeIcon icon={faInstagram} />
           </a>
         </div>
       </div>

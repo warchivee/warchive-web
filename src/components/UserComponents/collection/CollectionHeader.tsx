@@ -1,4 +1,3 @@
-import { Text, Title } from '@components/CommonComponents/text';
 import {
   COMMENT_LIMIT_LENGTH,
   TITLE_LIMIT_LENGTH,
@@ -10,12 +9,14 @@ import {
   Button,
   ButtonGroup,
   FormHelperText,
+  IconButton,
   Input,
   Stack,
   Textarea,
   Typography,
 } from '@mui/joy';
-import Icon from '@components/CommonComponents/icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function CollectionHeader() {
   const [isHovered, setIsHovered] = useState(false);
@@ -181,15 +182,14 @@ export default function CollectionHeader() {
       ) : null}
 
       {isHovered && (
-        <div
+        <IconButton
           onClick={() => {
             setIsEditMode(true);
             setIsHovered(false);
           }}
-          aria-hidden
         >
-          <Icon type="write" color="gray" size="normal" />
-        </div>
+          <FontAwesomeIcon icon={faPenToSquare} />
+        </IconButton>
       )}
     </Stack>
   );

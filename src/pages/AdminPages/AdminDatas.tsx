@@ -2,10 +2,10 @@ import { Title } from '@components/CommonComponents/text';
 import { Suspense, useState } from 'react';
 import Pagination from '@components/CommonComponents/pagination';
 import usePagination from 'src/hooks/usePagination';
-import Button from '@components/CommonComponents/button';
 import { PageLoader } from '@components/CommonComponents/loader';
 import { useQueryClient } from '@tanstack/react-query';
 import { DropdownOption } from '@components/AdminComponents/AdminMultiDropdown';
+import { Button } from '@mui/joy';
 import AdminEditData from '../../components/AdminComponents/AdminEditData';
 import AdminDataList from '../../components/AdminComponents/AdminDataList';
 import AdminSearchContainer from '../../components/AdminComponents/AdminSearchContainer';
@@ -51,11 +51,6 @@ export default function AdminHome() {
           onClick={() => {
             toggleAddData(true);
           }}
-          labelColor="ebony"
-          icon="plus"
-          iconColor="ebony"
-          background="selago"
-          border="round"
         >
           데이터 추가
         </Button>

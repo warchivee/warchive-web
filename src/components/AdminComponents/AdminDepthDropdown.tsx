@@ -1,6 +1,8 @@
-import Button from '@components/CommonComponents/button';
 import { Text } from '@components/CommonComponents/text';
 import { useEffect, useRef, useState } from 'react';
+import { IconButton } from '@mui/joy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { DropdownOption } from './AdminMultiDropdown';
 
 export interface DepthDropdownOption extends DropdownOption {
@@ -54,17 +56,12 @@ export default function DepthDropdown({
 
   return (
     <div className="depth-dropdown" ref={dropdownRef}>
-      <Button
-        icon="down"
-        onClick={handleButtonClick}
-        background={selectOption?.color || 'athens-gray'}
-        iconColor="ebony"
-        align="reverse"
-      >
+      <IconButton onClick={handleButtonClick}>
+        <FontAwesomeIcon icon={faAngleDown} />
         {selectOption
           ? `${selectOption?.name} > ${selectOption?.subOption?.name}`
           : '선택'}
-      </Button>
+      </IconButton>
       {isOpen && (
         <div className="items">
           <ul>

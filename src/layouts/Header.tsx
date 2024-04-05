@@ -1,17 +1,18 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cloneElement, startTransition, useState } from 'react';
-import Button from '@components/CommonComponents/button';
 import { checkLogin, logout } from 'src/services/auth.api';
 import Drawer from '@components/CommonComponents/drawer';
 import { Text, Title } from '@components/CommonComponents/text';
 import userUtil from '@utils/user.util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faBars,
   faBookBookmark,
   faCircleQuestion,
   faEnvelope,
   faHammer,
   faUser,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser as faUserSolid } from '@fortawesome/free-regular-svg-icons';
 import { IconButton, Typography } from '@mui/joy';
@@ -157,12 +158,9 @@ function MobileMenuDrawer({
       <div className="mobile-menu">
         <div>
           <div className="header">
-            <Button
-              icon="xmark"
-              iconColor="white"
-              size="big"
-              onClick={onClose}
-            />
+            <IconButton onClick={onClose}>
+              <FontAwesomeIcon icon={faXmark} />
+            </IconButton>
 
             <div className="logo">
               <img src="/images/logo/logo.png" alt="와카이브 로고" />
@@ -213,12 +211,9 @@ function MobileHeader({ menus, isLogin }: HeaderProps) {
 
   return (
     <div className="content mobile">
-      <Button
-        icon="hambuger-menu"
-        iconColor="vivid-violet"
-        size="big"
-        onClick={() => toggleMobileMenu(true)}
-      />
+      <IconButton onClick={() => toggleMobileMenu(true)}>
+        <FontAwesomeIcon icon={faBars} />
+      </IconButton>
       <Logo />
       <AboutButton />
 

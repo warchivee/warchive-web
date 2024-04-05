@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Modal from '@components/CommonComponents/modal';
-import Button from '@components/CommonComponents/button';
 import Cropper, { Area } from 'react-easy-crop';
 import { Text } from '@components/CommonComponents/text';
 import resizeImage from '@utils/resizeImage.utils';
 import WataCard from '@components/UserComponents/wata/card';
+import { Button } from '@mui/joy';
 import getCroppedImg from '../../utils/cropImage.utils';
 
 export default function AdminEditImage({
@@ -73,7 +73,6 @@ export default function AdminEditImage({
                 toggleEditImage(true);
               }
             }}
-            icon="share-up"
           >
             에디터편집
           </Button>

@@ -1,7 +1,9 @@
-import Button from '@components/CommonComponents/button';
 import { Text, Title } from '@components/CommonComponents/text';
 import classNames from 'classnames';
 import { useEffect } from 'react';
+import { Button, IconButton } from '@mui/joy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ModalButtonType, ModalProps } from './index.type';
 
 export default function Modal({
@@ -31,7 +33,6 @@ export default function Modal({
             onClick={() => {
               onConfirm();
             }}
-            labelColor="blue-violet"
           >
             확인
           </Button>
@@ -50,7 +51,9 @@ export default function Modal({
       <div className={classNames('inner', { [`${size}`]: size })}>
         <div className="header">
           <Title type="h2">{title}</Title>
-          <Button icon="xmark" onClick={onClose} />
+          <IconButton>
+            <FontAwesomeIcon icon={faXmark} onClick={onClose} />
+          </IconButton>
         </div>
 
         <div className="message">
