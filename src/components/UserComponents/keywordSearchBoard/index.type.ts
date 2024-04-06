@@ -8,7 +8,11 @@ export interface CheckKeywordBubbleProps {
   type?: 'default' | 'border' | 'remove';
   size?: FontSizeType;
   checked?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>,
+  ) => void;
 }
 
 export interface CheckKeywordBubblesProps {
