@@ -59,7 +59,15 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
   }, [isOpen]);
 
   return (
-    <Modal open={isOpen} onClose={onClose}>
+    <Modal
+      open={isOpen}
+      onClose={() => {
+        if (loading) {
+          return;
+        }
+        onClose();
+      }}
+    >
       <ModalDialog layout="center">
         <ModalClose variant="plain" sx={{ m: 1 }} />
         <Typography level="h4" fontWeight="lg">
@@ -76,6 +84,11 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
             value={title}
             onChange={(event) => setTitle(event.target.value)}
             color="neutral"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleConfirm();
+              }
+            }}
             endDecorator={
               <Typography level="body-sm" textColor="tertiary">
                 {title.length}/{TITLE_LIMIT_LENGTH}

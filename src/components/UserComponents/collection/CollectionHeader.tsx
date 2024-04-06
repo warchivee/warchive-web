@@ -92,7 +92,7 @@ export default function CollectionHeader() {
 
           <Typography level="body-sm" textColor="text.tertiary">
             {!getCollection()?.note || getCollection()?.note === ''
-              ? '설명을 입력하세요.'
+              ? '코멘트를 입력하세요.'
               : getCollection()?.note}
           </Typography>
         </Stack>
@@ -104,7 +104,7 @@ export default function CollectionHeader() {
             <Input
               fullWidth
               variant="soft"
-              value={editInfo.title}
+              value={editInfo?.title ?? ''}
               onChange={(event) =>
                 setEditInfo({ ...editInfo, title: event.target.value })
               }
@@ -131,7 +131,7 @@ export default function CollectionHeader() {
               variant="soft"
               maxRows={2}
               minRows={2}
-              value={editInfo.note}
+              value={editInfo?.note ?? ''}
               onChange={(event) =>
                 setEditInfo({ ...editInfo, note: event.target.value })
               }

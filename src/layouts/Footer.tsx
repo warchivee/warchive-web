@@ -75,7 +75,7 @@ export default function Footer({ mobile = false }: { mobile?: boolean }) {
                   rel="noreferrer"
                 >
                   <FontAwesomeIcon
-                    style={{ color: '#A292A5' }}
+                    style={{ color: '#A29EA5' }}
                     icon={faXTwitter}
                   />
                 </a>
@@ -86,7 +86,7 @@ export default function Footer({ mobile = false }: { mobile?: boolean }) {
                   rel="noreferrer"
                 >
                   <FontAwesomeIcon
-                    style={{ color: '#A292A5' }}
+                    style={{ color: '#A29EA5' }}
                     icon={faInstagram}
                   />
                 </a>

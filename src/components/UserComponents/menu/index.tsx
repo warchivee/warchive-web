@@ -20,6 +20,7 @@ export default function CollectionMenu() {
   const popupRef = useRef<HTMLDivElement>(null);
 
   const {
+    isCollectionsEmpty,
     getCollections,
     getSelectCollectionIndex,
     selectCollection,
@@ -79,32 +80,57 @@ export default function CollectionMenu() {
         </ul>
         <div className="control">
           <IconButton
+            size="sm"
+            variant="plain"
+            sx={{
+              border: '1px solid white',
+              borderRadius: '20px',
+              minHeight: '1.8rem',
+              minWidth: '1.8rem',
+              height: '1.8rem',
+              width: '1.8rem',
+            }}
             onClick={() => {
               setIsInputConfirmOpen(true);
               setOpenModal(true);
             }}
           >
-            <FontAwesomeIcon icon={faPlus} />
+            <FontAwesomeIcon style={{ color: 'white' }} icon={faPlus} />
           </IconButton>
-          <IconButton
-            onClick={() => {
-              setOpenModal(true);
-              openConfirmModal({
-                title: '컬렉션 삭제하기',
-                message:
-                  '컬렉션을 정말 삭제하시겠습니까?\n컬렉션에 추가한 작품들까지 전부 삭제됩니다.',
-                onCancel: () => {
-                  setOpenModal(false);
-                },
-                onConfirm: async () => {
-                  await handleDelete();
-                  setOpenModal(false);
-                },
-              });
-            }}
-          >
-            <FontAwesomeIcon icon={faMinus} />
-          </IconButton>
+          {!isCollectionsEmpty() && (
+            <IconButton
+              size="sm"
+              sx={{
+                border: '1px solid white',
+                borderRadius: '20px',
+                minHeight: '1.8rem',
+                minWidth: '1.8rem',
+                height: '1.8rem',
+                width: '1.8rem',
+              }}
+              variant="plain"
+              onClick={() => {
+                if (isCollectionsEmpty()) {
+                  return;
+                }
+                setOpenModal(true);
+                openConfirmModal({
+                  title: '컬렉션 삭제하기',
+                  message:
+                    '컬렉션을 정말 삭제하시겠습니까?\n컬렉션에 추가한 작품들까지 전부 삭제됩니다.',
+                  onCancel: () => {
+                    setOpenModal(false);
+                  },
+                  onConfirm: async () => {
+                    await handleDelete();
+                    setOpenModal(false);
+                  },
+                });
+              }}
+            >
+              <FontAwesomeIcon style={{ color: 'white' }} icon={faMinus} />
+            </IconButton>
+          )}
         </div>
       </div>
 

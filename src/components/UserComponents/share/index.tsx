@@ -19,13 +19,14 @@ declare global {
 export default function ShareCollectionButtons() {
   const { getCollection } = useCollection();
   const popupRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const [openInfo, setOpenInfo] = useState(false);
   const [openSnackbar] = useSnackbar();
 
   const shareUrlBase = window.location.href;
 
-  const title = getCollection()?.title;
-  const description = getCollection()?.note;
+  const title = '공유한 컬렉션 보러가기';
+  const description = `[${getCollection()?.title}] - ${getCollection()?.note}`;
   const url = `${shareUrlBase}/${getCollection()?.shared_id}`;
 
   const imageSize = {
@@ -36,6 +37,8 @@ export default function ShareCollectionButtons() {
   const handleClickOutside = (event: MouseEvent) => {
     if (
       popupRef.current &&
+      buttonRef.current &&
+      !buttonRef?.current?.contains(event.target as Node) &&
       !popupRef?.current?.contains(event.target as Node)
     ) {
       setOpenInfo(false);
@@ -117,7 +120,7 @@ export default function ShareCollectionButtons() {
               <Stack>
                 <IconButton
                   onClick={() => {
-                    const sendText = `와카이브 - ${getCollection().title}`;
+                    const sendText = `나의 여성서사 컬렉션 - ${getCollection()?.title}`;
                     window.open(
                       `https://twitter.com/intent/tweet?text=${sendText}&hashtags=와카이브,와카이브컬렉션,여성서사&url=${url}`,
                     );
@@ -179,25 +182,31 @@ export default function ShareCollectionButtons() {
         </Card>
       }
     >
-      <Button
-        variant="soft"
-        size="sm"
-        sx={{
+      <div
+        ref={buttonRef}
+        style={{
           width: 'max-content',
-          background: '#F0F0F0',
-          color: '#020202',
-          gap: '0.5rem',
-          borderRadius: '20px',
-        }}
-        onClick={() => {
-          setOpenInfo(!openInfo);
         }}
       >
-        <FontAwesomeIcon icon={faShareNodes} />
-        <Typography level="body-xs" textColor="black">
-          나만 보기 아까운 작품이 있다면?
-        </Typography>
-      </Button>
+        <Button
+          variant="soft"
+          size="sm"
+          sx={{
+            background: '#F0F0F0',
+            color: '#020202',
+            gap: '0.5rem',
+            borderRadius: '20px',
+          }}
+          onClick={() => {
+            setOpenInfo(!openInfo);
+          }}
+        >
+          <FontAwesomeIcon icon={faShareNodes} />
+          <Typography level="body-xs" textColor="black">
+            나만 보기 아까운 작품이 있다면?
+          </Typography>
+        </Button>
+      </div>
     </Tooltip>
   );
 }

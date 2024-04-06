@@ -30,8 +30,14 @@ const useSearchWata = () => {
 
       if (searchInput && searchInput?.replace(' ', '') !== '') {
         pass.searchInput =
-          wata.title.includes(searchInput) ||
-          wata.creators.includes(searchInput);
+          wata.title
+            ?.replace(' ', '')
+            ?.toLocaleLowerCase()
+            .includes(searchInput?.replace(' ', '')?.toLocaleLowerCase()) ||
+          wata.creators
+            ?.replace(' ', '')
+            ?.toLocaleLowerCase()
+            .includes(searchInput?.replace(' ', '')?.toLocaleLowerCase());
       }
 
       if (category && category.id !== 0) {

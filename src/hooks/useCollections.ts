@@ -21,8 +21,8 @@ import {
 
 export const collectionLocalStorageKey = 'COLLECTION_SAVED_AT';
 
-const COLLECTIONS_LIMMIT_COUNT = 20;
-const COLLECTION_ITEMS_LIMIT_COUNT = 50;
+export const COLLECTIONS_LIMMIT_COUNT = 20;
+export const COLLECTION_ITEMS_LIMIT_COUNT = 50;
 
 const indexedDB = IndexedDBUtil.getInstance();
 
@@ -32,9 +32,13 @@ export const useCollection = () => {
 
   const getSelectCollectionIndex = () => collectionState.selectedIndex;
 
-  const getCollections = () => collectionState.collections;
+  const getCollections = () => collectionState.collections ?? [];
 
-  const getCollection = () => getCollections()[getSelectCollectionIndex()];
+  const getCollection = () =>
+    getCollections()[getSelectCollectionIndex()] ?? [];
+
+  const isCollectionsEmpty = () =>
+    !getCollections() || getCollections()?.length <= 0;
 
   const getCollectionItems = () => {
     const collection = getCollection();
@@ -51,8 +55,8 @@ export const useCollection = () => {
 
   const updateCollection = async (params: { title: string; note: string }) => {
     if (
-      getCollection().title === params.title &&
-      getCollection().note === params.note
+      getCollection()?.title === params.title &&
+      getCollection()?.note === params.note
     ) {
       return;
     }
@@ -159,7 +163,7 @@ export const useCollection = () => {
 
         if (!addCount[item.collection_id]) {
           const index = findIndexByCollectionId(item.collection_id);
-          count = getCollections()[index].items.length + 1;
+          count = getCollections()[index]?.items?.length ?? 0 + 1;
         } else {
           count = addCount[item.collection_id] + 1;
         }
@@ -209,6 +213,7 @@ export const useCollection = () => {
   };
 
   return {
+    isCollectionsEmpty,
     getSelectCollectionIndex,
     getCollection,
     getCollections,

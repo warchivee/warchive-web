@@ -3,7 +3,7 @@ import {
   SearchKeywordsKeyType,
   SearchKeywordsType,
 } from 'src/types/serchKeyword.type';
-import { useEffect, useRef, useState } from 'react';
+import { startTransition, useEffect, useRef, useState } from 'react';
 import { KeywordType, PlatformType, WataType } from 'src/types/wata.type';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -35,6 +35,7 @@ export default function WataCollectionCard({
   const [openInfo, setOpenInfo] = useState(false);
 
   const popupRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   const openEditModal = () => {
     setIsEditModalVisible(!isEditModalVisible);
@@ -42,8 +43,10 @@ export default function WataCollectionCard({
   };
 
   const handleClickKeyword = (newValue: SearchKeywordsType) => {
-    setSearchKeywords(newValue);
-    navigate('/');
+    startTransition(() => {
+      setSearchKeywords(newValue);
+      navigate('/');
+    });
   };
 
   const renderHashTag = (type: SearchKeywordsKeyType, keyword: KeywordType) => {
@@ -76,6 +79,8 @@ export default function WataCollectionCard({
   const handleClickOutside = (event: MouseEvent) => {
     if (
       popupRef.current &&
+      buttonRef.current &&
+      !buttonRef?.current?.contains(event.target as Node) &&
       !popupRef?.current?.contains(event.target as Node)
     ) {
       setOpenInfo(false);
@@ -110,6 +115,9 @@ export default function WataCollectionCard({
           src={wata.thumbnail_card}
           alt={wata.title}
           loading="lazy"
+          style={{
+            objectFit: 'cover',
+          }}
         />
       </Box>
 
@@ -198,22 +206,25 @@ export default function WataCollectionCard({
             </Card>
           }
         >
-          <IconButton
-            variant="soft"
-            size="sm"
-            sx={{
-              gap: '0.5rem',
-              background: '#F0F0F0',
-              color: '#020202',
-              borderRadius: '5px',
-            }}
-            onClick={() => {
-              setOpenInfo(!openInfo);
-            }}
-          >
-            <FontAwesomeIcon icon={faCaretDown} />
-            작품 정보
-          </IconButton>
+          <div ref={buttonRef} style={{ width: '100%' }}>
+            <IconButton
+              variant="soft"
+              size="sm"
+              sx={{
+                width: '100%',
+                gap: '0.5rem',
+                background: '#F0F0F0',
+                color: '#020202',
+                borderRadius: '5px',
+              }}
+              onClick={() => {
+                setOpenInfo(!openInfo);
+              }}
+            >
+              <FontAwesomeIcon icon={faCaretDown} />
+              작품 정보
+            </IconButton>{' '}
+          </div>
         </Tooltip>
       </Stack>
 

@@ -36,23 +36,26 @@ export const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     const newConfig = { ...config };
-    if (
-      !(
-        newConfig.url?.includes('/login') ||
-        newConfig.url?.includes('/publish-wata')
-      )
-    ) {
-      if (tokenUtil.isExperis()) {
-        try {
-          await reissueToken(); // 토큰 재발급 요청
-        } catch (reissueError) {
-          window.location.href = '/login';
-          return Promise.reject(reissueError); // 에러 반환
-        }
-      }
 
-      newConfig.headers.Authorization = `Bearer ${tokenUtil.get()}`;
+    if (
+      newConfig.url === 'login' ||
+      newConfig.url === 'publish-wata' ||
+      newConfig.url?.includes('collection/')
+    ) {
+      return newConfig;
     }
+
+    if (tokenUtil.isExperis()) {
+      try {
+        await reissueToken(); // 토큰 재발급 요청
+      } catch (reissueError) {
+        window.location.href = '/login';
+        console.error(reissueError);
+        return Promise.reject(reissueError); // 에러 반환
+      }
+    }
+
+    newConfig.headers.Authorization = `Bearer ${tokenUtil.get()}`;
 
     return newConfig;
   },
@@ -73,6 +76,7 @@ api.interceptors.response.use(
         return await api(originalRequest);
       } catch (reissueError) {
         window.location.href = '/login';
+        console.error(reissueError);
         return Promise.reject(reissueError);
       }
     } else {

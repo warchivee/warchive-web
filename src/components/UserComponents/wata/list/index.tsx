@@ -23,8 +23,9 @@ export default function WataCardList({ watas = [] }: WataCardListProps) {
             handleBookmark={() => {
               if (!checkLogin()) {
                 openLoginModal({
-                  title: '로그인 필요',
-                  message: '로그인이 필요합니다.',
+                  title: '컬렉션에 추가하기',
+                  message:
+                    '컬렉션을 이용하려면 로그인이 필요해요.\n상단의 사람 모양 버튼을 클릭하여 로그인할 수 있어요.',
                 });
                 return;
               }

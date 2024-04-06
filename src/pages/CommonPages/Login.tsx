@@ -1,4 +1,5 @@
-import { Text, Title } from '@components/CommonComponents/text';
+import { Text } from '@components/CommonComponents/text';
+import { Typography } from '@mui/joy';
 import { getKakaoLoginPageUrl } from 'src/services/kakao.api';
 
 export default function Login() {
@@ -6,14 +7,16 @@ export default function Login() {
     <div className="login">
       <div className="logo">
         <img src="/images/logo/sh-logo.png" alt="로고" />
+        <Typography level="h2" textAlign="center">
+          로그인하기
+        </Typography>
       </div>
 
       <div className="title">
-        <Title type="h1">로그인하기</Title>
-        <Text color="gray">
-          별도의 회원가입 없이 소셜 계정으로 로그인하세요. 로그인 시 컬렉션
-          기능을 사용할 수 있습니다.
-        </Text>
+        <Typography level="body-sm" textAlign="center">
+          별도의 회원가입 없이 소셜 계정으로 로그인하세요.
+          <br /> 로그인 시 컬렉션을 사용할 수 있습니다.
+        </Typography>
       </div>
 
       <div className="driven" />

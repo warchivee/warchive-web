@@ -7,21 +7,33 @@ import WataCollectionList from '@components/UserComponents/collection/Collection
 import { Box, Stack, Typography } from '@mui/joy';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Header from 'src/layouts/Header';
-import Footer from 'src/layouts/Footer';
+import { AxiosError } from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFaceSurprise } from '@fortawesome/free-regular-svg-icons';
 
-const getDatas = async (id: string | undefined): Promise<CollectionType> => {
+const getDatas = async (
+  id: string | undefined,
+): Promise<CollectionType | undefined> => {
   if (id) {
-    const result = await getSharedCollectionApi(id);
-    return result;
+    try {
+      const result = await getSharedCollectionApi(id);
+      return result;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 404) {
+          return {
+            id: -1,
+            shared_id: '',
+            title: '',
+            note: '',
+            items: [],
+          };
+        }
+      }
+    }
   }
 
-  return {
-    id: -1,
-    shared_id: '',
-    title: '',
-    note: '',
-    items: [],
-  } as CollectionType;
+  return undefined;
 };
 
 export default function ShareCollections() {
@@ -29,12 +41,21 @@ export default function ShareCollections() {
 
   const watas = useRecoilValue(wataListState);
 
-  const { data: collection } = useSuspenseQuery<CollectionType>({
+  const { data: collection } = useSuspenseQuery<CollectionType | undefined>({
     queryKey: ['shared-collections', sharedId],
     queryFn: () => getDatas(sharedId),
   });
 
-  return (
+  return !collection || collection?.id === -1 ? (
+    <Stack height="calc(100vh - 68px)" minHeight="667px">
+      <Header />
+      <Stack justifyContent="center" alignItems="center" gap={2} height="100%">
+        <FontAwesomeIcon size="4x" icon={faFaceSurprise} color="#170c1e" />
+        <Typography level="h3">앗, 공유할 컬렉션이 없어요!</Typography>
+        <Typography>없어진 컬렉션이거나 없는 컬렉션이에요.</Typography>
+      </Stack>
+    </Stack>
+  ) : (
     <div className="share-collections">
       <Header />
       <Box
