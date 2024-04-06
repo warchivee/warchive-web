@@ -62,14 +62,7 @@ export const kakaoLogin = async (authCode: string) => {
 
     window.location.href = '/';
   } catch (error) {
-    ModalUtil.open({
-      title: '로그인 실패',
-      message: `로그인에 실패하였습니다. (${error})`,
-      onConfirm: () => {
-        window.location.href = '/';
-      },
-    });
-
+    console.error(error);
     failLogin();
   }
 };

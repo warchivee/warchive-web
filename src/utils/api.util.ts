@@ -38,7 +38,7 @@ api.interceptors.request.use(
     const newConfig = { ...config };
 
     if (
-      newConfig.url === 'login' ||
+      newConfig.url === 'auth/login' ||
       newConfig.url === 'publish-wata' ||
       newConfig.url?.includes('collection/')
     ) {
@@ -49,7 +49,7 @@ api.interceptors.request.use(
       try {
         await reissueToken(); // 토큰 재발급 요청
       } catch (reissueError) {
-        window.location.href = '/login';
+        // window.location.href = '/login';
         console.error(reissueError);
         return Promise.reject(reissueError); // 에러 반환
       }
@@ -75,7 +75,7 @@ api.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${tokenUtil.get()}`;
         return await api(originalRequest);
       } catch (reissueError) {
-        window.location.href = '/login';
+        // window.location.href = '/login';
         console.error(reissueError);
         return Promise.reject(reissueError);
       }
