@@ -36,8 +36,6 @@ export default function CollectionMenu() {
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
-      console.log(openModal);
-
       if (
         popupRef.current &&
         !popupRef?.current?.contains(event.target as Node) &&
@@ -98,8 +96,8 @@ export default function CollectionMenu() {
                 onCancel: () => {
                   setOpenModal(false);
                 },
-                onConfirm: () => {
-                  handleDelete();
+                onConfirm: async () => {
+                  await handleDelete();
                   setOpenModal(false);
                 },
               });

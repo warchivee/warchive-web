@@ -17,7 +17,7 @@ const getCollectionAtom = async () => {
 };
 
 export const collectionAtom = atom<CollectionAtomType>({
-  key: 'selectedCollectionIndexAtom',
+  key: 'collectionAtom',
   default: getCollectionAtom(),
 });
 

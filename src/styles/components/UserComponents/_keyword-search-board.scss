@@ -91,13 +91,16 @@
 
   & .select-keywords {
     @include flex-row-space-between;
+    gap: 1rem;
+    align-items: center;
     @include viewport;
     padding: 1rem 0rem;
 
     & > .keywords {
       @include flex-row-start;
       gap: 0.7rem;
-      flex-wrap: wrap;
+      overflow-y: scroll;
+      padding-bottom: 1rem;
     }
   }
 }

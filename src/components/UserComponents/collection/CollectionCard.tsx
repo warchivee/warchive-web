@@ -109,6 +109,7 @@ export default function WataCollectionCard({
           className="image"
           src={wata.thumbnail_card}
           alt={wata.title}
+          loading="lazy"
         />
       </Box>
 

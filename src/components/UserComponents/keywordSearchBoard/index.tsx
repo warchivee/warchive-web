@@ -98,9 +98,9 @@ export default function KeywordSearchBorad() {
             키워드로 검색
           </Title>
           {tabOpen ? (
-            <FontAwesomeIcon icon={faAngleUp} />
+            <FontAwesomeIcon style={{ color: 'white' }} icon={faAngleUp} />
           ) : (
-            <FontAwesomeIcon icon={faAngleDown} />
+            <FontAwesomeIcon style={{ color: 'white' }} icon={faAngleDown} />
           )}
         </div>
 
@@ -149,7 +149,7 @@ export default function KeywordSearchBorad() {
       {/* 선택한 키워드 리스트 */}
       {tabOpen || hasSelectedKeywords() ? (
         <div className="select-keywords">
-          <div className="keywords">
+          <div className="keywords" style={{ flex: 1 }}>
             <SelectedBubbles
               selectedKeywords={searchKeywords.genres}
               type="genres"
@@ -166,6 +166,13 @@ export default function KeywordSearchBorad() {
 
           {hasSelectedKeywords() && (
             <Button
+              sx={{
+                borderRadius: '20px',
+                height: 'max-content',
+                fontSize: '12px',
+              }}
+              size="sm"
+              variant="soft"
               onClick={() => {
                 resetSearchKeywords();
               }}

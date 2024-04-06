@@ -204,7 +204,7 @@ export const useCollection = () => {
         collections: await fetchCollections(),
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

@@ -36,7 +36,6 @@ export const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     const newConfig = { ...config };
-
     if (
       !(
         newConfig.url?.includes('/login') ||
@@ -47,7 +46,7 @@ api.interceptors.request.use(
         try {
           await reissueToken(); // 토큰 재발급 요청
         } catch (reissueError) {
-          window.location.href = '/login'; // 재발급 실패 시 로그인 페이지로 이동
+          window.location.href = '/login';
           return Promise.reject(reissueError); // 에러 반환
         }
       }

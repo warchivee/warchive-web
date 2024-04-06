@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { cloneElement, startTransition, useState } from 'react';
+import { cloneElement, startTransition, useEffect, useState } from 'react';
 import { checkLogin, logout } from 'src/services/auth.api';
 import Drawer from '@components/CommonComponents/drawer';
 import { Text, Title } from '@components/CommonComponents/text';
@@ -159,7 +159,7 @@ function MobileMenuDrawer({
         <div>
           <div className="header">
             <IconButton onClick={onClose}>
-              <FontAwesomeIcon icon={faXmark} />
+              <FontAwesomeIcon style={{ color: 'white' }} icon={faXmark} />
             </IconButton>
 
             <div className="logo">
@@ -200,7 +200,7 @@ function MobileMenuDrawer({
           </div>
         </div>
 
-        <Footer />
+        <Footer mobile />
       </div>
     </Drawer>
   );
@@ -212,7 +212,7 @@ function MobileHeader({ menus, isLogin }: HeaderProps) {
   return (
     <div className="content mobile">
       <IconButton onClick={() => toggleMobileMenu(true)}>
-        <FontAwesomeIcon icon={faBars} />
+        <FontAwesomeIcon style={{ color: '#b169dd' }} icon={faBars} />
       </IconButton>
       <Logo />
       <AboutButton />
@@ -248,6 +248,9 @@ function PCHeader({ menus = [], isLogin }: HeaderProps) {
 }
 
 export default function Header() {
+  const [login, setLogin] = useState(false);
+  const [menus, setMenus] = useState<MenuInfo[]>([]);
+
   const navigate = useNavigate();
   const userMenus: MenuInfo[] = [
     {
@@ -282,8 +285,10 @@ export default function Header() {
     },
   ];
 
-  const login = checkLogin();
-  const menus = userUtil.isAdmin() ? adminMenus : userMenus;
+  useEffect(() => {
+    setLogin(checkLogin());
+    setMenus(userUtil.isAdmin() ? adminMenus : userMenus);
+  }, []);
 
   return (
     <header>
