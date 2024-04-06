@@ -11,7 +11,7 @@ import CollectionMenu from '../../components/UserComponents/menu';
 export default function Collections() {
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
 
-  const { getCollectionItems } = useCollection();
+  const { getCollectionItems, getCollections } = useCollection();
 
   useEffect(() => {
     // 키워드 클릭 시 메인 페이지로 이동하며, 이전 카테고리 검색 기록이 남아있는 현상 수정
@@ -39,10 +39,14 @@ export default function Collections() {
       >
         <CollectionMenu />
         <Stack paddingTop="1rem" marginTop="1rem" width="100%" gap={2}>
-          <CollectionHeader />
-          <ShareCollectionButtons />
+          {getCollections() && getCollections()?.length > 0 && (
+            <>
+              <CollectionHeader />
+              <ShareCollectionButtons />
 
-          <WataCollectionList watas={getCollectionItems()} />
+              <WataCollectionList watas={getCollectionItems()} />
+            </>
+          )}
         </Stack>
       </Stack>
     </div>

@@ -24,8 +24,8 @@ export default function ShareCollectionButtons() {
 
   const shareUrlBase = window.location.href;
 
-  const { title } = getCollection();
-  const description = getCollection().note;
+  const title = getCollection()?.title;
+  const description = getCollection()?.note;
   const url = `${shareUrlBase}/${getCollection()?.shared_id}`;
 
   const imageSize = {
@@ -94,7 +94,7 @@ export default function ShareCollectionButtons() {
                         },
                         buttons: [
                           {
-                            title: 'title',
+                            title,
                             link: {
                               mobileWebUrl: url,
                               webUrl: url,
