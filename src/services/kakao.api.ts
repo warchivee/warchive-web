@@ -1,5 +1,4 @@
 import axios from 'axios';
-import ModalUtil from '@utils/modal.util';
 import { failLogin, login } from './auth.api';
 
 const getKakaoToken = async (authCode: string) => {
@@ -10,7 +9,8 @@ const getKakaoToken = async (authCode: string) => {
   const requestBody = {
     grant_type: 'authorization_code',
     client_id: import.meta.env.VITE_KAKAO_API_KEY,
-    redirect_uri: import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URL,
+    redirect_uri:
+      window.location.href + import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_PATH,
     code: authCode,
   };
 
@@ -42,7 +42,7 @@ export const getKakaoLoginPageUrl = () =>
   // step 1. 인가 코드 받기 https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code
   `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
     import.meta.env.VITE_KAKAO_API_KEY
-  }&redirect_uri=${import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URL}`;
+  }&redirect_uri=${window.location.href + import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_PATH}`;
 
 export const kakaoLogin = async (authCode: string) => {
   // step 2. 토큰 받기 https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token
