@@ -64,8 +64,7 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
-          {/* 링크를 입력해 직접 접근하는 경우 2depth (ex: login/redirect ) 경로로 접근 불가능 이슈로 login-redirect 로 명명함 => vercel.json 설정 참고 */}
-          <Route path="/login-redirect" element={<LoginRedirect />} />
+          <Route path="/login/redirect" element={<LoginRedirect />} />
 
           <Route path="/about" element={<About />} />
 
