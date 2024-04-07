@@ -10,15 +10,15 @@ interface CollectionAtomType {
 const initCollectionState = async () => {
   const collections = await fetchCollections();
 
-  return collections ?? [];
+  return {
+    selectedIndex: 0,
+    collections: collections ?? [],
+  };
 };
 
 export const collectionAtom = atom<CollectionAtomType>({
   key: 'collectionAtom',
-  default: {
-    selectedIndex: 0,
-    collections: await initCollectionState(),
-  },
+  default: initCollectionState(),
 });
 
 export default collectionAtom;
