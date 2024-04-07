@@ -7,18 +7,18 @@ interface CollectionAtomType {
   collections: CollectionType[];
 }
 
-const getCollectionAtom = async () => {
+const initCollectionState = async () => {
   const collections = await fetchCollections();
 
-  return {
-    selectedIndex: 0,
-    collections,
-  };
+  return collections ?? [];
 };
 
 export const collectionAtom = atom<CollectionAtomType>({
   key: 'collectionAtom',
-  default: getCollectionAtom(),
+  default: {
+    selectedIndex: 0,
+    collections: await initCollectionState(),
+  },
 });
 
 export default collectionAtom;

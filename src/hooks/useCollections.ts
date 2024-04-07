@@ -30,9 +30,22 @@ export const useCollection = () => {
   const watas = useRecoilValue(wataAtom);
   const [collectionState, setCollectionState] = useRecoilState(collectionAtom);
 
+  const initCollectionState = async () => {
+    const collections = await fetchCollections();
+
+    setCollectionState({
+      selectedIndex: 0,
+      collections,
+    });
+  };
+
+  const refreshCollectionState = async () => {
+    await initCollectionState();
+  };
+
   const getSelectCollectionIndex = () => collectionState.selectedIndex;
 
-  const getCollections = () => collectionState.collections ?? [];
+  const getCollections = () => collectionState.collections;
 
   const getCollection = () =>
     getCollections()[getSelectCollectionIndex()] ?? [];
@@ -213,6 +226,7 @@ export const useCollection = () => {
   };
 
   return {
+    refreshCollectionState,
     isCollectionsEmpty,
     getSelectCollectionIndex,
     getCollection,

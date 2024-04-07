@@ -29,10 +29,6 @@ const needUpdate = () => {
 };
 
 const syncCollectionFromServer = async () => {
-  if (!needUpdate()) {
-    return;
-  }
-
   await indexedDB.clearStore(COLLECTION_STORE);
 
   const datas = await getCollectionsApi();
@@ -41,12 +37,6 @@ const syncCollectionFromServer = async () => {
     datas?.forEach(async (item) => {
       await indexedDB.addItem(COLLECTION_STORE, item);
     });
-
-    localStorageUtil.save(
-      collectionUpdatedAtKey,
-      moment().tz('Asia/Seoul').add(1, 'd'),
-      false,
-    );
   } catch (error) {
     await indexedDB.clearStore(COLLECTION_STORE);
     console.error(error);

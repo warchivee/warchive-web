@@ -285,15 +285,16 @@ export default function Header() {
     },
   ];
 
-  useEffect(() => {
-    setLogin(checkLogin());
-    setMenus(userUtil.isAdmin() ? adminMenus : userMenus);
-  }, []);
-
   return (
     <header>
-      <PCHeader isLogin={login} menus={menus} />
-      <MobileHeader isLogin={login} menus={menus} />
+      <PCHeader
+        isLogin={checkLogin()}
+        menus={userUtil.isAdmin() ? adminMenus : userMenus}
+      />
+      <MobileHeader
+        isLogin={checkLogin()}
+        menus={userUtil.isAdmin() ? adminMenus : userMenus}
+      />
     </header>
   );
 }
