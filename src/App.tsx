@@ -64,7 +64,10 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
-          <Route path="/login/redirect" element={<LoginRedirect />} />
+          <Route
+            path={import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_PATH}
+            element={<LoginRedirect />}
+          />
 
           <Route path="/about" element={<About />} />
 
