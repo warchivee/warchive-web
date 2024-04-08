@@ -67,8 +67,8 @@ export default function AdminSearchContainer({
           variant="soft"
           type="text"
           value={searchConditions.title || ''}
-          onChange={(input) =>
-            setSearchConditions({ ...searchConditions, title: input })
+          onChange={(e) =>
+            setSearchConditions({ ...searchConditions, title: e.target.value })
           }
         />
       </div>
