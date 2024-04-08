@@ -112,10 +112,15 @@ export default function AdminDataCard({
   };
 
   const initThumbnail = async () => {
-    if (!thumbnail || !thumbnailBook) {
+    if (!thumbnail) {
       setCropThumbnail(
         'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
       );
+      return;
+    }
+
+    if (!thumbnailBook) {
+      setCropThumbnail(thumbnail);
       return;
     }
 
