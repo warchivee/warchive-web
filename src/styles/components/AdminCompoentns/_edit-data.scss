@@ -27,14 +27,6 @@
       border-bottom: 1px solid gray;
     }
 
-    & textarea {
-      width: 100%;
-      min-height: 150px;
-      border: 1px solid $purple;
-      border-radius: 1rem;
-      padding: 1rem;
-    }
-
     & > .text,
     & .image-editor > .controller > .text {
       color: $gray;

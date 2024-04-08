@@ -68,6 +68,9 @@ export default function AdminEditImage({
         <Text color="gray">{type === 'book' ? '책표지' : '카드'}</Text>
         <div>
           <Button
+            size="sm"
+            variant="outlined"
+            color="neutral"
             onClick={() => {
               if (cropImage !== '') {
                 toggleEditImage(true);

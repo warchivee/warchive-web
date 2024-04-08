@@ -48,6 +48,7 @@ export default function AdminHome() {
       <div className="header">
         <Title type="h1">데이터 관리</Title>
         <Button
+          variant="soft"
           onClick={() => {
             toggleAddData(true);
           }}

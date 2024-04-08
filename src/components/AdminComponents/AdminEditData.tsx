@@ -11,11 +11,15 @@ import {
 } from 'src/services/admin-wata.api';
 import uploadImage from 'src/services/upload-image';
 import { Text, Title } from '@components/CommonComponents/text';
-import Input from '@components/CommonComponents/input';
 import Drawer from '@components/CommonComponents/drawer';
 import { AxiosError } from 'axios';
-import { Button, IconButton } from '@mui/joy';
-import { faPlus, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { Button, IconButton, Input, Textarea, Typography } from '@mui/joy';
+import {
+  faPlus,
+  faTrashCan,
+  faUpload,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdminMultiDropdown, { DropdownOption } from './AdminMultiDropdown';
 import AdminEditImage from './AdminEditImage';
@@ -103,10 +107,21 @@ export default function AdminEditData({
         <div className="item">
           <Text color="gray">제목</Text>
           <Input
+            size="sm"
+            variant="soft"
             value={editData?.title || ''}
-            maxLength={250}
-            onChange={(value) => {
-              handleEditData('title', value);
+            endDecorator={
+              <Typography level="body-sm" textColor="tertiary">
+                {editData?.title?.length ?? 0}/250
+              </Typography>
+            }
+            slotProps={{
+              input: {
+                maxLength: 250,
+              },
+            }}
+            onChange={(e) => {
+              handleEditData('title', e.target.value);
             }}
           />
         </div>
@@ -114,10 +129,21 @@ export default function AdminEditData({
         <div className="item">
           <Text color="gray">작가/감독</Text>
           <Input
+            size="sm"
+            variant="soft"
             value={editData?.creators || ''}
-            maxLength={250}
-            onChange={(value) => {
-              handleEditData('creators', value);
+            endDecorator={
+              <Typography level="body-sm" textColor="tertiary">
+                {editData?.title?.length ?? 0}/250
+              </Typography>
+            }
+            slotProps={{
+              input: {
+                maxLength: 250,
+              },
+            }}
+            onChange={(e) => {
+              handleEditData('creators', e.target.value);
             }}
           />
         </div>
@@ -182,6 +208,9 @@ export default function AdminEditData({
         <div className="item">
           <Text color="gray">썸네일</Text>
           <IconButton
+            size="sm"
+            variant="outlined"
+            sx={{ gap: '0.2rem' }}
             onClick={() => {
               if (imgInput.current) {
                 imgInput.current.click();
@@ -258,9 +287,13 @@ export default function AdminEditData({
               />
               <div className="platform-input">
                 <Input
+                  size="sm"
+                  variant="soft"
                   value={platform?.url}
                   placeholder="url을 입력해주세요."
-                  onChange={(input) => {
+                  onChange={(e) => {
+                    const input = e.target.value;
+
                     const newPlatforms = [...(editData?.platforms || [])];
                     newPlatforms.splice(index, 1, {
                       ...newPlatforms[index],
@@ -269,20 +302,24 @@ export default function AdminEditData({
                     handleEditData('platforms', newPlatforms);
                   }}
                 />
-                <Button
+                <IconButton
                   onClick={() => {
                     const newPlatforms = [...(editData?.platforms || [])];
                     newPlatforms.splice(index, 1);
                     handleEditData('platforms', newPlatforms);
                   }}
                 >
-                  삭제
-                </Button>
+                  <FontAwesomeIcon icon={faTrashCan} />
+                </IconButton>
               </div>
             </div>
           ))}
 
           <IconButton
+            size="sm"
+            variant="outlined"
+            color="neutral"
+            sx={{ gap: '0.2rem' }}
             onClick={() => {
               handleEditData('platforms', [
                 ...(editData?.platforms || []),
@@ -297,7 +334,11 @@ export default function AdminEditData({
 
         <div className="item">
           <Text color="gray">비고</Text>
-          <textarea
+          <Textarea
+            size="sm"
+            variant="soft"
+            minRows={2}
+            sx={{ width: '100%' }}
             value={editData?.note ?? ''}
             onChange={(e) => {
               e.preventDefault();
@@ -308,6 +349,8 @@ export default function AdminEditData({
 
         <div className="controller">
           <Button
+            variant="plain"
+            color="neutral"
             onClick={() => {
               ModalUtil.open({
                 title: '데이터 입력 취소',
@@ -319,6 +362,7 @@ export default function AdminEditData({
             취소
           </Button>
           <Button
+            variant="plain"
             loading={isLoading}
             onClick={async () => {
               setIsLoading(true);

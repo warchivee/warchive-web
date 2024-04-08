@@ -12,7 +12,7 @@ export const getCollectionsApi = async () =>
   getData<CollectionType[]>('collection');
 
 export const getSharedCollectionApi = async (sharedId: string) =>
-  getData<CollectionType>(`shared/collection/${sharedId}`);
+  getData<CollectionType>(`collection/shared/${sharedId}`);
 
 export const createCollectionApi = async (params: {
   title: string;

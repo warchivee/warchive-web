@@ -40,7 +40,7 @@ api.interceptors.request.use(
     if (
       newConfig.url === 'auth/login' ||
       newConfig.url === 'publish-wata' ||
-      newConfig.url?.includes('shared/collection/')
+      newConfig.url?.includes('collection/shared')
     ) {
       return newConfig;
     }

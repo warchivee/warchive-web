@@ -25,8 +25,8 @@ export default function ShareCollectionButtons() {
 
   const shareUrlBase = window.location.href;
 
-  const title = '공유한 컬렉션 보러가기';
-  const description = `[${getCollection()?.title}] - ${getCollection()?.note}`;
+  const title = getCollection()?.title;
+  const description = `${getCollection()?.note ?? ''}`;
   const url = `${shareUrlBase}/${getCollection()?.shared_id}`;
 
   const imageSize = {
@@ -97,7 +97,7 @@ export default function ShareCollectionButtons() {
                         },
                         buttons: [
                           {
-                            title,
+                            title: '공유한 컬렉션 보러가기',
                             link: {
                               mobileWebUrl: url,
                               webUrl: url,

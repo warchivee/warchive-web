@@ -1,4 +1,3 @@
-import Input from '@components/CommonComponents/input';
 import MultiDropdown, {
   DropdownOption,
 } from '@components/AdminComponents/AdminMultiDropdown';
@@ -8,7 +7,7 @@ import { useState } from 'react';
 import { labelOptions } from 'src/services/admin-wata.api';
 import AdminDropdown from '@components/AdminComponents/AdminDropdown';
 import { SearchConditions } from '@pages/AdminPages/AdminDatas';
-import { Button } from '@mui/joy';
+import { Button, Input } from '@mui/joy';
 
 const periodOptions: DropdownOption[] = [
   {
@@ -64,6 +63,8 @@ export default function AdminSearchContainer({
       <div className="item">
         <Text color="gray">제목</Text>
         <Input
+          size="sm"
+          variant="soft"
           type="text"
           value={searchConditions.title || ''}
           onChange={(input) =>
@@ -164,6 +165,8 @@ export default function AdminSearchContainer({
 
       <div className="controller">
         <Button
+          variant="soft"
+          color="neutral"
           onClick={() => {
             setSearchConditions({});
             handleInitSearch();
@@ -172,6 +175,7 @@ export default function AdminSearchContainer({
           검색 초기화
         </Button>
         <Button
+          variant="soft"
           onClick={() => {
             handleSearch(searchConditions);
           }}
