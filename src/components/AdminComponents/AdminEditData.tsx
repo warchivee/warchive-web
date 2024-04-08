@@ -217,6 +217,7 @@ export default function AdminEditData({
           >
             <FontAwesomeIcon icon={faUpload} />
             업로드
+            <Typography>{image}</Typography>
             <input
               type="file"
               // eslint-disable-next-line @typescript-eslint/no-explicit-any

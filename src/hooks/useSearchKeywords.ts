@@ -22,6 +22,11 @@ export const useSearchKeywords = () => {
     });
   };
 
+  const includeKeyword = (type: SearchKeywordsKeyType, keyword: KeywordType) =>
+    searchKeywords[type]?.some(
+      (selectedBubble) => selectedBubble.id === keyword.id,
+    );
+
   const updateSearchKeywords = (
     type: SearchKeywordsKeyType,
     keyword: KeywordType,
@@ -38,10 +43,30 @@ export const useSearchKeywords = () => {
     });
   };
 
-  const resetSearchKeywords = (selectCategory?: KeywordType) => {
+  const selectCategory = (keyword: KeywordType) => {
     setSearchKeywords({
       searchInput: '',
-      category: selectCategory || searchKeywords.category,
+      category: keyword,
+      genres: [],
+      platforms: [],
+      keywords: [],
+    });
+  };
+
+  const selectKeyword = (type: SearchKeywordsKeyType, keyword: KeywordType) => {
+    setSearchKeywords({
+      searchInput: '',
+      category: searchKeywords.category,
+      genres: type === 'genres' ? [keyword] : [],
+      platforms: type === 'platforms' ? [keyword] : [],
+      keywords: type === 'keywords' ? [keyword] : [],
+    });
+  };
+
+  const resetSearchKeywords = () => {
+    setSearchKeywords({
+      searchInput: '',
+      category: searchKeywords.category,
       genres: [],
       platforms: [],
       keywords: [],
@@ -55,6 +80,9 @@ export const useSearchKeywords = () => {
 
   return {
     searchKeywords,
+    selectCategory,
+    selectKeyword,
+    includeKeyword,
     updateSearchInput,
     updateSearchKeywords,
     resetSearchKeywords,

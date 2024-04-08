@@ -4,9 +4,8 @@ import useModal from 'src/hooks/useModal';
 import { checkLogin } from 'src/services/auth.api';
 import WataCollectionCard from './CollectionCard';
 import AddCollectionItemModal from '../modal/addCollectionItem';
-import { WataCardListProps } from '../wata/index.type';
 
-export default function WataCollectionList({ watas }: WataCardListProps) {
+export default function WataCollectionList({ watas }: { watas: WataType[] }) {
   const [isOpenBookmarkModel, setIsOpenBookmarkModal] =
     useState<boolean>(false);
   const [selectWata, setSelectWata] = useState<WataType>();

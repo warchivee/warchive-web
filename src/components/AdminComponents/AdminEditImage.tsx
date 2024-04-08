@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Modal from '@components/CommonComponents/modal';
 import Cropper, { Area } from 'react-easy-crop';
 import { Text } from '@components/CommonComponents/text';
-import WataCard from '@components/UserComponents/wata/card';
+import WataCard from '@components/organism/wata/WataCard';
 import { Button } from '@mui/joy';
 import { WataThumbnailCropAreaType } from 'src/services/admin-wata.api';
 import getCroppedImg from '../../utils/cropImage.utils';

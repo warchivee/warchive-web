@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import wataAtom from 'src/stores/wata.atom';
 import { usePagination } from './usePagination';
 
-const PAGE_SIZE = 18;
+const PAGE_SIZE = 12;
 
 const useSearchWata = () => {
   const watas = useRecoilValue(wataAtom);
