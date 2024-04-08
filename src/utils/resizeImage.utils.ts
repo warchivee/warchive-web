@@ -1,6 +1,6 @@
 async function resizeImage(
   image: string,
-  options: { width: number; height?: number; aspectRatio?: number },
+  options: { width: number; height?: number },
 ): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     const img = new Image();
@@ -16,12 +16,12 @@ async function resizeImage(
       let width = options.width || img.width;
       let height = options.height || img.height;
 
-      if (options.aspectRatio) {
-        if (options.width && !options.height) {
-          height = width / options.aspectRatio;
-        } else if (!options.width && options.height) {
-          width = height * options.aspectRatio;
-        }
+      const aspectRatio = img.width / img.height;
+
+      if (options.width && !options.height) {
+        height = Math.floor(width / aspectRatio);
+      } else if (!options.width && options.height) {
+        width = height * aspectRatio;
       }
 
       canvas.width = width;

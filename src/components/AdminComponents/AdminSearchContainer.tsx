@@ -127,7 +127,7 @@ export default function AdminSearchContainer({
               name: '플랫폼',
             },
             {
-              id: 'thumbnailCard,thumbnailBook',
+              id: 'thumbnail',
               name: '썸네일',
             },
           ]}

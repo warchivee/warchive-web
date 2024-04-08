@@ -1,3 +1,5 @@
+import { WataThumbnailCropAreaType } from 'src/services/admin-wata.api';
+
 export interface WataListType {
   watas: WataType[];
   categories: KeywordListType[];
@@ -31,6 +33,7 @@ export interface WataType {
   keywords: KeywordType[];
   cautions: KeywordType[];
   platforms: PlatformType[];
-  thumbnail_card: string;
-  thumbnail_book: string;
+  thumbnail: string;
+  thumbnail_card?: WataThumbnailCropAreaType;
+  thumbnail_book?: WataThumbnailCropAreaType;
 }

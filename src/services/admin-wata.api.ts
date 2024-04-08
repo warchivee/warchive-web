@@ -4,6 +4,13 @@ import ModalUtil from '@utils/modal.util';
 import { AxiosError } from 'axios';
 import { Moment } from 'moment';
 
+export interface WataThumbnailCropAreaType {
+  w: number;
+  h: number;
+  x: number;
+  y: number;
+}
+
 export const labelOptions: DropdownOption[] = [
   {
     name: '검수전',
@@ -75,8 +82,9 @@ export interface EditAdminWata {
   keywords?: Keyword[];
   cautions?: Keyword[];
   platforms?: Platform[];
-  thumbnail_card?: string;
-  thumbnail_book?: string;
+  thumbnail?: string;
+  thumbnail_card?: WataThumbnailCropAreaType;
+  thumbnail_book?: WataThumbnailCropAreaType;
   note?: string;
   label?: string;
 }

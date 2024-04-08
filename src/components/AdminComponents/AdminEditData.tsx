@@ -5,6 +5,7 @@ import {
   EditAdminWataDto,
   Keyword,
   KeywordList,
+  WataThumbnailCropAreaType,
   createWata,
   getKeywords,
   updateWata,
@@ -21,6 +22,7 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import resizeImage from '@utils/resizeImage.utils';
 import AdminMultiDropdown, { DropdownOption } from './AdminMultiDropdown';
 import AdminEditImage from './AdminEditImage';
 import DepthDropdown from './AdminDepthDropdown';
@@ -48,12 +50,8 @@ export default function AdminEditData({
   const imgInput = useRef<HTMLInputElement | null>(null);
 
   const [image, setImage] = useState('');
-  const [cardCropImage, setCardCropImage] = useState(
-    data?.thumbnail_card || '',
-  );
-  const [bookCropImage, setBookCropImage] = useState(
-    data?.thumbnail_book || '',
-  );
+  const [cardCropArea, setCardCropArea] = useState<WataThumbnailCropAreaType>();
+  const [bookCropArea, setBookCropArea] = useState<WataThumbnailCropAreaType>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -83,8 +81,8 @@ export default function AdminEditData({
 
   useEffect(() => {
     if (isOpen) {
-      setCardCropImage(data?.thumbnail_card || '');
-      setBookCropImage(data?.thumbnail_book || '');
+      setCardCropArea(data?.thumbnail_card);
+      setBookCropArea(data?.thumbnail_book);
       setImage('');
       setEditData(data);
       getKeywordList();
@@ -231,10 +229,17 @@ export default function AdminEditData({
                   files = e.target.files;
                 }
                 const reader = new FileReader();
-                reader.onload = () => {
-                  setCardCropImage(reader.result as string);
-                  setBookCropImage(reader.result as string);
-                  setImage(reader.result as string);
+                reader.onload = async () => {
+                  try {
+                    const resized = await resizeImage(reader.result as string, {
+                      width: 500,
+                    });
+                    setCardCropArea(undefined);
+                    setBookCropArea(undefined);
+                    setImage(resized);
+                  } catch (error) {
+                    console.error(error);
+                  }
                 };
                 reader.readAsDataURL(files[0]);
               }}
@@ -247,15 +252,15 @@ export default function AdminEditData({
         <div className="item">
           <AdminEditImage
             type="card"
-            cropImage={cardCropImage}
-            setCropImage={setCardCropImage}
-            originImage={image !== '' ? image : data?.thumbnail_card}
+            cropArea={cardCropArea}
+            setCropArea={setCardCropArea}
+            originImage={image !== '' ? image : data?.thumbnail}
           />
           <AdminEditImage
             type="book"
-            cropImage={bookCropImage}
-            setCropImage={setBookCropImage}
-            originImage={image !== '' ? image : data?.thumbnail_book}
+            cropArea={bookCropArea}
+            setCropArea={setBookCropArea}
+            originImage={image !== '' ? image : data?.thumbnail}
           />
         </div>
 
@@ -379,32 +384,22 @@ export default function AdminEditData({
                 return;
               }
 
-              let thumbnailCard = cardCropImage;
-              let thumbnailBook = bookCropImage;
+              let resizedThumbnail = image;
 
               try {
                 if (
-                  thumbnailCard !== data?.thumbnail_card &&
-                  thumbnailCard !== ''
+                  resizedThumbnail &&
+                  resizedThumbnail !== data?.thumbnail &&
+                  !resizedThumbnail?.includes('http')
                 ) {
                   const { url } = await uploadImage(
-                    thumbnailCard.replace('data:image/jpeg;base64,', ''),
-                    `${editData?.title}-card`,
+                    resizedThumbnail?.replace('data:image/jpeg;base64,', ''),
+                    `${editData?.title}`,
                   );
 
-                  thumbnailCard = url;
-                }
+                  setImage(resizedThumbnail); // 와카이브 api 업로드 실패 시 한번 더 imgbb에 업로드되지 않도록 방지.
 
-                if (
-                  thumbnailBook !== data?.thumbnail_book &&
-                  thumbnailBook !== ''
-                ) {
-                  const { url } = await uploadImage(
-                    thumbnailBook.replace('data:image/jpeg;base64,', ''),
-                    `${editData?.title}-book`,
-                  );
-
-                  thumbnailBook = url;
+                  resizedThumbnail = url;
                 }
               } catch (error) {
                 const { error: imgbbError } = (error as AxiosError)?.response
@@ -431,8 +426,9 @@ export default function AdminEditData({
                 genre: editData?.genre?.id,
                 cautions: editData?.cautions?.map((item) => item.id),
                 keywords: editData?.keywords?.map((item) => item.id),
-                thumbnail_card: thumbnailCard,
-                thumbnail_book: thumbnailBook,
+                thumbnail: resizedThumbnail,
+                thumbnail_card: cardCropArea,
+                thumbnail_book: bookCropArea,
                 note: editData?.note,
               } as EditAdminWataDto;
 

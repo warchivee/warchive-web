@@ -1,4 +1,4 @@
-import { Area } from 'react-easy-crop';
+import { WataThumbnailCropAreaType } from 'src/services/admin-wata.api';
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ export function rotateSize(width: number, height: number, rotation: number) {
 
 export default async function getCroppedImg(
   imageSrc: string,
-  pixelCrop: Area,
+  pixelCrop: WataThumbnailCropAreaType,
   rotation = 0,
   flip = { horizontal: false, vertical: false },
 ): Promise<string> {
@@ -72,20 +72,20 @@ export default async function getCroppedImg(
   }
 
   // Set the size of the cropped canvas
-  croppedCanvas.width = pixelCrop.width;
-  croppedCanvas.height = pixelCrop.height;
+  croppedCanvas.width = pixelCrop.w;
+  croppedCanvas.height = pixelCrop.h;
 
   // Draw the cropped image onto the new canvas
   croppedCtx.drawImage(
     canvas,
     pixelCrop.x,
     pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
+    pixelCrop.w,
+    pixelCrop.h,
     0,
     0,
-    pixelCrop.width,
-    pixelCrop.height,
+    pixelCrop.w,
+    pixelCrop.h,
   );
 
   // As Base64 string

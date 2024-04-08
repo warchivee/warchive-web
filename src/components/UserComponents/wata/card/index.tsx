@@ -10,6 +10,8 @@ import searchKeywordAtom from 'src/stores/searchKeyword.atom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookBookmark } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/joy';
+import { useEffect, useState } from 'react';
+import getCroppedImg from '@utils/cropImage.utils';
 
 interface WataCardProps {
   wata: WataType;
@@ -17,6 +19,8 @@ interface WataCardProps {
 }
 
 export default function WataCard({ wata, handleBookmark }: WataCardProps) {
+  const [cropThumbnail, setCropThumbnail] = useState('');
+
   const navigate = useNavigate();
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
 
@@ -46,6 +50,29 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
       </div>
     );
   };
+
+  const initThumbnail = async () => {
+    if (!wata?.thumbnail) {
+      setCropThumbnail(
+        'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
+      );
+      return;
+    }
+
+    if (!wata?.thumbnail_card) {
+      setCropThumbnail(wata?.thumbnail);
+
+      return;
+    }
+
+    const cropImg = await getCroppedImg(wata.thumbnail, wata.thumbnail_card, 0);
+
+    setCropThumbnail(cropImg);
+  };
+
+  useEffect(() => {
+    initThumbnail();
+  }, [wata]);
 
   return (
     <div className="wata-card">
@@ -78,7 +105,7 @@ export default function WataCard({ wata, handleBookmark }: WataCardProps) {
       <div
         className="body"
         style={{
-          backgroundImage: `url(${wata.thumbnail_card})`,
+          backgroundImage: `url(${cropThumbnail})`,
         }}
       >
         <div className="platforms">

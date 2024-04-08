@@ -2,34 +2,37 @@ import { useEffect, useState } from 'react';
 import Modal from '@components/CommonComponents/modal';
 import Cropper, { Area } from 'react-easy-crop';
 import { Text } from '@components/CommonComponents/text';
-import resizeImage from '@utils/resizeImage.utils';
 import WataCard from '@components/UserComponents/wata/card';
 import { Button } from '@mui/joy';
+import { WataThumbnailCropAreaType } from 'src/services/admin-wata.api';
 import getCroppedImg from '../../utils/cropImage.utils';
 
 export default function AdminEditImage({
   type,
   originImage = '',
-  cropImage = '',
-  setCropImage,
+  cropArea,
+  setCropArea,
 }: {
   type: 'book' | 'card';
   originImage?: string;
-  cropImage?: string;
-  setCropImage: (image: string) => void;
+  cropArea?: WataThumbnailCropAreaType;
+  setCropArea: (area: WataThumbnailCropAreaType) => void;
 }) {
   const ratio = type === 'card' ? 300 / 124 : 105 / 150;
 
   const [openEditImage, toggleEditImage] = useState<boolean>(false);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>({
-    width: 0,
-    height: 0,
-    x: 0,
-    y: 0,
-  });
+  const [croppedAreaPixels, setCroppedAreaPixels] =
+    useState<WataThumbnailCropAreaType>({
+      w: 0,
+      h: 0,
+      x: 0,
+      y: 0,
+    });
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
+
+  const [cropPreview, setCropPreview] = useState('');
 
   const previewOption =
     type === 'card'
@@ -37,18 +40,19 @@ export default function AdminEditImage({
       : { width: '105px', height: '150px' };
 
   const onCropComplete = (area: Area, areaPixels: Area) => {
-    setCroppedAreaPixels(areaPixels);
+    setCroppedAreaPixels({
+      w: areaPixels.width,
+      h: areaPixels.height,
+      x: areaPixels.x,
+      y: areaPixels.y,
+    });
   };
 
   const handleModalConfirm = async () => {
     const croppedImage = await getCroppedImg(originImage, croppedAreaPixels, 0);
 
-    const resizedImage = await resizeImage(croppedImage, {
-      width: 500,
-      aspectRatio: ratio,
-    });
-
-    setCropImage(resizedImage);
+    setCropPreview(croppedImage);
+    setCropArea(croppedAreaPixels);
 
     toggleEditImage(false);
   };
@@ -58,7 +62,7 @@ export default function AdminEditImage({
   };
 
   useEffect(() => {
-    setCropImage(originImage || '');
+    setCropPreview(originImage || '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [originImage]);
 
@@ -72,7 +76,7 @@ export default function AdminEditImage({
             variant="outlined"
             color="neutral"
             onClick={() => {
-              if (cropImage !== '') {
+              if (originImage !== '') {
                 toggleEditImage(true);
               }
             }}
@@ -82,12 +86,12 @@ export default function AdminEditImage({
         </div>
       </div>
 
-      {cropImage &&
-        cropImage !== '' &&
+      {cropPreview &&
+        cropPreview !== '' &&
         (type === 'book' ? (
           <img
             style={{ ...previewOption, objectFit: 'cover' }}
-            src={cropImage}
+            src={cropPreview}
             alt="cropped"
           />
         ) : (
@@ -102,8 +106,8 @@ export default function AdminEditImage({
               keywords: [],
               cautions: [],
               platforms: [],
-              thumbnail_card: cropImage,
-              thumbnail_book: '',
+              thumbnail: originImage,
+              thumbnail_card: cropArea,
             }}
           />
         ))}

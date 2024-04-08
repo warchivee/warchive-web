@@ -10,9 +10,10 @@ import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import Modal from '@components/CommonComponents/modal';
 import { LoadingOverlay } from '@components/CommonComponents/loader';
 import Button from '@mui/joy/Button';
-import { Card, Chip, Option, Select } from '@mui/joy';
+import { Chip, Option, Select } from '@mui/joy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import getCroppedImg from '@utils/cropImage.utils';
 import AdminEditData from './AdminEditData';
 
 export interface DataCardProps {
@@ -85,6 +86,7 @@ export default function AdminDataCard({
     keywords,
     cautions,
     platforms,
+    thumbnail,
     thumbnail_card: thumbnailCard,
     thumbnail_book: thumbnailBook,
     updater,
@@ -92,6 +94,8 @@ export default function AdminDataCard({
     note,
     updated_at: updatedAt,
   } = data;
+
+  const [cropThumbnail, setCropThumbnail] = useState('');
 
   const [labelModalProps, setLabelModalProps] = useState({
     isOpen: false,
@@ -106,6 +110,23 @@ export default function AdminDataCard({
     NEED_CONTACT: 'tropical-blue',
     CENSOR: 'your-pink',
   };
+
+  const initThumbnail = async () => {
+    if (!thumbnail || !thumbnailBook) {
+      setCropThumbnail(
+        'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
+      );
+      return;
+    }
+
+    const cropImg = await getCroppedImg(thumbnail, thumbnailBook, 0);
+
+    setCropThumbnail(cropImg);
+  };
+
+  useEffect(() => {
+    initThumbnail();
+  }, [data]);
 
   return (
     <>
@@ -174,14 +195,7 @@ export default function AdminDataCard({
           <div className="body">
             <div className="left">
               <div className="thumbnail">
-                <img
-                  loading="lazy"
-                  src={
-                    thumbnailCard ||
-                    'https://www.freeiconspng.com/uploads/no-image-icon-4.png'
-                  }
-                  alt="썸네일"
-                />
+                <img loading="lazy" src={cropThumbnail} alt="썸네일" />
               </div>
             </div>
             <div className="right">
