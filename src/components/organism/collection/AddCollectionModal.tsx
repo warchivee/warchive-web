@@ -1,19 +1,21 @@
-import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import { useEffect, useState } from 'react';
+
+// joy component
 import Box from '@mui/joy/Box';
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import Typography from '@mui/joy/Typography';
 import ModalClose from '@mui/joy/ModalClose';
 import Button from '@mui/joy/Button';
-import { TITLE_LIMIT_LENGTH } from 'src/types/collection.type';
 import FormControl from '@mui/joy/FormControl';
 import FormHelperText from '@mui/joy/FormHelperText';
 import Input from '@mui/joy/Input';
+
+// utils
+import { ModalProps } from '@components/CommonComponents/modal/index.type';
+import { TITLE_LIMIT_LENGTH } from 'src/types/collection.type';
 import useCollection from 'src/hooks/useCollections';
 import RecoverableError from 'src/types/error/RecoverableError';
-
-const regex = /^[\w\s가-힣ㄱ-ㅎㅏ-ㅣ\!\?\,\.\-\_\&\:\~]+$/g;
 
 export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
   const [title, setTitle] = useState('');
@@ -28,9 +30,9 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
   const { addCollection } = useCollection();
 
   const handleConfirm = async () => {
-    try {
-      setLoading(true);
+    setLoading(true);
 
+    try {
       await addCollection(title);
 
       setError({ isError: false, message: '' });
@@ -39,11 +41,18 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
       if (e instanceof RecoverableError) {
         setError({ isError: true, message: e.message });
       } else {
-        console.error(e);
+        throw e;
       }
-    } finally {
-      setLoading(false);
     }
+
+    setLoading(false);
+  };
+
+  const handleClose = () => {
+    if (loading) {
+      return;
+    }
+    onClose();
   };
 
   useEffect(() => {
@@ -59,15 +68,7 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
   }, [isOpen]);
 
   return (
-    <Modal
-      open={isOpen}
-      onClose={() => {
-        if (loading) {
-          return;
-        }
-        onClose();
-      }}
-    >
+    <Modal open={isOpen} onClose={handleClose}>
       <ModalDialog layout="center">
         <ModalClose variant="plain" sx={{ m: 1 }} />
         <Typography level="h4" fontWeight="lg">
@@ -100,7 +101,7 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
               },
             }}
           />
-          <FormHelperText>{error?.isError && error?.message}</FormHelperText>
+          <FormHelperText>{error?.message}</FormHelperText>
         </FormControl>
 
         <Box
@@ -111,17 +112,7 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
             justifyContent: 'flex-end',
           }}
         >
-          <Button
-            variant="plain"
-            color="neutral"
-            onClick={() => {
-              if (loading) {
-                return;
-              }
-
-              onClose();
-            }}
-          >
+          <Button variant="plain" color="neutral" onClick={handleClose}>
             취소
           </Button>
           <Button

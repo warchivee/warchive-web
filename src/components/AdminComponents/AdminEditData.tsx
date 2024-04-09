@@ -231,16 +231,13 @@ export default function AdminEditData({
                 }
                 const reader = new FileReader();
                 reader.onload = async () => {
-                  try {
-                    const resized = await resizeImage(reader.result as string, {
-                      width: 500,
-                    });
-                    setCardCropArea(undefined);
-                    setBookCropArea(undefined);
-                    setImage(resized);
-                  } catch (error) {
-                    console.error(error);
-                  }
+                  const resized = await resizeImage(reader.result as string, {
+                    width: 500,
+                  });
+
+                  setCardCropArea(undefined);
+                  setBookCropArea(undefined);
+                  setImage(resized);
                 };
                 reader.readAsDataURL(files[0]);
               }}

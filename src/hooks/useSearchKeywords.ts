@@ -73,6 +73,16 @@ export const useSearchKeywords = () => {
     });
   };
 
+  const resetAllSearchKeywords = () => {
+    setSearchKeywords({
+      searchInput: '',
+      category: { id: 0, name: '전체' },
+      genres: [],
+      platforms: [],
+      keywords: [],
+    });
+  };
+
   const hasSelectedKeywords = (): boolean =>
     searchKeywords.genres.length !== 0 ||
     searchKeywords.platforms.length !== 0 ||
@@ -85,6 +95,7 @@ export const useSearchKeywords = () => {
     includeKeyword,
     updateSearchInput,
     updateSearchKeywords,
+    resetAllSearchKeywords,
     resetSearchKeywords,
     hasSelectedKeywords,
   };

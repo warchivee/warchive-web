@@ -1,5 +1,5 @@
 const htmlTagRegex = /<|>|&/g;
-const jsCodeRegex = /[(){}[\]]|['"]/g;
+const jsCodeRegex = /[(){}[\]]/g;
 const eventHandlerRegex = /\bon(?:load|click|mouseover|keydown)\s*=/gi;
 const jsProtocolUrlRegex = /javascript:/gi;
 

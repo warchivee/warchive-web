@@ -80,13 +80,13 @@ export const useCollection = () => {
 
     if (validInputText(params.title) || validInputText(params.note)) {
       throw new RecoverableError(
-        '컬렉션 이름과 코멘트에는 괄호, &, 따옴표, 외부 주소를 입력할 수 없습니다.',
+        '컬렉션 이름과 코멘트에는 괄호, &, url를 입력할 수 없습니다.',
       );
     }
 
     if (
-      params.title.length > TITLE_LIMIT_LENGTH ||
-      params.note.length > COMMENT_LIMIT_LENGTH
+      (params.title?.length ?? 0) > TITLE_LIMIT_LENGTH ||
+      (params.note?.length ?? 0) > COMMENT_LIMIT_LENGTH
     ) {
       throw new RecoverableError(
         '컬렉션 이름은 50자, 코멘트는 200자까지만 입력할 수 있습니다.',
@@ -145,21 +145,17 @@ export const useCollection = () => {
   };
 
   const deleteCollection = async () => {
-    try {
-      const { id } = getCollection();
+    const { id } = getCollection();
 
-      await deleteCollectionApi(id);
+    await deleteCollectionApi(id);
 
-      await indexedDB.deleteItem(COLLECTION_STORE, id);
+    await indexedDB.deleteItem(COLLECTION_STORE, id);
 
-      setCollectionState({
-        ...collectionState,
-        selectedIndex: getSelectCollectionIndex() - 1,
-        collections: await fetchCollections(),
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    setCollectionState({
+      ...collectionState,
+      selectedIndex: getSelectCollectionIndex() - 1,
+      collections: await fetchCollections(),
+    });
   };
 
   const findIndexByCollectionId = (collectionId: number) =>
@@ -191,38 +187,34 @@ export const useCollection = () => {
       }
     });
 
-    try {
-      await updateCollectionItemApi(updateItems);
+    await updateCollectionItemApi(updateItems);
 
-      updateItems?.forEach(async (updateItem) => {
-        const index = findIndexByCollectionId(updateItem.collection_id);
-        const collection = getCollections()[index];
-        const items = collection.items ?? [];
+    updateItems?.forEach(async (updateItem) => {
+      const index = findIndexByCollectionId(updateItem.collection_id);
+      const collection = getCollections()[index];
+      const items = collection.items ?? [];
 
-        if (updateItem.action === 'ADD') {
-          const updated = {
-            ...collection,
-            items: items.concat(updateItem.wata_id),
-          };
+      if (updateItem.action === 'ADD') {
+        const updated = {
+          ...collection,
+          items: items.concat(updateItem.wata_id),
+        };
 
-          await indexedDB.updateItem(COLLECTION_STORE, updated);
-        } else if (updateItem.action === 'DELETE') {
-          const updated = {
-            ...collection,
-            items: items?.filter((item) => item !== updateItem.wata_id),
-          };
+        await indexedDB.updateItem(COLLECTION_STORE, updated);
+      } else if (updateItem.action === 'DELETE') {
+        const updated = {
+          ...collection,
+          items: items?.filter((item) => item !== updateItem.wata_id),
+        };
 
-          await indexedDB.updateItem(COLLECTION_STORE, updated);
-        }
-      });
+        await indexedDB.updateItem(COLLECTION_STORE, updated);
+      }
+    });
 
-      setCollectionState({
-        ...collectionState,
-        collections: await fetchCollections(),
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    setCollectionState({
+      ...collectionState,
+      collections: await fetchCollections(),
+    });
   };
 
   return {

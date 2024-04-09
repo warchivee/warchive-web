@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { cloneElement, startTransition, useEffect, useState } from 'react';
+import { cloneElement, startTransition, useCallback, useState } from 'react';
 import { checkLogin, logout } from 'src/services/auth.api';
 import Drawer from '@components/CommonComponents/drawer';
 import { Text, Title } from '@components/CommonComponents/text';
@@ -16,7 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser as faUserSolid } from '@fortawesome/free-regular-svg-icons';
 import { IconButton, Typography } from '@mui/joy';
-import Footer from './Footer';
+import useModal from 'src/hooks/useModal';
 
 export interface MenuInfo {
   icon: JSX.Element;
@@ -64,6 +64,7 @@ function LoginButton({
   mobile?: boolean;
 }) {
   const navigate = useNavigate();
+  const [openModal] = useModal();
 
   if (isLogin) {
     return (
@@ -72,11 +73,17 @@ function LoginButton({
           gap: '0.5rem',
         }}
         onClick={() => {
-          startTransition(() => {
-            if (callback) {
-              callback();
-            }
-            logout();
+          openModal({
+            title: '로그아웃하기',
+            message: '로그아웃하시겠습니까?',
+            onConfirm: () => {
+              startTransition(() => {
+                if (callback) {
+                  callback();
+                }
+                logout();
+              });
+            },
           });
         }}
       >
@@ -152,6 +159,7 @@ function MobileMenuDrawer({
   onClose: () => void;
 }) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} background="ebony">
@@ -181,6 +189,9 @@ function MobileMenuDrawer({
                   label: '와카이브 소개',
                   icon: <FontAwesomeIcon icon={faCircleQuestion} />,
                   path: '/about',
+                  callback: () => {
+                    navigate('/about');
+                  },
                 } as MenuInfo,
               ].map((menu) => ({
                 ...menu,
@@ -199,8 +210,6 @@ function MobileMenuDrawer({
             <LoginButton isLogin={isLogin} callback={onClose} mobile />
           </div>
         </div>
-
-        <Footer mobile />
       </div>
     </Drawer>
   );
@@ -248,9 +257,6 @@ function PCHeader({ menus = [], isLogin }: HeaderProps) {
 }
 
 export default function Header() {
-  const [login, setLogin] = useState(false);
-  const [menus, setMenus] = useState<MenuInfo[]>([]);
-
   const navigate = useNavigate();
   const userMenus: MenuInfo[] = [
     {

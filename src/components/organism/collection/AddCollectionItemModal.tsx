@@ -53,11 +53,7 @@ export default function AddCollectionItemModal({
       }
     });
 
-    try {
-      await updateCollectionItems(updateItems);
-    } catch (error) {
-      console.error(error);
-    }
+    await updateCollectionItems(updateItems);
 
     setLoading(false);
     onClose();
@@ -110,38 +106,43 @@ export default function AddCollectionItemModal({
             wata &&
             editInfo.length === getCollections()?.length &&
             getCollections()?.map(
-              ({ title: collectionTitle, items }, index: number) => (
-                <ListItem
-                  key={`collection-add-${index + 1}`}
-                  sx={{ alignItems: 'flex-start' }}
-                >
-                  <Checkbox
-                    sx={{ flex: 1 }}
-                    disabled={
-                      (getCollections()[index].items ?? []).length >=
-                      COLLECTION_ITEMS_LIMIT_COUNT
-                    }
-                    size="sm"
-                    onChange={(event) => {
-                      if (loading) {
-                        return;
-                      }
-                      handleChecked(index, event.target.checked);
-                    }}
-                    checked={
-                      editInfo && editInfo[index] !== undefined
-                        ? editInfo[index]
-                        : false
-                    }
-                    label={collectionTitle}
-                    variant="soft"
-                    color="primary"
-                  />
-                  <Typography level="body-sm" textColor="primary.plainColor">
-                    ({items?.length ?? 0})
-                  </Typography>
-                </ListItem>
-              ),
+              ({ title: collectionTitle, items }, index: number) => {
+                const checked =
+                  editInfo && editInfo[index] !== undefined
+                    ? editInfo[index]
+                    : false;
+
+                // 삭제는 가능하도록 해야함.
+                const disabled =
+                  (getCollections()[index].items ?? []).length >=
+                    COLLECTION_ITEMS_LIMIT_COUNT && !originalInfo[index];
+
+                return (
+                  <ListItem
+                    key={`collection-add-${index + 1}`}
+                    sx={{ alignItems: 'flex-start' }}
+                  >
+                    <Checkbox
+                      sx={{ flex: 1 }}
+                      disabled={disabled}
+                      size="sm"
+                      onChange={(event) => {
+                        if (loading) {
+                          return;
+                        }
+                        handleChecked(index, event.target.checked);
+                      }}
+                      checked={checked}
+                      label={collectionTitle}
+                      variant="soft"
+                      color="primary"
+                    />
+                    <Typography level="body-sm" textColor="primary.plainColor">
+                      ({items?.length ?? 0})
+                    </Typography>
+                  </ListItem>
+                );
+              },
             )
           )}
         </List>

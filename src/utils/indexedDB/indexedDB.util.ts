@@ -87,7 +87,6 @@ class IndexedDBUtil {
       };
 
       request.onerror = () => {
-        console.error('Failed to add item:', request.error);
         reject(request.error);
       };
     });
@@ -104,7 +103,6 @@ class IndexedDBUtil {
     return new Promise<void>((resolve, reject) => {
       const request = store.add(item as T);
       request.onerror = () => {
-        console.error('Failed to add item:', request.error);
         reject(request.error);
       };
       request.onsuccess = () => resolve();
@@ -122,7 +120,6 @@ class IndexedDBUtil {
     return new Promise<void>((resolve, reject) => {
       const request = store.put(item);
       request.onerror = () => {
-        console.error('Failed to update item:', request.error);
         reject(request.error);
       };
       request.onsuccess = () => resolve();
@@ -140,7 +137,6 @@ class IndexedDBUtil {
     return new Promise<void>((resolve, reject) => {
       const request = store.delete(id);
       request.onerror = () => {
-        console.error('Failed to delete item:', request.error);
         reject(request.error);
       };
       request.onsuccess = () => resolve();
@@ -159,7 +155,6 @@ class IndexedDBUtil {
       const request = store.clear();
 
       request.onerror = () => {
-        console.error('Failed to delete item:', request.error);
         reject(request.error);
       };
 

@@ -3,7 +3,7 @@ import { WataType } from 'src/types/wata.type';
 import useModal from 'src/hooks/useModal';
 import { checkLogin } from 'src/services/auth.api';
 import WataCollectionCard from './CollectionCard';
-import AddCollectionItemModal from '../modal/addCollectionItem';
+import AddCollectionItemModal from './AddCollectionItemModal';
 
 export default function WataCollectionList({ watas }: { watas: WataType[] }) {
   const [isOpenBookmarkModel, setIsOpenBookmarkModal] =

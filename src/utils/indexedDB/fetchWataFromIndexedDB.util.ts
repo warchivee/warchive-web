@@ -52,7 +52,6 @@ const syncWataFromServer = async (): Promise<void> => {
     });
   } catch (error) {
     initStore();
-    console.error(error);
   }
 
   localStorageUtil.save(wataUpdatedAtKey, dataUpdateAt, false);

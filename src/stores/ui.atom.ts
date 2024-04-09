@@ -5,11 +5,20 @@ export const modalState = atom<{
   title: string;
   message: string;
   loading: boolean;
+  confirmTitle?: string;
+  cancelTitle?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
 }>({
   key: 'modalState',
-  default: { open: false, title: '', message: '', loading: false },
+  default: {
+    open: false,
+    title: '',
+    message: '',
+    loading: false,
+    confirmTitle: '확인',
+    cancelTitle: '취소',
+  },
 });
 
 export const snackbarState = atom<{ open: boolean; message: string }>({

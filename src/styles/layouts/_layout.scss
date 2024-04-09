@@ -5,5 +5,10 @@
 
   & .page {
     flex: 1;
+    min-height: calc(100vh - 400px);
+
+    @media (max-height: '800px') {
+      min-height: calc(100vh - 64px);
+    }
   }
 }

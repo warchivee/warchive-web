@@ -1,7 +1,8 @@
 import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
+
 import searchKeywordAtom from 'src/stores/searchKeyword.atom';
 import { WataType } from 'src/types/wata.type';
-import { useEffect, useState } from 'react';
 import wataAtom from 'src/stores/wata.atom';
 import { usePagination } from './usePagination';
 

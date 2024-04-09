@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import wataListState from 'src/stores/wata.atom';
 import { getSharedCollectionApi } from 'src/services/collection.api';
 import { CollectionType } from 'src/types/collection.type';
-import WataCollectionList from '@components/UserComponents/collection/CollectionList';
+import WataCollectionList from '@components/organism/collection/CollectionList';
 import { Box, Stack, Typography } from '@mui/joy';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Header from 'src/layouts/Header';

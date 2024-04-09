@@ -1,13 +1,23 @@
-import AddCollectionModal from '@components/UserComponents/modal/addCollection';
-import { Text } from '@components/CommonComponents/text';
-import { CollectionType } from 'src/types/collection.type';
-import classNames from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import useCollection from 'src/hooks/useCollections';
-import useModal from 'src/hooks/useModal';
-import { IconButton } from '@mui/joy';
+import classNames from 'classnames';
+
+// components
+import AddCollectionModal from '@components/organism/collection/AddCollectionModal';
+import { Text } from '@components/CommonComponents/text';
+
+// joy components
+import { IconButton, Typography } from '@mui/joy';
+
+// icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+
+// utils
+import { CollectionType } from 'src/types/collection.type';
+import useCollection, {
+  COLLECTIONS_LIMMIT_COUNT,
+} from 'src/hooks/useCollections';
+import useModal from 'src/hooks/useModal';
 
 export default function CollectionMenu() {
   const [isInputConfirmOpen, setIsInputConfirmOpen] = useState<boolean>(false);
@@ -27,14 +37,6 @@ export default function CollectionMenu() {
     deleteCollection,
   } = useCollection();
 
-  const handleDelete = async () => {
-    try {
-      await deleteCollection();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
       if (
@@ -53,11 +55,10 @@ export default function CollectionMenu() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openModal]);
+  }, [openModal, handleClickOutside]);
 
   return (
-    <div className="menu">
+    <div className="collection-menu" style={{ zIndex: openMenu ? 2 : 0 }}>
       <div className={openMenu ? 'pc show' : 'pc'} ref={popupRef}>
         <ul>
           {getCollections()?.map(
@@ -91,6 +92,14 @@ export default function CollectionMenu() {
               width: '1.8rem',
             }}
             onClick={() => {
+              if (getCollections()?.length >= COLLECTIONS_LIMMIT_COUNT) {
+                openConfirmModal({
+                  title: '컬렉션 생성 실패',
+                  message: `컬렉션은 ${COLLECTIONS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
+                });
+                return;
+              }
+
               setIsInputConfirmOpen(true);
               setOpenModal(true);
             }}
@@ -122,7 +131,7 @@ export default function CollectionMenu() {
                     setOpenModal(false);
                   },
                   onConfirm: async () => {
-                    await handleDelete();
+                    await deleteCollection();
                     setOpenModal(false);
                   },
                 });
@@ -139,7 +148,7 @@ export default function CollectionMenu() {
         onClick={() => setOpenMenu(!openMenu)}
         aria-hidden
       >
-        <Text color="light-gray">{openMenu ? '《　' : '　》'}</Text>
+        <Typography textColor="white">{openMenu ? '《　' : '　》'}</Typography>
       </div>
 
       <AddCollectionModal

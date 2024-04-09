@@ -39,7 +39,6 @@ const syncCollectionFromServer = async () => {
     });
   } catch (error) {
     await indexedDB.clearStore(COLLECTION_STORE);
-    console.error(error);
   }
 };
 

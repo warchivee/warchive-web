@@ -96,7 +96,6 @@ export default function AdminEditImage({
           />
         ) : (
           <WataCard
-            handleBookmark={() => {}}
             wata={{
               id: 1,
               title: 'test',

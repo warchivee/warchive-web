@@ -249,7 +249,7 @@ export default function WataCollectionCard({
             >
               <FontAwesomeIcon icon={faCaretDown} />
               작품 정보
-            </IconButton>{' '}
+            </IconButton>
           </div>
         </Tooltip>
       </Stack>

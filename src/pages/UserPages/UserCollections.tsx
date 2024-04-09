@@ -1,52 +1,54 @@
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import searchKeywordAtom from 'src/stores/searchKeyword.atom';
-import WataCollectionList from '@components/UserComponents/collection/CollectionList';
-import ShareCollectionButtons from '@components/UserComponents/share';
-import useCollection from 'src/hooks/useCollections';
-import { IconButton, Stack, Typography } from '@mui/joy';
+
+// components
+import WataCollectionList from '@components/organism/collection/CollectionList';
+import ShareCollectionButtons from '@components/organism/collection/ShareCollectionButtons';
+import CollectionHeader from '@components/organism/collection/CollectionHeader';
+import CollectionMenu from '@components/organism/collection/CollectionMenu';
+import { PageLoader } from '@components/CommonComponents/loader';
+
+// joy components
+import { Box, IconButton, Stack, Typography } from '@mui/joy';
+
+// icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { PageLoader } from '@components/CommonComponents/loader';
-import CollectionHeader from '../../components/UserComponents/collection/CollectionHeader';
-import CollectionMenu from '../../components/UserComponents/menu';
+
+// utils
+import useSearchKeywords from 'src/hooks/useSearchKeywords';
+import useCollection from 'src/hooks/useCollections';
 
 export default function Collections() {
-  const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
+  const { resetAllSearchKeywords } = useSearchKeywords();
 
   const { refreshCollectionState, getCollectionItems, isCollectionsEmpty } =
     useCollection();
 
   const [loading, setLoading] = useState(false);
 
-  const init = async () => {
+  const initCollectionData = async () => {
     setLoading(true);
-    // 키워드 클릭 시 메인 페이지로 이동하며, 이전 카테고리 검색 기록이 남아있는 현상 수정
-    setSearchKeywords({
-      ...searchKeywords,
-      category: {
-        name: '전체',
-        id: 0,
-      },
-    });
-
     await refreshCollectionState();
-
     setLoading(false);
   };
 
   useEffect(() => {
-    init();
+    // 페이지 이동 시 검색 키워드 초기화
+    resetAllSearchKeywords();
+
+    initCollectionData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="collections">
+    <Box>
       <Stack
         flexDirection="row"
         gap={3}
         width="100%"
+        maxWidth="1000px"
+        margin="0 auto"
         sx={{
           '@media (max-width: 600px)': {
             paddingLeft: '2rem',
@@ -54,6 +56,7 @@ export default function Collections() {
         }}
       >
         <CollectionMenu />
+
         {loading ? (
           <Stack paddingTop="1rem" marginTop="1rem" width="100%" gap={2}>
             <PageLoader />
@@ -82,13 +85,12 @@ export default function Collections() {
               <>
                 <CollectionHeader />
                 <ShareCollectionButtons />
-
                 <WataCollectionList watas={getCollectionItems()} />
               </>
             )}
           </Stack>
         )}
       </Stack>
-    </div>
+    </Box>
   );
 }

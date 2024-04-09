@@ -7,15 +7,28 @@ export const useModal = () => {
   const open = ({
     title = '',
     message = '',
+    confirmTitle = '확인',
+    cancelTitle = '취소',
     onConfirm,
     onCancel,
   }: {
     title: string;
     message: string;
+    confirmTitle?: string;
+    cancelTitle?: string;
     onConfirm?: () => void;
     onCancel?: () => void;
   }) => {
-    setModal({ ...modal, title, message, onConfirm, onCancel, open: true });
+    setModal({
+      ...modal,
+      title,
+      message,
+      onConfirm,
+      onCancel,
+      confirmTitle,
+      cancelTitle,
+      open: true,
+    });
   };
 
   return [open] as const;

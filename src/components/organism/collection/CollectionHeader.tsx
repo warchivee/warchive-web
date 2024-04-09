@@ -44,9 +44,7 @@ export default function CollectionHeader() {
       if (e instanceof RecoverableError) {
         setError({ isError: true, message: e.message });
       } else {
-        console.error(error);
-
-        setIsEditMode(false);
+        throw e;
       }
     }
 

@@ -50,7 +50,6 @@ api.interceptors.request.use(
         await reissueToken(); // 토큰 재발급 요청
       } catch (reissueError) {
         window.location.href = '/login';
-        console.error(reissueError);
         return Promise.reject(reissueError); // 에러 반환
       }
     }
@@ -76,7 +75,6 @@ api.interceptors.response.use(
         return await api(originalRequest);
       } catch (reissueError) {
         window.location.href = '/login';
-        console.error(reissueError);
         return Promise.reject(reissueError);
       }
     } else {

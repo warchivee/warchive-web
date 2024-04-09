@@ -1,91 +1,81 @@
-.collections {
-  @include viewport;
-  margin: 0 auto;
+.collection-menu {
+  background: $ebony;
+  min-height: fit-content;
+  height: 100%;
+  max-height: 100vh;
+  padding: 1rem 0rem 4rem 0;
+
   display: flex;
-  margin-bottom: 5rem;
 
-  & .menu {
-    background: $ebony;
-    min-height: fit-content;
+  & .pc {
+    width: 12rem;
+  }
+
+  & .mobile {
+    width: 1.5rem;
     height: 100%;
-    max-height: 100vh;
-    padding: 3rem 0rem 5rem 0;
-    z-index: 2;
+    display: none;
+    cursor: pointer;
+  }
 
+  ul {
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  & ul {
+    & li {
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+
+      & .text {
+        text-align: right;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &.active {
+        background: $light-violet;
+      }
+    }
+  }
+
+  & .control {
+    position: sticky;
     display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+
+    & .button {
+      border: 1px solid white;
+    }
+  }
+
+  @media (max-width: 600px) {
+    position: fixed;
+    left: 0;
+    top: 0;
 
     & .pc {
-      width: 12rem;
+      display: none;
+    }
+
+    & .pc.show {
+      display: block;
     }
 
     & .mobile {
-      width: 2rem;
-      height: 100%;
-      display: none;
-      cursor: pointer;
-    }
-
-    ul {
-      height: 100%;
-      overflow-y: scroll;
-    }
-
-    ul::-webkit-scrollbar {
-      display: none;
-    }
-
-    & ul {
-      & li {
-        padding: 0.8rem 1rem;
-        cursor: pointer;
-
-        & .text {
-          text-align: right;
-
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        &.active {
-          background: $light-violet;
-        }
-      }
-    }
-
-    & .control {
-      position: sticky;
       display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      gap: 0.5rem;
-      padding: 0.8rem 1rem;
-
-      & .button {
-        border: 1px solid white;
-      }
-    }
-
-    @media (max-width: 600px) {
-      & {
-        position: fixed;
-        left: 0;
-        top: 0;
-        padding-top: 64px; /* header height */
-      }
-      & .pc {
-        display: none;
-      }
-
-      & .pc.show {
-        display: block;
-      }
-
-      & .mobile {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+      justify-content: center;
+      align-items: center;
     }
   }
 }

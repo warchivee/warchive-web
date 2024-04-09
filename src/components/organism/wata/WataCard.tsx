@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // components
-import AddCollectionsModal from '@components/UserComponents/modal/addCollectionItem';
+import AddCollectionsModal from '@components/organism/collection/AddCollectionItemModal';
 import KeywordChip from '@components/organism/chip/KeywordChip';
 import PlatformChip from '@components/organism/chip/PlatformChip';
 
@@ -18,19 +18,25 @@ import { KeywordType, PlatformType, WataType } from 'src/types/wata.type';
 import { checkLogin } from 'src/services/auth.api';
 import useModal from 'src/hooks/useModal';
 import useCropThumbnail from 'src/hooks/useCropThumbnail';
+import { useNavigate } from 'react-router-dom';
 
 export default function WataCard({ wata }: { wata: WataType }) {
   const [isOpenCollectionAddModel, setIsCollectionAddModal] =
     useState<boolean>(false);
   const [openLoginModal] = useModal();
   const cropThumbnail = useCropThumbnail(wata, 'card');
+  const navigate = useNavigate();
 
   const handleAddCollection = () => {
     if (!checkLogin()) {
       openLoginModal({
         title: '컬렉션에 추가하기',
-        message:
-          '컬렉션을 이용하려면 로그인이 필요해요.\n상단의 사람 모양 버튼을 클릭하여 로그인할 수 있어요.',
+        confirmTitle: '로그인하기',
+        cancelTitle: '닫기',
+        onConfirm: () => {
+          navigate('/login');
+        },
+        message: '컬렉션을 이용하려면 로그인이 필요해요.',
       });
       return;
     }

@@ -68,12 +68,16 @@ export default function ShareCollectionButtons() {
       placement="bottom-start"
       sx={{ background: 'white' }}
       title={
-        <Card variant="plain" sx={{ background: 'white' }} ref={popupRef}>
-          <Stack gap={2}>
+        <Card
+          variant="plain"
+          sx={{ background: 'white', padding: '0.3rem 1rem' }}
+          ref={popupRef}
+        >
+          <Stack gap={1}>
             <Typography level="body-md" fontWeight="bolder">
               공유하기
             </Typography>
-            <Stack flexDirection="row" gap={1.5}>
+            <Stack flexDirection="row" gap={1}>
               <Stack>
                 <IconButton
                   onClick={() => {

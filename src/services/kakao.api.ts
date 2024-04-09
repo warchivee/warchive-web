@@ -61,7 +61,7 @@ export const kakaoLogin = async (authCode: string) => {
 
     window.location.href = '/';
   } catch (error) {
-    console.error(error);
     failLogin();
+    throw error;
   }
 };

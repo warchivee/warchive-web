@@ -156,7 +156,7 @@ function App() {
                   setModal({ ...modal, open: false });
                 }}
               >
-                취소
+                {modal.cancelTitle}
               </Button>
             )}
 
@@ -165,19 +165,15 @@ function App() {
               color="primary"
               loading={modal.loading}
               onClick={async () => {
-                try {
-                  setModal({ ...modal, loading: true });
-                  if (modal.onConfirm) {
-                    await modal.onConfirm();
-                  }
-                } catch (error) {
-                  console.error(error);
+                setModal({ ...modal, loading: true });
+                if (modal.onConfirm) {
+                  await modal.onConfirm();
                 }
 
                 setModal({ ...modal, loading: false, open: false });
               }}
             >
-              확인
+              {modal.confirmTitle}
             </Button>
           </Box>
         </ModalDialog>

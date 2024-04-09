@@ -110,6 +110,7 @@ export default function About() {
       </div>
 
       <IconButton
+        sx={{ gap: '0.2rem' }}
         onClick={() => {
           window.scrollTo(0, 0);
         }}
