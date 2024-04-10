@@ -176,7 +176,7 @@ export default function TermsOfServicePage() {
         </li>
       </ol>
 
-      <h3>제15조 (회원의 의무)</h3>
+      <h3>제12조 (회원의 의무)</h3>
       <p>회원은 서비스를 이용할 때 다음 각 호의 행위를 하지 않아야 합니다.</p>
       <ol>
         <li>
