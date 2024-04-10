@@ -26,7 +26,7 @@ export default function KeywordSearchBorad() {
   const [tab, setTab] = useState<number>(0);
   const [tabOpen, setTabOpen] = useState<boolean>(false);
 
-  const handleTab = (index: number) => {
+  const handleTab = (category: KeywordListType, index: number) => {
     const isCurrentTab = tab === index;
 
     if (!isCurrentTab) {
@@ -36,6 +36,11 @@ export default function KeywordSearchBorad() {
 
     setTab(isCurrentTab ? tab : index);
     setTabOpen(isCurrentTab ? !tabOpen : true);
+
+    selectCategory({
+      id: category.id,
+      name: category.name,
+    } as KeywordType);
   };
 
   return (
@@ -65,11 +70,7 @@ export default function KeywordSearchBorad() {
             className={classNames('tab', { select: tab === index })}
             key={`category-${category.id}`}
             onClick={() => {
-              handleTab(index);
-              selectCategory({
-                id: category.id,
-                name: category.name,
-              } as KeywordType);
+              handleTab(category, index);
             }}
             aria-hidden="true"
           >

@@ -21,6 +21,7 @@ export default function KeywordChip({
       return;
     }
     selectKeyword(type, keyword);
+    window.scrollTo(0, 0);
   };
 
   return (

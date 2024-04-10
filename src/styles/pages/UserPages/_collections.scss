@@ -3,6 +3,9 @@
   min-height: fit-content;
   height: 100%;
   max-height: 100vh;
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    min-height: -webkit-fill-available;
+  }
   padding: 1rem 0rem 4rem 0;
 
   display: flex;

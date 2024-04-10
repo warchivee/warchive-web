@@ -4,11 +4,11 @@ import Pagination from '@components/CommonComponents/pagination';
 import usePagination from 'src/hooks/usePagination';
 import { PageLoader } from '@components/CommonComponents/loader';
 import { useQueryClient } from '@tanstack/react-query';
-import { DropdownOption } from '@components/AdminComponents/AdminMultiDropdown';
+import { DropdownOption } from '@components/organism/admin/AdminMultiDropdown';
 import { Button } from '@mui/joy';
-import AdminEditData from '../../components/AdminComponents/AdminEditData';
-import AdminDataList from '../../components/AdminComponents/AdminDataList';
-import AdminSearchContainer from '../../components/AdminComponents/AdminSearchContainer';
+import AdminEditData from '../components/organism/admin/AdminEditData';
+import AdminDataList from '../components/organism/admin/AdminDataList';
+import AdminSearchContainer from '../components/organism/admin/AdminSearchContainer';
 
 export interface SearchConditions {
   title?: string;

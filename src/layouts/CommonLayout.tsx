@@ -1,5 +1,5 @@
-import Footer from 'src/layouts/Footer';
-import Header from 'src/layouts/Header';
+import Footer from '@components/organism/Footer';
+import Header from '@components/organism/Header';
 import { PageLoader } from '@components/CommonComponents/loader';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';

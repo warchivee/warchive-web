@@ -74,7 +74,9 @@ export default function WataCard({ wata }: { wata: WataType }) {
           </IconButton>
         </Stack>
 
-        <Typography level="body-sm">{wata.creators}</Typography>
+        <Typography level="body-sm" noWrap>
+          {wata.creators}
+        </Typography>
 
         <Stack
           direction="row"

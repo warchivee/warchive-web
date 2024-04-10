@@ -6,7 +6,7 @@ import { CollectionType } from 'src/types/collection.type';
 import WataCollectionList from '@components/organism/collection/CollectionList';
 import { Box, Stack, Typography } from '@mui/joy';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import Header from 'src/layouts/Header';
+import Header from '@components/organism/Header';
 import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSurprise } from '@fortawesome/free-regular-svg-icons';

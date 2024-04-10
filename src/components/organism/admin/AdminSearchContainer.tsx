@@ -1,12 +1,12 @@
 import MultiDropdown, {
   DropdownOption,
-} from '@components/AdminComponents/AdminMultiDropdown';
+} from '@components/organism/admin/AdminMultiDropdown';
 import { Text } from '@components/CommonComponents/text';
 import moment from 'moment';
 import { useState } from 'react';
 import { labelOptions } from 'src/services/admin-wata.api';
-import AdminDropdown from '@components/AdminComponents/AdminDropdown';
-import { SearchConditions } from '@pages/AdminPages/AdminDatas';
+import AdminDropdown from '@components/organism/admin/AdminDropdown';
+import { SearchConditions } from '@pages/AdminHome';
 import { Button, Input } from '@mui/joy';
 
 const periodOptions: DropdownOption[] = [

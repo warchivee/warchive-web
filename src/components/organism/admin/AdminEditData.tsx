@@ -207,7 +207,8 @@ export default function AdminEditData({
           <Text color="gray">썸네일</Text>
           <IconButton
             size="sm"
-            variant="outlined"
+            variant="soft"
+            color="neutral"
             sx={{ gap: '0.2rem' }}
             onClick={() => {
               if (imgInput.current) {
@@ -217,7 +218,6 @@ export default function AdminEditData({
           >
             <FontAwesomeIcon icon={faUpload} />
             업로드
-            <Typography>{image}</Typography>
             <input
               type="file"
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -240,6 +240,8 @@ export default function AdminEditData({
                   setImage(resized);
                 };
                 reader.readAsDataURL(files[0]);
+
+                e.target.value = '';
               }}
               ref={imgInput}
               style={{ display: 'none' }}
@@ -320,7 +322,7 @@ export default function AdminEditData({
 
           <IconButton
             size="sm"
-            variant="outlined"
+            variant="soft"
             color="neutral"
             sx={{ gap: '0.2rem' }}
             onClick={() => {

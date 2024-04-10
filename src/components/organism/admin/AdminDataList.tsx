@@ -1,7 +1,7 @@
 import getWata, { AdminWata, ApiGetResult } from 'src/services/admin-wata.api';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { SearchConditions } from '@pages/AdminPages/AdminDatas';
+import { SearchConditions } from '@pages/AdminHome';
 import AdminDataCard from './AdminDataCard';
 import { periodKeyValues } from './AdminSearchContainer';
 

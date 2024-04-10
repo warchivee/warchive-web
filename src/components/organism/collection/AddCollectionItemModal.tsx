@@ -94,7 +94,7 @@ export default function AddCollectionItemModal({
         <Typography level="h4" fontWeight="lg">
           {title}
         </Typography>
-        <List size="sm" sx={{ overflow: 'auto' }}>
+        <List size="sm" sx={{ overflow: 'auto', gap: '0.4rem' }}>
           {isCollectionsEmpty() ? (
             <>
               <Typography level="body-sm">컬렉션이 없어요!</Typography>

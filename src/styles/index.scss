@@ -22,12 +22,18 @@ body {
   color: $black;
 
   min-height: 100vh;
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    min-height: -webkit-fill-available;
+  }
 }
 
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    min-height: -webkit-fill-available;
+  }
   overflow: hidden;
 
   --font-content: 'Noto Sans KR', sans-serif;

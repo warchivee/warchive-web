@@ -1,11 +1,18 @@
 .layout {
   min-height: 100vh;
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    min-height: -webkit-fill-available;
+  }
   display: flex;
   flex-direction: column;
 
   & .page {
     flex: 1;
     min-height: calc(100vh - 400px);
+
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      min-height: -webkit-fill-available;
+    }
 
     @media (max-height: '800px') {
       min-height: calc(100vh - 64px);

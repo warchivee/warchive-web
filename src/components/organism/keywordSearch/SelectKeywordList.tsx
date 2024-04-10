@@ -31,7 +31,7 @@ export default function SelectKeywordList({
       </Typography>
       <Grid
         container
-        spacing={2}
+        spacing={3}
         sx={{
           overflowY: 'scroll',
           overflowX: 'hidden',

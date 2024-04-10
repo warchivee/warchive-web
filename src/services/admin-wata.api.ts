@@ -1,4 +1,4 @@
-import { DropdownOption } from '@components/AdminComponents/AdminMultiDropdown';
+import { DropdownOption } from '@components/organism/admin/AdminMultiDropdown';
 import { getData, patchData, postData } from '@utils/api.util';
 import ModalUtil from '@utils/modal.util';
 import { AxiosError } from 'axios';

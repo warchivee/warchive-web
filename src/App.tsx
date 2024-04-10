@@ -22,18 +22,16 @@ import { modalState, snackbarState } from './stores/ui.atom';
 const NoHeaderLayout = lazy(() => import('src/layouts/NoHeaderLayout'));
 const CommonLayout = lazy(() => import('src/layouts/CommonLayout'));
 
-const About = lazy(() => import('@pages/CommonPages/About'));
-const Login = lazy(() => import('@pages/CommonPages/Login'));
-const LoginRedirect = lazy(() => import('@pages/CommonPages/LoginRedirect'));
+const About = lazy(() => import('@pages/About'));
+const Login = lazy(() => import('@pages/Login'));
+const LoginRedirect = lazy(() => import('@pages/LoginRedirect'));
 
-const UserHome = lazy(() => import('@pages/UserPages/UserHome'));
-const UserCollections = lazy(() => import('@pages/UserPages/UserCollections'));
-const UserCollectionShare = lazy(
-  () => import('@pages/UserPages/UserCollectionShare'),
-);
+const UserHome = lazy(() => import('@pages/Home'));
+const UserCollections = lazy(() => import('@pages/Collections'));
+const UserCollectionShare = lazy(() => import('@pages/CollectionShare'));
 
 const AdminLayout = lazy(() => import('src/layouts/AdminLayout'));
-const AdminHome = lazy(() => import('@pages/AdminPages/AdminDatas'));
+const AdminHome = lazy(() => import('@pages/AdminHome'));
 
 function App() {
   const [modal, setModal] = useRecoilState(modalState);

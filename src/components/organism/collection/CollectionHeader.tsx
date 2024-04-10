@@ -73,10 +73,11 @@ export default function CollectionHeader() {
       justifyContent="space-between"
       alignItems="center"
       gap={3}
-      onMouseLeave={() => setIsHovered(false)}
     >
       {!isEditMode ? (
         <Stack
+          width="100%"
+          onMouseLeave={() => setIsHovered(false)}
           onMouseEnter={() => setIsHovered(true)}
           onClick={() => {
             setIsEditMode(true);

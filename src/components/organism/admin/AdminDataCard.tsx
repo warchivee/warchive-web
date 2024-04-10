@@ -142,7 +142,7 @@ export default function AdminDataCard({
           <div className="header">
             <div className="left">
               <Select
-                variant="plain"
+                variant="soft"
                 color="neutral"
                 size="sm"
                 indicator={<FontAwesomeIcon icon={faAngleDown} />}
