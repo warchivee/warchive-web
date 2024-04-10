@@ -22,7 +22,6 @@ import { modalState, snackbarState } from './stores/ui.atom';
 const NoHeaderLayout = lazy(() => import('src/layouts/NoHeaderLayout'));
 const CommonLayout = lazy(() => import('src/layouts/CommonLayout'));
 
-const About = lazy(() => import('@pages/About'));
 const Login = lazy(() => import('@pages/Login'));
 const LoginRedirect = lazy(() => import('@pages/LoginRedirect'));
 
@@ -32,6 +31,10 @@ const UserCollectionShare = lazy(() => import('@pages/CollectionShare'));
 
 const AdminLayout = lazy(() => import('src/layouts/AdminLayout'));
 const AdminHome = lazy(() => import('@pages/AdminHome'));
+
+const About = lazy(() => import('@pages/About'));
+const TermsOfServicePage = lazy(() => import('@pages/TermsOfServicePage'));
+const PrivacyPolicyPage = lazy(() => import('@pages/PrivacyPolicyPage'));
 
 function App() {
   const [modal, setModal] = useRecoilState(modalState);
@@ -68,6 +71,8 @@ function App() {
           />
 
           <Route path="/about" element={<About />} />
+          <Route path="/service" element={<TermsOfServicePage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
 
           <Route element={<LoginRoute />}>
             <Route element={<PermissionRoute access="USER" />}>

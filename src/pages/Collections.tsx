@@ -119,7 +119,9 @@ export default function Collections() {
                   />
                 ) : (
                   <>
-                    <ShareCollectionButtons />
+                    <div style={{ marginBottom: '2rem' }}>
+                      <ShareCollectionButtons />
+                    </div>
                     <WataCollectionList watas={getCollectionItems()} />
                   </>
                 )}

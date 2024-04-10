@@ -1,0 +1,45 @@
+.policy {
+  padding: 2rem 3rem;
+
+  & h1 {
+    font-size: xx-large;
+    font-weight: bold;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  & h2 {
+    font-size: x-large;
+    font-weight: bold;
+    border-bottom: 1px solid #dddddd;
+    margin: 2rem 0;
+  }
+
+  & h3 {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  & ol {
+    list-style: inside;
+    list-style-type: decimal;
+    margin: 1rem 0;
+
+    & ol {
+      margin-left: 1rem;
+    }
+  }
+
+  & ul {
+    list-style: inside;
+    list-style-type: disc;
+  }
+
+  p {
+    margin: 1rem 0;
+  }
+
+  hr {
+    margin: 3rem 0;
+  }
+}

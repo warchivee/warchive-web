@@ -29,14 +29,14 @@ export default function KeywordSearchBorad() {
   const handleTab = (category: KeywordListType, index: number) => {
     const isCurrentTab = tab === index;
 
-    if (!isCurrentTab) {
+    if (isCurrentTab) {
       // 현재 탭을 한번 더 클릭한 경우 검색어 초기화하지 않고 탭을 열고 닫기만 한다.
-      resetSearchKeywords();
+      setTabOpen(!tabOpen);
+      return;
     }
 
     setTab(isCurrentTab ? tab : index);
-    setTabOpen(isCurrentTab ? !tabOpen : true);
-
+    setTabOpen(true);
     selectCategory({
       id: category.id,
       name: category.name,

@@ -4,6 +4,7 @@ import { Box, Grid, Stack, Typography } from '@mui/joy';
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -61,15 +62,22 @@ export default function Footer() {
               </Stack>
 
               <Stack direction="row" gap={1}>
-                <Typography level="body-xs" textColor="text.tertiary">
-                  이용약관
-                </Typography>
+                <Link to="/service">
+                  <Typography level="body-xs" textColor="text.tertiary">
+                    이용약관
+                  </Typography>
+                </Link>
+
                 <Typography level="body-xs" textColor="text.tertiary">
                   |
                 </Typography>
-                <Typography level="body-xs" textColor="text.tertiary">
-                  개인정보처리방침
-                </Typography>
+
+                <Link to="/privacy">
+                  <Typography level="body-xs" textColor="text.tertiary">
+                    개인정보처리방침
+                  </Typography>
+                </Link>
+
                 <Typography level="body-xs" textColor="text.tertiary">
                   |
                 </Typography>

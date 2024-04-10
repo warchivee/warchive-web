@@ -1,7 +1,8 @@
-const htmlTagRegex = /<|>|&/g;
-const jsCodeRegex = /[(){}[\]]/g;
+const jsCodeRegex = /[<>(){}[\]]/g;
 const eventHandlerRegex = /\bon(?:load|click|mouseover|keydown)\s*=/gi;
 const jsProtocolUrlRegex = /javascript:/gi;
+const urlRegex =
+  /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/gi;
 
 const isUrl = (text: string) => {
   try {
@@ -16,7 +17,7 @@ const isUrl = (text: string) => {
 
 export const validInputText = (str: string) => {
   const combinedRegex = new RegExp(
-    `(${htmlTagRegex.source}|${jsCodeRegex.source}|${eventHandlerRegex.source}|${jsProtocolUrlRegex.source})`,
+    `(${jsCodeRegex.source}|${eventHandlerRegex.source}|${jsProtocolUrlRegex.source}|${urlRegex.source})`,
     'gi',
   );
 

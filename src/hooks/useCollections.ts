@@ -80,7 +80,7 @@ export const useCollection = () => {
 
     if (validInputText(params.title) || validInputText(params.note)) {
       throw new RecoverableError(
-        '컬렉션 이름과 코멘트에는 괄호, &, url를 입력할 수 없습니다.',
+        '컬렉션 이름과 코멘트에는 괄호, url를 입력할 수 없습니다.',
       );
     }
 
@@ -126,7 +126,7 @@ export const useCollection = () => {
 
     if (validInputText(title)) {
       throw new RecoverableError(
-        '컬렉션 이름에는 괄호, &, 따옴표, 외부 주소를 입력할 수 없습니다.',
+        '컬렉션 이름에는 괄호, url를 입력할 수 없습니다.',
       );
     }
 

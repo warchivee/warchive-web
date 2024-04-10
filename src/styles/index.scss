@@ -25,6 +25,8 @@ body {
   @supports (-webkit-appearance: none) and (stroke-color: transparent) {
     min-height: -webkit-fill-available;
   }
+
+  line-height: 1.6;
 }
 
 #root {

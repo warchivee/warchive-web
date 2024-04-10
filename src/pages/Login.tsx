@@ -1,5 +1,6 @@
 import { Text } from '@components/CommonComponents/text';
 import { Typography } from '@mui/joy';
+import { Link } from 'react-router-dom';
 import { getKakaoLoginPageUrl } from 'src/services/kakao.api';
 
 export default function Login() {
@@ -30,8 +31,13 @@ export default function Login() {
       </div>
 
       <div className="infos">
-        <Text size="small">이용약관</Text>
-        <Text size="small">개인정보처리방침</Text>
+        <Link to="/service">
+          <Text size="small">이용약관</Text>
+        </Link>
+
+        <Link to="/privacy">
+          <Text size="small">개인정보처리방침</Text>
+        </Link>
       </div>
     </div>
   );
