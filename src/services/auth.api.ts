@@ -1,7 +1,7 @@
 import { postData } from '@utils/api.util';
 import tokenUtil from '@utils/token.util';
 import userUtil from '@utils/user.util';
-import localStorageUtil from '@utils/localStorage/localstorage.util';
+import localStorageUtil from '@utils/localstorage.util';
 import { LoginInfo, LoginResult } from '../types/auth.type';
 
 export const login = async (loginInfo: LoginInfo) => {

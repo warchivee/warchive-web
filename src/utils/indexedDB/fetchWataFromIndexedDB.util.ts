@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
 import { WataListType, WataType } from 'src/types/wata.type';
-import localStorageUtil from '@utils/localStorage/localstorage.util';
+import localStorageUtil from '@utils/localstorage.util';
 import IndexedDBUtil, { KEYWORD_STORE, WATA_STORE } from './indexedDB.util';
 import { getData } from '../api.util';
 

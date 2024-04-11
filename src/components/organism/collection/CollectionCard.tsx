@@ -18,7 +18,7 @@ import {
   faCaretDown,
   faEllipsisVertical,
 } from '@fortawesome/free-solid-svg-icons';
-import getCroppedImg from '@utils/cropImage.utils';
+import getCroppedImg from '@utils/image/cropImage.utils';
 
 interface WataCardProps {
   wata: WataType;

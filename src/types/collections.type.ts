@@ -1,4 +1,12 @@
-import { CollectionType } from './collection.type';
+import { WataIdType } from './wata.type';
+
+export interface CollectionType {
+  id: number;
+  shared_id: string;
+  title: string;
+  note: string;
+  items: WataIdType[];
+}
 
 interface CollectionDefaultProps {
   collections: CollectionType[];

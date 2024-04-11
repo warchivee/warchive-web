@@ -1,5 +1,5 @@
 import { deleteData, getData, patchData, postData } from '@utils/api.util';
-import { CollectionType } from 'src/types/collection.type';
+import { CollectionType } from 'src/types/collections.type';
 import { WataIdType } from 'src/types/wata.type';
 
 export interface UpdateCollectionItemParam {

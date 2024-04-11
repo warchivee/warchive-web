@@ -15,14 +15,11 @@ import wataAtom from 'src/stores/wata.atom';
 import RecoverableError from 'src/types/error/RecoverableError';
 import { validInputText } from '@utils/stringValid.util';
 import {
-  COMMENT_LIMIT_LENGTH,
-  TITLE_LIMIT_LENGTH,
-} from 'src/types/collection.type';
-
-export const collectionLocalStorageKey = 'COLLECTION_SAVED_AT';
-
-export const COLLECTIONS_LIMMIT_COUNT = 20;
-export const COLLECTION_ITEMS_LIMIT_COUNT = 50;
+  COLLECTIONS_LIMMIT_COUNT,
+  COLLECTION_COMMENT_LIMIT_LENGTH,
+  COLLECTION_ITEMS_LIMIT_COUNT,
+  COLLECTION_TITLE_LIMIT_LENGTH,
+} from '@utils/consts/collections.const';
 
 const indexedDB = IndexedDBUtil.getInstance();
 
@@ -85,11 +82,11 @@ export const useCollection = () => {
     }
 
     if (
-      (params.title?.length ?? 0) > TITLE_LIMIT_LENGTH ||
-      (params.note?.length ?? 0) > COMMENT_LIMIT_LENGTH
+      (params.title?.length ?? 0) > COLLECTION_TITLE_LIMIT_LENGTH ||
+      (params.note?.length ?? 0) > COLLECTION_COMMENT_LIMIT_LENGTH
     ) {
       throw new RecoverableError(
-        '컬렉션 이름은 50자, 코멘트는 200자까지만 입력할 수 있습니다.',
+        `컬렉션 이름은 ${COLLECTION_TITLE_LIMIT_LENGTH}자, 코멘트는 ${COLLECTION_COMMENT_LIMIT_LENGTH}자까지만 입력할 수 있습니다.`,
       );
     }
 
@@ -118,7 +115,7 @@ export const useCollection = () => {
       throw new RecoverableError('컬렉션 이름은 두 글자 이상이어야 합니다.');
     }
 
-    if (title.length > TITLE_LIMIT_LENGTH) {
+    if (title.length > COLLECTION_TITLE_LIMIT_LENGTH) {
       throw new RecoverableError(
         '컬렉션 이름은 50자까지만 입력할 수 있습니다.',
       );

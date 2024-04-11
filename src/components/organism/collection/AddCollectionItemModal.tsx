@@ -9,12 +9,11 @@ import ListItem from '@mui/joy/ListItem';
 import Checkbox from '@mui/joy/Checkbox';
 
 import { WataType } from 'src/types/wata.type';
-import useCollections, {
-  COLLECTION_ITEMS_LIMIT_COUNT,
-} from 'src/hooks/useCollections';
+import useCollections from 'src/hooks/useCollections';
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import { useEffect, useState } from 'react';
 import { UpdateCollectionItemParam } from 'src/services/collection.api';
+import { COLLECTION_ITEMS_LIMIT_COUNT } from '@utils/consts/collections.const';
 
 interface AddCollectionItemModalProps extends ModalProps {
   wata?: WataType;

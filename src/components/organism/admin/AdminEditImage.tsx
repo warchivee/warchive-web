@@ -5,7 +5,7 @@ import { Text } from '@components/CommonComponents/text';
 import WataCard from '@components/organism/wata/WataCard';
 import { Button } from '@mui/joy';
 import { WataThumbnailCropAreaType } from 'src/services/admin-wata.api';
-import getCroppedImg from '../../../utils/cropImage.utils';
+import getCroppedImg from '../../../utils/image/cropImage.utils';
 
 export default function AdminEditImage({
   type,

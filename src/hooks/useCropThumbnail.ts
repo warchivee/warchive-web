@@ -1,4 +1,4 @@
-import getCroppedImg from '@utils/cropImage.utils';
+import getCroppedImg from '@utils/image/cropImage.utils';
 import { useCallback, useEffect, useState } from 'react';
 import { WataType } from 'src/types/wata.type';
 

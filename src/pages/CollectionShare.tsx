@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import wataListState from 'src/stores/wata.atom';
 import { getSharedCollectionApi } from 'src/services/collection.api';
-import { CollectionType } from 'src/types/collection.type';
 import WataCollectionList from '@components/organism/collection/CollectionList';
 import { Box, Stack, Typography } from '@mui/joy';
 import { useSuspenseQuery } from '@tanstack/react-query';
@@ -10,6 +9,7 @@ import Header from '@components/organism/Header';
 import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSurprise } from '@fortawesome/free-regular-svg-icons';
+import { CollectionType } from 'src/types/collections.type';
 
 const getDatas = async (
   id: string | undefined,

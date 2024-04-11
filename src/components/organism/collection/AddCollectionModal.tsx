@@ -13,9 +13,9 @@ import Input from '@mui/joy/Input';
 
 // utils
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
-import { TITLE_LIMIT_LENGTH } from 'src/types/collection.type';
 import useCollection from 'src/hooks/useCollections';
 import RecoverableError from 'src/types/error/RecoverableError';
+import { COLLECTION_TITLE_LIMIT_LENGTH } from '@utils/consts/collections.const';
 
 export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
   const [title, setTitle] = useState('');
@@ -92,12 +92,12 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
             }}
             endDecorator={
               <Typography level="body-sm" textColor="tertiary">
-                {title.length}/{TITLE_LIMIT_LENGTH}
+                {title.length}/{COLLECTION_TITLE_LIMIT_LENGTH}
               </Typography>
             }
             slotProps={{
               input: {
-                maxLength: TITLE_LIMIT_LENGTH,
+                maxLength: COLLECTION_TITLE_LIMIT_LENGTH,
               },
             }}
           />

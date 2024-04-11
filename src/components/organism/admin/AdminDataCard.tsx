@@ -13,7 +13,7 @@ import Button from '@mui/joy/Button';
 import { Chip, Option, Select } from '@mui/joy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import getCroppedImg from '@utils/cropImage.utils';
+import getCroppedImg from '@utils/image/cropImage.utils';
 import AdminEditData from './AdminEditData';
 
 export interface DataCardProps {

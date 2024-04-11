@@ -1,8 +1,8 @@
 import { checkLogin } from 'src/services/auth.api';
 import moment from 'moment-timezone';
 import { getCollectionsApi } from 'src/services/collection.api';
-import { CollectionType } from 'src/types/collection.type';
-import localStorageUtil from '@utils/localStorage/localstorage.util';
+import localStorageUtil from '@utils/localstorage.util';
+import { CollectionType } from 'src/types/collections.type';
 import IndexedDBUtil, { COLLECTION_STORE } from './indexedDB.util';
 
 export const collectionUpdatedAtKey = 'COLLECTION_UPDATE_AT';

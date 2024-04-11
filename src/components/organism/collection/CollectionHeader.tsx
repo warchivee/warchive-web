@@ -1,7 +1,3 @@
-import {
-  COMMENT_LIMIT_LENGTH,
-  TITLE_LIMIT_LENGTH,
-} from 'src/types/collection.type';
 import { useEffect, useState } from 'react';
 import useCollection from 'src/hooks/useCollections';
 import RecoverableError from 'src/types/error/RecoverableError';
@@ -17,6 +13,10 @@ import {
 } from '@mui/joy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  COLLECTION_COMMENT_LIMIT_LENGTH,
+  COLLECTION_TITLE_LIMIT_LENGTH,
+} from '@utils/consts/collections.const';
 
 export default function CollectionHeader() {
   const [isHovered, setIsHovered] = useState(false);
@@ -115,12 +115,12 @@ export default function CollectionHeader() {
               }
               endDecorator={
                 <Typography level="body-sm" textColor="tertiary">
-                  {editInfo.title.length}/{TITLE_LIMIT_LENGTH}
+                  {editInfo.title.length}/{COLLECTION_TITLE_LIMIT_LENGTH}
                 </Typography>
               }
               slotProps={{
                 input: {
-                  maxLength: TITLE_LIMIT_LENGTH,
+                  maxLength: COLLECTION_TITLE_LIMIT_LENGTH,
                 },
               }}
             />
@@ -141,12 +141,12 @@ export default function CollectionHeader() {
                   textColor="tertiary"
                   sx={{ ml: 'auto' }}
                 >
-                  {editInfo.note?.length ?? 0}/{COMMENT_LIMIT_LENGTH}
+                  {editInfo.note?.length ?? 0}/{COLLECTION_COMMENT_LIMIT_LENGTH}
                 </Typography>
               }
               slotProps={{
                 textarea: {
-                  maxLength: COMMENT_LIMIT_LENGTH,
+                  maxLength: COLLECTION_COMMENT_LIMIT_LENGTH,
                 },
               }}
             />

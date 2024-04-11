@@ -1,6 +1,6 @@
 import fetchCollections from '@utils/indexedDB/fetchCollectionFromIndexedDB.util';
 import { atom } from 'recoil';
-import { CollectionType } from 'src/types/collection.type';
+import { CollectionType } from 'src/types/collections.type';
 
 interface CollectionAtomType {
   selectedIndex: number;

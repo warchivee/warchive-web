@@ -13,11 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // utils
-import { CollectionType } from 'src/types/collection.type';
-import useCollection, {
-  COLLECTIONS_LIMMIT_COUNT,
-} from 'src/hooks/useCollections';
+import useCollection from 'src/hooks/useCollections';
 import useModal from 'src/hooks/useModal';
+import { CollectionType } from 'src/types/collections.type';
+import { COLLECTIONS_LIMMIT_COUNT } from '@utils/consts/collections.const';
 
 export default function CollectionMenu() {
   const [isInputConfirmOpen, setIsInputConfirmOpen] = useState<boolean>(false);

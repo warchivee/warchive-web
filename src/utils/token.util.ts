@@ -1,6 +1,4 @@
-import localStorageUtil, {
-  LS_TOKEN_KEY,
-} from './localStorage/localstorage.util';
+import localStorageUtil, { LS_TOKEN_KEY } from './localstorage.util';
 
 interface SavedToken {
   token: string;

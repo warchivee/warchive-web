@@ -1,7 +1,5 @@
 import { User } from 'src/types/auth.type';
-import localStorageUtil, {
-  LS_USER_KEY,
-} from './localStorage/localstorage.util';
+import localStorageUtil, { LS_USER_KEY } from './localstorage.util';
 
 const userUtil = {
   save: (user: User) => {

@@ -22,7 +22,7 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import resizeImage from '@utils/resizeImage.utils';
+import resizeImage from '@utils/image/resizeImage.utils';
 import AdminMultiDropdown, { DropdownOption } from './AdminMultiDropdown';
 import AdminEditImage from './AdminEditImage';
 import DepthDropdown from './AdminDepthDropdown';
