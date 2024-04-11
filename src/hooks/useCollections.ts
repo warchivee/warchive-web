@@ -13,7 +13,7 @@ import {
 import { collectionAtom } from 'src/stores/collection.atom';
 import wataAtom from 'src/stores/wata.atom';
 import RecoverableError from 'src/types/error/RecoverableError';
-import { validInputText } from '@utils/stringValid.util';
+import { isUrl, validInputText } from '@utils/stringValid.util';
 import {
   COLLECTIONS_LIMMIT_COUNT,
   COLLECTION_COMMENT_LIMIT_LENGTH,
@@ -75,9 +75,9 @@ export const useCollection = () => {
       throw new RecoverableError('컬렉션 이름은 두 글자 이상이어야 합니다.');
     }
 
-    if (validInputText(params.title) || validInputText(params.note)) {
+    if (isUrl(params.title) || isUrl(params.note)) {
       throw new RecoverableError(
-        '컬렉션 이름과 코멘트에는 괄호, url를 입력할 수 없습니다.',
+        '컬렉션 이름과 코멘트에는 url를 입력할 수 없습니다.',
       );
     }
 
@@ -117,14 +117,12 @@ export const useCollection = () => {
 
     if (title.length > COLLECTION_TITLE_LIMIT_LENGTH) {
       throw new RecoverableError(
-        '컬렉션 이름은 50자까지만 입력할 수 있습니다.',
+        `컬렉션 이름은 ${COLLECTION_TITLE_LIMIT_LENGTH}자까지만 입력할 수 있습니다.`,
       );
     }
 
     if (validInputText(title)) {
-      throw new RecoverableError(
-        '컬렉션 이름에는 괄호, url를 입력할 수 없습니다.',
-      );
+      throw new RecoverableError('컬렉션 이름에는 url를 입력할 수 없습니다.');
     }
 
     const result = await createCollectionApi({

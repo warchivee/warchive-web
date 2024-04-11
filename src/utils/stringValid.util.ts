@@ -4,7 +4,7 @@ const jsProtocolUrlRegex = /javascript:/gi;
 const urlRegex =
   /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/gi;
 
-const isUrl = (text: string) => {
+const checkUrl = (text: string) => {
   try {
     // eslint-disable-next-line no-new
     new URL(text);
@@ -21,7 +21,9 @@ export const validInputText = (str: string) => {
     'gi',
   );
 
-  return combinedRegex.test(str) || isUrl(str);
+  return combinedRegex.test(str) || checkUrl(str);
 };
+
+export const isUrl = (str: string) => urlRegex.test(str) || checkUrl(str);
 
 export const isIncludeBlockedWords = (str: string) => false;
