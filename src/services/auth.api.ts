@@ -1,4 +1,4 @@
-import { postData } from '@utils/api.util';
+import { deleteData, postData } from '@utils/api.util';
 import tokenUtil from '@utils/token.util';
 import userUtil from '@utils/user.util';
 import localStorageUtil from '@utils/localstorage.util';
@@ -21,6 +21,12 @@ export const failLogin = () => {
 export const logout = () => {
   localStorageUtil.clearAll();
   window.location.href = '/';
+};
+
+export const withdrawal = async () => {
+  await deleteData('auth/withdrawal');
+
+  logout();
 };
 
 export const checkLogin = () => userUtil.exist();

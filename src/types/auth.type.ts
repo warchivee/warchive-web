@@ -11,6 +11,7 @@ export interface TokenResult {
 export interface User {
   nickname: string;
   role: Permissiontype;
+  kakao_id: number;
 }
 
 export interface LoginResult {
