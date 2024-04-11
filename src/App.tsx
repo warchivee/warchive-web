@@ -33,7 +33,7 @@ const AdminLayout = lazy(() => import('src/layouts/AdminLayout'));
 const AdminHome = lazy(() => import('@pages/AdminHome'));
 
 const About = lazy(() => import('@pages/About'));
-const TermsOfServicePage = lazy(() => import('@pages/TermsOfServicePage'));
+const TermsOfServicePage = lazy(() => import('@pages/TermsOfUsePage'));
 const PrivacyPolicyPage = lazy(() => import('@pages/PrivacyPolicyPage'));
 
 function App() {
@@ -71,7 +71,7 @@ function App() {
           />
 
           <Route path="/about" element={<About />} />
-          <Route path="/service" element={<TermsOfServicePage />} />
+          <Route path="/terms" element={<TermsOfServicePage />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
 
           <Route element={<LoginRoute />}>
