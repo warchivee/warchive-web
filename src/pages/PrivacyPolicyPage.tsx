@@ -285,7 +285,7 @@ export default function PrivacyPolicyPage() {
             target="_blank"
             rel="noreferrer"
           >
-            Wahale 쿠키 설정 방법
+            Whale 쿠키 설정 방법
           </a>
         </li>
       </ul>
