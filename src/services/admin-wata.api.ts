@@ -34,7 +34,7 @@ export const labelOptions: DropdownOption[] = [
   },
   {
     name: '컨택필요',
-    id: 'NEED_CANTACT',
+    id: 'NEED_CONTACT',
     color: 'tropical-blue',
   },
   {
