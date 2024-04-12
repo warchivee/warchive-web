@@ -18,7 +18,7 @@ import {
   faCaretDown,
   faEllipsisVertical,
 } from '@fortawesome/free-solid-svg-icons';
-import getCroppedImg from '@utils/image/cropImage.utils';
+import useCropThumbnail from 'src/hooks/useCropThumbnail';
 
 interface WataCardProps {
   wata: WataType;
@@ -38,7 +38,7 @@ export default function WataCollectionCard({
   const popupRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
 
-  const [cropThumbnail, setCropThumbnail] = useState('');
+  const cropThumbnail = useCropThumbnail(wata, 'book');
 
   const openEditModal = () => {
     setIsEditModalVisible(!isEditModalVisible);
@@ -89,29 +89,6 @@ export default function WataCollectionCard({
       setOpenInfo(false);
     }
   };
-
-  const initThumbnail = async () => {
-    if (!wata?.thumbnail) {
-      setCropThumbnail(
-        'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
-      );
-      return;
-    }
-
-    if (!wata?.thumbnail_card) {
-      setCropThumbnail(wata?.thumbnail);
-
-      return;
-    }
-
-    const cropImg = await getCroppedImg(wata.thumbnail, wata.thumbnail_card, 0);
-
-    setCropThumbnail(cropImg);
-  };
-
-  useEffect(() => {
-    initThumbnail();
-  }, [wata]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
