@@ -72,12 +72,12 @@ body {
   }
 }
 
-*::-webkit-scrollbar {
+body *::-webkit-scrollbar {
   height: 4px;
   width: 4px;
 }
 
-*::-webkit-scrollbar-thumb {
+body *::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
 }

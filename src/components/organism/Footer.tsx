@@ -1,5 +1,14 @@
 // joy components
-import { Box, Grid, Stack, Typography } from '@mui/joy';
+import Modal from '@mui/joy/Modal';
+import {
+  Box,
+  Button,
+  Grid,
+  ModalClose,
+  ModalDialog,
+  Stack,
+  Typography,
+} from '@mui/joy';
 
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,9 +17,14 @@ import { Link } from 'react-router-dom';
 import useModal from 'src/hooks/useModal';
 import { unlinkKakao } from 'src/services/kakao.api';
 import userUtil from '@utils/user.util';
+import { faCoffee, faComment } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+import useSnackbar from 'src/hooks/useSnackbar';
 
 export default function Footer() {
   const [openWithdrawalModal] = useModal();
+  const [isOpenDonation, setIsOpenDonation] = useState(false);
+  const [openSnackbar] = useSnackbar();
 
   return (
     <footer style={{ zIndex: 1, position: 'relative', marginTop: '2rem' }}>
@@ -20,7 +34,6 @@ export default function Footer() {
           maxWidth="1000px"
           margin="0 auto"
           justifyContent="space-between"
-          alignItems="flex-end"
           gap={3}
         >
           <Grid>
@@ -115,15 +128,6 @@ export default function Footer() {
           <Grid display="flex" flexDirection="column" gap={3}>
             <Stack gap={1}>
               <Typography level="body-sm" textColor="text.tertiary">
-                후원계좌
-              </Typography>
-              <Typography level="body-xs" textColor="text.tertiary">
-                신한은행 110-428-228720 ㅇㅈㅇ
-              </Typography>
-            </Stack>
-
-            <Stack gap={1}>
-              <Typography level="body-sm" textColor="text.tertiary">
                 와카이브의 다른 프로젝트
               </Typography>
               <a
@@ -137,9 +141,69 @@ export default function Footer() {
                 </Typography>
               </a>
             </Stack>
+
+            <Button
+              color="primary"
+              variant="soft"
+              sx={{ borderRadius: '20px', gap: '5px' }}
+              onClick={() => {
+                setIsOpenDonation(true);
+              }}
+            >
+              <FontAwesomeIcon icon={faCoffee} />
+              와카이브 운영진에게 커피 사주기
+            </Button>
           </Grid>
         </Grid>
       </Box>
+
+      <Modal open={isOpenDonation} onClose={() => setIsOpenDonation(false)}>
+        <ModalDialog layout="center" sx={{ width: '300px' }}>
+          <ModalClose variant="plain" sx={{ m: 1 }} />
+          <Typography level="h4" fontWeight="lg">
+            BUY US A COFFEE
+          </Typography>
+          <Stack alignItems="center">
+            <div style={{ width: '200px', height: '200px', margin: '0 auto' }}>
+              <img
+                src="/images/kakaopay-qr.png"
+                alt="카카오페이 qr코드"
+                width="100%"
+                height="100%"
+              />
+            </div>
+
+            <Typography>
+              <FontAwesomeIcon icon={faComment} />
+              <span style={{ marginLeft: '5px' }}>kakaopay</span>
+            </Typography>
+          </Stack>
+          <Button
+            color="primary"
+            variant="soft"
+            sx={{ borderRadius: '20px', gap: '5px' }}
+            onClick={() => {
+              const isMobile = /Mobi/i.test(window.navigator.userAgent);
+
+              if (!isMobile) {
+                openSnackbar({
+                  message: 'PC에서는 QR코드로만 접속할 수 있어요.',
+                });
+                return;
+              }
+
+              window.open('https://qr.kakaopay.com/Ej8wPo7JV');
+            }}
+          >
+            <FontAwesomeIcon icon={faCoffee} />
+            와카이브 운영진에게 커피 사주기
+          </Button>
+
+          <Typography level="body-sm" textColor="tertiary">
+            보내주신 소중한 후원금은 와카이브 운영 및 서버비에 사용됩니다.
+          </Typography>
+        </ModalDialog>
+      </Modal>
     </footer>
   );
 }
