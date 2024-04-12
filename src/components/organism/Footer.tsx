@@ -7,6 +7,7 @@ import { faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 import useModal from 'src/hooks/useModal';
 import { unlinkKakao } from 'src/services/kakao.api';
+import userUtil from '@utils/user.util';
 
 export default function Footer() {
   const [openWithdrawalModal] = useModal();
@@ -82,27 +83,31 @@ export default function Footer() {
                   </Typography>
                 </Link>
 
-                <Typography level="body-xs" textColor="text.tertiary">
-                  |
-                </Typography>
-                <Typography
-                  level="body-xs"
-                  textColor="text.tertiary"
-                  sx={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    openWithdrawalModal({
-                      title: '탈퇴하기',
-                      message:
-                        '탈퇴하시겠습니까?\n탈퇴 시 모든 정보가 즉시 삭제됩니다.',
-                      onConfirm: async () => {
-                        await unlinkKakao();
-                      },
-                      confirmTitle: '탈퇴하기',
-                    });
-                  }}
-                >
-                  회원탈퇴
-                </Typography>
+                {!userUtil.isAdmin() && (
+                  <>
+                    <Typography level="body-xs" textColor="text.tertiary">
+                      |
+                    </Typography>
+                    <Typography
+                      level="body-xs"
+                      textColor="text.tertiary"
+                      sx={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        openWithdrawalModal({
+                          title: '탈퇴하기',
+                          message:
+                            '탈퇴하시겠습니까?\n탈퇴 시 모든 정보가 즉시 삭제됩니다.',
+                          onConfirm: async () => {
+                            await unlinkKakao();
+                          },
+                          confirmTitle: '탈퇴하기',
+                        });
+                      }}
+                    >
+                      회원탈퇴
+                    </Typography>
+                  </>
+                )}
               </Stack>
             </Stack>
           </Grid>
