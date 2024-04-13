@@ -1,15 +1,11 @@
 .layout {
   min-height: 100vh;
-  min-height: -webkit-fill-available;
-  min-height: fill-available;
   display: flex;
   flex-direction: column;
 
   & .page {
     flex: 1;
     min-height: calc(100vh - 400px);
-    min-height: -webkit-fill-available;
-    min-height: fill-available;
     @media (max-height: '800px') {
       min-height: calc(100vh - 64px);
     }

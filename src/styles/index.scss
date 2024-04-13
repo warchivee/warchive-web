@@ -21,13 +21,13 @@ body {
   background-color: $alabaster;
   color: $black;
 
-  width: '100%';
-  width: -webkit-fill-available;
-  width: fill-available;
-
   min-height: 100vh;
+  height: fill-available;
   min-height: -webkit-fill-available;
-  min-height: fill-available;
+
+  min-width: 100vw;
+  width: fill-available;
+  min-width: -webkit-fill-available;
   line-height: 1.6;
 }
 
@@ -35,8 +35,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
-  min-height: fill-available;
   overflow: hidden;
 
   --font-content: 'Noto Sans KR', sans-serif;
