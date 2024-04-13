@@ -18,8 +18,15 @@ export interface KeywordType {
   name: string;
 }
 
+export interface CautionType extends KeywordType {
+  id: number;
+  name: string;
+  required: boolean;
+}
+
 export interface PlatformType extends KeywordType {
   url: string;
+  order_top: boolean;
 }
 
 export type WataIdType = number;
@@ -31,7 +38,7 @@ export interface WataType {
   category: KeywordType;
   genre: KeywordType;
   keywords: KeywordType[];
-  cautions: KeywordType[];
+  cautions: CautionType[];
   platforms: PlatformType[];
   thumbnail: string;
   thumbnail_card?: WataThumbnailCropAreaType;
