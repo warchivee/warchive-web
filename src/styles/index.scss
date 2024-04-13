@@ -21,11 +21,13 @@ body {
   background-color: $alabaster;
   color: $black;
 
-  min-height: 100vh;
-  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    min-height: -webkit-fill-available;
-  }
+  width: '100%';
+  width: -webkit-fill-available;
+  width: fill-available;
 
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
   line-height: 1.6;
 }
 
@@ -33,9 +35,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    min-height: -webkit-fill-available;
-  }
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
   overflow: hidden;
 
   --font-content: 'Noto Sans KR', sans-serif;
