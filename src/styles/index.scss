@@ -35,6 +35,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: fill-available;
+  min-height: -webkit-fill-available;
+
+  min-width: 100vw;
+  width: fill-available;
+  min-width: -webkit-fill-available;
+
   overflow: hidden;
 
   --font-content: 'Noto Sans KR', sans-serif;

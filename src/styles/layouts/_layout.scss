@@ -6,8 +6,12 @@
   & .page {
     flex: 1;
     min-height: calc(100vh - 400px);
+    height: fill-available;
+    min-height: -webkit-fill-available;
     @media (max-height: '800px') {
       min-height: calc(100vh - 64px);
+      height: fill-available;
+      min-height: -webkit-fill-available;
     }
   }
 }
