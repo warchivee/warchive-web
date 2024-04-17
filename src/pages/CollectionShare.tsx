@@ -10,6 +10,7 @@ import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSurprise } from '@fortawesome/free-regular-svg-icons';
 import { CollectionType } from 'src/types/collections.type';
+import useCropThumbnail from 'src/hooks/useCropThumbnail';
 
 const getDatas = async (
   id: string | undefined,
@@ -46,6 +47,11 @@ export default function ShareCollections() {
     queryFn: () => getDatas(sharedId),
   });
 
+  const thumbnail = useCropThumbnail(
+    watas?.find((wata) => wata.id === collection?.items[0]),
+    'card',
+  );
+
   return !collection || collection?.id === -1 ? (
     <Stack height="calc(100vh - 68px)" minHeight="667px">
       <Header />
@@ -61,10 +67,11 @@ export default function ShareCollections() {
       <Box
         sx={{
           height: '350px',
-          backgroundImage: `url(${watas?.find((wata) => wata.id === collection?.items[0])?.thumbnail_card})`,
+          backgroundImage: `url(${thumbnail})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
+          backgroundColor: 'black',
         }}
       >
         <Box
@@ -75,8 +82,8 @@ export default function ShareCollections() {
             position: 'absolute',
             width: '100%',
             height: '350px',
-            backdropFilter: 'blur(10px) brightness(40%)',
-            WebkitBackdropFilter: 'blur(10px) brightness(40%)',
+            backdropFilter: 'blur(5px) brightness(40%)',
+            WebkitBackdropFilter: 'blur(5px) brightness(40%)',
             padding: '0 1rem',
           }}
         >

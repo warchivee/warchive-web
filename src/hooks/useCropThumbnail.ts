@@ -2,10 +2,17 @@ import getCroppedImg from '@utils/image/cropImage.utils';
 import { useCallback, useEffect, useState } from 'react';
 import { WataType } from 'src/types/wata.type';
 
-export const useCropThumbnail = (wata: WataType, type: 'card' | 'book') => {
+export const useCropThumbnail = (
+  wata: WataType | undefined,
+  type: 'card' | 'book',
+) => {
   const [cropThumbnail, setCropThumbnail] = useState<string>();
 
   const initThumbnail = useCallback(async () => {
+    if (!wata) {
+      return;
+    }
+
     if (!wata?.thumbnail) {
       setCropThumbnail(
         'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
