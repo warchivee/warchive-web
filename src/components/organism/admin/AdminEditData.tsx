@@ -19,7 +19,6 @@ import {
   faPlus,
   faTrashCan,
   faUpload,
-  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import resizeImage from '@utils/image/resizeImage.utils';
@@ -79,11 +78,86 @@ export default function AdminEditData({
         )
       : [];
 
+  const handleConfirm = async () => {
+    setIsLoading(true);
+
+    if (!editData?.title || editData?.title?.replace(' ', '') === '') {
+      ModalUtil.open({
+        title: '입력 오류',
+        message:
+          '데이터 수정 시 제목은 필수 입력값입니다. 제목을 입력해주세요.',
+      });
+      return;
+    }
+
+    let resizedThumbnail = image;
+
+    try {
+      if (
+        resizedThumbnail &&
+        resizedThumbnail !== data?.thumbnail &&
+        !resizedThumbnail?.includes('http')
+      ) {
+        const { url } = await uploadImage(
+          resizedThumbnail?.replace('data:image/jpeg;base64,', ''),
+          `${editData?.title}`,
+        );
+
+        setImage(resizedThumbnail); // 와카이브 api 업로드 실패 시 한번 더 imgbb에 업로드되지 않도록 방지.
+
+        resizedThumbnail = url;
+      }
+    } catch (error) {
+      const { error: imgbbError } = (error as AxiosError)?.response?.data as {
+        error: { code: number; message: string };
+      };
+
+      ModalUtil.open({
+        title: '이미지 업로드 오류',
+        message: `담당자에게 문의해주세요 - [${imgbbError?.code}] ${imgbbError?.message}`,
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
+    const updateData = {
+      title: editData?.title,
+      creators: editData?.creators,
+      platforms: editData?.platforms?.map((platform) => ({
+        id: platform.id,
+        url: platform.url,
+      })),
+      genre: editData?.genre?.id,
+      cautions: editData?.cautions?.map((item) => item.id),
+      keywords: editData?.keywords?.map((item) => item.id),
+      thumbnail: resizedThumbnail,
+      thumbnail_card: cardCropArea,
+      thumbnail_book: bookCropArea,
+      note: editData?.note,
+    } as EditAdminWataDto;
+
+    try {
+      if (!data?.id) {
+        await createWata(updateData);
+      } else {
+        await updateWata(data?.id, updateData);
+      }
+
+      onClose();
+      onConfirm();
+    } catch (error) {
+      setIsLoading(false);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     if (isOpen) {
       setCardCropArea(data?.thumbnail_card);
       setBookCropArea(data?.thumbnail_book);
-      setImage('');
+      setImage(data?.thumbnail ?? '');
       setEditData(data);
       getKeywordList();
     }
@@ -366,88 +440,7 @@ export default function AdminEditData({
           >
             취소
           </Button>
-          <Button
-            variant="plain"
-            loading={isLoading}
-            onClick={async () => {
-              setIsLoading(true);
-
-              if (
-                !editData?.title ||
-                editData?.title?.replace(' ', '') === ''
-              ) {
-                ModalUtil.open({
-                  title: '입력 오류',
-                  message:
-                    '데이터 수정 시 제목은 필수 입력값입니다. 제목을 입력해주세요.',
-                });
-                return;
-              }
-
-              let resizedThumbnail = image;
-
-              try {
-                if (
-                  resizedThumbnail &&
-                  resizedThumbnail !== data?.thumbnail &&
-                  !resizedThumbnail?.includes('http')
-                ) {
-                  const { url } = await uploadImage(
-                    resizedThumbnail?.replace('data:image/jpeg;base64,', ''),
-                    `${editData?.title}`,
-                  );
-
-                  setImage(resizedThumbnail); // 와카이브 api 업로드 실패 시 한번 더 imgbb에 업로드되지 않도록 방지.
-
-                  resizedThumbnail = url;
-                }
-              } catch (error) {
-                const { error: imgbbError } = (error as AxiosError)?.response
-                  ?.data as {
-                  error: { code: number; message: string };
-                };
-
-                ModalUtil.open({
-                  title: '이미지 업로드 오류',
-                  message: `담당자에게 문의해주세요 - [${imgbbError?.code}] ${imgbbError?.message}`,
-                });
-
-                setIsLoading(false);
-                return;
-              }
-
-              const updateData = {
-                title: editData?.title,
-                creators: editData?.creators,
-                platforms: editData?.platforms?.map((platform) => ({
-                  id: platform.id,
-                  url: platform.url,
-                })),
-                genre: editData?.genre?.id,
-                cautions: editData?.cautions?.map((item) => item.id),
-                keywords: editData?.keywords?.map((item) => item.id),
-                thumbnail: resizedThumbnail,
-                thumbnail_card: cardCropArea,
-                thumbnail_book: bookCropArea,
-                note: editData?.note,
-              } as EditAdminWataDto;
-
-              try {
-                if (!data?.id) {
-                  await createWata(updateData);
-                } else {
-                  await updateWata(data?.id, updateData);
-                }
-
-                onClose();
-                onConfirm();
-              } catch (error) {
-                setIsLoading(false);
-              }
-
-              setIsLoading(false);
-            }}
-          >
+          <Button variant="plain" loading={isLoading} onClick={handleConfirm}>
             확인
           </Button>
         </div>
