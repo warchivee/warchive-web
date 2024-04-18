@@ -84,6 +84,7 @@ function SamplePrevArrow(props: {
     <IconButton
       className={className}
       sx={{
+        position: 'absolute',
         marginTop: '15px',
         background: 'white !important',
         borderRadius: '50%',
