@@ -13,6 +13,7 @@ import useSearchWata from 'src/hooks/useSearchWata';
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import CarouselBanner from '@components/organism/CarouselBanner';
 
 export default function UserHome() {
   const { searchWatas, pageNo, maxPage, totalCount, handlePageChange } =
@@ -24,8 +25,10 @@ export default function UserHome() {
   };
 
   return (
-    <Stack gap="3rem">
+    <Stack gap="2rem">
       <KeywordSearchBorad />
+
+      <CarouselBanner />
 
       <Stack
         width="100%"
