@@ -2,7 +2,7 @@ import RecoverableError from 'src/types/error/RecoverableError';
 import UnrecoverableError from 'src/types/error/UnrecoverableError';
 
 const DB_KEY = 'warchive-web';
-const DB_VERSION = 1;
+const DB_VERSION = 2; // 1 : collections. 2: collections -> scrapbooks
 
 export const WATA_STORE = 'wata-store';
 export const KEYWORD_STORE = 'keyword-store';
