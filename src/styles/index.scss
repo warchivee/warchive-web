@@ -93,3 +93,7 @@ body *::-webkit-scrollbar-thumb {
   opacity: 0;
   display: none;
 }
+
+.slick-list {
+  overflow: visible !important;
+}

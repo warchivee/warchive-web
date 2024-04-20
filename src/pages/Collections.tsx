@@ -12,15 +12,9 @@ import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBookBookmark,
-  faBookOpen,
-  faBookmark,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBookBookmark, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // utils
-import useSearchKeywords from 'src/hooks/useSearchKeywords';
 import useCollection from 'src/hooks/useCollections';
 import Empty from '@components/organism/Empty';
 import {
@@ -29,8 +23,6 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 export default function Collections() {
-  const { resetAllSearchKeywords } = useSearchKeywords();
-
   const { refreshCollectionState, getCollectionItems, isCollectionsEmpty } =
     useCollection();
 
@@ -43,9 +35,6 @@ export default function Collections() {
   };
 
   useEffect(() => {
-    // 페이지 이동 시 검색 키워드 초기화
-    resetAllSearchKeywords();
-
     initCollectionData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,10 +71,10 @@ export default function Collections() {
             {isCollectionsEmpty() ? (
               <Empty
                 icon={faFaceSurprise}
-                title="컬렉션이 없어요"
+                title="스크랩북이 없어요"
                 content={
                   <Typography>
-                    컬렉션 목록의{' '}
+                    스크랩북 목록의{' '}
                     <IconButton
                       size="sm"
                       style={{
@@ -96,7 +85,7 @@ export default function Collections() {
                     >
                       <FontAwesomeIcon icon={faPlus} />
                     </IconButton>{' '}
-                    버튼을 눌러 내 여성서사 컬렉션을 만들어보세요.
+                    버튼을 눌러 내 여성서사 스크랩북을 만들어보세요.
                   </Typography>
                 }
               />
@@ -113,7 +102,7 @@ export default function Collections() {
                         <IconButton sx={{ cursor: 'text' }}>
                           <FontAwesomeIcon icon={faBookBookmark} />
                         </IconButton>
-                        버튼을 눌러 내 컬렉션에 추가할 수 있습니다.
+                        버튼을 눌러 내 스크랩북에 추가할 수 있습니다.
                       </Typography>
                     }
                   />

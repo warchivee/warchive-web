@@ -72,11 +72,11 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
       <ModalDialog layout="center">
         <ModalClose variant="plain" sx={{ m: 1 }} />
         <Typography level="h4" fontWeight="lg">
-          컬렉션 추가하기
+          스크랩북에 추가하기
         </Typography>
 
         <Typography level="body-sm" textColor="tertiary">
-          새로 만들 컬렉션의 이름을 입력해주세요.
+          새로 만들 스크랩북의 이름을 입력해주세요.
         </Typography>
 
         <FormControl>

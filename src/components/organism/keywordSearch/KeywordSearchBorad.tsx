@@ -20,8 +20,7 @@ export default function KeywordSearchBorad() {
     queryFn: () => indexedDB.getItems<KeywordListType[]>(KEYWORD_STORE),
   });
 
-  const { resetSearchKeywords, hasSelectedKeywords, selectCategory } =
-    useSearchKeywords();
+  const { hasSelectedKeywords, selectCategory } = useSearchKeywords();
 
   const [tab, setTab] = useState<number>(0);
   const [tabOpen, setTabOpen] = useState<boolean>(false);

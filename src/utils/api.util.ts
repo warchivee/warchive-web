@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { TokenResult } from 'src/types/auth.type';
 import tokenUtil from './token.util';
 
@@ -49,7 +49,6 @@ api.interceptors.request.use(
       try {
         await reissueToken(); // 토큰 재발급 요청
       } catch (reissueError) {
-        window.location.href = '/login';
         return Promise.reject(reissueError); // 에러 반환
       }
     }
@@ -74,7 +73,6 @@ api.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${tokenUtil.get()}`;
         return await api(originalRequest);
       } catch (reissueError) {
-        window.location.href = '/login';
         return Promise.reject(reissueError);
       }
     } else {

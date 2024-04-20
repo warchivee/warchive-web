@@ -25,16 +25,6 @@ function calculatePercentage(part: number, whole: number) {
 
 const banners = [
   {
-    subject: '와카이브 아티클 : 자유별',
-    title: '도망친 곳에는 천국이 있었다',
-    description: '〈불효녀로 행복하기〉 저자, 자유별 인터뷰를 만나보세요.',
-    backgroundStartColor: '#ECEEC9',
-    backgroundEndColor: '#D2D7AC33',
-    color: 'black',
-    src: BannerOne,
-    href: 'https://article.womynarchive.com/review/happy-jayoobyul/',
-  },
-  {
     title: '여성서사 주인공 성향 테스트',
     description: '내가 여성서사 작품에 들어간다면 누구일까?',
     backgroundStartColor: '#170C1E',
@@ -42,6 +32,16 @@ const banners = [
     color: 'white',
     src: BannerTwo,
     href: 'https://play.womynarchive.com/womyn-character-test',
+  },
+  {
+    subject: '와카이브 아티클 : 자유별',
+    title: '도망친 곳에는 천국이 있었다',
+    description: '〈불효녀로 행복하기〉 저자, 자유별 인터뷰를 만나보세요.',
+    backgroundStartColor: '#ECEEC9',
+    backgroundEndColor: '#D2D7AC33',
+    color: 'black',
+    src: BannerOne,
+    href: 'https://article.womynarchive.com/interview/jayoobyul/',
   },
   {
     subject: '와카이브 아티클 : 프로젝트 여생',
@@ -54,14 +54,6 @@ const banners = [
     href: 'https://article.womynarchive.com/interview/yeosaeng/',
   },
   {
-    title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
-    backgroundStartColor: '#590091',
-    backgroundEndColor: '#D388FF14',
-    color: 'white',
-    src: BannerFour,
-    href: 'https://womynarchive.notion.site/75138cd619284d739f16f474d100b81f',
-  },
-  {
     subject: '와카이브 아티클 : 불효녀로 행복하기 ',
     title: '도망친 곳에는 천국이 있었다',
     description: '내가 나로 살 수 있는 나라를 찾았다',
@@ -71,6 +63,14 @@ const banners = [
     src: BannerFive,
     href: 'https://article.womynarchive.com/review/happy-jayoobyul/',
     type: 'review',
+  },
+  {
+    title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
+    backgroundStartColor: '#590091',
+    backgroundEndColor: '#D388FF14',
+    color: 'white',
+    src: BannerFour,
+    href: 'https://womynarchive.notion.site/75138cd619284d739f16f474d100b81f',
   },
 ];
 
@@ -85,16 +85,15 @@ function SamplePrevArrow(props: {
       className={className}
       sx={{
         position: 'absolute',
-        marginTop: '15px',
         background: 'white !important',
         borderRadius: '50%',
         boxShadow: '0px 5px 12px rgba(0, 0, 0, 0.25)',
-        right: direction === 'right' ? '-20px !important' : '',
-        left: direction === 'left' ? '-20px !important' : '',
+        right: direction === 'right' ? '-15px !important' : '',
+        left: direction === 'left' ? '-15px !important' : '',
         zIndex: '1',
-        '@media (max-width: 600px)': {
-          marginTop: '-10px',
-        },
+        minHeight: '30px',
+        minWidth: '30px',
+        top: '48% !important',
       }}
       onClick={onClick}
     >
@@ -131,8 +130,8 @@ export default function CarouselBanner() {
       width="100%"
       maxWidth="900px"
       margin="0 auto"
+      marginTop="3rem"
       padding="0 1rem"
-      marginBottom="1rem"
     >
       <Slider
         {...settings}
@@ -159,7 +158,6 @@ export default function CarouselBanner() {
 
               {/* 배너 글 */}
               <Stack
-                marginTop="40px"
                 zIndex="2"
                 justifyContent="center"
                 padding="0 2rem"
@@ -169,7 +167,6 @@ export default function CarouselBanner() {
                 sx={{
                   '@media (max-width: 600px)': {
                     padding: '0 1.5rem',
-                    marginTop: 0,
                   },
                 }}
               >
@@ -193,8 +190,8 @@ export default function CarouselBanner() {
                 >
                   {item.title
                     ?.split('\n')
-                    ?.map((titleText, index: number) => (
-                      <div key={`banner-title-${index + 1}`}>{titleText}</div>
+                    ?.map((titleText, i: number) => (
+                      <div key={`banner-title-${i + 1}`}>{titleText}</div>
                     ))}
                 </Typography>
 
@@ -211,16 +208,12 @@ export default function CarouselBanner() {
               </Stack>
               {/* 배경색 */}
               <Box
-                marginTop="40px"
                 borderRadius="20px"
                 width="100%"
                 height="100%"
                 position="absolute"
                 sx={{
                   background: `linear-gradient(90deg, ${item.backgroundStartColor} 30%, ${item.backgroundEndColor} 80%, ${item.backgroundEndColor} 100%)`,
-                  '@media (max-width: 600px)': {
-                    marginTop: '0',
-                  },
                 }}
               />
 
@@ -230,20 +223,21 @@ export default function CarouselBanner() {
                   width="100%"
                   height="200px"
                   zIndex="1"
+                  position="absolute"
+                  top="-40px"
                   sx={{
                     background: `url(${item.src})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'contain',
                     '@media (max-width: 600px)': {
-                      marginLeft: '-30px',
                       width: '100%',
-                      height: '160px',
+                      height: '170px',
+                      top: '-25px',
                     },
                   }}
                 />
               ) : (
                 <Box
-                  marginTop="40px"
                   width="380px"
                   height="150px"
                   borderRadius="20px"
@@ -259,7 +253,6 @@ export default function CarouselBanner() {
                     backgroundSize: 'contain',
                     '@media (max-width: 600px)': {
                       marginLeft: '50px',
-                      marginTop: 0,
                       background: `linear-gradient(
                   to left, 
                     rgba(255,255,255,0) 10%, 
@@ -281,12 +274,9 @@ export default function CarouselBanner() {
                   marginLeft: 'auto',
                   marginRight: 'auto',
                   background: `linear-gradient(90deg, rgba(0,0,0,1) ${calculatePercentage(index + 1, banners?.length)}%, rgba(255,255,255,1) ${calculatePercentage(index + 1, banners?.length)}%)`,
-                  bottom: '-25px',
+                  bottom: '10px',
                   opacity: 0.7,
                   zIndex: 3,
-                  '@media (max-width: 600px)': {
-                    bottom: '15px',
-                  },
                 }}
               />
             </Stack>

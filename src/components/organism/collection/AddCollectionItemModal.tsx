@@ -96,9 +96,9 @@ export default function AddCollectionItemModal({
         <List size="sm" sx={{ overflow: 'auto', gap: '0.4rem' }}>
           {isCollectionsEmpty() ? (
             <>
-              <Typography level="body-sm">컬렉션이 없어요!</Typography>
+              <Typography level="body-sm">스크랩북이 없어요!</Typography>
               <Typography level="body-sm">
-                컬렉션 메뉴에서 나의 여성서사 컬렉션을 만들어보세요.
+                스크랩북 메뉴에서 나의 여성서사 스크랩북을 만들어보세요.
               </Typography>
             </>
           ) : (

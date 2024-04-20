@@ -30,13 +30,13 @@ export default function WataCard({ wata }: { wata: WataType }) {
   const handleAddCollection = () => {
     if (!checkLogin()) {
       openLoginModal({
-        title: '컬렉션에 추가하기',
+        title: '스크랩북에 추가하기',
         confirmTitle: '로그인하기',
         cancelTitle: '닫기',
         onConfirm: () => {
           navigate('/login');
         },
-        message: '컬렉션을 이용하려면 로그인이 필요해요.',
+        message: '스크랩북을 이용하려면 로그인이 필요해요.',
       });
       return;
     }
@@ -172,7 +172,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
       </Box>
 
       <AddCollectionsModal
-        title="컬렉션에 추가하기"
+        title="스크랩북에 추가하기"
         wata={wata}
         isOpen={isOpenCollectionAddModel}
         onClose={() => setIsCollectionAddModal(false)}

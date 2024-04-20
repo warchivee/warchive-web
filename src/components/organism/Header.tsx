@@ -260,7 +260,7 @@ export default function Header() {
   const navigate = useNavigate();
   const userMenus: MenuInfo[] = [
     {
-      label: '컬렉션',
+      label: '스크랩북',
       icon: <FontAwesomeIcon color="white" icon={faBookBookmark} />,
       path: '/collections',
       callback: () => {

@@ -40,6 +40,10 @@ const warchiveTheme = extendTheme({
           softActiveBorder: undefined,
           softActiveBg: undefined,
           softActiveColor: undefined,
+
+          solidBg: '#590091',
+          solidHoverBg: undefined,
+          solidActiveBg: undefined,
         },
         neutral: {
           plainBg: 'transparent',

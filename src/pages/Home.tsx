@@ -14,15 +14,22 @@ import useSearchWata from 'src/hooks/useSearchWata';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import CarouselBanner from '@components/organism/CarouselBanner';
+import { useEffect } from 'react';
 
 export default function UserHome() {
   const { searchWatas, pageNo, maxPage, totalCount, handlePageChange } =
     useSearchWata();
-  const { searchKeywords, updateSearchInput } = useSearchKeywords();
+  const { searchKeywords, updateSearchInput, resetAllSearchKeywords } =
+    useSearchKeywords();
 
   const handleInitInput = () => {
     updateSearchInput('');
   };
+
+  useEffect(() => {
+    // 페이지 이동 시 검색 키워드 초기화
+    resetAllSearchKeywords();
+  }, []);
 
   return (
     <Stack gap="2rem">

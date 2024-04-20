@@ -16,7 +16,7 @@ export default function Login() {
       <div className="title">
         <Typography level="body-sm" textAlign="center">
           별도의 회원가입 없이 소셜 계정으로 로그인하세요.
-          <br /> 로그인 시 컬렉션을 사용할 수 있습니다.
+          <br /> 로그인 시 스크랩북을 사용할 수 있습니다.
         </Typography>
       </div>
 

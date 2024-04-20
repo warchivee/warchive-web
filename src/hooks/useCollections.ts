@@ -72,12 +72,12 @@ export const useCollection = () => {
     }
 
     if (params.title?.replace(' ', '')?.length < 2) {
-      throw new RecoverableError('컬렉션 이름은 두 글자 이상이어야 합니다.');
+      throw new RecoverableError('스크랩북 이름은 두 글자 이상이어야 합니다.');
     }
 
     if (isUrl(params.title) || isUrl(params.note)) {
       throw new RecoverableError(
-        '컬렉션 이름과 코멘트에는 url를 입력할 수 없습니다.',
+        '스크랩북 이름과 코멘트에는 url를 입력할 수 없습니다.',
       );
     }
 
@@ -86,7 +86,7 @@ export const useCollection = () => {
       (params.note?.length ?? 0) > COLLECTION_COMMENT_LIMIT_LENGTH
     ) {
       throw new RecoverableError(
-        `컬렉션 이름은 ${COLLECTION_TITLE_LIMIT_LENGTH}자, 코멘트는 ${COLLECTION_COMMENT_LIMIT_LENGTH}자까지만 입력할 수 있습니다.`,
+        `스크랩북 이름은 ${COLLECTION_TITLE_LIMIT_LENGTH}자, 코멘트는 ${COLLECTION_COMMENT_LIMIT_LENGTH}자까지만 입력할 수 있습니다.`,
       );
     }
 
@@ -107,22 +107,22 @@ export const useCollection = () => {
   const addCollection = async (title: string) => {
     if (getCollections()?.length >= COLLECTIONS_LIMMIT_COUNT) {
       throw new RecoverableError(
-        `컬렉션은 ${COLLECTIONS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
+        `스크랩북은 ${COLLECTIONS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
       );
     }
 
     if (title?.replace(' ', '')?.length < 2) {
-      throw new RecoverableError('컬렉션 이름은 두 글자 이상이어야 합니다.');
+      throw new RecoverableError('스크랩북 이름은 두 글자 이상이어야 합니다.');
     }
 
     if (title.length > COLLECTION_TITLE_LIMIT_LENGTH) {
       throw new RecoverableError(
-        `컬렉션 이름은 ${COLLECTION_TITLE_LIMIT_LENGTH}자까지만 입력할 수 있습니다.`,
+        `스크랩북 이름은 ${COLLECTION_TITLE_LIMIT_LENGTH}자까지만 입력할 수 있습니다.`,
       );
     }
 
     if (validInputText(title)) {
-      throw new RecoverableError('컬렉션 이름에는 url를 입력할 수 없습니다.');
+      throw new RecoverableError('스크랩북 이름에는 url를 입력할 수 없습니다.');
     }
 
     const result = await createCollectionApi({
@@ -174,7 +174,7 @@ export const useCollection = () => {
 
         if (count > COLLECTION_ITEMS_LIMIT_COUNT) {
           throw new RecoverableError(
-            `한 컬렉션에는 작품을 ${COLLECTION_ITEMS_LIMIT_COUNT} 까지만 추가할 수 있습니다.`,
+            `한 스크랩북에는 작품을 ${COLLECTION_ITEMS_LIMIT_COUNT} 까지만 추가할 수 있습니다.`,
           );
         }
 

@@ -41,8 +41,8 @@ function App() {
   const [snackbar, setSnackbar] = useRecoilState(snackbarState);
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Router>
+    <Router>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Routes>
           <Route element={<NoHeaderLayout />}>
             <Route
@@ -170,8 +170,8 @@ function App() {
             </Box>
           </ModalDialog>
         </Modal>
-      </Router>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </Router>
   );
 }
 

@@ -1,15 +1,20 @@
 import { WataType } from 'src/types/wata.type';
-import { Grid } from '@mui/joy';
+import { Box } from '@mui/joy';
 import WataCard from './WataCard';
 
 export default function WataCardList({ watas = [] }: { watas: WataType[] }) {
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <Box
+      display="grid"
+      gridTemplateColumns="repeat(auto-fill, minmax(300px, auto))"
+      columnGap="1rem"
+      rowGap="1rem"
+      width="100%"
+      justifyContent="center"
+    >
       {watas?.map((wata: WataType) => (
-        <Grid key={`wata-${wata.id}`}>
-          <WataCard wata={wata} />
-        </Grid>
+        <WataCard key={`wata-${wata.id}`} wata={wata} />
       ))}
-    </Grid>
+    </Box>
   );
 }

@@ -57,8 +57,8 @@ export default function ShareCollections() {
       <Header />
       <Stack justifyContent="center" alignItems="center" gap={2} height="100%">
         <FontAwesomeIcon size="4x" icon={faFaceSurprise} color="#170c1e" />
-        <Typography level="h3">앗, 공유할 컬렉션이 없어요!</Typography>
-        <Typography>없어진 컬렉션이거나 없는 컬렉션이에요.</Typography>
+        <Typography level="h3">앗, 공유할 스크랩북이 없어요!</Typography>
+        <Typography>없어졌거나 없는 스크랩북이에요.</Typography>
       </Stack>
     </Stack>
   ) : (
@@ -106,7 +106,7 @@ export default function ShareCollections() {
 
             <Stack>
               {/* <Button variant="plain" sx={{ color: '#D9D9D9' }}>
-                내 컬렉션에 추가
+                내 스크랩북에 추가
               </Button> */}
             </Stack>
           </Stack>

@@ -101,7 +101,7 @@ export default function ShareCollectionButtons() {
                         },
                         buttons: [
                           {
-                            title: '공유한 컬렉션 보러가기',
+                            title: '공유한 스크랩북 보러가기',
                             link: {
                               mobileWebUrl: url,
                               webUrl: url,
@@ -124,9 +124,9 @@ export default function ShareCollectionButtons() {
               <Stack>
                 <IconButton
                   onClick={() => {
-                    const sendText = `나의 여성서사 컬렉션 - ${getCollection()?.title}`;
+                    const sendText = `나의 여성서사 스크랩북 - ${getCollection()?.title}`;
                     window.open(
-                      `https://twitter.com/intent/tweet?text=${sendText}&hashtags=와카이브,와카이브컬렉션,여성서사&url=${url}`,
+                      `https://twitter.com/intent/tweet?text=${sendText}&hashtags=와카이브,와카이브스크랩북,여성서사&url=${url}`,
                     );
                   }}
                 >

@@ -93,8 +93,8 @@ export default function CollectionMenu() {
             onClick={() => {
               if (getCollections()?.length >= COLLECTIONS_LIMMIT_COUNT) {
                 openConfirmModal({
-                  title: '컬렉션 생성 실패',
-                  message: `컬렉션은 ${COLLECTIONS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
+                  title: '스크랩북 생성 실패',
+                  message: `스크랩북은 ${COLLECTIONS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
                 });
                 return;
               }
@@ -123,9 +123,9 @@ export default function CollectionMenu() {
                 }
                 setOpenModal(true);
                 openConfirmModal({
-                  title: '컬렉션 삭제하기',
+                  title: '스크랩북 삭제하기',
                   message:
-                    '컬렉션을 정말 삭제하시겠습니까?\n컬렉션에 추가한 작품들까지 전부 삭제됩니다.',
+                    '스크랩북을 정말 삭제하시겠습니까?\n스크랩북에 추가한 작품들까지 전부 삭제됩니다.',
                   onCancel: () => {
                     setOpenModal(false);
                   },

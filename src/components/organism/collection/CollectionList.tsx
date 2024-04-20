@@ -36,7 +36,7 @@ export default function WataCollectionList({ watas }: { watas: WataType[] }) {
       </div>
 
       <AddCollectionItemModal
-        title="컬렉션 관리"
+        title="스크랩북 관리"
         wata={selectWata}
         isOpen={isOpenBookmarkModel}
         onClose={() => setIsOpenBookmarkModal(false)}
