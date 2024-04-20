@@ -106,7 +106,7 @@ const warchiveTheme = extendTheme({
     },
     JoyModal: {
       styleOverrides: {
-        root: ({ ownerState }) => ({
+        root: () => ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -117,7 +117,7 @@ const warchiveTheme = extendTheme({
     },
     JoyTextarea: {
       styleOverrides: {
-        root: ({ ownerState }) => ({
+        root: () => ({
           '--Textarea-focusedInset': 'none',
           '--Textarea-focusedThickness': 'none',
           '--Textarea-focusedHighlight': 'none',
@@ -129,7 +129,7 @@ const warchiveTheme = extendTheme({
     },
     JoyInput: {
       styleOverrides: {
-        root: ({ ownerState }) => ({
+        root: () => ({
           '--Input-focusedInset': 'none',
           '--Input-focusedThickness': 'none',
           '--Input-focusedHighlight': 'none',

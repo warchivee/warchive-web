@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // components
-import AddCollectionsModal from '@components/organism/collection/AddCollectionItemModal';
+import AddScrapbooksModal from '@components/organism/scrapbook/AddScrapbookItemModal';
 import KeywordChip from '@components/organism/chip/KeywordChip';
 import PlatformChip from '@components/organism/chip/PlatformChip';
 
@@ -21,13 +21,13 @@ import useCropThumbnail from 'src/hooks/useCropThumbnail';
 import { useNavigate } from 'react-router-dom';
 
 export default function WataCard({ wata }: { wata: WataType }) {
-  const [isOpenCollectionAddModel, setIsCollectionAddModal] =
+  const [isOpenScrapbookAddModel, setIsScrapbookAddModal] =
     useState<boolean>(false);
   const [openLoginModal] = useModal();
   const cropThumbnail = useCropThumbnail(wata, 'card');
   const navigate = useNavigate();
 
-  const handleAddCollection = () => {
+  const handleAddScrapbook = () => {
     if (!checkLogin()) {
       openLoginModal({
         title: '스크랩북에 추가하기',
@@ -41,7 +41,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
       return;
     }
 
-    setIsCollectionAddModal(true);
+    setIsScrapbookAddModal(true);
   };
 
   return (
@@ -67,7 +67,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
           </Typography>
           <IconButton
             size="sm"
-            onClick={handleAddCollection}
+            onClick={handleAddScrapbook}
             sx={{ minHeight: 'max-content', justifyContent: 'flex-end' }}
           >
             <FontAwesomeIcon color="white" icon={faBookBookmark} />
@@ -171,11 +171,11 @@ export default function WataCard({ wata }: { wata: WataType }) {
         </Stack>
       </Box>
 
-      <AddCollectionsModal
+      <AddScrapbooksModal
         title="스크랩북에 추가하기"
         wata={wata}
-        isOpen={isOpenCollectionAddModel}
-        onClose={() => setIsCollectionAddModal(false)}
+        isOpen={isOpenScrapbookAddModel}
+        onClose={() => setIsScrapbookAddModal(false)}
       />
     </Stack>
   );

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 // components
-import AddCollectionModal from '@components/organism/collection/AddCollectionModal';
+import AddScrapbookModal from '@components/organism/scrapbook/AddScrapModal';
 import { Text } from '@components/CommonComponents/text';
 
 // joy components
@@ -13,12 +13,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // utils
-import useCollection from 'src/hooks/useCollections';
+import useScrapbook from 'src/hooks/useScrapbooks';
 import useModal from 'src/hooks/useModal';
-import { CollectionType } from 'src/types/collections.type';
-import { COLLECTIONS_LIMMIT_COUNT } from '@utils/consts/collections.const';
+import { ScrapbookType } from 'src/types/scrapbooks.type';
+import { SCRAPBOOKS_LIMMIT_COUNT } from '@utils/consts/scrapbooks.const';
 
-export default function CollectionMenu() {
+export default function ScrapbookMenu() {
   const [isInputConfirmOpen, setIsInputConfirmOpen] = useState<boolean>(false);
 
   const [openMenu, setOpenMenu] = useState(false);
@@ -29,12 +29,12 @@ export default function CollectionMenu() {
   const popupRef = useRef<HTMLDivElement>(null);
 
   const {
-    isCollectionsEmpty,
-    getCollections,
-    getSelectCollectionIndex,
-    selectCollection,
-    deleteCollection,
-  } = useCollection();
+    isScrapbooksEmpty,
+    getScrapbooks,
+    getSelectScrapbookIndex,
+    selectScrapbook,
+    deleteScrapbook,
+  } = useScrapbook();
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
@@ -57,26 +57,24 @@ export default function CollectionMenu() {
   }, [openModal, handleClickOutside]);
 
   return (
-    <div className="collection-menu" style={{ zIndex: openMenu ? 2 : 0 }}>
+    <div className="scrapbook-menu" style={{ zIndex: openMenu ? 2 : 0 }}>
       <div className={openMenu ? 'pc show' : 'pc'} ref={popupRef}>
         <ul>
-          {getCollections()?.map(
-            (collection: CollectionType, index: number) => (
-              <li
-                className={classNames({
-                  active: index === getSelectCollectionIndex(),
-                })}
-                key={`bookmark-list-${collection.id}`}
-                onClick={() => {
-                  selectCollection(index);
-                  setOpenMenu(!openMenu);
-                }}
-                aria-hidden="true"
-              >
-                <Text color="white">{collection.title}</Text>
-              </li>
-            ),
-          )}
+          {getScrapbooks()?.map((scrapbook: ScrapbookType, index: number) => (
+            <li
+              className={classNames({
+                active: index === getSelectScrapbookIndex(),
+              })}
+              key={`bookmark-list-${scrapbook.id}`}
+              onClick={() => {
+                selectScrapbook(index);
+                setOpenMenu(!openMenu);
+              }}
+              aria-hidden="true"
+            >
+              <Text color="white">{scrapbook.title}</Text>
+            </li>
+          ))}
         </ul>
         <div className="control">
           <IconButton
@@ -91,10 +89,10 @@ export default function CollectionMenu() {
               width: '1.8rem',
             }}
             onClick={() => {
-              if (getCollections()?.length >= COLLECTIONS_LIMMIT_COUNT) {
+              if (getScrapbooks()?.length >= SCRAPBOOKS_LIMMIT_COUNT) {
                 openConfirmModal({
                   title: '스크랩북 생성 실패',
-                  message: `스크랩북은 ${COLLECTIONS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
+                  message: `스크랩북은 ${SCRAPBOOKS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
                 });
                 return;
               }
@@ -105,7 +103,7 @@ export default function CollectionMenu() {
           >
             <FontAwesomeIcon style={{ color: 'white' }} icon={faPlus} />
           </IconButton>
-          {!isCollectionsEmpty() && (
+          {!isScrapbooksEmpty() && (
             <IconButton
               size="sm"
               sx={{
@@ -118,7 +116,7 @@ export default function CollectionMenu() {
               }}
               variant="plain"
               onClick={() => {
-                if (isCollectionsEmpty()) {
+                if (isScrapbooksEmpty()) {
                   return;
                 }
                 setOpenModal(true);
@@ -130,7 +128,7 @@ export default function CollectionMenu() {
                     setOpenModal(false);
                   },
                   onConfirm: async () => {
-                    await deleteCollection();
+                    await deleteScrapbook();
                     setOpenModal(false);
                   },
                 });
@@ -150,7 +148,7 @@ export default function CollectionMenu() {
         <Typography textColor="white">{openMenu ? '《　' : '　》'}</Typography>
       </div>
 
-      <AddCollectionModal
+      <AddScrapbookModal
         isOpen={isInputConfirmOpen}
         onClose={() => {
           setIsInputConfirmOpen(false);

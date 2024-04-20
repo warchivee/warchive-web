@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { TokenResult } from 'src/types/auth.type';
 import tokenUtil from './token.util';
 
@@ -40,7 +40,7 @@ api.interceptors.request.use(
     if (
       newConfig.url === 'auth/login' ||
       newConfig.url === 'publish-wata' ||
-      newConfig.url?.includes('collection/shared')
+      newConfig.url?.includes('scrapbook/shared')
     ) {
       return newConfig;
     }

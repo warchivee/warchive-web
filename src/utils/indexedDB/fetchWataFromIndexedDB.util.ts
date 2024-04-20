@@ -60,9 +60,9 @@ const syncWataFromServer = async (): Promise<void> => {
 export const fetchWatas = async (): Promise<WataType[]> => {
   await syncWataFromServer();
 
-  const savedCollections = await indexedDB.getItems<WataType[]>(WATA_STORE);
+  const savedScrapbooks = await indexedDB.getItems<WataType[]>(WATA_STORE);
 
-  return savedCollections;
+  return savedScrapbooks;
 };
 
 export default fetchWatas;

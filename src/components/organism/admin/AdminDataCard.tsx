@@ -87,7 +87,6 @@ export default function AdminDataCard({
     cautions,
     platforms,
     thumbnail,
-    thumbnail_card: thumbnailCard,
     thumbnail_book: thumbnailBook,
     updater,
     label = 'NEED_CHECK',
@@ -131,6 +130,7 @@ export default function AdminDataCard({
 
   useEffect(() => {
     initThumbnail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (

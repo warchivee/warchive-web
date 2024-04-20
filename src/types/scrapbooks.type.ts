@@ -1,6 +1,6 @@
 import { WataIdType } from './wata.type';
 
-export interface CollectionType {
+export interface ScrapbookType {
   id: number;
   shared_id: string;
   title: string;
@@ -8,27 +8,27 @@ export interface CollectionType {
   items: WataIdType[];
 }
 
-interface CollectionDefaultProps {
-  collections: CollectionType[];
+interface ScrapbookDefaultProps {
+  scrapbooks: ScrapbookType[];
   selectIndex: number;
 }
 
-export interface CollectionTitleProps {
+export interface ScrapbookTitleProps {
   isEditMode: boolean;
-  collection?: CollectionType;
+  scrapbook?: ScrapbookType;
   selectIndex: number;
   handleEditMode: (editMode: boolean) => void;
 }
 
-export interface CollectionNoteProps {
+export interface ScrapbookNoteProps {
   isEditMode: boolean;
-  collection?: CollectionType;
+  scrapbook?: ScrapbookType;
   selectIndex: number;
   handleEditMode: (editMode: boolean) => void;
 }
 
-export interface CollectionMenuProps extends CollectionDefaultProps {
+export interface ScrapbookMenuProps extends ScrapbookDefaultProps {
   handleChange: (index: number) => void;
 }
 
-export interface CollectionShareButtonsProps extends CollectionDefaultProps {}
+export interface ScrapbookShareButtonsProps extends ScrapbookDefaultProps {}

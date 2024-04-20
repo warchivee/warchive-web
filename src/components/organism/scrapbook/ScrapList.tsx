@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { WataType } from 'src/types/wata.type';
 import useModal from 'src/hooks/useModal';
 import { checkLogin } from 'src/services/auth.api';
-import WataCollectionCard from './CollectionCard';
-import AddCollectionItemModal from './AddCollectionItemModal';
+import WataScrapbookCard from './ScrapCard';
+import AddScrapbookItemModal from './AddScrapbookItemModal';
 
-export default function WataCollectionList({ watas }: { watas: WataType[] }) {
+export default function WataScrapbookList({ watas }: { watas: WataType[] }) {
   const [isOpenBookmarkModel, setIsOpenBookmarkModal] =
     useState<boolean>(false);
   const [selectWata, setSelectWata] = useState<WataType>();
@@ -16,10 +16,10 @@ export default function WataCollectionList({ watas }: { watas: WataType[] }) {
     <>
       <div className="wata-col-list">
         {watas?.map((wata: WataType) => (
-          <WataCollectionCard
+          <WataScrapbookCard
             key={`wata-${wata.id}`}
             wata={wata}
-            handleCollection={() => {
+            handleScrapbook={() => {
               if (!checkLogin()) {
                 openLoginModal({
                   title: '로그인 필요',
@@ -35,7 +35,7 @@ export default function WataCollectionList({ watas }: { watas: WataType[] }) {
         ))}
       </div>
 
-      <AddCollectionItemModal
+      <AddScrapbookItemModal
         title="스크랩북 관리"
         wata={selectWata}
         isOpen={isOpenBookmarkModel}

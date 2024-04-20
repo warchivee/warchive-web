@@ -25,7 +25,7 @@ import { useEffect, useState } from 'react';
 import todayPopupHandler from '@utils/weeklyPopup.util';
 
 export default function TodayPopup() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [closeWeekly, setCloseWeekly] = useState(false);
 
   const handleClose = () => {
@@ -95,7 +95,7 @@ export default function TodayPopup() {
         <ModalDialog
           layout="center"
           sx={{
-            width: '100%',
+            width: '80%',
             maxWidth: '400px',
             minWidth: '300px',
             maxHeight: '80%',

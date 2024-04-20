@@ -1,23 +1,23 @@
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import wataListState from 'src/stores/wata.atom';
-import { getSharedCollectionApi } from 'src/services/collection.api';
-import WataCollectionList from '@components/organism/collection/CollectionList';
+import { getSharedScrapbookApi } from 'src/services/scrapbook.api';
+import WataScrapbookList from '@components/organism/scrapbook/ScrapList';
 import { Box, Stack, Typography } from '@mui/joy';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Header from '@components/organism/Header';
 import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSurprise } from '@fortawesome/free-regular-svg-icons';
-import { CollectionType } from 'src/types/collections.type';
+import { ScrapbookType } from 'src/types/scrapbooks.type';
 import useCropThumbnail from 'src/hooks/useCropThumbnail';
 
 const getDatas = async (
   id: string | undefined,
-): Promise<CollectionType | undefined> => {
+): Promise<ScrapbookType | undefined> => {
   if (id) {
     try {
-      const result = await getSharedCollectionApi(id);
+      const result = await getSharedScrapbookApi(id);
       return result;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -37,22 +37,22 @@ const getDatas = async (
   return undefined;
 };
 
-export default function ShareCollections() {
+export default function ShareScrapbooks() {
   const { sharedId } = useParams();
 
   const watas = useRecoilValue(wataListState);
 
-  const { data: collection } = useSuspenseQuery<CollectionType | undefined>({
-    queryKey: ['shared-collections', sharedId],
+  const { data: scrapbook } = useSuspenseQuery<ScrapbookType | undefined>({
+    queryKey: ['shared-scrapbooks', sharedId],
     queryFn: () => getDatas(sharedId),
   });
 
   const thumbnail = useCropThumbnail(
-    watas?.find((wata) => wata.id === collection?.items[0]),
+    watas?.find((wata) => wata.id === scrapbook?.items[0]),
     'card',
   );
 
-  return !collection || collection?.id === -1 ? (
+  return !scrapbook || scrapbook?.id === -1 ? (
     <Stack height="calc(100vh - 68px)" minHeight="667px">
       <Header />
       <Stack justifyContent="center" alignItems="center" gap={2} height="100%">
@@ -62,7 +62,7 @@ export default function ShareCollections() {
       </Stack>
     </Stack>
   ) : (
-    <div className="share-collections">
+    <div className="share-scrapbooks">
       <Header />
       <Box
         sx={{
@@ -97,10 +97,10 @@ export default function ShareCollections() {
           >
             <Stack gap="10px">
               <Typography level="h2" sx={{ color: 'white' }}>
-                {collection?.title}
+                {scrapbook?.title}
               </Typography>
               <Typography level="body-sm" sx={{ color: '#D9D9D9' }}>
-                {collection?.note}
+                {scrapbook?.note}
               </Typography>
             </Stack>
 
@@ -122,8 +122,8 @@ export default function ShareCollections() {
           overflow: 'auto',
         }}
       >
-        <WataCollectionList
-          watas={watas?.filter((wata) => collection?.items?.includes(wata.id))}
+        <WataScrapbookList
+          watas={watas?.filter((wata) => scrapbook?.items?.includes(wata.id))}
         />
       </Box>
     </div>

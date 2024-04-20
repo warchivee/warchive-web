@@ -29,6 +29,7 @@ export default function UserHome() {
   useEffect(() => {
     // 페이지 이동 시 검색 키워드 초기화
     resetAllSearchKeywords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -26,4 +26,4 @@ export const validInputText = (str: string) => {
 
 export const isUrl = (str: string) => urlRegex.test(str) || checkUrl(str);
 
-export const isIncludeBlockedWords = (str: string) => false;
+export const isIncludeBlockedWords = () => false;

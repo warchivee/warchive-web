@@ -1,6 +1,6 @@
 import { faRobot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Stack, Typography } from '@mui/joy';
+import { Card, Stack, Typography } from '@mui/joy';
 import { AxiosError } from 'axios';
 import { logout } from 'src/services/auth.api';
 
@@ -39,6 +39,28 @@ function ErrorFallback({ error }: { error: Error }) {
             </a>
             에서 보실 수 있습니다.
           </Typography>
+
+          <Card
+            sx={{
+              opacity: 0.7,
+              width: '100%',
+              maxWidth: '500px',
+              minWidth: '300px',
+            }}
+          >
+            <Typography>
+              점검 동안 와카이브의 다른 프로젝트를 구경해보세요.
+            </Typography>
+            <Typography
+              level="body-sm"
+              sx={{ cursor: 'pointer' }}
+              onClick={() => {
+                window.open('https://article.womynarchive.com/');
+              }}
+            >
+              Warchive: article
+            </Typography>
+          </Card>
         </Stack>
       );
     }

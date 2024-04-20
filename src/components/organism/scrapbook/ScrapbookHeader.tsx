@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useCollection from 'src/hooks/useCollections';
+import useScrapbook from 'src/hooks/useScrapbooks';
 import RecoverableError from 'src/types/error/RecoverableError';
 import {
   Button,
@@ -14,11 +14,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import {
-  COLLECTION_COMMENT_LIMIT_LENGTH,
-  COLLECTION_TITLE_LIMIT_LENGTH,
-} from '@utils/consts/collections.const';
+  SCRAPBOOK_COMMENT_LIMIT_LENGTH,
+  SCRAPBOOK_TITLE_LIMIT_LENGTH,
+} from '@utils/consts/scrapbooks.const';
 
-export default function CollectionHeader() {
+export default function ScrapbookHeader() {
   const [isHovered, setIsHovered] = useState(false);
   const [editInfo, setEditInfo] = useState({ title: '', note: '' });
 
@@ -30,14 +30,14 @@ export default function CollectionHeader() {
     message: '',
   });
 
-  const { getCollection, getSelectCollectionIndex, updateCollection } =
-    useCollection();
+  const { getScrapbook, getSelectScrapbookIndex, updateScrapbook } =
+    useScrapbook();
 
   const handleConfirm = async () => {
     try {
       setLoading(true);
 
-      await updateCollection(editInfo);
+      await updateScrapbook(editInfo);
 
       setIsEditMode(false);
     } catch (e) {
@@ -52,20 +52,20 @@ export default function CollectionHeader() {
   };
 
   useEffect(() => {
-    if (getCollection()) {
+    if (getScrapbook()) {
       setLoading(false);
       setIsEditMode(false);
       setError({
         isError: false,
         message: '',
       });
-      setEditInfo({ title: getCollection().title, note: getCollection().note });
+      setEditInfo({ title: getScrapbook().title, note: getScrapbook().note });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getSelectCollectionIndex()]);
+  }, [getSelectScrapbookIndex()]);
 
-  return !getCollection() ? (
+  return !getScrapbook() ? (
     <div />
   ) : (
     <Stack
@@ -87,12 +87,12 @@ export default function CollectionHeader() {
             cursor: 'pointer',
           }}
         >
-          <Typography level="h3">{getCollection()?.title}</Typography>
+          <Typography level="h3">{getScrapbook()?.title}</Typography>
 
           <Typography level="body-sm" textColor="text.tertiary">
-            {!getCollection()?.note || getCollection()?.note === ''
+            {!getScrapbook()?.note || getScrapbook()?.note === ''
               ? '코멘트를 입력하세요.'
-              : getCollection()?.note}
+              : getScrapbook()?.note}
           </Typography>
         </Stack>
       ) : null}
@@ -115,12 +115,12 @@ export default function CollectionHeader() {
               }
               endDecorator={
                 <Typography level="body-sm" textColor="tertiary">
-                  {editInfo.title.length}/{COLLECTION_TITLE_LIMIT_LENGTH}
+                  {editInfo.title.length}/{SCRAPBOOK_TITLE_LIMIT_LENGTH}
                 </Typography>
               }
               slotProps={{
                 input: {
-                  maxLength: COLLECTION_TITLE_LIMIT_LENGTH,
+                  maxLength: SCRAPBOOK_TITLE_LIMIT_LENGTH,
                 },
               }}
             />
@@ -141,12 +141,12 @@ export default function CollectionHeader() {
                   textColor="tertiary"
                   sx={{ ml: 'auto' }}
                 >
-                  {editInfo.note?.length ?? 0}/{COLLECTION_COMMENT_LIMIT_LENGTH}
+                  {editInfo.note?.length ?? 0}/{SCRAPBOOK_COMMENT_LIMIT_LENGTH}
                 </Typography>
               }
               slotProps={{
                 textarea: {
-                  maxLength: COLLECTION_COMMENT_LIMIT_LENGTH,
+                  maxLength: SCRAPBOOK_COMMENT_LIMIT_LENGTH,
                 },
               }}
             />

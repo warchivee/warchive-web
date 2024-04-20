@@ -89,9 +89,7 @@ export default function PrivacyPolicyPage() {
         </li>
       </ol>
 
-      <h3>
-        <h3>제8조(개인정보의 이용)</h3>
-      </h3>
+      <h3>제8조(개인정보의 이용)</h3>
       <p>와카이브는 개인정보를 다음 각 호의 경우에 이용합니다.</p>
       <ol>
         <li>공지사항의 전달 등 와카이브운영에 필요한 경우</li>

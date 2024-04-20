@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 // components
-import WataCollectionList from '@components/organism/collection/CollectionList';
-import ShareCollectionButtons from '@components/organism/collection/ShareCollectionButtons';
-import CollectionHeader from '@components/organism/collection/CollectionHeader';
-import CollectionMenu from '@components/organism/collection/CollectionMenu';
+import WataScrapbookList from '@components/organism/scrapbook/ScrapList';
+import ShareScrapbookButtons from '@components/organism/scrapbook/ShareScrapbookButtons';
+import ScrapbookHeader from '@components/organism/scrapbook/ScrapbookHeader';
 import { PageLoader } from '@components/CommonComponents/loader';
+import ScrapbookMenu from '@components/organism/scrapbook/ScrapbooksMenu';
 
 // joy components
 import { Box, IconButton, Stack, Typography } from '@mui/joy';
@@ -15,33 +15,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookBookmark, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // utils
-import useCollection from 'src/hooks/useCollections';
+import useScrapbook from 'src/hooks/useScrapbooks';
 import Empty from '@components/organism/Empty';
 import {
   faFaceSurprise,
   faGrinWink,
 } from '@fortawesome/free-regular-svg-icons';
 
-export default function Collections() {
-  const { refreshCollectionState, getCollectionItems, isCollectionsEmpty } =
-    useCollection();
+export default function Scrapbooks() {
+  const { refreshScrapbookState, getScrapbookItems, isScrapbooksEmpty } =
+    useScrapbook();
 
   const [loading, setLoading] = useState(false);
 
-  const initCollectionData = async () => {
+  const initScrapbookData = async () => {
     setLoading(true);
-    await refreshCollectionState();
+    await refreshScrapbookState();
     setLoading(false);
   };
 
   useEffect(() => {
-    initCollectionData();
+    initScrapbookData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Box>
+    <Box marginBottom="3rem">
       <Stack
         flexDirection="row"
         gap={3}
@@ -54,7 +54,7 @@ export default function Collections() {
           },
         }}
       >
-        <CollectionMenu />
+        <ScrapbookMenu />
 
         {loading ? (
           <Stack paddingTop="1rem" marginTop="1rem" width="100%" gap={2}>
@@ -68,7 +68,7 @@ export default function Collections() {
             height="100%"
             gap={2}
           >
-            {isCollectionsEmpty() ? (
+            {isScrapbooksEmpty() ? (
               <Empty
                 icon={faFaceSurprise}
                 title="스크랩북이 없어요"
@@ -91,8 +91,8 @@ export default function Collections() {
               />
             ) : (
               <>
-                <CollectionHeader />
-                {(getCollectionItems()?.length ?? 0) <= 0 ? (
+                <ScrapbookHeader />
+                {(getScrapbookItems()?.length ?? 0) <= 0 ? (
                   <Empty
                     icon={faGrinWink}
                     title="좋아하는 작품을 추가해보세요"
@@ -109,9 +109,9 @@ export default function Collections() {
                 ) : (
                   <>
                     <div style={{ marginBottom: '2rem' }}>
-                      <ShareCollectionButtons />
+                      <ShareScrapbookButtons />
                     </div>
-                    <WataCollectionList watas={getCollectionItems()} />
+                    <WataScrapbookList watas={getScrapbookItems()} />
                   </>
                 )}
               </>

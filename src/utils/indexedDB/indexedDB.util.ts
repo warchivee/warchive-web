@@ -6,7 +6,7 @@ const DB_VERSION = 1;
 
 export const WATA_STORE = 'wata-store';
 export const KEYWORD_STORE = 'keyword-store';
-export const COLLECTION_STORE = 'collection-store';
+export const SCRAPBOOK_STORE = 'scrapbook-store';
 
 class IndexedDBUtil {
   private static instance: IndexedDBUtil;
@@ -62,8 +62,8 @@ class IndexedDBUtil {
           });
         }
 
-        if (!db.objectStoreNames.contains(COLLECTION_STORE)) {
-          db.createObjectStore(COLLECTION_STORE, {
+        if (!db.objectStoreNames.contains(SCRAPBOOK_STORE)) {
+          db.createObjectStore(SCRAPBOOK_STORE, {
             keyPath: 'id',
           });
         }

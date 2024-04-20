@@ -9,36 +9,36 @@ import ListItem from '@mui/joy/ListItem';
 import Checkbox from '@mui/joy/Checkbox';
 
 import { WataType } from 'src/types/wata.type';
-import useCollections from 'src/hooks/useCollections';
+import useScrapbooks from 'src/hooks/useScrapbooks';
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import { useEffect, useState } from 'react';
-import { UpdateCollectionItemParam } from 'src/services/collection.api';
-import { COLLECTION_ITEMS_LIMIT_COUNT } from '@utils/consts/collections.const';
+import { UpdateScrapbookItemParam } from 'src/services/scrapbook.api';
+import { SCRAPBOOK_ITEMS_LIMIT_COUNT } from '@utils/consts/scrapbooks.const';
 
-interface AddCollectionItemModalProps extends ModalProps {
+interface AddScrapbookItemModalProps extends ModalProps {
   wata?: WataType;
 }
 
-export default function AddCollectionItemModal({
+export default function AddScrapbookItemModal({
   title,
   wata,
   isOpen,
   onClose,
-}: AddCollectionItemModalProps) {
-  const { getCollections, updateCollectionItems, isCollectionsEmpty } =
-    useCollections();
+}: AddScrapbookItemModalProps) {
+  const { getScrapbooks, updateScrapbookItems, isScrapbooksEmpty } =
+    useScrapbooks();
 
   const [originalInfo, setOriginalInfo] = useState<boolean[]>([]);
   const [editInfo, setEditInfo] = useState<boolean[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleConfirm = async () => {
-    if (isCollectionsEmpty()) {
+    if (isScrapbooksEmpty()) {
       onClose();
       return;
     }
 
-    const updateItems: UpdateCollectionItemParam[] = [];
+    const updateItems: UpdateScrapbookItemParam[] = [];
 
     setLoading(true);
 
@@ -46,13 +46,13 @@ export default function AddCollectionItemModal({
       if (wata && info !== originalInfo[index]) {
         updateItems.push({
           wata_id: wata.id,
-          collection_id: getCollections()[index].id,
+          scrapbook_id: getScrapbooks()[index].id,
           action: info ? 'ADD' : 'DELETE',
         });
       }
     });
 
-    await updateCollectionItems(updateItems);
+    await updateScrapbookItems(updateItems);
 
     setLoading(false);
     onClose();
@@ -69,7 +69,7 @@ export default function AddCollectionItemModal({
   useEffect(() => {
     if (isOpen && wata) {
       const info =
-        getCollections()?.map(({ items }) => items?.includes(wata.id)) ?? [];
+        getScrapbooks()?.map(({ items }) => items?.includes(wata.id)) ?? [];
 
       setOriginalInfo(info);
       setEditInfo(info);
@@ -94,7 +94,7 @@ export default function AddCollectionItemModal({
           {title}
         </Typography>
         <List size="sm" sx={{ overflow: 'auto', gap: '0.4rem' }}>
-          {isCollectionsEmpty() ? (
+          {isScrapbooksEmpty() ? (
             <>
               <Typography level="body-sm">스크랩북이 없어요!</Typography>
               <Typography level="body-sm">
@@ -103,9 +103,9 @@ export default function AddCollectionItemModal({
             </>
           ) : (
             wata &&
-            editInfo.length === getCollections()?.length &&
-            getCollections()?.map(
-              ({ title: collectionTitle, items }, index: number) => {
+            editInfo.length === getScrapbooks()?.length &&
+            getScrapbooks()?.map(
+              ({ title: scrapbookTitle, items }, index: number) => {
                 const checked =
                   editInfo && editInfo[index] !== undefined
                     ? editInfo[index]
@@ -113,12 +113,12 @@ export default function AddCollectionItemModal({
 
                 // 삭제는 가능하도록 해야함.
                 const disabled =
-                  (getCollections()[index].items ?? []).length >=
-                    COLLECTION_ITEMS_LIMIT_COUNT && !originalInfo[index];
+                  (getScrapbooks()[index].items ?? []).length >=
+                    SCRAPBOOK_ITEMS_LIMIT_COUNT && !originalInfo[index];
 
                 return (
                   <ListItem
-                    key={`collection-add-${index + 1}`}
+                    key={`scrapbook-add-${index + 1}`}
                     sx={{ alignItems: 'flex-start' }}
                   >
                     <Checkbox
@@ -132,7 +132,7 @@ export default function AddCollectionItemModal({
                         handleChecked(index, event.target.checked);
                       }}
                       checked={checked}
-                      label={collectionTitle}
+                      label={scrapbookTitle}
                       variant="soft"
                       color="primary"
                     />
@@ -154,7 +154,7 @@ export default function AddCollectionItemModal({
             justifyContent: 'flex-end',
           }}
         >
-          {!isCollectionsEmpty() && (
+          {!isScrapbooksEmpty() && (
             <Button
               variant="plain"
               color="neutral"

@@ -17,7 +17,15 @@ const useSearchWata = () => {
   const { pageNo, maxPage, handlePageChange, totalCount, handleTotalCount } =
     usePagination(0, PAGE_SIZE);
 
+  const [searchAllWata, setSearchAllwata] = useState<WataType[]>([]);
   const [searchWatas, setSearchWatas] = useState<WataType[]>([]);
+
+  const pageSearchWata = (allWatas: WataType[]) => {
+    const result = allWatas.slice((pageNo - 1) * PAGE_SIZE, pageNo * PAGE_SIZE);
+
+    setSearchWatas(result);
+    handleTotalCount(allWatas?.length);
+  };
 
   const getSearchWatas = async () => {
     const filterWatas = watas?.filter((wata: WataType) => {
@@ -68,25 +76,22 @@ const useSearchWata = () => {
       );
     });
 
-    const result = filterWatas.slice(
-      (pageNo - 1) * PAGE_SIZE,
-      pageNo * PAGE_SIZE,
-    );
-
-    handleTotalCount(filterWatas?.length);
-    setSearchWatas(result);
+    setSearchAllwata(filterWatas);
+    pageSearchWata(filterWatas);
   };
 
   useEffect(() => {
-    getSearchWatas();
+    pageSearchWata(searchAllWata);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNo]);
 
   useEffect(() => {
-    if (pageNo === 1) {
-      getSearchWatas();
+    getSearchWatas();
+
+    if (pageNo !== 1) {
+      handlePageChange(1);
     }
-    handlePageChange(1);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchKeywords]);
 

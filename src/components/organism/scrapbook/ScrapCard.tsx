@@ -22,12 +22,12 @@ import useCropThumbnail from 'src/hooks/useCropThumbnail';
 
 interface WataCardProps {
   wata: WataType;
-  handleCollection: () => void;
+  handleScrapbook: () => void;
 }
 
-export default function WataCollectionCard({
+export default function WataScrapbookCard({
   wata,
-  handleCollection,
+  handleScrapbook,
 }: WataCardProps) {
   const navigate = useNavigate();
   const [searchKeywords, setSearchKeywords] = useRecoilState(searchKeywordAtom);
@@ -74,8 +74,8 @@ export default function WataCollectionCard({
     );
   };
 
-  const moveCollection = () => {
-    handleCollection();
+  const moveScrapbook = () => {
+    handleScrapbook();
     openEditModal();
   };
 
@@ -234,7 +234,7 @@ export default function WataCollectionCard({
       <Box height="100%" paddingTop="5px">
         <IconButton
           onClick={() => {
-            moveCollection();
+            moveScrapbook();
           }}
         >
           <FontAwesomeIcon icon={faEllipsisVertical} />

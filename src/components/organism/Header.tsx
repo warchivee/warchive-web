@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { cloneElement, startTransition, useCallback, useState } from 'react';
+import { cloneElement, startTransition, useState } from 'react';
 import { checkLogin, logout } from 'src/services/auth.api';
 import Drawer from '@components/CommonComponents/drawer';
 import { Text, Title } from '@components/CommonComponents/text';
@@ -114,13 +114,17 @@ function LoginButton({
 }
 
 function Logo() {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-
   return (
     <IconButton
       onClick={() => {
         startTransition(() => {
-          navigate('/');
+          if (pathname === '/') {
+            window.location.href = '/';
+          } else {
+            navigate('/');
+          }
         });
       }}
     >
@@ -262,9 +266,9 @@ export default function Header() {
     {
       label: '스크랩북',
       icon: <FontAwesomeIcon color="white" icon={faBookBookmark} />,
-      path: '/collections',
+      path: '/scrapbooks',
       callback: () => {
-        navigate('/collections');
+        navigate('/scrapbooks');
       },
     },
     {

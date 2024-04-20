@@ -1,6 +1,6 @@
 import { Button, Card, IconButton, Stack, Tooltip, Typography } from '@mui/joy';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import useCollection from 'src/hooks/useCollections';
+import useScrapbook from 'src/hooks/useScrapbooks';
 import kakaotalk_logo from '@assets/logos/kakaotalk.png';
 import twitter_logo from '@assets/logos/twitter.png';
 import facebook_logo from '@assets/logos/facebook.png';
@@ -16,8 +16,8 @@ declare global {
   }
 }
 
-export default function ShareCollectionButtons() {
-  const { getCollection } = useCollection();
+export default function ShareScrapbookButtons() {
+  const { getScrapbook } = useScrapbook();
   const popupRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const [openInfo, setOpenInfo] = useState(false);
@@ -25,9 +25,9 @@ export default function ShareCollectionButtons() {
 
   const shareUrlBase = window.location.href;
 
-  const title = getCollection()?.title;
-  const description = `${getCollection()?.note ?? ''}`;
-  const url = `${shareUrlBase}/${getCollection()?.shared_id}`;
+  const title = getScrapbook()?.title;
+  const description = `${getScrapbook()?.note ?? ''}`;
+  const url = `${shareUrlBase}/${getScrapbook()?.shared_id}`;
 
   const imageSize = {
     width: '28px',
@@ -124,7 +124,7 @@ export default function ShareCollectionButtons() {
               <Stack>
                 <IconButton
                   onClick={() => {
-                    const sendText = `나의 여성서사 스크랩북 - ${getCollection()?.title}`;
+                    const sendText = `나의 여성서사 스크랩북 - ${getScrapbook()?.title}`;
                     window.open(
                       `https://twitter.com/intent/tweet?text=${sendText}&hashtags=와카이브,와카이브스크랩북,여성서사&url=${url}`,
                     );

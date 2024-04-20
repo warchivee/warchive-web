@@ -22,7 +22,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export default function Footer() {
   const [openWithdrawalModal] = useModal();
   return (
-    <footer style={{ zIndex: 1, position: 'relative', marginTop: '2rem' }}>
+    <footer style={{ zIndex: 1, position: 'relative' }}>
       <Box sx={{ background: '#170c1e' }} padding="2rem 1rem">
         <Grid
           container
@@ -93,7 +93,7 @@ export default function Footer() {
                   </Typography>
                 </Link>
 
-                {!userUtil.isAdmin() && (
+                {userUtil.exist() && !userUtil.isAdmin() && (
                   <>
                     <Typography level="body-xs" textColor="text.tertiary">
                       |

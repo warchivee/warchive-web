@@ -181,19 +181,20 @@ export default function CarouselBanner() {
                   </Typography>
                 )}
 
-                <Typography
-                  level="body-lg"
-                  fontWeight="bolder"
-                  textColor={item.color}
-                  lineHeight={1.2}
-                  textAlign={item?.type === 'review' ? 'right' : 'left'}
-                >
-                  {item.title
-                    ?.split('\n')
-                    ?.map((titleText, i: number) => (
-                      <div key={`banner-title-${i + 1}`}>{titleText}</div>
-                    ))}
-                </Typography>
+                <Stack>
+                  {item.title?.split('\n')?.map((titleText, i: number) => (
+                    <Typography
+                      lineHeight={1.2}
+                      key={`banner-title-${i + 1}`}
+                      level="body-lg"
+                      fontWeight="bolder"
+                      textColor={item.color}
+                      textAlign={item?.type === 'review' ? 'right' : 'left'}
+                    >
+                      {titleText}
+                    </Typography>
+                  ))}
+                </Stack>
 
                 {item?.description && (
                   <Typography

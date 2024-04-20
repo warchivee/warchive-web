@@ -44,74 +44,82 @@ export default function KeywordSearchBorad() {
 
   return (
     <div className="keyword-search-board">
-      {/* 카테고리 탭 */}
-      <div className="tabs">
-        <div
-          className="control"
-          onClick={() => {
-            setTabOpen(!tabOpen);
-          }}
-          aria-hidden="true"
-        >
-          <Title type="h5" color="white">
-            키워드로 검색
-          </Title>
-          {tabOpen ? (
-            <FontAwesomeIcon style={{ color: 'white' }} icon={faAngleUp} />
-          ) : (
-            <FontAwesomeIcon style={{ color: 'white' }} icon={faAngleDown} />
-          )}
-        </div>
+      {keywords && keywords?.length > 0 && (
+        <>
+          {/* 카테고리 탭 */}
+          <div className="tabs">
+            <div
+              className="control"
+              onClick={() => {
+                setTabOpen(!tabOpen);
+              }}
+              aria-hidden="true"
+            >
+              <Title type="h5" color="white">
+                키워드로 검색
+              </Title>
+              {tabOpen ? (
+                <FontAwesomeIcon style={{ color: 'white' }} icon={faAngleUp} />
+              ) : (
+                <FontAwesomeIcon
+                  style={{ color: 'white' }}
+                  icon={faAngleDown}
+                />
+              )}
+            </div>
 
-        {/* 카테고리 탭 */}
-        {keywords?.map((category: KeywordListType, index: number) => (
-          <div
-            className={classNames('tab', { select: tab === index })}
-            key={`category-${category.id}`}
-            onClick={() => {
-              handleTab(category, index);
-            }}
-            aria-hidden="true"
-          >
-            <Typography level="body-sm" textColor="white" noWrap>
-              {category.name}
-            </Typography>
+            {/* 카테고리 탭 */}
+            {keywords?.map((category: KeywordListType, index: number) => (
+              <div
+                className={classNames('tab', { select: tab === index })}
+                key={`category-${category.id}`}
+                onClick={() => {
+                  handleTab(category, index);
+                }}
+                aria-hidden="true"
+              >
+                <Typography level="body-sm" textColor="white" noWrap>
+                  {category.name}
+                </Typography>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {/* 키워드 리스트 */}
-      <Box
-        width="100%"
-        sx={{ background: '#9023D5', display: tabOpen ? 'flex' : 'none' }}
-      >
-        <Stack
-          direction="row"
-          gap={2}
-          width="100%"
-          maxHeight="300px"
-          maxWidth="1000px"
-          margin="0 auto"
-          padding="2rem 1rem"
-        >
-          <SelectKeywordList type="genres" keywords={keywords[tab].genres} />
-          <SelectKeywordList
-            type="platforms"
-            keywords={keywords[tab].platforms}
-          />
-          <SelectKeywordList
-            type="keywords"
-            keywords={keywords[tab].keywords}
-          />
-        </Stack>
-      </Box>
-
-      {/* 선택한 키워드 리스트 */}
-      {tabOpen || hasSelectedKeywords() ? (
-        <Box width="100%" maxWidth="1000px">
-          <SelectedKeywordView />
-        </Box>
-      ) : null}
+          {/* 키워드 리스트 */}
+          <Box
+            width="100%"
+            sx={{ background: '#9023D5', display: tabOpen ? 'flex' : 'none' }}
+          >
+            <Stack
+              direction="row"
+              gap={2}
+              width="100%"
+              maxHeight="300px"
+              maxWidth="1000px"
+              margin="0 auto"
+              padding="2rem 1rem"
+            >
+              <SelectKeywordList
+                type="genres"
+                keywords={keywords[tab]?.genres}
+              />
+              <SelectKeywordList
+                type="platforms"
+                keywords={keywords[tab]?.platforms}
+              />
+              <SelectKeywordList
+                type="keywords"
+                keywords={keywords[tab]?.keywords}
+              />
+            </Stack>
+          </Box>
+          {/* 선택한 키워드 리스트 */}
+          {tabOpen || hasSelectedKeywords() ? (
+            <Box width="100%" maxWidth="1000px">
+              <SelectedKeywordView />
+            </Box>
+          ) : null}
+        </>
+      )}
     </div>
   );
 }

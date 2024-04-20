@@ -13,11 +13,11 @@ import Input from '@mui/joy/Input';
 
 // utils
 import { ModalProps } from '@components/CommonComponents/modal/index.type';
-import useCollection from 'src/hooks/useCollections';
+import useScrapbook from 'src/hooks/useScrapbooks';
 import RecoverableError from 'src/types/error/RecoverableError';
-import { COLLECTION_TITLE_LIMIT_LENGTH } from '@utils/consts/collections.const';
+import { SCRAPBOOK_TITLE_LIMIT_LENGTH } from '@utils/consts/scrapbooks.const';
 
-export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
+export default function AddScrapbookModal({ isOpen, onClose }: ModalProps) {
   const [title, setTitle] = useState('');
 
   const [loading, setLoading] = useState(false);
@@ -27,13 +27,13 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
     message: '',
   });
 
-  const { addCollection } = useCollection();
+  const { addScrapbook } = useScrapbook();
 
   const handleConfirm = async () => {
     setLoading(true);
 
     try {
-      await addCollection(title);
+      await addScrapbook(title);
 
       setError({ isError: false, message: '' });
       onClose();
@@ -92,12 +92,12 @@ export default function AddCollectionModal({ isOpen, onClose }: ModalProps) {
             }}
             endDecorator={
               <Typography level="body-sm" textColor="tertiary">
-                {title.length}/{COLLECTION_TITLE_LIMIT_LENGTH}
+                {title.length}/{SCRAPBOOK_TITLE_LIMIT_LENGTH}
               </Typography>
             }
             slotProps={{
               input: {
-                maxLength: COLLECTION_TITLE_LIMIT_LENGTH,
+                maxLength: SCRAPBOOK_TITLE_LIMIT_LENGTH,
               },
             }}
           />
