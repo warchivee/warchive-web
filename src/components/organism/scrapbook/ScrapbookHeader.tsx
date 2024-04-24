@@ -17,6 +17,8 @@ import {
   SCRAPBOOK_COMMENT_LIMIT_LENGTH,
   SCRAPBOOK_TITLE_LIMIT_LENGTH,
 } from '@utils/consts/scrapbooks.const';
+import useSnackbar from 'src/hooks/useSnackbar';
+import { AxiosError } from 'axios';
 
 export default function ScrapbookHeader() {
   const [isHovered, setIsHovered] = useState(false);
@@ -33,6 +35,8 @@ export default function ScrapbookHeader() {
   const { getScrapbook, getSelectScrapbookIndex, updateScrapbook } =
     useScrapbook();
 
+  const [openSnackbar] = useSnackbar();
+
   const handleConfirm = async () => {
     try {
       setLoading(true);
@@ -43,8 +47,10 @@ export default function ScrapbookHeader() {
     } catch (e) {
       if (e instanceof RecoverableError) {
         setError({ isError: true, message: e.message });
-      } else {
-        throw e;
+      } else if (error instanceof AxiosError) {
+        openSnackbar({
+          message: error?.response?.data?.message,
+        });
       }
     }
 

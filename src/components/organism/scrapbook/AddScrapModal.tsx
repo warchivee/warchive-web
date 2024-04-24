@@ -16,6 +16,8 @@ import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import useScrapbook from 'src/hooks/useScrapbooks';
 import RecoverableError from 'src/types/error/RecoverableError';
 import { SCRAPBOOK_TITLE_LIMIT_LENGTH } from '@utils/consts/scrapbooks.const';
+import useSnackbar from 'src/hooks/useSnackbar';
+import { AxiosError } from 'axios';
 
 export default function AddScrapbookModal({ isOpen, onClose }: ModalProps) {
   const [title, setTitle] = useState('');
@@ -26,6 +28,8 @@ export default function AddScrapbookModal({ isOpen, onClose }: ModalProps) {
     isError: false,
     message: '',
   });
+
+  const [openSnackbar] = useSnackbar();
 
   const { addScrapbook } = useScrapbook();
 
@@ -40,8 +44,10 @@ export default function AddScrapbookModal({ isOpen, onClose }: ModalProps) {
     } catch (e) {
       if (e instanceof RecoverableError) {
         setError({ isError: true, message: e.message });
-      } else {
-        throw e;
+      } else if (error instanceof AxiosError) {
+        openSnackbar({
+          message: error?.response?.data?.message,
+        });
       }
     }
 

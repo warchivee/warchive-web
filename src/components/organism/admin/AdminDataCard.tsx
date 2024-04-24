@@ -10,10 +10,10 @@ import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import Modal from '@components/CommonComponents/modal';
 import { LoadingOverlay } from '@components/CommonComponents/loader';
 import Button from '@mui/joy/Button';
-import { Chip, Option, Select } from '@mui/joy';
+import { Chip, Option, Select, Skeleton } from '@mui/joy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import getCroppedImg from '@utils/image/cropImage.utils';
+import useCropThumbnail from 'src/hooks/useCropThumbnail';
 import AdminEditData from './AdminEditData';
 
 export interface DataCardProps {
@@ -86,15 +86,13 @@ export default function AdminDataCard({
     keywords,
     cautions,
     platforms,
-    thumbnail,
-    thumbnail_book: thumbnailBook,
     updater,
     label = 'NEED_CHECK',
     note,
     updated_at: updatedAt,
   } = data;
 
-  const [cropThumbnail, setCropThumbnail] = useState('');
+  const cropThumbnail = useCropThumbnail(data, 'book');
 
   const [labelModalProps, setLabelModalProps] = useState({
     isOpen: false,
@@ -109,29 +107,6 @@ export default function AdminDataCard({
     NEED_CONTACT: 'tropical-blue',
     CENSOR: 'your-pink',
   };
-
-  const initThumbnail = async () => {
-    if (!thumbnail) {
-      setCropThumbnail(
-        'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
-      );
-      return;
-    }
-
-    if (!thumbnailBook) {
-      setCropThumbnail(thumbnail);
-      return;
-    }
-
-    const cropImg = await getCroppedImg(thumbnail, thumbnailBook, 0);
-
-    setCropThumbnail(cropImg);
-  };
-
-  useEffect(() => {
-    initThumbnail();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
 
   return (
     <>
@@ -200,7 +175,22 @@ export default function AdminDataCard({
           <div className="body">
             <div className="left">
               <div className="thumbnail">
-                <img loading="lazy" src={cropThumbnail} alt="썸네일" />
+                <Skeleton
+                  variant="overlay"
+                  loading={cropThumbnail === undefined}
+                  sx={{ width: '50px', height: '70px' }}
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={cropThumbnail}
+                    alt={`${data.title}`}
+                    style={{
+                      objectFit: 'cover',
+                      contentVisibility: 'auto',
+                    }}
+                  />
+                </Skeleton>
               </div>
             </div>
             <div className="right">

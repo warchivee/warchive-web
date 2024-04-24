@@ -51,15 +51,28 @@ function ErrorFallback({ error }: { error: Error }) {
             <Typography>
               점검 동안 와카이브의 다른 프로젝트를 구경해보세요.
             </Typography>
-            <Typography
-              level="body-sm"
-              sx={{ cursor: 'pointer' }}
-              onClick={() => {
-                window.open('https://article.womynarchive.com/');
-              }}
-            >
-              Warchive: article
-            </Typography>
+            <Stack>
+              <a
+                href="https://article.womynarchive.com/"
+                target="_blank"
+                aria-label="와카이브-아티클로 이동"
+                rel="noreferrer"
+              >
+                <Typography level="body-sm" textColor="text.tertiary">
+                  Warchive: article
+                </Typography>
+              </a>
+              <a
+                href="https://play.womynarchive.com/womyn-character-test"
+                target="_blank"
+                aria-label="와카이브-여성서사 캐릭터 테스트 이동"
+                rel="noreferrer"
+              >
+                <Typography level="body-sm" textColor="text.tertiary">
+                  Warchive: womyn character test
+                </Typography>
+              </a>
+            </Stack>
           </Card>
         </Stack>
       );

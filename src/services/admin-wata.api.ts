@@ -122,6 +122,7 @@ export interface EditAdminWataDto {
 export interface FindWataConditions {
   title?: string;
   label?: string[];
+  categories?: number[];
   updateStartDate?: Moment;
   updateEndDate?: Moment;
   isPublished?: string;
@@ -135,6 +136,7 @@ export const getWata = (
 ) => {
   const {
     title,
+    categories,
     label,
     updateStartDate,
     updateEndDate,
@@ -144,12 +146,13 @@ export const getWata = (
 
   const params = {
     ...(title && { title }),
-    ...(label && label.length !== 0 && { label: label.join(',') }),
+    ...(categories && categories.length > 0 && { categories }),
+    ...(label && label.length > 0 && { label: label.join(',') }),
     ...(updateStartDate && { updateStartDate }),
     ...(updateEndDate && { updateEndDate }),
     ...(isPublished && { isPublished }),
     ...(needWriteItems &&
-      needWriteItems.length !== 0 && {
+      needWriteItems.length > 0 && {
         needWriteItems: needWriteItems.join(','),
       }),
   };

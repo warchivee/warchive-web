@@ -14,17 +14,34 @@ import useSearchWata from 'src/hooks/useSearchWata';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import CarouselBanner from '@components/organism/CarouselBanner';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export default function UserHome() {
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('s') ?? '';
+
   const { searchWatas, pageNo, maxPage, totalCount, handlePageChange } =
     useSearchWata();
   const { searchKeywords, updateSearchInput, resetAllSearchKeywords } =
     useSearchKeywords();
 
-  const handleInitInput = () => {
-    updateSearchInput('');
-  };
+  const [searchInput, setSearchInput] = useState('');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      updateSearchInput(searchInput);
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchInput]);
+
+  useEffect(() => {
+    setSearchInput(query);
+  }, [query]);
 
   useEffect(() => {
     // 페이지 이동 시 검색 키워드 초기화
@@ -50,9 +67,9 @@ export default function UserHome() {
           size="sm"
           variant="outlined"
           color="primary"
-          value={searchKeywords.searchInput}
+          value={searchInput}
           placeholder="제목/작가/감독명으로 검색"
-          onChange={(e) => updateSearchInput(e.target.value)}
+          onChange={(e) => setSearchInput(e.target.value)}
           startDecorator={
             <FontAwesomeIcon
               style={{ color: '#590091' }}
@@ -60,7 +77,11 @@ export default function UserHome() {
             />
           }
           endDecorator={
-            <IconButton onClick={handleInitInput}>
+            <IconButton
+              onClick={() => {
+                setSearchInput('');
+              }}
+            >
               <FontAwesomeIcon icon={faXmark} />
             </IconButton>
           }

@@ -12,6 +12,7 @@ import AdminSearchContainer from '../components/organism/admin/AdminSearchContai
 
 export interface SearchConditions {
   title?: string;
+  categories?: DropdownOption[];
   label?: DropdownOption[];
   updatePeriod?: DropdownOption;
   isPublished?: DropdownOption;

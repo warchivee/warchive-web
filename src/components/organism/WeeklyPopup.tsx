@@ -123,7 +123,7 @@ export default function TodayPopup() {
                 bottom: '-10px',
                 borderWidth: '0 10px 10px 0',
                 borderRightColor: '#590091',
-                left: '-2px',
+                left: 0,
               },
             }}
           >

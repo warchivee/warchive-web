@@ -13,6 +13,7 @@ const searchDatas = async (
   const result = await getWata(
     {
       ...searchConditions,
+      categories: searchConditions.categories?.map((item) => +item.id),
       label: searchConditions.label?.map((item) => item.id as string),
       isPublished: searchConditions.isPublished?.id as string,
       needWriteItems: searchConditions.needWriteItems?.map(

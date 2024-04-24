@@ -13,7 +13,7 @@ import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import Stack from '@mui/joy/Stack';
 import Chip from '@mui/joy/Chip';
-import { Box, IconButton, Tooltip } from '@mui/joy';
+import { Box, IconButton, Skeleton, Tooltip } from '@mui/joy';
 import {
   faCaretDown,
   faEllipsisVertical,
@@ -111,17 +111,28 @@ export default function WataScrapbookCard({
           boxShadow: '4px -4px rgba(0, 0, 0, 0.1)',
         }}
       >
-        <img
-          width="100%"
-          height="100%"
-          className="image"
-          src={cropThumbnail}
-          alt={wata.title}
-          loading="lazy"
-          style={{
-            objectFit: 'cover',
+        <Skeleton
+          variant="overlay"
+          loading={cropThumbnail === undefined}
+          sx={{
+            width: '105px',
+            height: '150px',
+            boxShadow: '4px -4px rgba(0, 0, 0, 0.1)',
           }}
-        />
+        >
+          <img
+            loading="lazy"
+            decoding="async"
+            src={cropThumbnail}
+            alt={`${wata.title}`}
+            style={{
+              objectFit: 'cover',
+              width: '100%',
+              height: '100%',
+              contentVisibility: 'auto',
+            }}
+          />
+        </Skeleton>
       </Box>
 
       <Stack

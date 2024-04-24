@@ -1,14 +1,5 @@
 // joy components
-import Modal from '@mui/joy/Modal';
-import {
-  Box,
-  Button,
-  Grid,
-  ModalClose,
-  ModalDialog,
-  Stack,
-  Typography,
-} from '@mui/joy';
+import { Box, Button, Grid, Stack, Typography } from '@mui/joy';
 
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,22 +24,24 @@ export default function Footer() {
         >
           <Grid>
             <Stack gap={1}>
-              <Stack>
+              <Stack gap={1}>
                 <Typography level="body-sm" textColor="text.tertiary">
                   팀 와카이브
                 </Typography>
-                <Typography level="body-xs" textColor="text.tertiary">
-                  team.warchive@gmail.com
-                </Typography>
-                <a
-                  href="https://womynarchive.notion.site/ae89f36ef66b498a80e5b5dca798cc9a?pvs=4"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <Stack>
                   <Typography level="body-xs" textColor="text.tertiary">
-                    와카이브 팀원 소개 페이지 바로가기
+                    team.warchive@gmail.com
                   </Typography>
-                </a>
+                  <a
+                    href="https://womynarchive.notion.site/ae89f36ef66b498a80e5b5dca798cc9a?pvs=4"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography level="body-xs" textColor="text.tertiary">
+                      와카이브 팀원 소개 페이지 바로가기
+                    </Typography>
+                  </a>
+                </Stack>
               </Stack>
 
               <Stack direction="row" gap={2}>
@@ -127,16 +120,28 @@ export default function Footer() {
               <Typography level="body-sm" textColor="text.tertiary">
                 와카이브의 다른 프로젝트
               </Typography>
-              <a
-                href="https://article.womynarchive.com/"
-                target="_blank"
-                aria-label="와카이브-아티클로 이동"
-                rel="noreferrer"
-              >
-                <Typography level="body-xs" textColor="text.tertiary">
-                  Warchive: article
-                </Typography>
-              </a>
+              <Stack>
+                <a
+                  href="https://article.womynarchive.com/"
+                  target="_blank"
+                  aria-label="와카이브-아티클로 이동"
+                  rel="noreferrer"
+                >
+                  <Typography level="body-xs" textColor="text.tertiary">
+                    Warchive: article
+                  </Typography>
+                </a>
+                <a
+                  href="https://play.womynarchive.com/womyn-character-test"
+                  target="_blank"
+                  aria-label="와카이브-여성서사 캐릭터 테스트 이동"
+                  rel="noreferrer"
+                >
+                  <Typography level="body-xs" textColor="text.tertiary">
+                    Warchive: womyn character test
+                  </Typography>
+                </a>
+              </Stack>
             </Stack>
 
             <Button

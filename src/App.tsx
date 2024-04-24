@@ -15,6 +15,7 @@ import ModalClose from '@mui/joy/ModalClose';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import { Snackbar } from '@mui/joy';
+import { AxiosError } from 'axios';
 import { modalState, snackbarState } from './stores/ui.atom';
 
 const NoHeaderLayout = lazy(() => import('src/layouts/NoHeaderLayout'));
@@ -79,6 +80,7 @@ function App() {
         variant="soft"
         color="primary"
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        sx={{ justifyContent: 'center' }}
         onClose={(event, reason) => {
           if (reason === 'clickaway') {
             setSnackbar({ ...snackbar, open: false });
@@ -149,7 +151,18 @@ function App() {
               onClick={async () => {
                 setModal({ ...modal, loading: true });
                 if (modal.onConfirm) {
-                  await modal.onConfirm();
+                  try {
+                    await modal.onConfirm();
+                  } catch (error) {
+                    if (error instanceof AxiosError) {
+                      setSnackbar({
+                        ...snackbar,
+                        open: true,
+                        message:
+                          '작업에 실패했습니다. 계속해서 같은 오류가 발생하면 문의 바랍니다.',
+                      });
+                    }
+                  }
                 }
 
                 setModal({ ...modal, loading: false, open: false });

@@ -74,6 +74,41 @@ export default function AdminSearchContainer({
       </div>
 
       <div className="item">
+        <Text color="gray">카테고리</Text>
+        <MultiDropdown
+          selectedOptions={searchConditions?.categories ?? []}
+          options={[
+            {
+              id: '1',
+              name: '게임',
+            },
+            {
+              id: '2',
+              name: '공연/전시',
+            },
+            {
+              id: '3',
+              name: '만화',
+            },
+            {
+              id: '4',
+              name: '서적',
+            },
+            {
+              id: '5',
+              name: '영상',
+            },
+          ]}
+          onChange={(value) => {
+            setSearchConditions({
+              ...searchConditions,
+              categories: value,
+            });
+          }}
+        />
+      </div>
+
+      <div className="item">
         <Text color="gray">라벨</Text>
         <MultiDropdown
           selectedOptions={searchConditions?.label ?? []}

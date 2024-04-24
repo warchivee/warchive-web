@@ -1,9 +1,10 @@
 import getCroppedImg from '@utils/image/cropImage.utils';
 import { useCallback, useEffect, useState } from 'react';
+import { AdminWata } from 'src/services/admin-wata.api';
 import { WataType } from 'src/types/wata.type';
 
 export const useCropThumbnail = (
-  wata: WataType | undefined,
+  wata: WataType | AdminWata | undefined,
   type: 'card' | 'book',
 ) => {
   const [cropThumbnail, setCropThumbnail] = useState<string>();
@@ -34,6 +35,8 @@ export const useCropThumbnail = (
   }, [wata, type]);
 
   useEffect(() => {
+    setCropThumbnail(undefined);
+
     initThumbnail();
   }, [initThumbnail, wata]);
 

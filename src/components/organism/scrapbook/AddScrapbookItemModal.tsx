@@ -14,6 +14,8 @@ import { ModalProps } from '@components/CommonComponents/modal/index.type';
 import { useEffect, useState } from 'react';
 import { UpdateScrapbookItemParam } from 'src/services/scrapbook.api';
 import { SCRAPBOOK_ITEMS_LIMIT_COUNT } from '@utils/consts/scrapbooks.const';
+import useSnackbar from 'src/hooks/useSnackbar';
+import { AxiosError } from 'axios';
 
 interface AddScrapbookItemModalProps extends ModalProps {
   wata?: WataType;
@@ -31,6 +33,8 @@ export default function AddScrapbookItemModal({
   const [originalInfo, setOriginalInfo] = useState<boolean[]>([]);
   const [editInfo, setEditInfo] = useState<boolean[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const [openSnackbar] = useSnackbar();
 
   const handleConfirm = async () => {
     if (isScrapbooksEmpty()) {
@@ -52,10 +56,27 @@ export default function AddScrapbookItemModal({
       }
     });
 
-    await updateScrapbookItems(updateItems);
+    try {
+      if (updateItems && updateItems?.length > 0) {
+        await updateScrapbookItems(updateItems);
+      }
 
-    setLoading(false);
-    onClose();
+      setLoading(false);
+
+      openSnackbar({
+        message: `${wata?.title}을(를) 스크랩했습니다.`,
+      });
+
+      onClose();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        openSnackbar({
+          message: error?.response?.data?.message,
+        });
+      }
+
+      setLoading(false);
+    }
   };
 
   const handleChecked = (index: number, value: boolean) => {

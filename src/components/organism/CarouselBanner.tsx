@@ -130,7 +130,7 @@ export default function CarouselBanner() {
       width="100%"
       maxWidth="900px"
       margin="0 auto"
-      marginTop="3rem"
+      marginTop="1rem"
       padding="0 1rem"
     >
       <Slider
@@ -222,7 +222,7 @@ export default function CarouselBanner() {
               {item?.type === 'review' ? (
                 <Box
                   width="100%"
-                  height="200px"
+                  height="190px"
                   zIndex="1"
                   position="absolute"
                   top="-40px"
