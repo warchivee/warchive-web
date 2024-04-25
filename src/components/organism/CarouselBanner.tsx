@@ -222,18 +222,19 @@ export default function CarouselBanner() {
               {item?.type === 'review' ? (
                 <Box
                   width="100%"
-                  height="190px"
+                  height="180px"
                   zIndex="1"
                   position="absolute"
-                  top="-40px"
+                  top="-30px"
                   sx={{
                     background: `url(${item.src})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'contain',
                     '@media (max-width: 600px)': {
                       width: '100%',
-                      height: '170px',
-                      top: '-25px',
+                      height: '150px',
+                      top: '-5px',
+                      left: '-20px',
                     },
                   }}
                 />
