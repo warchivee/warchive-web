@@ -28,7 +28,7 @@ export default function UserHome() {
   const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
-    let timer: number;
+    let timer: null | ReturnType<typeof setTimeout>;
 
     if (searchInput && searchInput?.length > 0) {
       timer = setTimeout(() => {
