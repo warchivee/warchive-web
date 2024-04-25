@@ -220,7 +220,7 @@ export default function AdminDataCard({
           <div className="keywords">
             <ol>
               {platforms?.map((platform) => (
-                <li key={`admin-keyword-${id}-${platform.id}`}>
+                <li key={`admin-data-card-${id}-platform-${platform.id}`}>
                   <a href={platform.url} target="_blank" rel="noreferrer">
                     <Chip>{platform.name}</Chip>
                   </a>
@@ -235,12 +235,12 @@ export default function AdminDataCard({
             <div>
               <ol>
                 {keywords?.map((keyword) => (
-                  <li key={`admin-keyword-${id}-${keyword.id}`}>
+                  <li key={`dmin-data-card-${id}-keyword-${keyword.id}`}>
                     <Text color="gray">#{keyword.name}</Text>
                   </li>
                 ))}
                 {cautions?.map((caution) => (
-                  <li key={`admin-keyword-${id}-${caution.id}`}>
+                  <li key={`dmin-data-card-${id}-caution-${caution.id}`}>
                     <Text color="light-violet">⚠️{caution.name}</Text>
                   </li>
                 ))}

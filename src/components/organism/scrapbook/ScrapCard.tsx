@@ -63,7 +63,7 @@ export default function WataScrapbookCard({
 
     return (
       <Typography
-        key={`wata-card-${type}-${keyword.id}`}
+        key={`wata-scrapbook-card-${wata.id}-${type}-${keyword.id}`}
         onClick={() => handleClickKeyword(newValue)}
         sx={{ cursor: 'pointer' }}
         level="body-sm"
@@ -188,7 +188,7 @@ export default function WataScrapbookCard({
                   <Stack direction="row" gap={1} flexWrap="wrap">
                     {wata?.cautions?.map((caution: KeywordType) => (
                       <Typography
-                        key={`hashtag-${caution.id}`}
+                        key={`wata-scrapbook-card-${wata.id}-caution-${caution.id}`}
                         level="body-sm"
                         textColor="text.tertiary"
                       >
@@ -204,7 +204,7 @@ export default function WataScrapbookCard({
                 {wata?.platforms?.map((platform: PlatformType) => (
                   <Chip
                     size="sm"
-                    key={`hashtag-${platform.id}`}
+                    key={`wata-scrapbook-card-${wata.id}-platform-${platform.id}`}
                     slotProps={{
                       action: {
                         component: 'a',

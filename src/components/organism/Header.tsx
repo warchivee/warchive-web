@@ -116,6 +116,7 @@ function LoginButton({
 function Logo() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
   return (
     <IconButton
       onClick={() => {

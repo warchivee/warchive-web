@@ -13,7 +13,11 @@ import {
 import { scrapbookAtom } from 'src/stores/scrapbook.atom';
 import wataAtom from 'src/stores/wata.atom';
 import RecoverableError from 'src/types/error/RecoverableError';
-import { isUrl, validInputText } from '@utils/stringValid.util';
+import {
+  isIncludeBlockedWords,
+  isUrl,
+  validInputText,
+} from '@utils/stringValid.util';
 import {
   SCRAPBOOKS_LIMMIT_COUNT,
   SCRAPBOOK_COMMENT_LIMIT_LENGTH,
@@ -81,6 +85,15 @@ export const useScrapbook = () => {
     }
 
     if (
+      isIncludeBlockedWords(params.title) ||
+      isIncludeBlockedWords(params.note)
+    ) {
+      throw new RecoverableError(
+        '스크랩북 이름과 코멘트에 입력할 수 없는 단어가 있습니다.',
+      );
+    }
+
+    if (
       (params.title?.length ?? 0) > SCRAPBOOK_TITLE_LIMIT_LENGTH ||
       (params.note?.length ?? 0) > SCRAPBOOK_COMMENT_LIMIT_LENGTH
     ) {
@@ -107,6 +120,12 @@ export const useScrapbook = () => {
     if (getScrapbooks()?.length >= SCRAPBOOKS_LIMMIT_COUNT) {
       throw new RecoverableError(
         `스크랩북은 ${SCRAPBOOKS_LIMMIT_COUNT}개만 생성할 수 있습니다.`,
+      );
+    }
+
+    if (isIncludeBlockedWords(title)) {
+      throw new RecoverableError(
+        '스크랩북 이름에 입력할 수 없는 단어가 있습니다.',
       );
     }
 

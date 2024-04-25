@@ -13,7 +13,7 @@ export default function WataCardList({ watas = [] }: { watas: WataType[] }) {
       justifyContent="center"
     >
       {watas?.map((wata: WataType) => (
-        <WataCard key={`wata-${wata.id}`} wata={wata} />
+        <WataCard key={`wata-card-${wata.id}`} wata={wata} />
       ))}
     </Box>
   );

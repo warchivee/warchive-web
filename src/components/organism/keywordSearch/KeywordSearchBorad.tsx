@@ -20,13 +20,13 @@ export default function KeywordSearchBorad() {
     queryFn: () => indexedDB.getItems<KeywordListType[]>(KEYWORD_STORE),
   });
 
-  const { hasSelectedKeywords, selectCategory } = useSearchKeywords();
+  const { hasSelectedKeywords, selectCategory, searchKeywords } =
+    useSearchKeywords();
 
-  const [tab, setTab] = useState<number>(0);
   const [tabOpen, setTabOpen] = useState<boolean>(false);
 
-  const handleTab = (category: KeywordListType, index: number) => {
-    const isCurrentTab = tab === index;
+  const handleTab = (category: KeywordListType) => {
+    const isCurrentTab = category.id === searchKeywords.category.id;
 
     if (isCurrentTab) {
       // 현재 탭을 한번 더 클릭한 경우 검색어 초기화하지 않고 탭을 열고 닫기만 한다.
@@ -34,7 +34,6 @@ export default function KeywordSearchBorad() {
       return;
     }
 
-    setTab(isCurrentTab ? tab : index);
     setTabOpen(true);
     selectCategory({
       id: category.id,
@@ -69,12 +68,14 @@ export default function KeywordSearchBorad() {
             </div>
 
             {/* 카테고리 탭 */}
-            {keywords?.map((category: KeywordListType, index: number) => (
+            {keywords?.map((category: KeywordListType) => (
               <div
-                className={classNames('tab', { select: tab === index })}
+                className={classNames('tab', {
+                  select: searchKeywords.category.id === category.id,
+                })}
                 key={`category-${category.id}`}
                 onClick={() => {
-                  handleTab(category, index);
+                  handleTab(category);
                 }}
                 aria-hidden="true"
               >
@@ -100,15 +101,15 @@ export default function KeywordSearchBorad() {
             >
               <SelectKeywordList
                 type="genres"
-                keywords={keywords[tab]?.genres}
+                keywords={keywords[searchKeywords.category.id]?.genres}
               />
               <SelectKeywordList
                 type="platforms"
-                keywords={keywords[tab]?.platforms}
+                keywords={keywords[searchKeywords.category.id]?.platforms}
               />
               <SelectKeywordList
                 type="keywords"
-                keywords={keywords[tab]?.keywords}
+                keywords={keywords[searchKeywords.category.id]?.keywords}
               />
             </Stack>
           </Box>

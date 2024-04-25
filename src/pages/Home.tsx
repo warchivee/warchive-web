@@ -23,18 +23,23 @@ export default function UserHome() {
 
   const { searchWatas, pageNo, maxPage, totalCount, handlePageChange } =
     useSearchWata();
-  const { searchKeywords, updateSearchInput, resetAllSearchKeywords } =
-    useSearchKeywords();
+  const { updateSearchInput, resetAllSearchKeywords } = useSearchKeywords();
 
   const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      updateSearchInput(searchInput);
-    }, 200);
+    let timer: number;
+
+    if (searchInput && searchInput?.length > 0) {
+      timer = setTimeout(() => {
+        updateSearchInput(searchInput);
+      }, 200);
+    }
 
     return () => {
-      clearTimeout(timer);
+      if (timer) {
+        clearTimeout(timer);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput]);
@@ -44,7 +49,6 @@ export default function UserHome() {
   }, [query]);
 
   useEffect(() => {
-    // 페이지 이동 시 검색 키워드 초기화
     resetAllSearchKeywords();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

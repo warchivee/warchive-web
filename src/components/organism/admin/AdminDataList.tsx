@@ -54,9 +54,9 @@ export default function AdminDataList({
   return (
     <div>
       <div>
-        {datas?.result?.map((data, index) => (
+        {datas?.result?.map((data) => (
           <AdminDataCard
-            key={`data-card-${index + 1}`}
+            key={`admin-data-card-${data.id}`}
             data={data}
             refreshDatas={() => refreshDatas()}
           />

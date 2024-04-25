@@ -1,3 +1,6 @@
+// https://ko.vitejs.dev/guide/assets#importing-asset-as-string
+import blockedWords from '@assets/blockedWords.txt?raw';
+
 const jsCodeRegex = /[<>(){}[\]]/g;
 const eventHandlerRegex = /\bon(?:load|click|mouseover|keydown)\s*=/gi;
 const jsProtocolUrlRegex = /javascript:/gi;
@@ -26,4 +29,17 @@ export const validInputText = (str: string) => {
 
 export const isUrl = (str: string) => urlRegex.test(str) || checkUrl(str);
 
-export const isIncludeBlockedWords = () => false;
+export const isIncludeBlockedWords = (str: string) => {
+  try {
+    const profanityList = blockedWords
+      .split('\n')
+      .map((word: string) => word.replace(/\s/g, ''))
+      .filter((word: string) => word !== '');
+
+    const regexPattern = new RegExp(`${profanityList.join('|')}`, 'gi');
+
+    return regexPattern.test(str.replace(/\s/g, ''));
+  } catch (err) {
+    return true;
+  }
+};

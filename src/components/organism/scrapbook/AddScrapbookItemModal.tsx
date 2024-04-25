@@ -59,13 +59,13 @@ export default function AddScrapbookItemModal({
     try {
       if (updateItems && updateItems?.length > 0) {
         await updateScrapbookItems(updateItems);
+
+        openSnackbar({
+          message: `${wata?.title}을(를) 스크랩했습니다.`,
+        });
       }
 
       setLoading(false);
-
-      openSnackbar({
-        message: `${wata?.title}을(를) 스크랩했습니다.`,
-      });
 
       onClose();
     } catch (error) {

@@ -13,7 +13,7 @@ export default function SelectedKeywordView() {
 
   const renderKeywords = (type: SearchKeywordsKeyType) =>
     searchKeywords[type]?.map((keyword) => (
-      <div key={`select-keyword-${keyword.id}`}>
+      <div key={`selectd-keyword-${keyword.id}`}>
         <SelectKeywordChip
           type={type}
           keyword={keyword}

@@ -87,7 +87,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
           <KeywordChip keyword={wata.genre} type="genres" />
           {wata?.keywords?.map((keyword: KeywordType) => (
             <KeywordChip
-              key={`wata-card-keyword-${keyword.id}`}
+              key={`wata-card-${wata.id}-keyword-${keyword.id}`}
               keyword={keyword}
               type="keywords"
             />
@@ -139,7 +139,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
           >
             {wata?.platforms?.map((platform: PlatformType) => (
               <PlatformChip
-                key={`wata-card-platform-${platform.id}`}
+                key={`wata-card-${wata.id}-platform-${platform.id}`}
                 platform={platform}
               />
             ))}
@@ -159,7 +159,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
             >
               {wata?.cautions?.map((caution: KeywordType) => (
                 <Typography
-                  key={`hashtag-${caution.id}`}
+                  key={`wata-card-${wata.id}-caution-${caution.id}`}
                   level="body-xs"
                   textColor="white"
                 >
