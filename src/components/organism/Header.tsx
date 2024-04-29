@@ -24,6 +24,7 @@ import {
   Typography,
 } from '@mui/joy';
 import useModal from 'src/hooks/useModal';
+import MailModal from './MailModal';
 
 export interface MenuInfo {
   icon: JSX.Element;
@@ -291,6 +292,9 @@ function PCHeader({ menus = [], isLogin }: HeaderProps) {
 
 export default function Header() {
   const navigate = useNavigate();
+
+  const [openMail, setOpenMail] = useState(false);
+
   const userMenus: MenuInfo[] = [
     {
       label: '스크랩북',
@@ -304,10 +308,12 @@ export default function Header() {
       label: '추천작 제보',
       icon: <FontAwesomeIcon icon={faEnvelope} />,
       callback: () => {
-        window.open(
-          'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
-          '_blank',
-        );
+        // window.open(
+        //   'https://docs.google.com/forms/d/e/1FAIpQLSfvn7m8JTfXCt57EkJLkXo66a6FB2ra0hzN9PE4CyVNZcuzHg/viewform',
+        //   '_blank',
+        // );
+
+        setOpenMail(true);
       },
     },
   ];
@@ -334,6 +340,8 @@ export default function Header() {
         isLogin={checkLogin()}
         menus={userUtil.isAdmin() ? adminMenus : userMenus}
       />
+
+      <MailModal open={openMail} onClose={() => setOpenMail(false)} />
     </header>
   );
 }
