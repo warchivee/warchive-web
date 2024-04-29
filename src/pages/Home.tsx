@@ -16,6 +16,7 @@ import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import CarouselBanner from '@components/organism/CarouselBanner';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import useSearchbarText from 'src/hooks/useSearchbarText';
 
 export default function UserHome() {
   const [searchParams] = useSearchParams();
@@ -26,6 +27,7 @@ export default function UserHome() {
   const { updateSearchInput, resetAllSearchKeywords } = useSearchKeywords();
 
   const [searchInput, setSearchInput] = useState('');
+  const searchText = useSearchbarText();
 
   useEffect(() => {
     let timer: null | ReturnType<typeof setTimeout>;
@@ -72,7 +74,7 @@ export default function UserHome() {
           variant="outlined"
           color="primary"
           value={searchInput}
-          placeholder="제목/작가/감독명으로 검색"
+          placeholder={searchText}
           onChange={(e) => setSearchInput(e.target.value)}
           startDecorator={
             <FontAwesomeIcon
