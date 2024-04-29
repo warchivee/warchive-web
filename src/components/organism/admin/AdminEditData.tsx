@@ -325,12 +325,14 @@ export default function AdminEditData({
 
         <div className="item">
           <AdminEditImage
+            wata={data}
             type="card"
             cropArea={cardCropArea}
             setCropArea={setCardCropArea}
             originImage={image !== '' ? image : data?.thumbnail}
           />
           <AdminEditImage
+            wata={data}
             type="book"
             cropArea={bookCropArea}
             setCropArea={setBookCropArea}
@@ -373,11 +375,21 @@ export default function AdminEditData({
                   onChange={(e) => {
                     const input = e.target.value;
 
+                    const domain = input.includes('://')
+                      ? input.split('://')[1]?.split('/')[0]
+                      : input;
+
+                    const matchPlatform = keywordList.platforms?.find((p) =>
+                      domain.includes(p.domain ?? 'sdfsdfsdfsdfds'),
+                    );
+
                     const newPlatforms = [...(editData?.platforms || [])];
                     newPlatforms.splice(index, 1, {
                       ...newPlatforms[index],
+                      ...matchPlatform,
                       url: input,
                     });
+
                     handleEditData('platforms', newPlatforms);
                   }}
                 />

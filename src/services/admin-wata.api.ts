@@ -56,7 +56,9 @@ export interface Keyword {
 
 interface Platform extends Keyword {
   mapping_id: number;
+  domain?: string;
   url: string;
+  order_top: boolean;
 }
 
 interface Genre extends Keyword {

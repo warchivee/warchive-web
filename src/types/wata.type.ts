@@ -26,6 +26,7 @@ export interface CautionType extends KeywordType {
 
 export interface PlatformType extends KeywordType {
   url: string;
+  domain?: string;
   order_top: boolean;
 }
 

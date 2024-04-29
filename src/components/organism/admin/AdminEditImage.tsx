@@ -4,15 +4,20 @@ import Cropper, { Area } from 'react-easy-crop';
 import { Text } from '@components/CommonComponents/text';
 import WataCard from '@components/organism/wata/WataCard';
 import { Button } from '@mui/joy';
-import { WataThumbnailCropAreaType } from 'src/services/admin-wata.api';
+import {
+  EditAdminWata,
+  WataThumbnailCropAreaType,
+} from 'src/services/admin-wata.api';
 import getCroppedImg from '../../../utils/image/cropImage.utils';
 
 export default function AdminEditImage({
+  wata,
   type,
   originImage = '',
   cropArea,
   setCropArea,
 }: {
+  wata: EditAdminWata | undefined;
   type: 'book' | 'card';
   originImage?: string;
   cropArea?: WataThumbnailCropAreaType;
@@ -97,11 +102,11 @@ export default function AdminEditImage({
         ) : (
           <WataCard
             wata={{
-              id: 1,
-              title: 'test',
-              creators: 'test',
-              category: { id: 1, name: 'test' },
-              genre: { id: 1, name: 'test' },
+              id: 0,
+              title: wata?.title ?? '',
+              creators: wata?.creators ?? '',
+              category: { id: 0, name: '' },
+              genre: { id: 0, name: '' },
               keywords: [],
               cautions: [],
               platforms: [],
