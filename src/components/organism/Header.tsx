@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cloneElement, startTransition, useState } from 'react';
 import { checkLogin, logout } from 'src/services/auth.api';
-import Drawer from '@components/CommonComponents/drawer';
 import { Text, Title } from '@components/CommonComponents/text';
 import userUtil from '@utils/user.util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +14,15 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser as faUserSolid } from '@fortawesome/free-regular-svg-icons';
-import { IconButton, Typography } from '@mui/joy';
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  ModalClose,
+  Stack,
+  Typography,
+} from '@mui/joy';
 import useModal from 'src/hooks/useModal';
 
 export interface MenuInfo {
@@ -167,26 +174,47 @@ function MobileMenuDrawer({
   const navigate = useNavigate();
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} background="ebony">
-      <div className="mobile-menu">
-        <div>
-          <div className="header">
-            <IconButton onClick={onClose}>
-              <FontAwesomeIcon style={{ color: 'white' }} icon={faXmark} />
-            </IconButton>
+    <Drawer
+      open={isOpen}
+      onClose={onClose}
+      size="md"
+      sx={{
+        '& .MuiDrawer-content': {
+          background: '#170C1E',
+        },
+      }}
+    >
+      <Box role="presentation">
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          padding="2rem 1rem 2rem 1rem"
+          gap={1}
+          sx={{ background: '#9023D5' }}
+        >
+          <ModalClose color="primary" />
 
-            <div className="logo">
-              <img src="/images/logo/logo.png" alt="와카이브 로고" />
-            </div>
+          <Box height="45px" width="45px">
+            <img
+              src="/images/logo/logo.png"
+              alt="와카이브 로고"
+              height="100%"
+              width="100%"
+            />
+          </Box>
 
-            <Text size="small" color="white">
-              여성서사 아카이브 프로젝트
-            </Text>
-            <Title type="h2" color="white">
-              Warchive
-            </Title>
-          </div>
-          <div className="menus">
+          <Text size="small" color="white">
+            여성서사 아카이브 프로젝트
+          </Text>
+          <Title type="h2" color="white">
+            Warchive
+          </Title>
+        </Stack>
+        <Stack
+          alignItems="flex-start"
+          divider={<Divider sx={{ background: '#ffffff40' }} />}
+        >
+          <Stack alignItems="flex-start" gap={1} padding="1rem">
             {renderMenus(
               [
                 ...menus,
@@ -210,12 +238,12 @@ function MobileMenuDrawer({
               })),
               pathname,
             )}
-          </div>
-          <div className="menus">
+          </Stack>
+          <Stack alignItems="flex-start" gap={1} padding="1rem">
             <LoginButton isLogin={isLogin} callback={onClose} mobile />
-          </div>
-        </div>
-      </div>
+          </Stack>
+        </Stack>
+      </Box>
     </Drawer>
   );
 }

@@ -22,24 +22,24 @@ import {
 import { useEffect, useState } from 'react';
 
 // utils
-import todayPopupHandler from '@utils/weeklyPopup.util';
+import weeklyPopupHandler from '@utils/weeklyPopup.util';
 
-export default function TodayPopup() {
+export default function WeeklyPopup() {
   const [open, setOpen] = useState(false);
   const [closeWeekly, setCloseWeekly] = useState(false);
 
   const handleClose = () => {
     if (closeWeekly) {
-      todayPopupHandler.set();
+      weeklyPopupHandler.set();
     } else {
-      todayPopupHandler.delete();
+      weeklyPopupHandler.delete();
     }
 
     setOpen(false);
   };
 
   useEffect(() => {
-    const isClose = todayPopupHandler.isSettingClose();
+    const isClose = weeklyPopupHandler.isSettingClose();
     setOpen(!isClose);
     setCloseWeekly(isClose);
   }, []);
@@ -108,7 +108,7 @@ export default function TodayPopup() {
             level="body-sm"
             sx={{
               position: 'relative',
-              margin: '0 -30px 0 -30px',
+              margin: '0 -30px 0 -31px',
               padding: '10px 0',
               background: '#590091',
               border: 'none',

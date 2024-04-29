@@ -5,7 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Footer from '@components/organism/Footer';
 import Header from '@components/organism/Header';
 import { PageLoader } from '@components/CommonComponents/loader';
-import TodayPopup from '@components/organism/WeeklyPopup';
+import WeeklyPopup from '@components/organism/WeeklyPopup';
 
 import ErrorFallback from './ErrorFallback';
 
@@ -25,7 +25,7 @@ export default function CommonLayout() {
         <Footer />
       </div>
 
-      {pathname !== '/admin' && <TodayPopup />}
+      {pathname === '/' && <WeeklyPopup />}
     </div>
   );
 }
