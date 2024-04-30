@@ -58,7 +58,12 @@ export default function WataCard({ wata }: { wata: WataType }) {
         height="max-content"
         sx={{ background: '#170c1e' }}
       >
-        <Stack direction="row" justifyContent="space-between" gap={1}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          gap={1}
+        >
           <Typography
             level={wata.title.length >= 30 ? 'title-sm' : 'title-md'}
             textColor="white"
@@ -68,7 +73,11 @@ export default function WataCard({ wata }: { wata: WataType }) {
           <IconButton
             size="sm"
             onClick={handleAddScrapbook}
-            sx={{ minHeight: 'max-content', justifyContent: 'flex-end' }}
+            sx={{
+              minHeight: 'max-content',
+              justifyContent: 'flex-end',
+              marginTop: '5px',
+            }}
           >
             <FontAwesomeIcon color="white" icon={faBookBookmark} />
           </IconButton>
