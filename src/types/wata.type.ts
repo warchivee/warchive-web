@@ -16,6 +16,7 @@ export interface KeywordListType {
 export interface KeywordType {
   id: number;
   name: string;
+  order_top?: boolean;
 }
 
 export interface CautionType extends KeywordType {

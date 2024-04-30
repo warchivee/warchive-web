@@ -37,15 +37,26 @@ export default function SelectKeywordList({
           overflowX: 'hidden',
         }}
       >
-        {keywords?.map((keyword) => (
-          <Grid key={`select-keyword-${keyword.id}`} xs={12} sm={6} md={6}>
-            <SelectKeywordChip
-              type={type}
-              keyword={keyword}
-              checked={includeKeyword(type, keyword)}
-            />
-          </Grid>
-        ))}
+        {keywords
+          ?.sort((a, b) => {
+            const aOrderTop = a?.order_top ?? false;
+            const bOrderTop = b?.order_top ?? false;
+
+            if (bOrderTop && !aOrderTop) return 1;
+            if (aOrderTop && !bOrderTop) return -1;
+
+            return a.name.localeCompare(b.name, 'ko');
+          })
+          ?.filter((k) => k.name !== '플랫폼없음')
+          ?.map((keyword) => (
+            <Grid key={`select-keyword-${keyword.id}`} xs={12} sm={6} md={6}>
+              <SelectKeywordChip
+                type={type}
+                keyword={keyword}
+                checked={includeKeyword(type, keyword)}
+              />
+            </Grid>
+          ))}
       </Grid>
     </Stack>
   );
