@@ -10,6 +10,7 @@ export interface KeywordListType {
   name: string;
   genres: KeywordType[];
   keywords: KeywordType[];
+  cautions: KeywordType[];
   platforms: KeywordType[];
 }
 

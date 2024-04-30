@@ -42,9 +42,33 @@ const syncWataFromServer = async (): Promise<void> => {
 
   const { watas, categories } = await getData<WataListType>('publish-wata');
 
+  const allCategory = categories[0];
+
   try {
     watas?.forEach(async (item) => {
-      await indexedDB.addItem(WATA_STORE, item);
+      await indexedDB.addItem(WATA_STORE, {
+        ...item,
+        category: {
+          ...item.category,
+          name: categories?.find((c) => c.id === item.category.id)?.name,
+        },
+        genre: {
+          ...item.genre,
+          name: allCategory?.genres.find((g) => g.id === item.genre.id)?.name,
+        },
+        keywords: item.keywords.map((ik) => ({
+          ...ik,
+          name: allCategory.keywords.find((k) => k.id === ik.id)?.name,
+        })),
+        cautions: item.cautions.map((ic) => ({
+          ...ic,
+          name: allCategory.cautions.find((c) => c.id === ic.id)?.name,
+        })),
+        platforms: item.platforms.map((ip) => ({
+          ...ip,
+          name: allCategory.platforms.find((p) => p.id === ip.id)?.name,
+        })),
+      });
     });
 
     categories?.forEach(async (item) => {
