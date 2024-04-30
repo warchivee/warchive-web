@@ -50,24 +50,31 @@ const syncWataFromServer = async (): Promise<void> => {
         ...item,
         category: {
           ...item.category,
-          name: categories?.find((c) => c.id === item.category.id)?.name,
+          name: categories?.find((c) => c.id === item.category.id)?.name ?? '',
         },
         genre: {
           ...item.genre,
-          name: allCategory?.genres.find((g) => g.id === item.genre.id)?.name,
+          name:
+            allCategory?.genres.find((g) => g.id === item.genre.id)?.name ?? '',
         },
-        keywords: item.keywords.map((ik) => ({
-          ...ik,
-          name: allCategory.keywords.find((k) => k.id === ik.id)?.name,
-        })),
-        cautions: item.cautions.map((ic) => ({
-          ...ic,
-          name: allCategory.cautions.find((c) => c.id === ic.id)?.name,
-        })),
-        platforms: item.platforms.map((ip) => ({
-          ...ip,
-          name: allCategory.platforms.find((p) => p.id === ip.id)?.name,
-        })),
+        keywords: item.keywords
+          .map((ik) => ({
+            ...ik,
+            name: allCategory.keywords.find((k) => k.id === ik.id)?.name ?? '',
+          }))
+          ?.sort((a, b) => a.name.localeCompare(b.name, 'ko')),
+        cautions: item.cautions
+          .map((ic) => ({
+            ...ic,
+            name: allCategory.cautions.find((c) => c.id === ic.id)?.name ?? '',
+          }))
+          ?.sort((a, b) => a.name.localeCompare(b.name, 'ko')),
+        platforms: item.platforms
+          .map((ip) => ({
+            ...ip,
+            name: allCategory.platforms.find((p) => p.id === ip.id)?.name ?? '',
+          }))
+          ?.sort((a, b) => a.name.localeCompare(b.name, 'ko')),
       });
     });
 
