@@ -30,13 +30,9 @@ export default function UserHome() {
   const searchText = useSearchbarText();
 
   useEffect(() => {
-    let timer: null | ReturnType<typeof setTimeout>;
-
-    if (searchInput && searchInput?.length > 0) {
-      timer = setTimeout(() => {
-        updateSearchInput(searchInput);
-      }, 200);
-    }
+    const timer = setTimeout(() => {
+      updateSearchInput(searchInput);
+    }, 200);
 
     return () => {
       if (timer) {
