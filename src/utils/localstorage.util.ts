@@ -49,7 +49,8 @@ const localStorageUtil = {
   },
 
   clearAll: () => {
-    localStorage.clear();
+    localStorage.removeItem(LS_USER_KEY);
+    localStorage.removeItem(LS_TOKEN_KEY);
   },
 };
 

@@ -15,6 +15,8 @@ import BannerTwo from '@assets/banner/mbti.png';
 import BannerThree from '@assets/banner/여생1.png';
 import BannerFour from '@assets/banner/구인.png';
 import BannerFive from '@assets/banner/불효녀.png';
+import BannerSix from '@assets/banner/job.png';
+import BannerSeven from '@assets/banner/호걸옹주.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -29,6 +31,7 @@ const banners = [
     description: '내가 여성서사 작품에 들어간다면 누구일까?',
     backgroundStartColor: '#170C1E',
     backgroundEndColor: '#666666A6',
+    textBackgroundColor: '#170C1E',
     color: 'white',
     src: BannerTwo,
     href: 'https://play.womynarchive.com/womyn-character-test',
@@ -39,6 +42,7 @@ const banners = [
     description: '〈불효녀로 행복하기〉 저자, 자유별 인터뷰를 만나보세요.',
     backgroundStartColor: '#ECEEC9',
     backgroundEndColor: '#D2D7AC33',
+    textBackgroundColor: '#ECEEC9',
     color: 'black',
     src: BannerOne,
     href: 'https://article.womynarchive.com/interview/jayoobyul/',
@@ -49,9 +53,35 @@ const banners = [
     description: '프로젝트 여생의 전시 비하인드, 와카이브에서만.',
     backgroundStartColor: '#B0D8AE',
     backgroundEndColor: '#FFFFFF00',
+    textBackgroundColor: '#B0D8AE4D',
     color: 'black',
     src: BannerThree,
     href: 'https://article.womynarchive.com/interview/yeosaeng/',
+  },
+  {
+    subject: '와카이브 아티클 : 호걸옹주',
+    title: '호걸아기씨, 나의 왕이시여 ',
+    description:
+      '위기에 빠진 세상을 구하는 영웅 서사의 주인공은 대부분 남성이었다.',
+    backgroundStartColor: '#EBAE2A',
+    backgroundEndColor: '#FFFFFF14',
+    textBackgroundColor: '#EBAE2A4D',
+    color: 'black',
+    src: BannerSeven,
+    href: 'https://article.womynarchive.com/interview/yeosaeng/',
+  },
+  {
+    subject: '와카이브 아티클 : 직업을 때려치운 여자들',
+    title:
+      '여자인 내가 하기 좋은 일 말고,\n나라는 여자도 하기 좋은 일을 찾아서',
+    description: '서로의 레퍼런스가 된 여성들의 탈직장 연대기 ',
+    backgroundStartColor: '#FFF5F9',
+    backgroundEndColor: '#FFF5F9',
+    textBackgroundColor: '#FFF5F9',
+    color: 'black',
+    src: BannerSix,
+    href: 'https://article.womynarchive.com/review/womyn-who-quit-job/',
+    type: 'review',
   },
   {
     subject: '와카이브 아티클 : 불효녀로 행복하기 ',
@@ -59,6 +89,7 @@ const banners = [
     description: '내가 나로 살 수 있는 나라를 찾았다',
     backgroundStartColor: '#81B8D6',
     backgroundEndColor: '#81B8D6',
+    textBackgroundColor: '#81B8D6',
     color: 'black',
     src: BannerFive,
     href: 'https://article.womynarchive.com/review/happy-jayoobyul/',
@@ -68,6 +99,7 @@ const banners = [
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
     backgroundStartColor: '#590091',
     backgroundEndColor: '#D388FF14',
+    textBackgroundColor: '#5900914D',
     color: 'white',
     src: BannerFour,
     href: 'https://womynarchive.notion.site/75138cd619284d739f16f474d100b81f',
@@ -158,7 +190,7 @@ export default function CarouselBanner() {
 
               {/* 배너 글 */}
               <Stack
-                zIndex="2"
+                zIndex="4"
                 justifyContent="center"
                 padding="0 2rem"
                 position="absolute"
@@ -166,6 +198,10 @@ export default function CarouselBanner() {
                 gap={0.5}
                 sx={{
                   '@media (max-width: 600px)': {
+                    textShadow: `-1px 0px 10px ${item.textBackgroundColor}
+                    , 0px 1px 10px ${item.textBackgroundColor}
+                    , 1px 0px 10px ${item.textBackgroundColor}
+                    , 0px -1px 10px ${item.textBackgroundColor}`,
                     padding: '0 1.5rem',
                   },
                 }}
@@ -176,6 +212,9 @@ export default function CarouselBanner() {
                     fontWeight="400"
                     textColor={item.color}
                     textAlign={item?.type === 'review' ? 'right' : 'left'}
+                    sx={{
+                      wordBreak: 'keep-all',
+                    }}
                   >
                     {item.subject}
                   </Typography>
@@ -190,6 +229,9 @@ export default function CarouselBanner() {
                       fontWeight="bolder"
                       textColor={item.color}
                       textAlign={item?.type === 'review' ? 'right' : 'left'}
+                      sx={{
+                        wordBreak: 'keep-all',
+                      }}
                     >
                       {titleText}
                     </Typography>
@@ -202,6 +244,9 @@ export default function CarouselBanner() {
                     fontWeight="400"
                     textColor={item.color}
                     textAlign={item?.type === 'review' ? 'right' : 'left'}
+                    sx={{
+                      wordBreak: 'keep-all',
+                    }}
                   >
                     {item.description}
                   </Typography>
@@ -212,6 +257,7 @@ export default function CarouselBanner() {
                 borderRadius="20px"
                 width="100%"
                 height="100%"
+                zIndex="2"
                 position="absolute"
                 sx={{
                   background: `linear-gradient(90deg, ${item.backgroundStartColor} 30%, ${item.backgroundEndColor} 80%, ${item.backgroundEndColor} 100%)`,
@@ -223,7 +269,7 @@ export default function CarouselBanner() {
                 <Box
                   width="100%"
                   height="180px"
-                  zIndex="1"
+                  zIndex="3"
                   position="absolute"
                   top="-30px"
                   sx={{
@@ -243,7 +289,10 @@ export default function CarouselBanner() {
                   width="380px"
                   height="150px"
                   borderRadius="20px"
+                  zIndex="1"
+                  position="absolute"
                   sx={{
+                    right: 0,
                     background: `linear-gradient(
                   to left, 
                     rgba(255,255,255,0) 10%, 

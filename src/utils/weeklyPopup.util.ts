@@ -1,7 +1,7 @@
 import moment from 'moment';
 import localStorageUtil from './localstorage.util';
 
-const WEEKLY_MODAL_KEY = 'weekly_popup_close_time';
+export const WEEKLY_MODAL_KEY = 'weekly_popup_close_time';
 
 const weeklyPopupHandler = {
   set() {

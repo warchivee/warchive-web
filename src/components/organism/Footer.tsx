@@ -131,16 +131,6 @@ export default function Footer() {
                     Warchive: article
                   </Typography>
                 </a>
-                <a
-                  href="https://play.womynarchive.com/womyn-character-test"
-                  target="_blank"
-                  aria-label="와카이브-여성서사 캐릭터 테스트 이동"
-                  rel="noreferrer"
-                >
-                  <Typography level="body-xs" textColor="text.tertiary">
-                    Warchive: womyn character test
-                  </Typography>
-                </a>
               </Stack>
             </Stack>
 

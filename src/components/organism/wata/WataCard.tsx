@@ -83,7 +83,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
           </IconButton>
         </Stack>
 
-        <Typography level="body-sm" noWrap>
+        <Typography level="body-xs" noWrap>
           {wata.creators}
         </Typography>
 
@@ -164,7 +164,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
               justifyContent="center"
               padding="5px"
               gap={0.5}
-              sx={{ background: '#170c1e', opacity: '0.8' }}
+              sx={{ background: '#170c1e', opacity: '0.9' }}
             >
               {wata?.cautions?.map((caution: KeywordType) => (
                 <Typography

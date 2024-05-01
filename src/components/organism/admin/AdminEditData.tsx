@@ -375,8 +375,8 @@ export default function AdminEditData({
                   onChange={(e) => {
                     const input = e.target.value;
 
-                    const domain = input.includes('://')
-                      ? input.split('://')[1]?.split('/')[0]
+                    const domain = input.includes('?')
+                      ? input.split('?')[0]
                       : input;
 
                     const matchPlatform = keywordList.platforms?.find((p) =>
