@@ -93,7 +93,8 @@ export default function ShareScrapbookButtons() {
                         content: {
                           title,
                           description,
-                          imageUrl: '이미지 url',
+                          imageUrl:
+                            'https://i.ibb.co/hyK2VR9/warchive-cover.png',
                           link: {
                             mobileWebUrl: url,
                             webUrl: url,
