@@ -68,7 +68,7 @@ const banners = [
     textBackgroundColor: '#EBAE2A4D',
     color: 'black',
     src: BannerSeven,
-    href: 'https://article.womynarchive.com/interview/yeosaeng/',
+    href: 'https://article.womynarchive.com/review/hogeolongju/',
   },
   {
     subject: '와카이브 아티클 : 직업을 때려치운 여자들',
