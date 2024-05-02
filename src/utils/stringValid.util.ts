@@ -30,15 +30,15 @@ export const validInputText = (str: string) => {
 export const isUrl = (str: string) => urlRegex.test(str) || checkUrl(str);
 
 export const isIncludeBlockedWords = (str: string) => {
+  const testStr = str ?? '';
   try {
     const profanityList = blockedWords
       .split('\n')
       .map((word: string) => word.replace(/\s/g, ''))
       .filter((word: string) => word !== '');
-
     const regexPattern = new RegExp(`${profanityList.join('|')}`, 'gi');
 
-    return regexPattern.test(str.replace(/\s/g, ''));
+    return regexPattern.test(testStr.replace(/\s/g, ''));
   } catch (err) {
     return true;
   }

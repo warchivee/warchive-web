@@ -31,7 +31,7 @@ export const fetchScrapbooks = async (): Promise<ScrapbookType[]> => {
   const savedScrapbooks =
     await indexedDB.getItems<ScrapbookType[]>(SCRAPBOOK_STORE);
 
-  return savedScrapbooks.sort((a, b) => b.id - a.id);
+  return savedScrapbooks;
 };
 
 export default fetchScrapbooks;
