@@ -24,6 +24,7 @@ import {
   SCRAPBOOK_ITEMS_LIMIT_COUNT,
   SCRAPBOOK_TITLE_LIMIT_LENGTH,
 } from '@utils/consts/scrapbooks.const';
+import { WataType } from 'src/types/wata.type';
 
 const indexedDB = IndexedDBUtil.getInstance();
 
@@ -53,14 +54,18 @@ export const useScrapbook = () => {
   const isScrapbooksEmpty = () =>
     !getScrapbooks() || getScrapbooks()?.length <= 0;
 
-  const getScrapbookItems = () => {
+  const getScrapbookItems = (): WataType[] => {
     const scrapbook = getScrapbook();
 
     if (!scrapbook || !scrapbook?.items || scrapbook?.items?.length === 0) {
       return [];
     }
 
-    return scrapbook?.items?.map((item) => watas?.find((w) => w.id === item));
+    const result: WataType[] = scrapbook?.items
+      ?.map((item) => watas?.find((w) => w.id === item))
+      ?.filter((si): si is WataType => si !== undefined);
+
+    return result;
   };
 
   const selectScrapbook = (index: number) => {
