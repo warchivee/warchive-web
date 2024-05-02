@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSurprise } from '@fortawesome/free-regular-svg-icons';
 import { ScrapbookType } from 'src/types/scrapbooks.type';
 import useCropThumbnail from 'src/hooks/useCropThumbnail';
+import { WataType } from 'src/types/wata.type';
 
 const getDatas = async (
   id: string | undefined,
@@ -123,7 +124,9 @@ export default function ShareScrapbooks() {
         }}
       >
         <WataScrapbookList
-          watas={watas?.filter((wata) => scrapbook?.items?.includes(wata.id))}
+          watas={scrapbook?.items
+            ?.map((item) => watas?.find((w) => w.id === item))
+            ?.filter((si): si is WataType => si !== undefined)}
         />
       </Box>
     </div>
