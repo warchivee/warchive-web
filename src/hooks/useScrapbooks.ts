@@ -59,7 +59,8 @@ export const useScrapbook = () => {
     if (!scrapbook || !scrapbook?.items || scrapbook?.items?.length === 0) {
       return [];
     }
-    return watas?.filter((wata) => scrapbook?.items?.includes(wata.id));
+
+    return scrapbook?.items?.map((item) => watas?.find((w) => w.id === item));
   };
 
   const selectScrapbook = (index: number) => {
