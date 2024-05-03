@@ -41,19 +41,21 @@ export default function MailModal({
     content: '',
   });
 
+  const handleClose = () => {
+    if (loading) {
+      return;
+    }
+
+    onClose();
+  };
+
   return (
     <Modal
       open={open}
       sx={{
         background: '#00000080',
       }}
-      onClose={() => {
-        if (loading) {
-          return;
-        }
-
-        onClose();
-      }}
+      onClose={handleClose}
     >
       <ModalDialog
         layout="center"
@@ -236,6 +238,8 @@ export default function MailModal({
               openSnackbar({
                 message: '추천작을 와카이브로 전송했어요.',
               });
+
+              onClose();
             } catch (error) {
               openSnackbar({
                 message:
