@@ -14,9 +14,9 @@ import BannerOne from '@assets/banner/자유별.png';
 import BannerTwo from '@assets/banner/mbti.png';
 import BannerThree from '@assets/banner/여생1.png';
 import BannerFour from '@assets/banner/구인.png';
-import BannerFive from '@assets/banner/불효녀.png';
 import BannerSix from '@assets/banner/job.png';
 import BannerSeven from '@assets/banner/호걸옹주.png';
+import BannerSience from '@assets/banner/sience.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -59,6 +59,18 @@ const banners = [
     href: 'https://article.womynarchive.com/interview/yeosaeng/',
   },
   {
+    subject: '와카이브 아티클 : 과학하는 여자들',
+    title: '여성과학인상 수상자들을 찾아가다',
+    description: '여학생들은 수학, 과학에서 남학생들을 못 이긴다고?',
+    backgroundStartColor: '#94B6C2',
+    backgroundEndColor: '#94B6C2',
+    textBackgroundColor: '#94B6C2',
+    color: 'black',
+    src: BannerSience,
+    href: 'https://article.womynarchive.com/review/womyn-doing-science/',
+    type: 'review',
+  },
+  {
     subject: '와카이브 아티클 : 호걸옹주',
     title: '호걸아기씨, 나의 왕이시여 ',
     description:
@@ -81,18 +93,6 @@ const banners = [
     color: 'black',
     src: BannerSix,
     href: 'https://article.womynarchive.com/review/womyn-who-quit-job/',
-    type: 'review',
-  },
-  {
-    subject: '와카이브 아티클 : 불효녀로 행복하기 ',
-    title: '도망친 곳에는 천국이 있었다',
-    description: '내가 나로 살 수 있는 나라를 찾았다',
-    backgroundStartColor: '#81B8D6',
-    backgroundEndColor: '#81B8D6',
-    textBackgroundColor: '#81B8D6',
-    color: 'black',
-    src: BannerFive,
-    href: 'https://article.womynarchive.com/review/happy-jayoobyul/',
     type: 'review',
   },
   {
