@@ -46,6 +46,13 @@ export default function MailModal({
       return;
     }
 
+    setContents({
+      category: '',
+      title: '',
+      creators: '',
+      content: '',
+    });
+
     onClose();
   };
 
@@ -152,7 +159,7 @@ export default function MailModal({
             }
           >
             <Option value="게임">게임</Option>
-            <Option value="공연/전시">공연/전시</Option>
+            <Option value="공연/전시">공연전시</Option>
             <Option value="서적">서적</Option>
             <Option value="만화">만화</Option>
             <Option value="영상">영상</Option>
@@ -237,6 +244,13 @@ export default function MailModal({
 
               openSnackbar({
                 message: '추천작을 와카이브로 전송했어요.',
+              });
+
+              setContents({
+                category: '',
+                title: '',
+                creators: '',
+                content: '',
               });
 
               onClose();
