@@ -120,64 +120,62 @@ export default function WataCard({ wata }: { wata: WataType }) {
             }}
           />
         </Skeleton>
+
         <Stack
+          direction="row"
+          flexWrap="wrap"
+          justifyContent="center"
+          alignContent="center"
           position="absolute"
-          justifyContent="space-between"
+          zIndex={1}
           alignItems="center"
           height="100%"
           width="100%"
-        >
-          <Stack
-            direction="row"
-            flexWrap="wrap"
-            justifyContent="center"
-            alignContent="center"
-            height="100%"
-            width="100%"
-            padding="10px"
-            gap={1}
-            sx={{
-              background: '#170c1e',
-              opacity: '0',
-              transition: 'all 0.3s',
+          padding="10px"
+          gap={1}
+          sx={{
+            background: '#170c1e',
+            opacity: '0',
+            transition: 'all 0.3s',
 
-              '&:hover': {
-                opacity: '0.8',
-              },
-            }}
+            '&:hover': {
+              opacity: '0.8',
+            },
+          }}
+        >
+          {wata?.platforms?.map((platform: PlatformType) => (
+            <PlatformChip
+              key={`wata-card-${wata.id}-platform-${platform.id}`}
+              platform={platform}
+            />
+          ))}
+        </Stack>
+
+        {wata?.cautions.length !== 0 && (
+          <Stack
+            position="absolute"
+            bottom={0}
+            direction="row"
+            height="fit-content"
+            marginTop="auto"
+            width="100%"
+            alignItems="center"
+            justifyContent="center"
+            padding="5px"
+            gap={0.5}
+            sx={{ background: '#170c1e', opacity: '0.9' }}
           >
-            {wata?.platforms?.map((platform: PlatformType) => (
-              <PlatformChip
-                key={`wata-card-${wata.id}-platform-${platform.id}`}
-                platform={platform}
-              />
+            {wata?.cautions?.map((caution: KeywordType) => (
+              <Typography
+                key={`wata-card-${wata.id}-caution-${caution.id}`}
+                level="body-xs"
+                textColor="white"
+              >
+                ⚠️ {caution.name}
+              </Typography>
             ))}
           </Stack>
-
-          {wata?.cautions.length !== 0 && (
-            <Stack
-              direction="row"
-              height="fit-content"
-              marginTop="auto"
-              width="100%"
-              alignItems="center"
-              justifyContent="center"
-              padding="5px"
-              gap={0.5}
-              sx={{ background: '#170c1e', opacity: '0.9' }}
-            >
-              {wata?.cautions?.map((caution: KeywordType) => (
-                <Typography
-                  key={`wata-card-${wata.id}-caution-${caution.id}`}
-                  level="body-xs"
-                  textColor="white"
-                >
-                  ⚠️ {caution.name}
-                </Typography>
-              ))}
-            </Stack>
-          )}
-        </Stack>
+        )}
       </Box>
 
       <AddScrapbooksModal
