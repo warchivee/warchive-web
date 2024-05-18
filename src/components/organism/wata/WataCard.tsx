@@ -48,6 +48,7 @@ export default function WataCard({ wata }: { wata: WataType }) {
     <Stack
       height="12.5rem"
       width="18.75rem"
+      borderRadius="10px 10px 0 0"
       sx={{
         boxShadow: '0px 5px 12px rgba(0, 0, 0, 0.25)',
       }}
