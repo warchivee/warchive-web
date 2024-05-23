@@ -14,7 +14,7 @@ import BannerOne from '@assets/banner/자유별.png';
 import BannerTwo from '@assets/banner/mbti.png';
 import BannerThree from '@assets/banner/여생1.png';
 import BannerFour from '@assets/banner/구인.png';
-import BannerSix from '@assets/banner/job.png';
+import BannerSix from '@assets/banner/gugyeong.png';
 import BannerSeven from '@assets/banner/호걸옹주.png';
 import BannerSience from '@assets/banner/sience.png';
 
@@ -59,6 +59,18 @@ const banners = [
     href: 'https://article.womynarchive.com/interview/yeosaeng/',
   },
   {
+    subject: '와카이브 아티클 : 구경이',
+    title: '“ 솔직히 , 죽여도  되죠? ”',
+    description:
+      '만약 당신에게 범죄자를 뒤탈 없이 완벽하게 죽일 기회가 온다면?',
+    backgroundStartColor: '#CECECE',
+    backgroundEndColor: '#CECECE00',
+    textBackgroundColor: '#CECECE',
+    color: 'black',
+    src: BannerSix,
+    href: 'https://article.womynarchive.com/review/inspector-koo/',
+  },
+  {
     subject: '와카이브 아티클 : 과학하는 여자들',
     title: '여성과학인상 수상자들을 찾아가다',
     description: '여학생들은 수학, 과학에서 남학생들을 못 이긴다고?',
@@ -81,19 +93,6 @@ const banners = [
     color: 'black',
     src: BannerSeven,
     href: 'https://article.womynarchive.com/review/hogeolongju/',
-  },
-  {
-    subject: '와카이브 아티클 : 직업을 때려치운 여자들',
-    title:
-      '여자인 내가 하기 좋은 일 말고,\n나라는 여자도 하기 좋은 일을 찾아서',
-    description: '서로의 레퍼런스가 된 여성들의 탈직장 연대기 ',
-    backgroundStartColor: '#FFF5F9',
-    backgroundEndColor: '#FFF5F9',
-    textBackgroundColor: '#FFF5F9',
-    color: 'black',
-    src: BannerSix,
-    href: 'https://article.womynarchive.com/review/womyn-who-quit-job/',
-    type: 'review',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
