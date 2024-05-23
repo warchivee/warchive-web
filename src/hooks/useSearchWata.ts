@@ -37,16 +37,16 @@ const useSearchWata = () => {
         keywords: true,
       };
 
-      if (searchInput && searchInput?.replace(' ', '') !== '') {
+      if (searchInput && searchInput?.replace(/\s/g, '') !== '') {
         pass.searchInput =
           wata.title
-            ?.replace(' ', '')
+            ?.replace(/\s/g, '')
             ?.toLocaleLowerCase()
-            .includes(searchInput?.replace(' ', '')?.toLocaleLowerCase()) ||
+            .includes(searchInput?.replace(/\s/g, '')?.toLocaleLowerCase()) ||
           wata.creators
-            ?.replace(' ', '')
+            ?.replace(/\s/g, '')
             ?.toLocaleLowerCase()
-            .includes(searchInput?.replace(' ', '')?.toLocaleLowerCase());
+            .includes(searchInput?.replace(/\s/g, '')?.toLocaleLowerCase());
       }
 
       if (category && category.id !== 0) {
