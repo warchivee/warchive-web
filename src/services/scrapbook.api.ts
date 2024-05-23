@@ -9,8 +9,7 @@ export interface UpdateScrapbookItemParam {
 }
 
 export const getScrapbooksApi = async () =>
-  // return getData<ScrapbookType[]>('scrapbook');
-  [];
+  getData<ScrapbookType[]>('scrapbook');
 
 export const getSharedScrapbookApi = async (sharedId: string) =>
   getData<ScrapbookType>(`scrapbook/shared/${sharedId}`);
