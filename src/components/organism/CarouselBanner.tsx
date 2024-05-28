@@ -40,7 +40,7 @@ const banners = [
   },
   {
     subject: '와카이브 아티클 : 나 잡으려고 텔레그램 가입했어?',
-    title: '아직 디지털 성범죄는 끝나지 않았다 : 추적단 불꽃, 2년 간의 추적기',
+    title: '아직, 디지털 성범죄는 끝나지 않았다\n: 추적단 불꽃 2년 간의 추적기',
     description: '‘N번방·박사방’  텔레그램 성 착취 사건 이후 5년',
     backgroundStartColor: '#192970',
     backgroundEndColor: '#192970',
