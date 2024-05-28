@@ -10,13 +10,15 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
-import BannerOne from '@assets/banner/자유별.png';
-import BannerTwo from '@assets/banner/mbti.png';
-import BannerThree from '@assets/banner/여생1.png';
-import BannerFour from '@assets/banner/구인.png';
-import BannerSix from '@assets/banner/gugyeong.png';
-import BannerSeven from '@assets/banner/호걸옹주.png';
-import BannerSience from '@assets/banner/sience.png';
+import BannerPlay from '@assets/banner/mbti.png';
+
+import BannerReview1 from '@assets/banner/telegram.png';
+import BannerReview2 from '@assets/banner/gugyeong.png';
+
+import BannerInterview1 from '@assets/banner/자유별.png';
+import BannerInterview2 from '@assets/banner/여생1.png';
+
+import BannerRecruit from '@assets/banner/구인.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -33,30 +35,20 @@ const banners = [
     backgroundEndColor: '#666666A6',
     textBackgroundColor: '#170C1E',
     color: 'white',
-    src: BannerTwo,
+    src: BannerPlay,
     href: 'https://play.womynarchive.com/womyn-character-test',
   },
   {
-    subject: '와카이브 아티클 : 자유별',
-    title: '도망친 곳에는 천국이 있었다',
-    description: '〈불효녀로 행복하기〉 저자, 자유별 인터뷰를 만나보세요.',
-    backgroundStartColor: '#ECEEC9',
-    backgroundEndColor: '#D2D7AC33',
-    textBackgroundColor: '#ECEEC9',
-    color: 'black',
-    src: BannerOne,
-    href: 'https://article.womynarchive.com/interview/jayoobyul/',
-  },
-  {
-    subject: '와카이브 아티클 : 프로젝트 여생',
-    title: '정상에서 보자!\n그런데, 정상이 어디 있는데요?',
-    description: '프로젝트 여생의 전시 비하인드, 와카이브에서만.',
-    backgroundStartColor: '#B0D8AE',
-    backgroundEndColor: '#FFFFFF00',
-    textBackgroundColor: '#B0D8AE4D',
-    color: 'black',
-    src: BannerThree,
-    href: 'https://article.womynarchive.com/interview/yeosaeng/',
+    subject: '와카이브 아티클 : 나 잡으려고 텔레그램 가입했어?',
+    title: '아직 디지털 성범죄는 끝나지 않았다 : 추적단 불꽃, 2년 간의 추적기',
+    description: '‘N번방·박사방’  텔레그램 성 착취 사건 이후 5년',
+    backgroundStartColor: '#192970',
+    backgroundEndColor: '#192970',
+    textBackgroundColor: '#192970',
+    color: 'white',
+    src: BannerReview1,
+    href: 'https://article.womynarchive.com/review/telegram/',
+    type: 'review',
   },
   {
     subject: '와카이브 아티클 : 구경이',
@@ -67,40 +59,39 @@ const banners = [
     backgroundEndColor: '#CECECE00',
     textBackgroundColor: '#CECECE',
     color: 'black',
-    src: BannerSix,
+    src: BannerReview2,
     href: 'https://article.womynarchive.com/review/inspector-koo/',
   },
   {
-    subject: '와카이브 아티클 : 과학하는 여자들',
-    title: '여성과학인상 수상자들을 찾아가다',
-    description: '여학생들은 수학, 과학에서 남학생들을 못 이긴다고?',
-    backgroundStartColor: '#94B6C2',
-    backgroundEndColor: '#94B6C2',
-    textBackgroundColor: '#94B6C2',
+    subject: '와카이브 아티클 : 자유별',
+    title: '도망친 곳에는 천국이 있었다',
+    description: '〈불효녀로 행복하기〉 저자, 자유별 인터뷰를 만나보세요.',
+    backgroundStartColor: '#ECEEC9',
+    backgroundEndColor: '#D2D7AC33',
+    textBackgroundColor: '#ECEEC9',
     color: 'black',
-    src: BannerSience,
-    href: 'https://article.womynarchive.com/review/womyn-doing-science/',
-    type: 'review',
+    src: BannerInterview1,
+    href: 'https://article.womynarchive.com/interview/jayoobyul/',
   },
   {
-    subject: '와카이브 아티클 : 호걸옹주',
-    title: '호걸아기씨, 나의 왕이시여 ',
-    description:
-      '위기에 빠진 세상을 구하는 영웅 서사의 주인공은 대부분 남성이었다.',
-    backgroundStartColor: '#EBAE2A',
-    backgroundEndColor: '#FFFFFF14',
-    textBackgroundColor: '#EBAE2A4D',
+    subject: '와카이브 아티클 : 프로젝트 여생',
+    title: '정상에서 보자!\n그런데, 정상이 어디 있는데요?',
+    description: '프로젝트 여생의 전시 비하인드, 와카이브에서만.',
+    backgroundStartColor: '#B0D8AE',
+    backgroundEndColor: '#FFFFFF00',
+    textBackgroundColor: '#B0D8AE4D',
     color: 'black',
-    src: BannerSeven,
-    href: 'https://article.womynarchive.com/review/hogeolongju/',
+    src: BannerInterview2,
+    href: 'https://article.womynarchive.com/interview/yeosaeng/',
   },
+
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
     backgroundStartColor: '#590091',
     backgroundEndColor: '#D388FF14',
     textBackgroundColor: '#5900914D',
     color: 'white',
-    src: BannerFour,
+    src: BannerRecruit,
     href: 'https://womynarchive.notion.site/75138cd619284d739f16f474d100b81f',
   },
 ];
