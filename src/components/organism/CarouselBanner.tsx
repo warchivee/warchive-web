@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
-import BannerPlay from '@assets/banner/mbti.png';
+import BannerPlay from '@assets/banner/test.png';
 
 import BannerReview1 from '@assets/banner/telegram.png';
 import BannerReview2 from '@assets/banner/gugyeong.png';
@@ -29,14 +29,15 @@ function calculatePercentage(part: number, whole: number) {
 
 const banners = [
   {
-    title: '여성서사 주인공 성향 테스트',
-    description: '내가 여성서사 작품에 들어간다면 누구일까?',
-    backgroundStartColor: '#170C1E',
-    backgroundEndColor: '#666666A6',
-    textBackgroundColor: '#170C1E',
+    title: '제 1회 여성서사 고인물 모의고사, 난 몇 등급일까?',
+    description:
+      '여성서사를 사랑하는 당신! 내 사랑을 한 번 확인해볼까요? 와카이브 공식 인증서로 당당한 고인물이 되어보세요.',
+    backgroundStartColor: '#60492E',
+    backgroundEndColor: '#E2DBD5A6',
+    textBackgroundColor: '#60492E',
     color: 'white',
     src: BannerPlay,
-    href: 'https://play.womynarchive.com/womyn-character-test',
+    href: 'https://play.womynarchive.com/master-mock-exam',
   },
   {
     subject: '와카이브 아티클 : 나 잡으려고 텔레그램 가입했어?',
