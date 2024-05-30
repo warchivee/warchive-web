@@ -14,9 +14,7 @@ import BannerPlay from '@assets/banner/test.png';
 
 import BannerReview1 from '@assets/banner/telegram.png';
 import BannerReview2 from '@assets/banner/gugyeong.png';
-
-import BannerInterview1 from '@assets/banner/자유별.png';
-import BannerInterview2 from '@assets/banner/여생1.png';
+import BannerReview3 from '@assets/banner/radish.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -38,6 +36,18 @@ const banners = [
     color: 'white',
     src: BannerPlay,
     href: 'https://play.womynarchive.com/master-mock-exam',
+  },
+  {
+    subject: '와카이브 아티클 : RADish  8호',
+    title: '세계 최전선의 래디컬 페미니즘 잡지, <RADish> 8호',
+    description: '지금 이 순간, 우리에게 필요한 담론을 가장 날카롭게 제시하다!',
+    backgroundStartColor: '#53A751',
+    backgroundEndColor: '#53A751',
+    textBackgroundColor: '#53A751',
+    color: 'white',
+    src: BannerReview3,
+    href: 'https://article.womynarchive.com/review/radish-no8/',
+    type: 'review',
   },
   {
     subject: '와카이브 아티클 : 나 잡으려고 텔레그램 가입했어?',
@@ -63,29 +73,6 @@ const banners = [
     src: BannerReview2,
     href: 'https://article.womynarchive.com/review/inspector-koo/',
   },
-  {
-    subject: '와카이브 아티클 : 자유별',
-    title: '도망친 곳에는 천국이 있었다',
-    description: '〈불효녀로 행복하기〉 저자, 자유별 인터뷰를 만나보세요.',
-    backgroundStartColor: '#ECEEC9',
-    backgroundEndColor: '#D2D7AC33',
-    textBackgroundColor: '#ECEEC9',
-    color: 'black',
-    src: BannerInterview1,
-    href: 'https://article.womynarchive.com/interview/jayoobyul/',
-  },
-  {
-    subject: '와카이브 아티클 : 프로젝트 여생',
-    title: '정상에서 보자!\n그런데, 정상이 어디 있는데요?',
-    description: '프로젝트 여생의 전시 비하인드, 와카이브에서만.',
-    backgroundStartColor: '#B0D8AE',
-    backgroundEndColor: '#FFFFFF00',
-    textBackgroundColor: '#B0D8AE4D',
-    color: 'black',
-    src: BannerInterview2,
-    href: 'https://article.womynarchive.com/interview/yeosaeng/',
-  },
-
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
     backgroundStartColor: '#590091',
