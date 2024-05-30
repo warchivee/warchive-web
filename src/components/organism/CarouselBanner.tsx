@@ -10,7 +10,8 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
-import BannerPlay from '@assets/banner/test.png';
+import BannerPlay1 from '@assets/banner/mbti.png';
+import BannerPlay2 from '@assets/banner/test.png';
 
 import BannerReview1 from '@assets/banner/telegram.png';
 import BannerReview2 from '@assets/banner/gugyeong.png';
@@ -34,8 +35,18 @@ const banners = [
     backgroundEndColor: '#E2DBD5A6',
     textBackgroundColor: '#60492E',
     color: 'white',
-    src: BannerPlay,
+    src: BannerPlay2,
     href: 'https://play.womynarchive.com/master-mock-exam',
+  },
+  {
+    title: '여성서사 주인공 성향 테스트',
+    description: '내가 여성서사 작품에 들어간다면 누구일까?',
+    backgroundStartColor: '#170C1E',
+    backgroundEndColor: '#666666A6',
+    textBackgroundColor: '#170C1E',
+    color: 'white',
+    src: BannerPlay1,
+    href: 'https://play.womynarchive.com/womyn-character-test',
   },
   {
     subject: '와카이브 아티클 : RADish  8호',
