@@ -10,6 +10,8 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
+import Banner from '@assets/banner/bookclub.png';
+
 import BannerPlay1 from '@assets/banner/mbti.png';
 import BannerPlay2 from '@assets/banner/test.png';
 
@@ -27,6 +29,17 @@ function calculatePercentage(part: number, whole: number) {
 }
 
 const banners = [
+  {
+    title: '익명의 독서모임, 와카이브 북클럽 OPEN',
+    description:
+      '독서 모임은 부담스럽고, 블로그 개설은 귀찮지만 감상은 나누고 싶은 당신을 위해',
+    backgroundStartColor: '#D737C8',
+    backgroundEndColor: '#BC28AE33',
+    textBackgroundColor: '#D737C8',
+    color: 'white',
+    src: Banner,
+    href: 'https://article.womynarchive.com/bookclub',
+  },
   {
     title: '제 1회 여성서사 고인물 모의고사, 난 몇 등급일까?',
     description:
