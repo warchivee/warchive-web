@@ -16,7 +16,7 @@ import BannerPlay1 from '@assets/banner/mbti.png';
 import BannerPlay2 from '@assets/banner/test.png';
 
 import BannerReview1 from '@assets/banner/telegram.png';
-import BannerReview2 from '@assets/banner/gugyeong.png';
+import BannerReview2 from '@assets/banner/crazy.png';
 import BannerReview3 from '@assets/banner/radish.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -74,6 +74,18 @@ const banners = [
     type: 'review',
   },
   {
+    subject: '와카이브 아티클 : 미쳐있고 괴상하며 오만하고 똑똑한 여자들',
+    title: '미쳐있고 괴상하며 오만하고 똑똑한 여자들',
+    description: '질병과 낙인 너머, 여성 우울에 관한 가장 치열하고 다정한 탐구',
+    backgroundStartColor: '#379FBF',
+    backgroundEndColor: '#379FBF',
+    textBackgroundColor: '#379FBF',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/ceai-womyn/',
+  },
+  {
     subject: '와카이브 아티클 : 나 잡으려고 텔레그램 가입했어?',
     title: '아직, 디지털 성범죄는 끝나지 않았다\n: 추적단 불꽃 2년 간의 추적기',
     description: '‘N번방·박사방’  텔레그램 성 착취 사건 이후 5년',
@@ -84,18 +96,6 @@ const banners = [
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/telegram/',
     type: 'review',
-  },
-  {
-    subject: '와카이브 아티클 : 구경이',
-    title: '“ 솔직히 , 죽여도  되죠? ”',
-    description:
-      '만약 당신에게 범죄자를 뒤탈 없이 완벽하게 죽일 기회가 온다면?',
-    backgroundStartColor: '#CECECE',
-    backgroundEndColor: '#CECECE00',
-    textBackgroundColor: '#CECECE',
-    color: 'black',
-    src: BannerReview2,
-    href: 'https://article.womynarchive.com/review/inspector-koo/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
