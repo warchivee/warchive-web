@@ -18,6 +18,7 @@ import {
   faBookOpen,
   faBullhorn,
   faPalette,
+  faPenNib,
 } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 
@@ -185,6 +186,18 @@ export default function WeeklyPopup() {
                   </Stack>
                   <Typography level="body-sm">- 데이터 수집 및 검수</Typography>
                   <Typography level="body-sm">- 데이터 입력</Typography>
+                </Stack>
+              </Card>
+
+              <Card variant="soft">
+                <Stack>
+                  <Stack direction="row" gap={0.5} alignItems="center">
+                    <FontAwesomeIcon icon={faPenNib} />
+                    <Typography fontWeight="bold">리뷰팀</Typography>
+                  </Stack>
+                  <Typography level="body-sm">
+                    - 여성서사 리뷰 아티클 작성
+                  </Typography>
                 </Stack>
               </Card>
             </Stack>
