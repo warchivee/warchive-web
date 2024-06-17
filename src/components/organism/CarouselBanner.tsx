@@ -62,7 +62,7 @@ const banners = [
     href: 'https://play.womynarchive.com/womyn-character-test',
   },
   {
-    subject: '와카이브 아티클 : RADish  8호',
+    subject: '와카이브 아티클: RADish  8호',
     title: '세계 최전선의 래디컬 페미니즘 잡지, <RADish> 8호',
     description: '지금 이 순간, 우리에게 필요한 담론을 가장 날카롭게 제시하다!',
     backgroundStartColor: '#53A751',
@@ -74,8 +74,8 @@ const banners = [
     type: 'review',
   },
   {
-    subject: '와카이브 아티클 : 미쳐있고 괴상하며 오만하고 똑똑한 여자들',
-    title: '미쳐있고 괴상하며 오만하고 똑똑한 여자들',
+    subject: '와카이브 아티클: 미쳐있고 괴상하며 오만하고 똑똑한 여자들',
+    title: '자기 삶의 저자인 여자는 웬만큼 다 미쳐 있다',
     description: '질병과 낙인 너머, 여성 우울에 관한 가장 치열하고 다정한 탐구',
     backgroundStartColor: '#379FBF',
     backgroundEndColor: '#379FBF',
@@ -86,7 +86,7 @@ const banners = [
     href: 'https://article.womynarchive.com/review/ceai-womyn/',
   },
   {
-    subject: '와카이브 아티클 : 나 잡으려고 텔레그램 가입했어?',
+    subject: '와카이브 아티클: 나 잡으려고 텔레그램 가입했어?',
     title: '아직, 디지털 성범죄는 끝나지 않았다\n: 추적단 불꽃 2년 간의 추적기',
     description: '‘N번방·박사방’  텔레그램 성 착취 사건 이후 5년',
     backgroundStartColor: '#192970',
@@ -242,12 +242,18 @@ export default function CarouselBanner() {
 
                 {item?.description && (
                   <Typography
+                    className={item?.type === 'review' ? `review` : ''}
                     level="body-xs"
                     fontWeight="400"
                     textColor={item.color}
                     textAlign={item?.type === 'review' ? 'right' : 'left'}
                     sx={{
                       wordBreak: 'keep-all',
+                      '@media(max-width: 400px)': {
+                        '&.review': {
+                          display: 'none',
+                        },
+                      },
                     }}
                   >
                     {item.description}
