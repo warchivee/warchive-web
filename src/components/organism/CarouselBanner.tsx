@@ -15,7 +15,7 @@ import Banner from '@assets/banner/bookclub.png';
 import BannerPlay1 from '@assets/banner/mbti.png';
 import BannerPlay2 from '@assets/banner/test.png';
 
-import BannerReview1 from '@assets/banner/telegram.png';
+import BannerReview1 from '@assets/banner/mother.png';
 import BannerReview2 from '@assets/banner/crazy.png';
 import BannerReview3 from '@assets/banner/radish.png';
 
@@ -62,6 +62,19 @@ const banners = [
     href: 'https://play.womynarchive.com/womyn-character-test',
   },
   {
+    subject: '와카이브 아티클: 내 이름은 마더',
+    title: '내 딸 건드리면 그게 누구든 다 죽인다',
+    description:
+      '전직 특수 부대 저격수 출신 킬러가 돌아왔다, 오직 딸을 지키기 위해',
+    backgroundStartColor: '#360909',
+    backgroundEndColor: '#f0e6e400',
+    textBackgroundColor: '#360909',
+    color: 'white',
+    src: BannerReview1,
+    href: 'https://article.womynarchive.com/review/the-mother/',
+    type: 'review-movie',
+  },
+  {
     subject: '와카이브 아티클: RADish  8호',
     title: '세계 최전선의 래디컬 페미니즘 잡지, <RADish> 8호',
     description: '지금 이 순간, 우리에게 필요한 담론을 가장 날카롭게 제시하다!',
@@ -84,18 +97,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/ceai-womyn/',
-  },
-  {
-    subject: '와카이브 아티클: 나 잡으려고 텔레그램 가입했어?',
-    title: '아직, 디지털 성범죄는 끝나지 않았다\n: 추적단 불꽃 2년 간의 추적기',
-    description: '‘N번방·박사방’  텔레그램 성 착취 사건 이후 5년',
-    backgroundStartColor: '#192970',
-    backgroundEndColor: '#192970',
-    textBackgroundColor: '#192970',
-    color: 'white',
-    src: BannerReview1,
-    href: 'https://article.womynarchive.com/review/telegram/',
-    type: 'review',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
@@ -242,7 +243,7 @@ export default function CarouselBanner() {
 
                 {item?.description && (
                   <Typography
-                    className={item?.type === 'review' ? `review` : ''}
+                    className={item?.type?.includes('review') ? `review` : ''}
                     level="body-xs"
                     fontWeight="400"
                     textColor={item.color}
