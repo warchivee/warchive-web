@@ -274,6 +274,15 @@ export default function CarouselBanner() {
                       : `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 50%, ${item.backgroundEndColor} 75%,  transparent 100%), url(${item.src})`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right',
+                  '@media (max-width: 600px)': {
+                    background:
+                      item?.type === 'review'
+                        ? `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 100%)`
+                        : `linear-gradient(90deg, ${item.backgroundStartColor} 0%,  transparent 100%), url(${item.src})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: '0% center',
+                    backgroundSize: 'cover',
+                  },
                 }}
               />
 
