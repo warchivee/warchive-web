@@ -14,10 +14,10 @@ import Banner from '@assets/banner/bookclub.png';
 
 import BannerPlay1 from '@assets/banner/mbti.png';
 import BannerPlay2 from '@assets/banner/test.png';
+import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/mother.png';
 import BannerReview2 from '@assets/banner/crazy.png';
-import BannerReview3 from '@assets/banner/radish.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -39,6 +39,17 @@ const banners = [
     color: 'white',
     src: Banner,
     href: 'https://article.womynarchive.com/bookclub',
+  },
+  {
+    title: '2024 여성서사 등장인물 월드컵, 지금 개최!',
+    description:
+      '고르기 어려운 나의 최애, 당신의 원픽 여성서사 최애캐를 골라보세요',
+    backgroundStartColor: '#5C8001',
+    backgroundEndColor: '#BFD7AC1A',
+    textBackgroundColor: '#5C8001',
+    color: 'white',
+    src: BannerPlay3,
+    href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
     title: '제 1회 여성서사 고인물 모의고사, 난 몇 등급일까?',
@@ -85,18 +96,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/ceai-womyn/',
-  },
-  {
-    subject: '와카이브 아티클: RADish  8호',
-    title: '세계 최전선의 래디컬 페미니즘 잡지, <RADish> 8호',
-    description: '지금 이 순간, 우리에게 필요한 담론을 가장 날카롭게 제시하다!',
-    backgroundStartColor: '#53A751',
-    backgroundEndColor: '#53A751',
-    textBackgroundColor: '#53A751',
-    color: 'white',
-    src: BannerReview3,
-    href: 'https://article.womynarchive.com/review/radish-no8/',
-    type: 'review',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
@@ -269,7 +268,12 @@ export default function CarouselBanner() {
                 zIndex="2"
                 position="absolute"
                 sx={{
-                  background: `linear-gradient(90deg, ${item.backgroundStartColor} 30%, ${item.backgroundEndColor} 80%, ${item.backgroundEndColor} 100%)`,
+                  background:
+                    item?.type === 'review'
+                      ? `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 100%)`
+                      : `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 60%, transparent 100%), url(${item.src})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'right',
                 }}
               />
 
@@ -294,32 +298,7 @@ export default function CarouselBanner() {
                   }}
                 />
               ) : (
-                <Box
-                  width="380px"
-                  height="150px"
-                  borderRadius="20px"
-                  zIndex="1"
-                  sx={{
-                    background: `linear-gradient(
-                  to left, 
-                    rgba(255,255,255,0) 10%, 
-                    rgba(255,255,255,0.1) 50%,
-                    rgba(255,255,255,0.5) 85%,
-                    rgba(255,255,255,1) 100%),
-                    url(${item.src})`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'contain',
-                    '@media (max-width: 600px)': {
-                      marginLeft: '50px',
-                      background: `linear-gradient(
-                  to left, 
-                    rgba(255,255,255,0) 10%, 
-                    rgba(255,255,255,0.5) 50%,
-                    rgba(255,255,255,1) 100%),
-                    url(${item.src})`,
-                    },
-                  }}
-                />
+                <Box />
               )}
 
               <Box
