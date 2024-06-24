@@ -271,7 +271,7 @@ export default function CarouselBanner() {
                   background:
                     item?.type === 'review'
                       ? `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 100%)`
-                      : `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 60%, transparent 100%), url(${item.src})`,
+                      : `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 50%, ${item.backgroundEndColor} 75%,  transparent 100%), url(${item.src})`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right',
                 }}
