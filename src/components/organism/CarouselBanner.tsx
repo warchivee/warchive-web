@@ -44,8 +44,8 @@ const banners = [
     title: '2024 여성서사 등장인물 월드컵, 지금 개최!',
     description:
       '고르기 어려운 나의 최애, 당신의 원픽 여성서사 최애캐를 골라보세요',
-    backgroundStartColor: '#5C8001',
-    backgroundEndColor: '#BFD7AC1A',
+    backgroundStartColor: '#8BCC00',
+    backgroundEndColor: '#BFD7AC00',
     textBackgroundColor: '#5C8001',
     color: 'white',
     src: BannerPlay3,
