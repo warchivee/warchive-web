@@ -17,7 +17,7 @@ import BannerPlay2 from '@assets/banner/test.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/mother.png';
-import BannerReview2 from '@assets/banner/crazy.png';
+import BannerReview2 from '@assets/banner/disappear.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -73,6 +73,18 @@ const banners = [
     href: 'https://play.womynarchive.com/womyn-character-test',
   },
   {
+    subject: '와카이브 아티클: 사라지는 건 여자들뿐이거든요',
+    title: '여성 소설가 8인이 재현한 여성의 불안, 오싹한 고딕-스릴러',
+    description: '사라지는 것이 여자들뿐이어도, 우리는 사라지지 않을 것이다',
+    backgroundStartColor: '#771DAF',
+    backgroundEndColor: '#771DAF',
+    textBackgroundColor: '#771DAF',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/only-womyn-disappear',
+  },
+  {
     subject: '와카이브 아티클: 내 이름은 마더',
     title: '내 딸 건드리면 그게 누구든 다 죽인다',
     description:
@@ -84,18 +96,6 @@ const banners = [
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/the-mother/',
     type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클: 미쳐있고 괴상하며 오만하고 똑똑한 여자들',
-    title: '자기 삶의 저자인 여자는 웬만큼 다 미쳐 있다',
-    description: '질병과 낙인 너머, 여성 우울에 관한 가장 치열하고 다정한 탐구',
-    backgroundStartColor: '#379FBF',
-    backgroundEndColor: '#379FBF',
-    textBackgroundColor: '#379FBF',
-    color: 'white',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/ceai-womyn/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
