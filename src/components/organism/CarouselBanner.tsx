@@ -16,7 +16,7 @@ import BannerPlay1 from '@assets/banner/mbti.png';
 import BannerPlay2 from '@assets/banner/test.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
-import BannerReview1 from '@assets/banner/mother.png';
+import BannerReview1 from '@assets/banner/stop.png';
 import BannerReview2 from '@assets/banner/disappear.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -73,6 +73,19 @@ const banners = [
     href: 'https://play.womynarchive.com/womyn-character-test',
   },
   {
+    subject: '와카이브 아티클: 여성의당 피해자와 함께하는 교제폭력 정책간담회',
+    title: '“ 여성폭력의 종결을 위해 ”',
+    description:
+      '법의 사각지대에 놓인 교제폭력의 특수성과 제도의 문제점을 깊이 파고들자',
+    backgroundStartColor: '#7B1CA8',
+    backgroundEndColor: '#7B1CA800',
+    textBackgroundColor: '#7B1CA8',
+    color: 'white',
+    src: BannerReview1,
+    href: 'https://article.womynarchive.com/review/dating-violence-law/',
+    type: 'review-movie',
+  },
+  {
     subject: '와카이브 아티클: 사라지는 건 여자들뿐이거든요',
     title: '여성 소설가 8인이 재현한 여성의 불안, 오싹한 고딕-스릴러',
     description: '사라지는 것이 여자들뿐이어도, 우리는 사라지지 않을 것이다',
@@ -83,19 +96,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/only-womyn-disappear',
-  },
-  {
-    subject: '와카이브 아티클: 내 이름은 마더',
-    title: '내 딸 건드리면 그게 누구든 다 죽인다',
-    description:
-      '전직 특수 부대 저격수 출신 킬러가 돌아왔다, 오직 딸을 지키기 위해',
-    backgroundStartColor: '#360909',
-    backgroundEndColor: '#f0e6e400',
-    textBackgroundColor: '#360909',
-    color: 'white',
-    src: BannerReview1,
-    href: 'https://article.womynarchive.com/review/the-mother/',
-    type: 'review-movie',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
