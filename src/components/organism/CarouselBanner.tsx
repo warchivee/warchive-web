@@ -17,7 +17,7 @@ import BannerPlay2 from '@assets/banner/test.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/stop.png';
-import BannerReview2 from '@assets/banner/disappear.png';
+import BannerReview2 from '@assets/banner/letter.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -72,6 +72,19 @@ const banners = [
     src: BannerPlay1,
     href: 'https://play.womynarchive.com/womyn-character-test',
   },
+
+  {
+    subject: '와카이브 아티클: 우리 대화는 밤새도록 끝이 없지',
+    title: '예술을 고민하는 너에게 이 편지를 보내',
+    description: '예술을 사랑하는 여성에게 바치는 두 여성 창작가의 편지',
+    backgroundStartColor: '#313A4F',
+    backgroundEndColor: '#313A4F',
+    textBackgroundColor: '#313A4F',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/endless-night-talks/',
+  },
   {
     subject: '와카이브 아티클: 여성의당 피해자와 함께하는 교제폭력 정책간담회',
     title: '“ 여성폭력의 종결을 위해 ”',
@@ -84,18 +97,6 @@ const banners = [
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/dating-violence-law/',
     type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클: 사라지는 건 여자들뿐이거든요',
-    title: '여성 소설가 8인이 재현한 여성의 불안, 오싹한 고딕-스릴러',
-    description: '사라지는 것이 여자들뿐이어도, 우리는 사라지지 않을 것이다',
-    backgroundStartColor: '#771DAF',
-    backgroundEndColor: '#771DAF',
-    textBackgroundColor: '#771DAF',
-    color: 'white',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/only-womyn-disappear',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
