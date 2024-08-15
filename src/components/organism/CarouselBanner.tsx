@@ -16,7 +16,7 @@ import BannerPlay1 from '@assets/banner/mbti.png';
 import BannerPlay2 from '@assets/banner/test.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
-import BannerReview1 from '@assets/banner/stop.png';
+import BannerReview1 from '@assets/banner/findagirlfriend.png';
 import BannerReview2 from '@assets/banner/letter.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -72,7 +72,18 @@ const banners = [
     src: BannerPlay1,
     href: 'https://play.womynarchive.com/womyn-character-test',
   },
-
+  {
+    subject: '와카이브 아티클: 여친을 찾아서',
+    title: '우리를 위협하는 ‘여친’은 과연 누구인가?',
+    description: '여성캐릭터 4인의 사랑, 연대, 협력 그리고 성장',
+    backgroundStartColor: '#4E1B2D',
+    backgroundEndColor: '#FFBFDB00',
+    textBackgroundColor: '#4E1B2D',
+    color: 'white',
+    src: BannerReview1,
+    href: 'https://article.womynarchive.com/review/find-a-girlfriend/',
+    type: 'review-movie',
+  },
   {
     subject: '와카이브 아티클: 우리 대화는 밤새도록 끝이 없지',
     title: '예술을 고민하는 너에게 이 편지를 보내',
@@ -84,19 +95,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/endless-night-talks/',
-  },
-  {
-    subject: '와카이브 아티클: 여성의당 피해자와 함께하는 교제폭력 정책간담회',
-    title: '“ 여성폭력의 종결을 위해 ”',
-    description:
-      '법의 사각지대에 놓인 교제폭력의 특수성과 제도의 문제점을 깊이 파고들자',
-    backgroundStartColor: '#7B1CA8',
-    backgroundEndColor: '#7B1CA800',
-    textBackgroundColor: '#7B1CA8',
-    color: 'white',
-    src: BannerReview1,
-    href: 'https://article.womynarchive.com/review/dating-violence-law/',
-    type: 'review-movie',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
