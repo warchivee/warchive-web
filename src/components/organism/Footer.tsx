@@ -139,7 +139,7 @@ export default function Footer() {
               variant="soft"
               sx={{ borderRadius: '20px', gap: '5px' }}
               onClick={() => {
-                window.open('https://toss.me/warchive');
+                window.open('https://buymeacoffee.com/warchive');
               }}
             >
               <FontAwesomeIcon icon={faCoffee} />
