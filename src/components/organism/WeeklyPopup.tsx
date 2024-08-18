@@ -181,17 +181,6 @@ export default function WeeklyPopup() {
               <Card variant="soft">
                 <Stack>
                   <Stack direction="row" gap={0.5} alignItems="center">
-                    <FontAwesomeIcon icon={faBookOpen} />
-                    <Typography fontWeight="bold">데이터팀</Typography>
-                  </Stack>
-                  <Typography level="body-sm">- 데이터 수집 및 검수</Typography>
-                  <Typography level="body-sm">- 데이터 입력</Typography>
-                </Stack>
-              </Card>
-
-              <Card variant="soft">
-                <Stack>
-                  <Stack direction="row" gap={0.5} alignItems="center">
                     <FontAwesomeIcon icon={faPenNib} />
                     <Typography fontWeight="bold">리뷰팀</Typography>
                   </Stack>
@@ -206,7 +195,7 @@ export default function WeeklyPopup() {
                 variant="soft"
                 onClick={() => {
                   window.open(
-                    'https://womynarchive.notion.site/75138cd619284d739f16f474d100b81f',
+                    'https://heavenly-geese-701.notion.site/2bfd3e7b37f84dc6b1c291d94719e976',
                   );
                 }}
               >
