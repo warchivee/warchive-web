@@ -77,7 +77,7 @@ const banners = [
     title: '우리를 위협하는 ‘여친’은 과연 누구인가?',
     description: '여성캐릭터 4인의 사랑, 연대, 협력 그리고 성장',
     backgroundStartColor: '#4E1B2D',
-    backgroundEndColor: '#FFBFDB',
+    backgroundEndColor: '#FFBFDB00',
     textBackgroundColor: '#4E1B2D',
     color: 'white',
     src: BannerReview1,
