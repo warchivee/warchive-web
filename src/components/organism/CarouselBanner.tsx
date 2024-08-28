@@ -12,7 +12,7 @@ import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
 import Banner from '@assets/banner/bookclub.png';
 
-import BannerPlay1 from '@assets/banner/mbti.png';
+import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
 import BannerPlay2 from '@assets/banner/test.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
@@ -41,6 +41,16 @@ const banners = [
     href: 'https://article.womynarchive.com/bookclub',
   },
   {
+    title: '오싹한 탈출 게임, ‘캐롤린과 캐롤린’ 플레이',
+    description: '연구소를 지키는 살인경비로봇들로부터 탈출하라',
+    backgroundStartColor: '#031D2A',
+    backgroundEndColor: '#065169',
+    textBackgroundColor: '#031D2A',
+    color: 'white',
+    src: BannerPlay1,
+    href: 'https://zep.us/play/D6gb3K',
+  },
+  {
     title: '2024 여성서사 등장인물 월드컵, 지금 개최!',
     description:
       '고르기 어려운 나의 최애, 당신의 원픽 여성서사 최애캐를 골라보세요',
@@ -61,16 +71,6 @@ const banners = [
     color: 'white',
     src: BannerPlay2,
     href: 'https://play.womynarchive.com/master-mock-exam',
-  },
-  {
-    title: '여성서사 주인공 성향 테스트',
-    description: '내가 여성서사 작품에 들어간다면 누구일까?',
-    backgroundStartColor: '#170C1E',
-    backgroundEndColor: '#666666A6',
-    textBackgroundColor: '#170C1E',
-    color: 'white',
-    src: BannerPlay1,
-    href: 'https://play.womynarchive.com/womyn-character-test',
   },
   {
     subject: '와카이브 아티클: 여친을 찾아서',
