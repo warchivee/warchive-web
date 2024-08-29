@@ -17,7 +17,7 @@ import BannerPlay2 from '@assets/banner/test.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/findagirlfriend.png';
-import BannerReview2 from '@assets/banner/letter.png';
+import BannerReview2 from '@assets/banner/damsel.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -73,6 +73,18 @@ const banners = [
     href: 'https://play.womynarchive.com/master-mock-exam',
   },
   {
+    subject: '와카이브 아티클: 댐즐',
+    title: '용의 제물로 바쳐진 공주의 탈출기, ‘댐즐’',
+    description: '생존을 위해 투쟁하는 여성들에게 헌정하는 여성서사',
+    backgroundStartColor: '#B69542',
+    backgroundEndColor: '#FFB80000',
+    textBackgroundColor: '#B69542',
+    color: 'white',
+    src: BannerReview2,
+    href: 'https://article.womynarchive.com/review/damsel/',
+    type: 'review-movie',
+  },
+  {
     subject: '와카이브 아티클: 여친을 찾아서',
     title: '우리를 위협하는 ‘여친’은 과연 누구인가?',
     description: '여성캐릭터 4인의 사랑, 연대, 협력 그리고 성장',
@@ -83,18 +95,6 @@ const banners = [
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/find-a-girlfriend/',
     type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클: 우리 대화는 밤새도록 끝이 없지',
-    title: '예술을 고민하는 너에게 이 편지를 보내',
-    description: '예술을 사랑하는 여성에게 바치는 두 여성 창작가의 편지',
-    backgroundStartColor: '#313A4F',
-    backgroundEndColor: '#313A4F',
-    textBackgroundColor: '#313A4F',
-    color: 'white',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/endless-night-talks/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
