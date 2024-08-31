@@ -13,7 +13,7 @@ import { Box, IconButton, Stack, Typography } from '@mui/joy';
 import Banner from '@assets/banner/bookclub.png';
 
 import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
-import BannerPlay2 from '@assets/banner/test.png';
+import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/findagirlfriend.png';
@@ -29,6 +29,17 @@ function calculatePercentage(part: number, whole: number) {
 }
 
 const banners = [
+  {
+    title: '자유로움을 패션에 담다 : NO MORE CORSET',
+    description:
+      '탈코 후 옷입기가 고민이라면? 다양한 개성을 담아낸 탈코 룩북이 딱!',
+    backgroundStartColor: '#9A7A68',
+    backgroundEndColor: '#C7AD9E00',
+    textBackgroundColor: '#9A7A68',
+    color: 'white',
+    src: BannerPlay2,
+    href: 'https://nomore-corset.womynarchive.com/',
+  },
   {
     title: '익명의 독서모임, 와카이브 북클럽 OPEN',
     description:
@@ -60,17 +71,6 @@ const banners = [
     color: 'white',
     src: BannerPlay3,
     href: 'https://play.womynarchive.com/character-worldcup',
-  },
-  {
-    title: '제 1회 여성서사 고인물 모의고사, 난 몇 등급일까?',
-    description:
-      '여성서사를 사랑하는 당신! 내 사랑을 한 번 확인해볼까요? 와카이브 공식 인증서로 당당한 고인물이 되어보세요.',
-    backgroundStartColor: '#60492E',
-    backgroundEndColor: '#E2DBD5A6',
-    textBackgroundColor: '#60492E',
-    color: 'white',
-    src: BannerPlay2,
-    href: 'https://play.womynarchive.com/master-mock-exam',
   },
   {
     subject: '와카이브 아티클: 댐즐',
