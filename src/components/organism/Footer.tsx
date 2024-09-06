@@ -33,7 +33,7 @@ export default function Footer() {
                     team.warchive@gmail.com
                   </Typography>
                   <a
-                    href="https://womynarchive.notion.site/ae89f36ef66b498a80e5b5dca798cc9a?pvs=4"
+                    href="https://heavenly-geese-701.notion.site/6a78f7624f1d47e1b8edbc4030b18a1f?pvs=4"
                     target="_blank"
                     rel="noreferrer"
                   >
