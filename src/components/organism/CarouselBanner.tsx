@@ -16,7 +16,7 @@ import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
-import BannerReview1 from '@assets/banner/findagirlfriend.png';
+import BannerReview1 from '@assets/banner/writersbestfriend.png';
 import BannerReview2 from '@assets/banner/damsel.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -73,6 +73,19 @@ const banners = [
     href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
+    subject: '와카이브 아티클: 글 쓰는 여자들의 특별한 친구',
+    title: '세상을 함께 바꾸어내는 여자들의 문학적 우정',
+    description:
+      '버지니아 울프, 한나 아렌트,  위대한 여성의 특별한 친구에 대해',
+    backgroundStartColor: '#FFA617',
+    backgroundEndColor: '#FFA617',
+    textBackgroundColor: '#FFA617',
+    color: 'white',
+    src: BannerReview1,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/writers-best-friend/',
+  },
+  {
     subject: '와카이브 아티클: 댐즐',
     title: '용의 제물로 바쳐진 공주의 탈출기, ‘댐즐’',
     description: '생존을 위해 투쟁하는 여성들에게 헌정하는 여성서사',
@@ -82,18 +95,6 @@ const banners = [
     color: 'white',
     src: BannerReview2,
     href: 'https://article.womynarchive.com/review/damsel/',
-    type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클: 여친을 찾아서',
-    title: '우리를 위협하는 ‘여친’은 과연 누구인가?',
-    description: '여성캐릭터 4인의 사랑, 연대, 협력 그리고 성장',
-    backgroundStartColor: '#4E1B2D',
-    backgroundEndColor: '#FFBFDB00',
-    textBackgroundColor: '#4E1B2D',
-    color: 'white',
-    src: BannerReview1,
-    href: 'https://article.womynarchive.com/review/find-a-girlfriend/',
     type: 'review-movie',
   },
   {
