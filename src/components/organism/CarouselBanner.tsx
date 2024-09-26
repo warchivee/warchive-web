@@ -79,7 +79,7 @@ const banners = [
     backgroundStartColor: '#FAECAC',
     backgroundEndColor: '#FFFEDF00',
     textBackgroundColor: '#FAECAC',
-    color: 'white',
+    color: 'black',
     src: BannerReview2,
     href: 'https://article.womynarchive.com/review/unnatural/',
     type: 'review-movie',
