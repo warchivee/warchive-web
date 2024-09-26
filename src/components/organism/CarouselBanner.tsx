@@ -17,7 +17,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/writersbestfriend.png';
-import BannerReview2 from '@assets/banner/damsel.png';
+import BannerReview2 from '@assets/banner/unnatural.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -73,7 +73,19 @@ const banners = [
     href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
-    subject: '와카이브 아티클: 글 쓰는 여자들의 특별한 친구',
+    subject: '와카이브 아티클 : 언내추럴',
+    title: '레몬향과 함께 퍼지는 따스한 위로, 언내추럴',
+    description: '부조리한 세상을 바꾸어 나가는 올곧은 진심',
+    backgroundStartColor: '#FAECAC',
+    backgroundEndColor: '#FFFEDF00',
+    textBackgroundColor: '#FAECAC',
+    color: 'white',
+    src: BannerReview2,
+    href: 'https://article.womynarchive.com/review/unnatural/',
+    type: 'review-movie',
+  },
+  {
+    subject: '와카이브 아티클 : 글 쓰는 여자들의 특별한 친구',
     title: '세상을 함께 바꾸어내는 여자들의 문학적 우정',
     description:
       '버지니아 울프, 한나 아렌트,  위대한 여성의 특별한 친구에 대해',
@@ -84,18 +96,6 @@ const banners = [
     src: BannerReview1,
     type: 'review',
     href: 'https://article.womynarchive.com/review/writers-best-friend/',
-  },
-  {
-    subject: '와카이브 아티클: 댐즐',
-    title: '용의 제물로 바쳐진 공주의 탈출기, ‘댐즐’',
-    description: '생존을 위해 투쟁하는 여성들에게 헌정하는 여성서사',
-    backgroundStartColor: '#B69542',
-    backgroundEndColor: '#FFB80000',
-    textBackgroundColor: '#B69542',
-    color: 'white',
-    src: BannerReview2,
-    href: 'https://article.womynarchive.com/review/damsel/',
-    type: 'review-movie',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
