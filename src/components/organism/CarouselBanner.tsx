@@ -75,7 +75,7 @@ const banners = [
   {
     subject: '와카이브 아티클 : 정년이',
     title: '시대를 초월한 기념비적인 여성서사, 정년이',
-    description: '2024 년, 다시 펼쳐지는 여성들의 무대',
+    description: '2024년, 다시 펼쳐지는 여성들의 무대',
     backgroundStartColor: '#6B5A3E',
     backgroundEndColor: '#6C5A4200',
     textBackgroundColor: '#6B5A3E',
