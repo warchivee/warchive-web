@@ -16,7 +16,7 @@ import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
-import BannerReview1 from '@assets/banner/writersbestfriend.png';
+import BannerReview1 from '@assets/banner/jeongnyeon.png';
 import BannerReview2 from '@assets/banner/unnatural.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -73,6 +73,18 @@ const banners = [
     href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
+    subject: '와카이브 아티클 : 정년이',
+    title: '시대를 초월한 기념비적인 여성서사, 정년이',
+    description: '2024년, 다시 펼쳐지는 여성들의 무대',
+    backgroundStartColor: '#6B5A3E',
+    backgroundEndColor: '#6C5A4200',
+    textBackgroundColor: '#6B5A3E',
+    color: 'white',
+    src: BannerReview1,
+    href: 'https://article.womynarchive.com/review/jeongnyeon/',
+    type: 'review-movie',
+  },
+  {
     subject: '와카이브 아티클 : 언내추럴',
     title: '레몬향과 함께 퍼지는 따스한 위로, 언내추럴',
     description: '부조리한 세상을 바꾸어 나가는 올곧은 진심',
@@ -83,19 +95,6 @@ const banners = [
     src: BannerReview2,
     href: 'https://article.womynarchive.com/review/unnatural/',
     type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클 : 글 쓰는 여자들의 특별한 친구',
-    title: '세상을 함께 바꾸어내는 여자들의 문학적 우정',
-    description:
-      '버지니아 울프, 한나 아렌트,  위대한 여성의 특별한 친구에 대해',
-    backgroundStartColor: '#FFA617',
-    backgroundEndColor: '#FFA617',
-    textBackgroundColor: '#FFA617',
-    color: 'white',
-    src: BannerReview1,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/writers-best-friend/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
