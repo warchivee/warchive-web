@@ -17,7 +17,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/jeongnyeon.png';
-import BannerReview2 from '@assets/banner/unnatural.png';
+import BannerReview2 from '@assets/banner/masterpiecesofmisogyny.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -73,6 +73,18 @@ const banners = [
     href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
+    subject: '와카이브 아티클 : 여자를 모욕하는 걸작들',
+    title: '여성을 모욕하며 쌓아올린 ‘걸작’에 이별을 고하다',
+    description: '여성의 관점으로 ‘고전’과 ‘걸작’을 재조명하다',
+    backgroundStartColor: '#379FBF',
+    backgroundEndColor: '#379FBF',
+    textBackgroundColor: '#379FBF',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/masterpieces-of-misogyny/',
+  },
+  {
     subject: '와카이브 아티클 : 정년이',
     title: '시대를 초월한 기념비적인 여성서사, 정년이',
     description: '2024년, 다시 펼쳐지는 여성들의 무대',
@@ -82,18 +94,6 @@ const banners = [
     color: 'white',
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/jeongnyeon/',
-    type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클 : 언내추럴',
-    title: '레몬향과 함께 퍼지는 따스한 위로, 언내추럴',
-    description: '부조리한 세상을 바꾸어 나가는 올곧은 진심',
-    backgroundStartColor: '#FAECAC',
-    backgroundEndColor: '#FFFEDF00',
-    textBackgroundColor: '#FAECAC',
-    color: 'black',
-    src: BannerReview2,
-    href: 'https://article.womynarchive.com/review/unnatural/',
     type: 'review-movie',
   },
   {
