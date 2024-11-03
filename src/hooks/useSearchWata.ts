@@ -57,9 +57,10 @@ const useSearchWata = () => {
         pass.genres = genres?.some((g) => wata.genre.id === g.id);
       }
 
+      // category - platform 구조 변경으로 id가 아닌 name 으로 조회
       if (platforms && platforms.length !== 0) {
-        const platformIds = new Set(platforms?.map((p) => p.id));
-        pass.platforms = wata.platforms?.some((wp) => platformIds.has(wp.id));
+        const platformIds = new Set(platforms?.map((p) => p.name));
+        pass.platforms = wata.platforms?.some((wp) => platformIds.has(wp.name));
       }
 
       if (keywords && keywords.length !== 0) {

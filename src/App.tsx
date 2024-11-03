@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import LoginRoute from 'src/routes/LoginRoute';
-import PermissionRoute from 'src/routes/PermissionRoute';
 
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
@@ -59,9 +58,7 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
 
           <Route element={<LoginRoute />}>
-            <Route element={<PermissionRoute access="USER" />}>
-              <Route path="/scrapbooks" element={<UserScrapbooks />} />
-            </Route>
+            <Route path="/scrapbooks" element={<UserScrapbooks />} />
           </Route>
         </Route>
       </Routes>
