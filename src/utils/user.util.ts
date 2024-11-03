@@ -26,16 +26,6 @@ const userUtil = {
     }
   },
 
-  isAdmin: (): boolean => {
-    try {
-      const user = userUtil.get();
-
-      return user?.role === 'ADMIN';
-    } catch (error) {
-      return false;
-    }
-  },
-
   remove: () => {
     localStorageUtil.remove(LS_USER_KEY);
   },

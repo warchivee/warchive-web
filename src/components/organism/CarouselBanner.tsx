@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
 
 import React, { useState } from 'react';
 import Slider from 'react-slick';

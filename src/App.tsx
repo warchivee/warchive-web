@@ -28,9 +28,6 @@ const UserHome = lazy(() => import('@pages/Home'));
 const UserScrapbooks = lazy(() => import('@pages/Scrapbooks'));
 const UserScrapbookShare = lazy(() => import('@pages/ScrapbooksShare'));
 
-const AdminLayout = lazy(() => import('src/layouts/AdminLayout'));
-const AdminHome = lazy(() => import('@pages/AdminHome'));
-
 const About = lazy(() => import('@pages/About'));
 const TermsOfServicePage = lazy(() => import('@pages/TermsOfUsePage'));
 const PrivacyPolicyPage = lazy(() => import('@pages/PrivacyPolicyPage'));
@@ -64,11 +61,6 @@ function App() {
           <Route element={<LoginRoute />}>
             <Route element={<PermissionRoute access="USER" />}>
               <Route path="/scrapbooks" element={<UserScrapbooks />} />
-            </Route>
-            <Route element={<PermissionRoute access="ADMIN" />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<AdminHome />} />
-              </Route>
             </Route>
           </Route>
         </Route>

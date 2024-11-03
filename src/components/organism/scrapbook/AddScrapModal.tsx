@@ -70,7 +70,6 @@ export default function AddScrapbookModal({ isOpen, onClose }: ModalProps) {
       });
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (

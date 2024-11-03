@@ -2,16 +2,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { cloneElement, startTransition, useState } from 'react';
 import { checkLogin, logout } from 'src/services/auth.api';
 import { Text, Title } from '@components/CommonComponents/text';
-import userUtil from '@utils/user.util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
   faBookBookmark,
   faCircleQuestion,
   faEnvelope,
-  faHammer,
   faUser,
-  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser as faUserSolid } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -318,28 +315,10 @@ export default function Header() {
     },
   ];
 
-  const adminMenus: MenuInfo[] = [
-    ...userMenus,
-    {
-      label: '관리자',
-      icon: <FontAwesomeIcon icon={faHammer} />,
-      path: '/admin',
-      callback: () => {
-        navigate('/admin');
-      },
-    },
-  ];
-
   return (
     <header>
-      <PCHeader
-        isLogin={checkLogin()}
-        menus={userUtil.isAdmin() ? adminMenus : userMenus}
-      />
-      <MobileHeader
-        isLogin={checkLogin()}
-        menus={userUtil.isAdmin() ? adminMenus : userMenus}
-      />
+      <PCHeader isLogin={checkLogin()} menus={userMenus} />
+      <MobileHeader isLogin={checkLogin()} menus={userMenus} />
 
       <MailModal open={openMail} onClose={() => setOpenMail(false)} />
     </header>

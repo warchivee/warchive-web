@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react';
-
 // components
 import WataScrapbookList from '@components/organism/scrapbook/ScrapList';
 import ShareScrapbookButtons from '@components/organism/scrapbook/ShareScrapbookButtons';
 import ScrapbookHeader from '@components/organism/scrapbook/ScrapbookHeader';
-import { PageLoader } from '@components/CommonComponents/loader';
 import ScrapbookMenu from '@components/organism/scrapbook/ScrapbooksMenu';
 
 // joy components
