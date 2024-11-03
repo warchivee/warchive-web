@@ -14,12 +14,7 @@ import {
 
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBookOpen,
-  faBullhorn,
-  faPalette,
-  faPenNib,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBullhorn, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 
 // utils
@@ -177,7 +172,6 @@ export default function WeeklyPopup() {
                   <Typography level="body-sm">- SNS 홍보물 제작</Typography>
                 </Stack>
               </Card>
-
             </Stack>
             <Stack>
               <Button

@@ -86,7 +86,7 @@ export default function Footer() {
                   </Typography>
                 </Link>
 
-                {userUtil.exist() && !userUtil.isAdmin() && (
+                {userUtil.exist() && (
                   <>
                     <Typography level="body-xs" textColor="text.tertiary">
                       |

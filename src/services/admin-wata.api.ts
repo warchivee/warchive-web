@@ -1,4 +1,3 @@
-import { DropdownOption } from '@components/organism/admin/AdminMultiDropdown';
 import { getData, patchData, postData } from '@utils/api.util';
 import ModalUtil from '@utils/modal.util';
 import { AxiosError } from 'axios';
@@ -10,39 +9,6 @@ export interface WataThumbnailCropAreaType {
   x: number;
   y: number;
 }
-
-export const labelOptions: DropdownOption[] = [
-  {
-    name: '검수전',
-    id: 'NEED_CHECK',
-    color: 'athens-gray',
-  },
-  {
-    name: '검수중',
-    id: 'CHECKING',
-    color: 'cream-brulee',
-  },
-  {
-    name: '검수완료',
-    id: 'CHECKED',
-    color: 'french-lilac',
-  },
-  {
-    name: '보류',
-    id: 'HOLD',
-    color: 'botticelli',
-  },
-  {
-    name: '컨택필요',
-    id: 'NEED_CONTACT',
-    color: 'tropical-blue',
-  },
-  {
-    name: '탈락',
-    id: 'CENSOR',
-    color: 'your-pink',
-  },
-];
 
 export interface ApiGetResult<T> {
   total_count: number;

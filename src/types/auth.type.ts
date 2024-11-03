@@ -20,8 +20,7 @@ export interface LoginResult {
   user: User;
 }
 
-export type Permissiontype = 'ADMIN' | 'USER';
+export type Permissiontype = 'USER';
 export const permissionLevel = {
-  ADMIN: 2,
   USER: 1,
 };

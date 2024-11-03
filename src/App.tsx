@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import LoginRoute from 'src/routes/LoginRoute';
-import PermissionRoute from 'src/routes/PermissionRoute';
 
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
@@ -27,9 +26,6 @@ const LoginRedirect = lazy(() => import('@pages/LoginRedirect'));
 const UserHome = lazy(() => import('@pages/Home'));
 const UserScrapbooks = lazy(() => import('@pages/Scrapbooks'));
 const UserScrapbookShare = lazy(() => import('@pages/ScrapbooksShare'));
-
-const AdminLayout = lazy(() => import('src/layouts/AdminLayout'));
-const AdminHome = lazy(() => import('@pages/AdminHome'));
 
 const About = lazy(() => import('@pages/About'));
 const TermsOfServicePage = lazy(() => import('@pages/TermsOfUsePage'));
@@ -62,14 +58,7 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
 
           <Route element={<LoginRoute />}>
-            <Route element={<PermissionRoute access="USER" />}>
-              <Route path="/scrapbooks" element={<UserScrapbooks />} />
-            </Route>
-            <Route element={<PermissionRoute access="ADMIN" />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<AdminHome />} />
-              </Route>
-            </Route>
+            <Route path="/scrapbooks" element={<UserScrapbooks />} />
           </Route>
         </Route>
       </Routes>
