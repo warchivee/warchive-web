@@ -40,17 +40,6 @@ const banners = [
     href: 'https://nomore-corset.womynarchive.com/',
   },
   {
-    title: '익명의 독서모임, 와카이브 북클럽 OPEN',
-    description:
-      '독서 모임은 부담스럽고, 블로그 개설은 귀찮지만 감상은 나누고 싶은 당신을 위해',
-    backgroundStartColor: '#D737C8',
-    backgroundEndColor: '#BC28AE33',
-    textBackgroundColor: '#D737C8',
-    color: 'white',
-    src: Banner,
-    href: 'https://article.womynarchive.com/bookclub',
-  },
-  {
     title: '오싹한 탈출 게임, ‘캐롤린과 캐롤린’ 플레이',
     description: '연구소를 지키는 살인경비로봇들로부터 탈출하라',
     backgroundStartColor: '#031D2A',
