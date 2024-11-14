@@ -15,7 +15,7 @@ import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
-import BannerReview1 from '@assets/banner/jeongnyeon.png';
+import BannerReview1 from '@assets/banner/sylvialive.png';
 import BannerReview2 from '@assets/banner/masterpiecesofmisogyny.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -61,6 +61,18 @@ const banners = [
     href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
+    subject: '와카이브 아티클 : 실비아, 살다',
+    title: '살기 위해 죽어야 했던 실비아',
+    description: '억압을 벗어나 온전한 나로 살아가기 위해 ',
+    backgroundStartColor: '#AF2A23',
+    backgroundEndColor: '#AC221F24',
+    textBackgroundColor: '#AF2A23',
+    color: 'white',
+    src: BannerReview1,
+    href: 'https://article.womynarchive.com/review/sylvia-live/',
+    type: 'review-movie',
+  },
+  {
     subject: '와카이브 아티클 : 여자를 모욕하는 걸작들',
     title: '여성을 모욕하며 쌓아올린 ‘걸작’에 이별을 고하다',
     description: '여성의 관점으로 ‘고전’과 ‘걸작’을 재조명하다',
@@ -71,18 +83,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/masterpieces-of-misogyny/',
-  },
-  {
-    subject: '와카이브 아티클 : 정년이',
-    title: '시대를 초월한 기념비적인 여성서사, 정년이',
-    description: '2024년, 다시 펼쳐지는 여성들의 무대',
-    backgroundStartColor: '#6B5A3E',
-    backgroundEndColor: '#6C5A4200',
-    textBackgroundColor: '#6B5A3E',
-    color: 'white',
-    src: BannerReview1,
-    href: 'https://article.womynarchive.com/review/jeongnyeon/',
-    type: 'review-movie',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
