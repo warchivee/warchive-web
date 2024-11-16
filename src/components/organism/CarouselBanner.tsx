@@ -9,7 +9,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
-import Banner from '@assets/banner/bookclub.png';
+import Banner from '@assets/banner/RiU.png';
 
 import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
@@ -28,6 +28,17 @@ function calculatePercentage(part: number, whole: number) {
 }
 
 const banners = [
+  {
+    title: '대학 내 래디컬의 계보 기록 프로젝트',
+    description:
+      '한국 여성주의 운동의 순간이 사라지지 않도록 , 뜨거운 활동의 순간을 보존하다',
+    backgroundStartColor: '#482091',
+    backgroundEndColor: '#FFFFFF00',
+    textBackgroundColor: '#482091',
+    color: 'white',
+    src: Banner,
+    href: 'https://article.womynarchive.com/Radicals-in-University',
+  },
   {
     title: '자유로움을 패션에 담다 : NO MORE CORSET',
     description:
