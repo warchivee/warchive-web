@@ -38,7 +38,11 @@ export default function SelectKeywordList({
         }}
       >
         {keywords
-          ?.sort((a, b) => {
+          ?.filter(
+            (keyword, index, self) =>
+              self.findIndex((k) => k.name === keyword.name) === index, // 키워드 중복 제거
+          )
+          .sort((a, b) => {
             const aOrderTop = a?.order_top ?? false;
             const bOrderTop = b?.order_top ?? false;
 
