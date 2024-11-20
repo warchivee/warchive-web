@@ -21,7 +21,11 @@ export default function PlatformChip({ platform }: { platform: PlatformType }) {
       }}
       slotProps={{
         action: isNaverPlatform
-          ? { component: 'a', href: '' }
+          ? {
+              component: 'a',
+              href: '',
+              onClick: (e: React.MouseEvent) => e.preventDefault(),
+            }
           : { component: 'a', href: platform.url, target: '_blank' },
       }}
     >
