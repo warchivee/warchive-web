@@ -12,13 +12,7 @@ export default function PlatformChip({ platform }: { platform: PlatformType }) {
       size="sm"
       variant="outlined"
       color="neutral"
-      sx={{
-        height: 'max-content',
-        '& a': {
-          backgroundColor: 'transparent',
-          pointerEvents: isNaverPlatform ? 'none' : 'auto',
-        },
-      }}
+      sx={{ height: 'max-content', '& a': { backgroundColor: 'transparent' } }}
       slotProps={{
         action: isNaverPlatform
           ? undefined
