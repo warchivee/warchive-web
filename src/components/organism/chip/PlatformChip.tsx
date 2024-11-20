@@ -15,7 +15,7 @@ export default function PlatformChip({ platform }: { platform: PlatformType }) {
       sx={{ height: 'max-content', '& a': { backgroundColor: 'transparent' } }}
       slotProps={{
         action: isNaverPlatform
-          ? undefined
+          ? { component: 'p' }
           : { component: 'a', href: platform.url, target: '_blank' },
       }}
     >
