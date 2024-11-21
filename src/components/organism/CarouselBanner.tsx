@@ -16,7 +16,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/sylvialive.png';
-import BannerReview2 from '@assets/banner/masterpiecesofmisogyny.png';
+import BannerReview2 from '@assets/banner/portraitofaladyonfire.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -72,6 +72,18 @@ const banners = [
     href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
+    subject: '와카이브 아티클 : 타오르는 여인의 초상',
+    title: '시대의 틈에서 타오르는 사랑을 품고 살았던 여성들',
+    description: '여성만이 존재하는 세계 속 여성의 관계와 사랑 ',
+    backgroundStartColor: '#378C93',
+    backgroundEndColor: '#378C9300',
+    textBackgroundColor: '#378C93',
+    color: 'white',
+    src: BannerReview2,
+    href: 'https://article.womynarchive.com/review/portrait-of-a-lady-on-fire/',
+    type: 'review-movie',
+  },
+  {
     subject: '와카이브 아티클 : 실비아, 살다',
     title: '살기 위해 죽어야 했던 실비아',
     description: '억압을 벗어나 온전한 나로 살아가기 위해 ',
@@ -82,18 +94,6 @@ const banners = [
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/sylvia-live/',
     type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클 : 여자를 모욕하는 걸작들',
-    title: '여성을 모욕하며 쌓아올린 ‘걸작’에 이별을 고하다',
-    description: '여성의 관점으로 ‘고전’과 ‘걸작’을 재조명하다',
-    backgroundStartColor: '#379FBF',
-    backgroundEndColor: '#379FBF',
-    textBackgroundColor: '#379FBF',
-    color: 'white',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/masterpieces-of-misogyny/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
