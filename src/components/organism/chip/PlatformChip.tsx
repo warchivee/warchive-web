@@ -5,7 +5,7 @@ import { Chip } from '@mui/joy';
 import { PlatformType } from 'src/types/wata.type';
 
 export default function PlatformChip({ platform }: { platform: PlatformType }) {
-  const isNaverPlatform = platform.name.includes('네이버');
+  const isNaverPlatform = platform.name.includes('네이버'); // 네이버 불매 이슈로 안 보이도록 처리함.
 
   return (
     <Chip

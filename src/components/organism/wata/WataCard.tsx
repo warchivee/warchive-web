@@ -144,6 +144,11 @@ export default function WataCard({ wata }: { wata: WataType }) {
             },
           }}
         >
+          {(!wata?.platforms || wata?.platforms?.length <= 0) && (
+            <Typography level="body-xs" textColor="white">
+              서비스하는 곳 없음
+            </Typography>
+          )}
           {wata?.platforms?.map((platform: PlatformType) => (
             <PlatformChip
               key={`wata-card-${wata.id}-platform-${platform.id}`}

@@ -51,7 +51,6 @@ export default function SelectKeywordList({
 
             return a.name.localeCompare(b.name, 'ko');
           })
-          ?.filter((k) => k.name !== '플랫폼없음')
           ?.map((keyword) => (
             <Grid key={`select-keyword-${keyword.id}`} xs={12} sm={6} md={6}>
               <SelectKeywordChip
