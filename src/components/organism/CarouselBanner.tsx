@@ -15,7 +15,7 @@ import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
-import BannerReview1 from '@assets/banner/sylvialive.png';
+import BannerReview1 from '@assets/banner/yujinandyujin.png';
 import BannerReview2 from '@assets/banner/portraitofaladyonfire.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -72,6 +72,18 @@ const banners = [
     href: 'https://play.womynarchive.com/character-worldcup',
   },
   {
+    subject: '와카이브 아티클 : 유진과 유진',
+    title: '너와 나, 우리는 함께 나아갈 수 있어',
+    description: '비슷한 상처를 지닌 두 유진이 건네는 희망의 메시지',
+    backgroundStartColor: '#487138',
+    backgroundEndColor: '#48713824',
+    textBackgroundColor: '#487138',
+    color: 'white',
+    src: BannerReview1,
+    href: 'https://article.womynarchive.com/review/yujin-and-yujin/',
+    type: 'review-movie',
+  },
+  {
     subject: '와카이브 아티클 : 타오르는 여인의 초상',
     title: '시대의 틈에서 타오르는 사랑을 품고 살았던 여성들',
     description: '여성만이 존재하는 세계 속 여성의 관계와 사랑 ',
@@ -81,18 +93,6 @@ const banners = [
     color: 'white',
     src: BannerReview2,
     href: 'https://article.womynarchive.com/review/portrait-of-a-lady-on-fire/',
-    type: 'review-movie',
-  },
-  {
-    subject: '와카이브 아티클 : 실비아, 살다',
-    title: '살기 위해 죽어야 했던 실비아',
-    description: '억압을 벗어나 온전한 나로 살아가기 위해 ',
-    backgroundStartColor: '#AF2A23',
-    backgroundEndColor: '#AC221F24',
-    textBackgroundColor: '#AF2A23',
-    color: 'white',
-    src: BannerReview1,
-    href: 'https://article.womynarchive.com/review/sylvia-live/',
     type: 'review-movie',
   },
   {
