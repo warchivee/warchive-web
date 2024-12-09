@@ -11,7 +11,7 @@ import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
 import Banner from '@assets/banner/RiU.png';
 
-import BannerPlay1 from '@assets/banner/carolineandcaroline.png';
+import BannerPlay1 from '@assets/banner/award.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
@@ -28,6 +28,16 @@ function calculatePercentage(part: number, whole: number) {
 }
 
 const banners = [
+  {
+    title: '2024 여성서사 베스트 콤비 어워드 개최!',
+    description: '올해 여러분의 마음을 울린 최고의 여성 듀오는 누구인가요?',
+    backgroundStartColor: '#DEB500',
+    backgroundEndColor: '#DEB500',
+    textBackgroundColor: '#DEB500',
+    color: 'white',
+    src: BannerPlay1,
+    href: 'https://play.womynarchive.com/best-duo-award-2024',
+  },
   {
     title: '대학 내 래디컬의 계보 기록 프로젝트',
     description:
@@ -49,16 +59,6 @@ const banners = [
     color: 'white',
     src: BannerPlay2,
     href: 'https://nomore-corset.womynarchive.com/',
-  },
-  {
-    title: '오싹한 탈출 게임, ‘캐롤린과 캐롤린’ 플레이',
-    description: '연구소를 지키는 살인경비로봇들로부터 탈출하라',
-    backgroundStartColor: '#031D2A',
-    backgroundEndColor: '#06516900',
-    textBackgroundColor: '#031D2A',
-    color: 'white',
-    src: BannerPlay1,
-    href: 'https://zep.us/play/D6gb3K',
   },
   {
     title: '2024 여성서사 등장인물 월드컵, 지금 개최!',
