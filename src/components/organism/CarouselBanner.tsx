@@ -32,7 +32,7 @@ const banners = [
     title: '2024 여성서사 베스트 콤비 어워드 개최!',
     description: '올해 여러분의 마음을 울린 최고의 여성 듀오는 누구인가요?',
     backgroundStartColor: '#DEB500',
-    backgroundEndColor: '#DEB500',
+    backgroundEndColor: '#DEB50000',
     textBackgroundColor: '#DEB500',
     color: 'white',
     src: BannerPlay1,
