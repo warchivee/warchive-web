@@ -88,6 +88,9 @@ export const getData = async <T>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params?: any,
 ): Promise<T> => {
+  // TEST : 서버 없이 배너 테스트 시 주석 해제해주세요.
+  // return true;
+
   let queryString = '';
   if (params) {
     queryString += '?';

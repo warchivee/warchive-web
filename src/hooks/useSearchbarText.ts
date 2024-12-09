@@ -16,7 +16,7 @@ const useSearchbarText = () => {
     const randomElement = watas[randomIndex];
 
     setSearchText(
-      `${randomElement.title}, 어디서 ${randomElement.category.name === '게임' ? '할 수 있지?' : '볼 수 있지?'}`,
+      `${randomElement?.title}, 어디서 ${randomElement?.category?.name === '게임' ? '할 수 있지?' : '볼 수 있지?'}`,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

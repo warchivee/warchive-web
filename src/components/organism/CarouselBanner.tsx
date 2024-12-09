@@ -27,16 +27,55 @@ function calculatePercentage(part: number, whole: number) {
   return (part / whole) * 100;
 }
 
+const bannerStyle: Record<string, any> = {
+  normal: {
+    direction: 'row',
+    textAlign: 'left',
+    description: true,
+    bgGradient: true,
+    imgType: 'gradientImg',
+  },
+  normalFlat: {
+    direction: 'row',
+    textAlign: 'left',
+    description: true,
+    bgGradient: false,
+    imgType: 'img',
+  },
+  normalReview: {
+    direction: 'row',
+    textAlign: 'left',
+    description: false,
+    bgGradient: true,
+    imgType: 'gradientImg',
+  },
+  review: {
+    direction: 'row-reverse',
+    textAlign: 'right',
+    description: false,
+    bgGradient: false,
+    imgType: 'mock',
+  },
+};
+
+/**
+ * Type 설명
+ * 일반 배너 : mormal (그라데이션 배경에 글이 왼쪽에 있는 배너)
+ * 단색 배경에 일반 배너 : normalFLat (단색 배경에 글이 왼쪽에 있는 배너)
+ * 리뷰 배너 : review (책 목업 이미지가 왼쪽에 있는 단색 배경의 배너)
+ * 리뷰 배너인데 일반 배너와 형태가 같음 : normalReview (리뷰인데 일반 배너와 같은 형태)
+ */
 const banners = [
   {
     title: '2024 여성서사 베스트 콤비 어워드 개최!',
     description: '올해 여러분의 마음을 울린 최고의 여성 듀오는 누구인가요?',
     backgroundStartColor: '#DEB500',
-    backgroundEndColor: '#DEB50000',
+    backgroundEndColor: '#DEB500',
     textBackgroundColor: '#DEB500',
     color: 'white',
     src: BannerPlay1,
     href: 'https://play.womynarchive.com/best-duo-award-2024',
+    type: 'normalFlat',
   },
   {
     title: '대학 내 래디컬의 계보 기록 프로젝트',
@@ -48,6 +87,7 @@ const banners = [
     color: 'white',
     src: Banner,
     href: 'https://article.womynarchive.com/Radicals-in-University',
+    type: 'normal',
   },
   {
     title: '자유로움을 패션에 담다 : NO MORE CORSET',
@@ -59,6 +99,7 @@ const banners = [
     color: 'white',
     src: BannerPlay2,
     href: 'https://nomore-corset.womynarchive.com/',
+    type: 'normal',
   },
   {
     title: '2024 여성서사 등장인물 월드컵, 지금 개최!',
@@ -70,6 +111,7 @@ const banners = [
     color: 'white',
     src: BannerPlay3,
     href: 'https://play.womynarchive.com/character-worldcup',
+    type: 'normal',
   },
   {
     subject: '와카이브 아티클 : 유진과 유진',
@@ -81,7 +123,7 @@ const banners = [
     color: 'white',
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/yujin-and-yujin/',
-    type: 'review-movie',
+    type: 'normalReview',
   },
   {
     subject: '와카이브 아티클 : 타오르는 여인의 초상',
@@ -93,7 +135,7 @@ const banners = [
     color: 'white',
     src: BannerReview2,
     href: 'https://article.womynarchive.com/review/portrait-of-a-lady-on-fire/',
-    type: 'review-movie',
+    type: 'normalReview',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
@@ -103,6 +145,7 @@ const banners = [
     color: 'white',
     src: BannerRecruit,
     href: 'https://womynarchive.notion.site/75138cd619284d739f16f474d100b81f',
+    type: 'normal',
   },
 ];
 
@@ -175,7 +218,7 @@ export default function CarouselBanner() {
           <div key={`banner-${item.title}`}>
             <Stack
               height="150px"
-              direction={item?.type === 'review' ? 'row-reverse' : 'row'}
+              direction={bannerStyle[item.type].direction}
               justifyContent="space-between"
               position="relative"
               onClick={() => {
@@ -211,7 +254,7 @@ export default function CarouselBanner() {
                     level="body-xs"
                     fontWeight="400"
                     textColor={item.color}
-                    textAlign={item?.type === 'review' ? 'right' : 'left'}
+                    textAlign={bannerStyle[item.type].textAlign}
                     sx={{
                       wordBreak: 'keep-all',
                     }}
@@ -228,7 +271,7 @@ export default function CarouselBanner() {
                       level="body-lg"
                       fontWeight="bolder"
                       textColor={item.color}
-                      textAlign={item?.type === 'review' ? 'right' : 'left'}
+                      textAlign={bannerStyle[item.type].textAlign}
                       sx={{
                         wordBreak: 'keep-all',
                       }}
@@ -240,15 +283,17 @@ export default function CarouselBanner() {
 
                 {item?.description && (
                   <Typography
-                    className={item?.type?.includes('review') ? `review` : ''}
+                    className={
+                      bannerStyle[item.type].description ? `hidden` : ''
+                    }
                     level="body-xs"
                     fontWeight="400"
                     textColor={item.color}
-                    textAlign={item?.type === 'review' ? 'right' : 'left'}
+                    textAlign={bannerStyle[item.type].textAlign}
                     sx={{
                       wordBreak: 'keep-all',
                       '@media(max-width: 400px)': {
-                        '&.review': {
+                        '&.hidden': {
                           display: 'none',
                         },
                       },
@@ -266,17 +311,15 @@ export default function CarouselBanner() {
                 zIndex="2"
                 position="absolute"
                 sx={{
-                  background:
-                    item?.type === 'review'
-                      ? `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 100%)`
-                      : `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 50%, ${item.backgroundEndColor} 75%,  transparent 100%), url(${item.src})`,
+                  background: bannerStyle[item.type].bgGradient
+                    ? `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 50%, ${item.backgroundEndColor} 75%,  transparent 100%), url(${item.src})`
+                    : `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 100%)`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right',
                   '@media (max-width: 600px)': {
-                    background:
-                      item?.type === 'review'
-                        ? `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 100%)`
-                        : `linear-gradient(90deg, ${item.backgroundStartColor} 0%,  transparent 100%), url(${item.src})`,
+                    background: bannerStyle[item.type].bgGradient
+                      ? `linear-gradient(90deg, ${item.backgroundStartColor} 0%,  transparent 100%), url(${item.src})`
+                      : `linear-gradient(90deg, ${item.backgroundStartColor} 0%, ${item.backgroundStartColor} 100%)`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: '0% center',
                     backgroundSize: 'cover',
@@ -284,10 +327,10 @@ export default function CarouselBanner() {
                 }}
               />
 
-              {/* 배너 이미지 */}
-              {item?.type === 'review' ? (
+              {/* 배너 그래디언트 방식 아닐 때 이미지 렌더링 */}
+              {/* eslint-disable-next-line no-nested-ternary */}
+              {bannerStyle[item.type].imgType === 'mock' ? (
                 <Box
-                  width="100%"
                   height="180px"
                   zIndex="3"
                   position="absolute"
@@ -304,10 +347,25 @@ export default function CarouselBanner() {
                     },
                   }}
                 />
+              ) : bannerStyle[item.type].imgType === 'img' ? (
+                <Box
+                  width="100%"
+                  height="100%"
+                  minWidth="300px"
+                  zIndex="3"
+                  position="absolute"
+                  sx={{
+                    background: `url(${item.src})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'right',
+                  }}
+                />
               ) : (
                 <Box />
               )}
 
+              {/* 배너 순서 바 */}
               <Box
                 width="90%"
                 height="2px"

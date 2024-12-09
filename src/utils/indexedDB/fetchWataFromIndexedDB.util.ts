@@ -42,6 +42,10 @@ const syncWataFromServer = async (): Promise<void> => {
 
   const { watas, categories } = await getData<WataListType>('publish-wata');
 
+  if (!categories) {
+    return;
+  }
+
   const allCategory = categories[0];
 
   try {
