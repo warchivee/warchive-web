@@ -14,7 +14,13 @@ import {
 
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBullhorn, faPalette } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBullhorn,
+  faPalette,
+  faPenFancy,
+  faBook,
+  faLaptop,
+} from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 
 // utils
@@ -160,16 +166,40 @@ export default function WeeklyPopup() {
               <Card variant="soft">
                 <Stack>
                   <Stack direction="row" gap={0.5} alignItems="center">
-                    <FontAwesomeIcon icon={faPalette} />
-                    <Typography fontWeight="bold">디자인팀</Typography>
+                    <FontAwesomeIcon icon={faLaptop} />
+                    <Typography fontWeight="bold">개발팀</Typography>
                   </Stack>
 
-                  <Typography level="body-sm">- 웹 디자인</Typography>
                   <Typography level="body-sm">
-                    - 와카이브:아티클 이미지 제작
+                    - 와카이브 유지보수 (React)
                   </Typography>
+                  <Typography level="body-sm">
+                    - 와카이브: PLAY 신규 컨텐츠 개발 (Svelte)
+                  </Typography>
+                </Stack>
+              </Card>
+              <Card variant="soft">
+                <Stack>
+                  <Stack direction="row" gap={0.5} alignItems="center">
+                    <FontAwesomeIcon icon={faPenFancy} />
+                    <Typography fontWeight="bold">리뷰팀</Typography>
+                  </Stack>
 
-                  <Typography level="body-sm">- SNS 홍보물 제작</Typography>
+                  <Typography level="body-sm">
+                    - 와카이브: 아티클 여성서사 리뷰 작성
+                  </Typography>
+                </Stack>
+              </Card>
+              <Card variant="soft">
+                <Stack>
+                  <Stack direction="row" gap={0.5} alignItems="center">
+                    <FontAwesomeIcon icon={faBook} />
+                    <Typography fontWeight="bold">데이터팀</Typography>
+                  </Stack>
+
+                  <Typography level="body-sm">
+                    - 여성서사 데이터 수집 및 검수
+                  </Typography>
                 </Stack>
               </Card>
             </Stack>
