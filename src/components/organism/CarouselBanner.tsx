@@ -16,7 +16,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/yujinandyujin.png';
-import BannerReview2 from '@assets/banner/portraitofaladyonfire.png';
+import BannerReview2 from '@assets/banner/threewomengetabiggerhouse.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -114,6 +114,19 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 여자 셋이 모이면 집이 커진다',
+    title: '자기만의 방을 넘어 우리만의 방으로!',
+    description:
+      '이런게 삶이라면 좀 더 살아보고 싶다, 의외로 완벽한 공동생활 라이프',
+    backgroundStartColor: '#4CB725',
+    backgroundEndColor: '#4CB725',
+    textBackgroundColor: '#4CB725',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/three-women-get-a-bigger-house/',
+  },
+  {
     subject: '와카이브 아티클 : 유진과 유진',
     title: '너와 나, 우리는 함께 나아갈 수 있어',
     description: '비슷한 상처를 지닌 두 유진이 건네는 희망의 메시지',
@@ -123,18 +136,6 @@ const banners = [
     color: 'white',
     src: BannerReview1,
     href: 'https://article.womynarchive.com/review/yujin-and-yujin/',
-    type: 'normalReview',
-  },
-  {
-    subject: '와카이브 아티클 : 타오르는 여인의 초상',
-    title: '시대의 틈에서 타오르는 사랑을 품고 살았던 여성들',
-    description: '여성만이 존재하는 세계 속 여성의 관계와 사랑 ',
-    backgroundStartColor: '#378C93',
-    backgroundEndColor: '#378C9300',
-    textBackgroundColor: '#378C93',
-    color: 'white',
-    src: BannerReview2,
-    href: 'https://article.womynarchive.com/review/portrait-of-a-lady-on-fire/',
     type: 'normalReview',
   },
   {
