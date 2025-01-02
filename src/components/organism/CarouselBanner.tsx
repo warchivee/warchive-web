@@ -123,8 +123,8 @@ const banners = [
     textBackgroundColor: '#261E1B',
     color: 'white',
     src: BannerReview1,
-    type: 'review',
     href: 'https://article.womynarchive.com/review/in-defence-of-witches/',
+    type: 'review',
   },
   {
     subject: '와카이브 아티클 : 여자 셋이 모이면 집이 커진다',
@@ -136,8 +136,8 @@ const banners = [
     textBackgroundColor: '#4CB725',
     color: 'white',
     src: BannerReview2,
-    type: 'review',
     href: 'https://article.womynarchive.com/review/three-women-get-a-bigger-house/',
+    type: 'review',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
