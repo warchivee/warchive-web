@@ -15,7 +15,7 @@ import BannerPlay1 from '@assets/banner/award.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
-import BannerReview1 from '@assets/banner/yujinandyujin.png';
+import BannerReview1 from '@assets/banner/indefenceofwitches.png';
 import BannerReview2 from '@assets/banner/threewomengetabiggerhouse.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -114,6 +114,19 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 마녀',
+    title: '마녀 : 남들보다 튀는 여자들의 목을 쳐라',
+    description:
+      '화형의 시대부터 21세기까지, 마녀들의 후손을 위한 페미니즘 바이블',
+    backgroundStartColor: '#261E1B',
+    backgroundEndColor: '#261E1B',
+    textBackgroundColor: '#261E1B',
+    color: 'white',
+    src: BannerReview1,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/in-defence-of-witches/',
+  },
+  {
     subject: '와카이브 아티클 : 여자 셋이 모이면 집이 커진다',
     title: '자기만의 방을 넘어 우리만의 방으로!',
     description:
@@ -125,18 +138,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/three-women-get-a-bigger-house/',
-  },
-  {
-    subject: '와카이브 아티클 : 유진과 유진',
-    title: '너와 나, 우리는 함께 나아갈 수 있어',
-    description: '비슷한 상처를 지닌 두 유진이 건네는 희망의 메시지',
-    backgroundStartColor: '#487138',
-    backgroundEndColor: '#48713824',
-    textBackgroundColor: '#487138',
-    color: 'white',
-    src: BannerReview1,
-    href: 'https://article.womynarchive.com/review/yujin-and-yujin/',
-    type: 'normalReview',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
