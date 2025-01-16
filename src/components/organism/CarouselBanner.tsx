@@ -122,7 +122,7 @@ const banners = [
     textBackgroundColor: '#002178',
     color: 'white',
     src: BannerReview2,
-    type: 'normalReview',
+    type: 'review',
     href: 'https://article.womynarchive.com/review/blue-collar-women/',
   },
   {
@@ -135,7 +135,7 @@ const banners = [
     textBackgroundColor: '#261E1B',
     color: 'white',
     src: BannerReview1,
-    type: 'normalReview',
+    type: 'review',
     href: 'https://article.womynarchive.com/review/in-defence-of-witches/',
   },
   {
