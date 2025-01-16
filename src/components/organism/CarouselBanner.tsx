@@ -114,7 +114,7 @@ const banners = [
     type: 'normal',
   },
   {
-    subject: '와카이브 아티클 : 나, 블루칼라여자',
+    subject: '와카이브 아티클 : 나, 블루칼라 여자',
     title: '신체적 ‘차이’만 생각해도 되는 블루칼라 현장을 꿈꾸며',
     description: '각자의 자리에서 고군분투하고 있을 여성 노동자들에게',
     backgroundStartColor: '#002178',
