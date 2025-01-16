@@ -16,7 +16,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/worldcup.png';
 
 import BannerReview1 from '@assets/banner/indefenceofwitches.png';
-import BannerReview2 from '@assets/banner/threewomengetabiggerhouse.png';
+import BannerReview2 from '@assets/banner/bluecollarwomen.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -114,6 +114,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 나, 블루칼라여자',
+    title: '신체적 ‘차이’만 생각해도 되는 블루칼라 현장을 꿈꾸며',
+    description: '각자의 자리에서 고군분투하고 있을 여성 노동자들에게',
+    backgroundStartColor: '#002178',
+    backgroundEndColor: '#002178',
+    textBackgroundColor: '#002178',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/blue-collar-women/',
+  },
+  {
     subject: '와카이브 아티클 : 마녀',
     title: '마녀 : 남들보다 튀는 여자들의 목을 쳐라',
     description:
@@ -123,21 +135,8 @@ const banners = [
     textBackgroundColor: '#261E1B',
     color: 'white',
     src: BannerReview1,
+    type: 'review',
     href: 'https://article.womynarchive.com/review/in-defence-of-witches/',
-    type: 'review',
-  },
-  {
-    subject: '와카이브 아티클 : 여자 셋이 모이면 집이 커진다',
-    title: '자기만의 방을 넘어 우리만의 방으로!',
-    description:
-      '이런게 삶이라면 좀 더 살아보고 싶다, 의외로 완벽한 공동생활 라이프',
-    backgroundStartColor: '#4CB725',
-    backgroundEndColor: '#4CB725',
-    textBackgroundColor: '#4CB725',
-    color: 'white',
-    src: BannerReview2,
-    href: 'https://article.womynarchive.com/review/three-women-get-a-bigger-house/',
-    type: 'review',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
