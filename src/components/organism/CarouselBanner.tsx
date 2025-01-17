@@ -332,6 +332,7 @@ export default function CarouselBanner() {
               {/* eslint-disable-next-line no-nested-ternary */}
               {bannerStyle[item.type].imgType === 'mock' ? (
                 <Box
+                  width="100%"
                   height="180px"
                   zIndex="3"
                   position="absolute"
@@ -340,9 +341,8 @@ export default function CarouselBanner() {
                     background: `url(${item.src})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'contain',
-                    width: '100%',
-                    height: '150px',
                     '@media (max-width: 600px)': {
+                      height: '150px',
                       top: '-5px',
                       left: '-20px',
                     },
