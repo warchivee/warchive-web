@@ -208,7 +208,7 @@ export default function WeeklyPopup() {
                 variant="soft"
                 onClick={() => {
                   window.open(
-                    'https://heavenly-geese-701.notion.site/2bfd3e7b37f84dc6b1c291d94719e976',
+                    'https://heavenly-geese-701.notion.site/2bfd3e7b37f84dc6b1c291d94719e976?pvs=4',
                   );
                 }}
               >
