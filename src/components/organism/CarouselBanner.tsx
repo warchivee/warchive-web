@@ -145,7 +145,7 @@ const banners = [
     textBackgroundColor: '#5900914D',
     color: 'white',
     src: BannerRecruit,
-    href: 'https://womynarchive.notion.site/75138cd619284d739f16f474d100b81f',
+    href: 'https://heavenly-geese-701.notion.site/2bfd3e7b37f84dc6b1c291d94719e976f',
     type: 'normal',
   },
 ];
