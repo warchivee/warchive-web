@@ -13,7 +13,7 @@ import Banner from '@assets/banner/RiU.png';
 
 import BannerPlay1 from '@assets/banner/award.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
-import BannerPlay3 from '@assets/banner/worldcup.png';
+import BannerPlay3 from '@assets/banner/typing.png';
 
 import BannerReview1 from '@assets/banner/indefenceofwitches.png';
 import BannerReview2 from '@assets/banner/bluecollarwomen.png';
@@ -67,6 +67,18 @@ const bannerStyle: Record<string, any> = {
  */
 const banners = [
   {
+    title: '디지털 필사 서비스: Type Her Story',
+    description:
+      '세상을 바꾼 여성들의 강렬한 말의 힘을 지금 당신의 손끝에서 다시 느껴보세요.',
+    backgroundStartColor: '#786A7D',
+    backgroundEndColor: '#D9BFE300',
+    textBackgroundColor: '#786A7D',
+    color: 'white',
+    src: BannerPlay3,
+    href: 'https://article.womynarchive.com/type-her-story',
+    type: 'normalFlat',
+  },
+  {
     title: '2024 여성서사 베스트 콤비 어워드 개최!',
     description: '올해 여러분의 마음을 울린 최고의 여성 듀오는 누구인가요?',
     backgroundStartColor: '#DEB500',
@@ -99,18 +111,6 @@ const banners = [
     color: 'white',
     src: BannerPlay2,
     href: 'https://nomore-corset.womynarchive.com/',
-    type: 'normal',
-  },
-  {
-    title: '2024 여성서사 등장인물 월드컵, 지금 개최!',
-    description:
-      '고르기 어려운 나의 최애, 당신의 원픽 여성서사 최애캐를 골라보세요',
-    backgroundStartColor: '#8BCC00',
-    backgroundEndColor: '#BFD7AC00',
-    textBackgroundColor: '#5C8001',
-    color: 'white',
-    src: BannerPlay3,
-    href: 'https://play.womynarchive.com/character-worldcup',
     type: 'normal',
   },
   {
