@@ -15,7 +15,7 @@ import BannerPlay1 from '@assets/banner/award.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
-import BannerReview1 from '@assets/banner/indefenceofwitches.png';
+import BannerReview1 from '@assets/banner/sirensurvivetheisland.png';
 import BannerReview2 from '@assets/banner/bluecollarwomen.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -114,6 +114,19 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 사이렌: 불의 섬',
+    title: '강인한 여성들의 극한 경쟁 서바이벌',
+    description:
+      '여경, 아가씨가 아니고 형사입니다.  가려졌던 여성들의 통쾌한 한판 승부',
+    backgroundStartColor: '#6F1B05',
+    backgroundEndColor: '#6F1B0519',
+    textBackgroundColor: '#6F1B05',
+    color: 'white',
+    src: BannerReview1,
+    type: 'normalReview',
+    href: 'https://article.womynarchive.com/review/siren-survive-the-island/',
+  },
+  {
     subject: '와카이브 아티클 : 나, 블루칼라 여자',
     title: '신체적 ‘차이’만 생각해도 되는 블루칼라 현장을 꿈꾸며',
     description: '각자의 자리에서 고군분투하고 있을 여성 노동자들에게',
@@ -124,19 +137,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/blue-collar-women/',
-  },
-  {
-    subject: '와카이브 아티클 : 마녀',
-    title: '마녀 : 남들보다 튀는 여자들의 목을 쳐라',
-    description:
-      '화형의 시대부터 21세기까지, 마녀들의 후손을 위한 페미니즘 바이블',
-    backgroundStartColor: '#261E1B',
-    backgroundEndColor: '#261E1B',
-    textBackgroundColor: '#261E1B',
-    color: 'white',
-    src: BannerReview1,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/in-defence-of-witches/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
