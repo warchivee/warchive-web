@@ -16,7 +16,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
 import BannerReview1 from '@assets/banner/sirensurvivetheisland.png';
-import BannerReview2 from '@assets/banner/bluecollarwomen.png';
+import BannerReview2 from '@assets/banner/unmadewomensclothes.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -114,6 +114,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 여성복은 아직 만들어지지 않았다',
+    title: '여성을 위한 여성복은 없다',
+    description: '여남 의복의 차별적 실태를 마주하다',
+    backgroundStartColor: '#D9C3B2',
+    backgroundEndColor: '#D9C3B2',
+    textBackgroundColor: '#D9C3B2',
+    color: 'black',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/unmade-womens-clothes/',
+  },
+  {
     subject: '와카이브 아티클 : 사이렌: 불의 섬',
     title: '강인한 여성들의 극한 경쟁 서바이벌',
     description:
@@ -125,18 +137,6 @@ const banners = [
     src: BannerReview1,
     type: 'normalReview',
     href: 'https://article.womynarchive.com/review/siren-survive-the-island/',
-  },
-  {
-    subject: '와카이브 아티클 : 나, 블루칼라 여자',
-    title: '신체적 ‘차이’만 생각해도 되는 블루칼라 현장을 꿈꾸며',
-    description: '각자의 자리에서 고군분투하고 있을 여성 노동자들에게',
-    backgroundStartColor: '#002178',
-    backgroundEndColor: '#002178',
-    textBackgroundColor: '#002178',
-    color: 'white',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/blue-collar-women/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
