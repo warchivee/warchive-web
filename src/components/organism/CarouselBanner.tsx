@@ -15,7 +15,7 @@ import BannerPlay1 from '@assets/banner/award.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
-import BannerReview1 from '@assets/banner/sirensurvivetheisland.png';
+import BannerReview1 from '@assets/banner/fridathelastnightshow.png';
 import BannerReview2 from '@assets/banner/unmadewomensclothes.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -114,6 +114,19 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 프리다',
+    title: '그럼에도 불구하고, 인생이여 만세!',
+    description:
+      '여성의 목소리로 재구성된 예술가 프리다 칼로의 삶, 여성 4인극 <프리다>',
+    backgroundStartColor: '#B30000',
+    backgroundEndColor: '#A8000317',
+    textBackgroundColor: '#B30000',
+    color: 'white',
+    src: BannerReview1,
+    type: 'normalReview',
+    href: 'https://article.womynarchive.com/review/frida-the-last-night-show/',
+  },
+  {
     subject: '와카이브 아티클 : 여성복은 아직 만들어지지 않았다',
     title: '여성을 위한 여성복은 없다',
     description: '여남 의복의 차별적 실태를 마주하다',
@@ -124,19 +137,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/unmade-womens-clothes/',
-  },
-  {
-    subject: '와카이브 아티클 : 사이렌: 불의 섬',
-    title: '강인한 여성들의 극한 경쟁 서바이벌',
-    description:
-      '여경, 아가씨가 아니고 형사입니다.  가려졌던 여성들의 통쾌한 한판 승부',
-    backgroundStartColor: '#6F1B05',
-    backgroundEndColor: '#6F1B0519',
-    textBackgroundColor: '#6F1B05',
-    color: 'white',
-    src: BannerReview1,
-    type: 'normalReview',
-    href: 'https://article.womynarchive.com/review/siren-survive-the-island/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
