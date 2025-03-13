@@ -16,7 +16,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
 import BannerReview1 from '@assets/banner/fridathelastnightshow.png';
-import BannerReview2 from '@assets/banner/unmadewomensclothes.png';
+import BannerReview2 from '@assets/banner/everythingeverywhereallatonce.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -114,6 +114,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 에브리씽 에브리웨어 올 앳 원스',
+    title: '부질없는 세상이라도 사랑하는 네가 있다면,',
+    description: '무한한 가능성 속에서 건네는 따뜻한 위로',
+    backgroundStartColor: '#B07F31',
+    backgroundEndColor: '#AF7F301C',
+    textBackgroundColor: '#B07F31',
+    color: 'white',
+    src: BannerReview2,
+    type: 'normalReview',
+    href: 'https://article.womynarchive.com/review/everything-everywhere-all-at-once/',
+  },
+  {
     subject: '와카이브 아티클 : 프리다',
     title: '그럼에도 불구하고, 인생이여 만세!',
     description:
@@ -125,18 +137,6 @@ const banners = [
     src: BannerReview1,
     type: 'normalReview',
     href: 'https://article.womynarchive.com/review/frida-the-last-night-show/',
-  },
-  {
-    subject: '와카이브 아티클 : 여성복은 아직 만들어지지 않았다',
-    title: '여성을 위한 여성복은 없다',
-    description: '여남 의복의 차별적 실태를 마주하다',
-    backgroundStartColor: '#D9C3B2',
-    backgroundEndColor: '#D9C3B2',
-    textBackgroundColor: '#D9C3B2',
-    color: 'black',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/unmade-womens-clothes/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
