@@ -11,11 +11,10 @@ import { Box, IconButton, Stack, Typography } from '@mui/joy';
 
 import Banner from '@assets/banner/RiU.png';
 
-import BannerPlay1 from '@assets/banner/award.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
-import BannerReview1 from '@assets/banner/fridathelastnightshow.png';
+import BannerReview1 from '@assets/banner/mariacurie.png';
 import BannerReview2 from '@assets/banner/everythingeverywhereallatonce.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
@@ -79,17 +78,6 @@ const banners = [
     type: 'normalFlat',
   },
   {
-    title: '2024 여성서사 베스트 콤비 어워드 개최!',
-    description: '올해 여러분의 마음을 울린 최고의 여성 듀오는 누구인가요?',
-    backgroundStartColor: '#DEB500',
-    backgroundEndColor: '#DEB500',
-    textBackgroundColor: '#DEB500',
-    color: 'white',
-    src: BannerPlay1,
-    href: 'https://play.womynarchive.com/best-duo-award-2024',
-    type: 'normalFlat',
-  },
-  {
     title: '대학 내 래디컬의 계보 기록 프로젝트',
     description:
       '한국 여성주의 운동의 순간이 사라지지 않도록 , 뜨거운 활동의 순간을 보존하다',
@@ -114,6 +102,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 마리 퀴리',
+    title: '젊고 푸르른 과학계의 별, 그 너머의 고통과 희망',
+    description: '시대의 억압을  넘고자 한 위대한 과학자, 마리 퀴리의 삶',
+    backgroundStartColor: '#1B202D',
+    backgroundEndColor: '#1B1F2C1A',
+    textBackgroundColor: '#1B202D',
+    color: 'white',
+    src: BannerReview1,
+    type: 'normalReview',
+    href: 'https://article.womynarchive.com/review/maria-curie/',
+  },
+  {
     subject: '와카이브 아티클 : 에브리씽 에브리웨어 올 앳 원스',
     title: '부질없는 세상이라도 사랑하는 네가 있다면,',
     description: '무한한 가능성 속에서 건네는 따뜻한 위로',
@@ -124,19 +124,6 @@ const banners = [
     src: BannerReview2,
     type: 'normalReview',
     href: 'https://article.womynarchive.com/review/everything-everywhere-all-at-once/',
-  },
-  {
-    subject: '와카이브 아티클 : 프리다',
-    title: '그럼에도 불구하고, 인생이여 만세!',
-    description:
-      '여성의 목소리로 재구성된 예술가 프리다 칼로의 삶, 여성 4인극 <프리다>',
-    backgroundStartColor: '#B30000',
-    backgroundEndColor: '#A8000317',
-    textBackgroundColor: '#B30000',
-    color: 'white',
-    src: BannerReview1,
-    type: 'normalReview',
-    href: 'https://article.womynarchive.com/review/frida-the-last-night-show/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
