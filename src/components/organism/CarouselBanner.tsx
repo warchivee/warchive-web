@@ -103,7 +103,7 @@ const banners = [
   },
   {
     subject: '와카이브 아티클 : 마리 퀴리',
-    title: '젊고 푸르른 과학계의 별, 그 너머의 고통과 희망',
+    title: '짙고 푸르른 과학계의 별, 그 너머의 고통과 희망',
     description: '시대의 억압을  넘고자 한 위대한 과학자, 마리 퀴리의 삶',
     backgroundStartColor: '#1B202D',
     backgroundEndColor: '#1B1F2C1A',
