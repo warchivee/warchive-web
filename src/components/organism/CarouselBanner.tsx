@@ -17,7 +17,7 @@ import BannerPlay3 from '@assets/banner/typing.png';
 import BannerReview1 from '@assets/banner/mariacurie.png';
 import BannerReview2 from '@assets/banner/meetingkoreanhalmaegods.png';
 
-import BannerRecruit from '@assets/banner/구인.png';
+// import BannerRecruit from '@assets/banner/구인.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -125,16 +125,17 @@ const banners = [
     type: 'normalReview',
     href: 'https://article.womynarchive.com/review/maria-curie/',
   },
-  {
-    title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
-    backgroundStartColor: '#590091',
-    backgroundEndColor: '#D388FF14',
-    textBackgroundColor: '#5900914D',
-    color: 'white',
-    src: BannerRecruit,
-    href: 'https://heavenly-geese-701.notion.site/2bfd3e7b37f84dc6b1c291d94719e976',
-    type: 'normal',
-  },
+  // 구인 시 주석 해제
+  // {
+  //   title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
+  //   backgroundStartColor: '#590091',
+  //   backgroundEndColor: '#D388FF14',
+  //   textBackgroundColor: '#5900914D',
+  //   color: 'white',
+  //   src: BannerRecruit,
+  //   href: 'https://heavenly-geese-701.notion.site/2bfd3e7b37f84dc6b1c291d94719e976',
+  //   type: 'normal',
+  // },
 ];
 
 function SamplePrevArrow(props: {
