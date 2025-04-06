@@ -15,7 +15,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
 import BannerReview1 from '@assets/banner/mariacurie.png';
-import BannerReview2 from '@assets/banner/everythingeverywhereallatonce.png';
+import BannerReview2 from '@assets/banner/meetingkoreanhalmaegods.png';
 
 import BannerRecruit from '@assets/banner/구인.png';
 
@@ -102,6 +102,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 한국의 할매신을 만나다',
+    title: '한국의 할매신을 만나다: 여성, 나 자신을 찾아서',
+    description: '남성 권위가 허용한 ‘모성의 신’들을 비판하며',
+    backgroundStartColor: '#994848',
+    backgroundEndColor: '#994848',
+    textBackgroundColor: '#994848',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/meeting-korean-halmae-gods/',
+  },
+  {
     subject: '와카이브 아티클 : 마리 퀴리',
     title: '짙고 푸르른 과학계의 별, 그 너머의 고통과 희망',
     description: '시대의 억압을  넘고자 한 위대한 과학자, 마리 퀴리의 삶',
@@ -112,18 +124,6 @@ const banners = [
     src: BannerReview1,
     type: 'normalReview',
     href: 'https://article.womynarchive.com/review/maria-curie/',
-  },
-  {
-    subject: '와카이브 아티클 : 에브리씽 에브리웨어 올 앳 원스',
-    title: '부질없는 세상이라도 사랑하는 네가 있다면,',
-    description: '무한한 가능성 속에서 건네는 따뜻한 위로',
-    backgroundStartColor: '#B07F31',
-    backgroundEndColor: '#AF7F301C',
-    textBackgroundColor: '#B07F31',
-    color: 'white',
-    src: BannerReview2,
-    type: 'normalReview',
-    href: 'https://article.womynarchive.com/review/everything-everywhere-all-at-once/',
   },
   {
     title: 'ONLY FOR YOU\n지금, 와카이브 신규 팀원 모집중',
