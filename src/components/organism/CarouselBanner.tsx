@@ -14,7 +14,7 @@ import Banner from '@assets/banner/RiU.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
-import BannerReview1 from '@assets/banner/mariacurie.png';
+import BannerReview1 from '@assets/banner/deepandbeautifulforest.png';
 import BannerReview2 from '@assets/banner/meetingkoreanhalmaegods.png';
 
 // import BannerRecruit from '@assets/banner/구인.png';
@@ -102,6 +102,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 숲은 깊고 아름다운데',
+    title: '숲은 깊고 아름다운데: 동화 여주 잔혹사',
+    description: '로맨스는 누구의 욕망인가?',
+    backgroundStartColor: '#749873',
+    backgroundEndColor: '#749873',
+    textBackgroundColor: '#749873',
+    color: 'white',
+    src: BannerReview1,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/deep-and-beautiful-forest/',
+  },
+  {
     subject: '와카이브 아티클 : 한국의 할매신을 만나다',
     title: '한국의 할매신을 만나다: 여성, 나 자신을 찾아서',
     description: '남성 권위가 허용한 ‘모성의 신’들을 비판하며',
@@ -112,18 +124,6 @@ const banners = [
     src: BannerReview2,
     type: 'review',
     href: 'https://article.womynarchive.com/review/meeting-korean-halmae-gods/',
-  },
-  {
-    subject: '와카이브 아티클 : 마리 퀴리',
-    title: '짙고 푸르른 과학계의 별, 그 너머의 고통과 희망',
-    description: '시대의 억압을  넘고자 한 위대한 과학자, 마리 퀴리의 삶',
-    backgroundStartColor: '#1B202D',
-    backgroundEndColor: '#1B1F2C1A',
-    textBackgroundColor: '#1B202D',
-    color: 'white',
-    src: BannerReview1,
-    type: 'normalReview',
-    href: 'https://article.womynarchive.com/review/maria-curie/',
   },
   // 구인 시 주석 해제
   // {
