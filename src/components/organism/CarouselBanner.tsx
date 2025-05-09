@@ -15,7 +15,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
 import BannerReview1 from '@assets/banner/deepandbeautifulforest.png';
-import BannerReview2 from '@assets/banner/meetingkoreanhalmaegods.png';
+import BannerReview2 from '@assets/banner/detectiveparkmiok.png';
 
 // import BannerRecruit from '@assets/banner/구인.png';
 
@@ -102,6 +102,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 형사 박미옥',
+    title: '여성혐오 속에서 ‘형사의 길’ 을 만들다',
+    description: '한국 경찰 역사상 최초의 강력계 여형사, 최초의 여성 강력반장',
+    backgroundStartColor: '#002DC0',
+    backgroundEndColor: '#002DC0',
+    textBackgroundColor: '#002DC0',
+    color: 'white',
+    src: BannerReview2,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/detective-park-mi-ok/',
+  },
+  {
     subject: '와카이브 아티클 : 숲은 깊고 아름다운데',
     title: '숲은 깊고 아름다운데: 동화 여주 잔혹사',
     description: '로맨스는 누구의 욕망인가?',
@@ -112,18 +124,6 @@ const banners = [
     src: BannerReview1,
     type: 'review',
     href: 'https://article.womynarchive.com/review/deep-and-beautiful-forest/',
-  },
-  {
-    subject: '와카이브 아티클 : 한국의 할매신을 만나다',
-    title: '한국의 할매신을 만나다: 여성, 나 자신을 찾아서',
-    description: '남성 권위가 허용한 ‘모성의 신’들을 비판하며',
-    backgroundStartColor: '#994848',
-    backgroundEndColor: '#994848',
-    textBackgroundColor: '#994848',
-    color: 'white',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/meeting-korean-halmae-gods/',
   },
   // 구인 시 주석 해제
   // {
