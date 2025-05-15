@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookBookmark } from '@fortawesome/free-solid-svg-icons';
 
 // utils
+import useScrapbooks from 'src/hooks/useScrapbooks';
 import { KeywordType, PlatformType, WataType } from 'src/types/wata.type';
 import { checkLogin } from 'src/services/auth.api';
 import useModal from 'src/hooks/useModal';
@@ -23,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 export default function WataCard({ wata }: { wata: WataType }) {
   const [isOpenScrapbookAddModel, setIsScrapbookAddModal] =
     useState<boolean>(false);
+  const { hasScrapbook } = useScrapbooks();
   const [openLoginModal] = useModal();
   const cropThumbnail = useCropThumbnail(wata, 'card');
   const navigate = useNavigate();
@@ -80,7 +82,10 @@ export default function WataCard({ wata }: { wata: WataType }) {
               marginTop: '5px',
             }}
           >
-            <FontAwesomeIcon color="white" icon={faBookBookmark} />
+            <FontAwesomeIcon
+              color={hasScrapbook(wata.id) ? '#B169DD' : 'white'}
+              icon={faBookBookmark}
+            />
           </IconButton>
         </Stack>
 

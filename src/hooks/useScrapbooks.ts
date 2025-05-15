@@ -68,6 +68,9 @@ export const useScrapbook = () => {
     return result;
   };
 
+  const hasScrapbook = (wataId: number) =>
+    getScrapbooks().some((s) => s.items.includes(wataId));
+
   const selectScrapbook = (index: number) => {
     setScrapbookState({ ...scrapbookState, selectedIndex: index });
   };
@@ -239,6 +242,7 @@ export const useScrapbook = () => {
   return {
     refreshScrapbookState,
     isScrapbooksEmpty,
+    hasScrapbook,
     getSelectScrapbookIndex,
     getScrapbook,
     getScrapbooks,
