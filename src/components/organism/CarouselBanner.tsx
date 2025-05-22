@@ -109,7 +109,7 @@ const banners = [
     backgroundStartColor: '#ABEEF5',
     backgroundEndColor: '#ABEEF5',
     textBackgroundColor: '#ABEEF5',
-    color: 'white',
+    color: 'black',
     src: BannerReview1,
     type: 'review',
     href: 'https://article.womynarchive.com/review/the-gender-of-capital/',
