@@ -15,7 +15,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
 import BannerReview1 from '@assets/banner/thegenderofcapital.png';
-import BannerReview2 from '@assets/banner/detectiveparkmiok.png';
+import BannerReview2 from '@assets/banner/afterthecurtaincall.png';
 
 // import BannerRecruit from '@assets/banner/구인.png';
 
@@ -102,6 +102,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 애프터 커튼콜',
+    title: '연극이 끝나면 시작되는 우리의 이야기',
+    description: '“난 소영 씨 덕분에 여기 있는 거예요.”',
+    backgroundStartColor: '#D5D3D0',
+    backgroundEndColor: '#D5D3D01A',
+    textBackgroundColor: '#D5D3D0',
+    color: 'black',
+    src: BannerReview2,
+    type: 'normalReview',
+    href: 'https://article.womynarchive.com/review/after-the-curtain-call/',
+  },
+  {
     subject: '와카이브 아티클 : 자본의 성별',
     title: '딸의 노동, 아들의 상속',
     description:
@@ -113,18 +125,6 @@ const banners = [
     src: BannerReview1,
     type: 'review',
     href: 'https://article.womynarchive.com/review/the-gender-of-capital/',
-  },
-  {
-    subject: '와카이브 아티클 : 형사 박미옥',
-    title: '여성혐오 속에서 ‘형사의 길’ 을 만들다',
-    description: '한국 경찰 역사상 최초의 강력계 여형사, 최초의 여성 강력반장',
-    backgroundStartColor: '#002DC0',
-    backgroundEndColor: '#002DC0',
-    textBackgroundColor: '#002DC0',
-    color: 'white',
-    src: BannerReview2,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/detective-park-mi-ok/',
   },
   // 구인 시 주석 해제
   // {
