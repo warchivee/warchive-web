@@ -14,7 +14,7 @@ import Banner from '@assets/banner/RiU.png';
 import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
-import BannerReview1 from '@assets/banner/thegenderofcapital.png';
+import BannerReview1 from '@assets/banner/ourbodiestheirbattlefield.png';
 import BannerReview2 from '@assets/banner/afterthecurtaincall.png';
 
 // import BannerRecruit from '@assets/banner/구인.png';
@@ -102,6 +102,18 @@ const banners = [
     type: 'normal',
   },
   {
+    subject: '와카이브 아티클 : 관통당한 몸',
+    title: '전쟁의 가장 값싼 무기, 강간',
+    description: '우리는 분노하고, 싸워야 한다.',
+    backgroundStartColor: '#FFFFAC',
+    backgroundEndColor: '#FFFFAC',
+    textBackgroundColor: '#FFFFAC',
+    color: 'black',
+    src: BannerReview1,
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/our-bodies-their-battlefield/',
+  },
+  {
     subject: '와카이브 아티클 : 애프터 커튼콜',
     title: '연극이 끝나면 시작되는 우리의 이야기',
     description: '“난 소영 씨 덕분에 여기 있는 거예요.”',
@@ -112,19 +124,6 @@ const banners = [
     src: BannerReview2,
     type: 'normalReview',
     href: 'https://article.womynarchive.com/review/after-the-curtain-call/',
-  },
-  {
-    subject: '와카이브 아티클 : 자본의 성별',
-    title: '딸의 노동, 아들의 상속',
-    description:
-      '“여성과 남성 간 자산 불평등은 월스트리트가 아니라 가족의 일상에서 생겨난다!”',
-    backgroundStartColor: '#ABEEF5',
-    backgroundEndColor: '#ABEEF5',
-    textBackgroundColor: '#ABEEF5',
-    color: 'black',
-    src: BannerReview1,
-    type: 'review',
-    href: 'https://article.womynarchive.com/review/the-gender-of-capital/',
   },
   // 구인 시 주석 해제
   // {
