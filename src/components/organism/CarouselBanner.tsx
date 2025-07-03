@@ -15,7 +15,7 @@ import BannerPlay2 from '@assets/banner/nomorecorset.png';
 import BannerPlay3 from '@assets/banner/typing.png';
 
 import BannerReview1 from '@assets/banner/ourbodiestheirbattlefield.png';
-import BannerReview2 from '@assets/banner/afterthecurtaincall.png';
+import BannerReview2 from '@assets/banner/greenhouseattheendoftheearth.png';
 
 // import BannerRecruit from '@assets/banner/구인.png';
 
@@ -114,16 +114,16 @@ const banners = [
     href: 'https://article.womynarchive.com/review/our-bodies-their-battlefield/',
   },
   {
-    subject: '와카이브 아티클 : 애프터 커튼콜',
-    title: '연극이 끝나면 시작되는 우리의 이야기',
-    description: '“난 소영 씨 덕분에 여기 있는 거예요.”',
-    backgroundStartColor: '#D5D3D0',
-    backgroundEndColor: '#D5D3D01A',
-    textBackgroundColor: '#D5D3D0',
-    color: 'black',
+    subject: '와카이브 아티클 : 지구 끝의 온실',
+    title: '멸망한 세계에 뿌리내리는 것은',
+    description: '“이곳은 불안정한 기반 위에 세워진 도피처였다.”',
+    backgroundStartColor: '#D837B5',
+    backgroundEndColor: '#D837B5',
+    textBackgroundColor: '#D837B5',
+    color: 'white',
     src: BannerReview2,
-    type: 'normalReview',
-    href: 'https://article.womynarchive.com/review/after-the-curtain-call/',
+    type: 'review',
+    href: 'https://article.womynarchive.com/review/our-bodies-their-battlefield/',
   },
   // 구인 시 주석 해제
   // {
