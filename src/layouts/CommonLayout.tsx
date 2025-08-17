@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import Footer from '@components/organism/Footer';
@@ -10,7 +10,7 @@ import { PageLoader } from '@components/CommonComponents/loader';
 import ErrorFallback from './ErrorFallback';
 
 export default function CommonLayout() {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
   return (
     <div className="layout">
       <Header />
