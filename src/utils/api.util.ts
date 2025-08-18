@@ -37,10 +37,12 @@ api.interceptors.request.use(
   async (config) => {
     const newConfig = { ...config };
 
+    // 로그인 필요 없는 api path 리스트
     if (
       newConfig.url === 'auth/login' ||
       newConfig.url === 'publish-wata' ||
-      newConfig.url?.includes('scrapbook/shared')
+      newConfig.url?.includes('scrapbook/shared') ||
+      newConfig.url === 'banner'
     ) {
       return newConfig;
     }
