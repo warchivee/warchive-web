@@ -31,7 +31,7 @@ export default function Login() {
       </div>
 
       <div className="infos">
-        <Link to="/service">
+        <Link to="/terms">
           <Text size="small">이용약관</Text>
         </Link>
 
