@@ -3,13 +3,17 @@ import { useEffect } from 'react';
 import { kakaoLogin } from 'src/services/kakao.api';
 
 export default function LoginRedirect() {
-  const code = new URL(window.location.href).searchParams.get('code');
+  const { searchParams } = new URL(window.location.href);
+
+  const code = searchParams.get('code');
+  const rd = sessionStorage.getItem('rd') || '/';
+  sessionStorage.removeItem('rd');
 
   useEffect(() => {
     if (code) {
-      kakaoLogin(code);
+      kakaoLogin(code, rd);
     }
-  }, [code]);
+  }, [code, rd]);
 
   return <PageLoader />;
 }

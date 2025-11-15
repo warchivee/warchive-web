@@ -39,13 +39,18 @@ const getKakaoLoginInfo = async (tokenType: string, accessToken: string) => {
   return data;
 };
 
-export const getKakaoLoginPageUrl = () =>
+export const getKakaoLoginPageUrl = () => {
   // step 1. 인가 코드 받기 https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code
-  `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
+  const params = new URLSearchParams(window.location.search);
+  const rd = params.get('rd') || '/';
+  sessionStorage.setItem('rd', rd);
+
+  return `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
     import.meta.env.VITE_KAKAO_API_KEY
   }&redirect_uri=${window.location.origin}${import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_PATH}`;
+};
 
-export const kakaoLogin = async (authCode: string) => {
+export const kakaoLogin = async (authCode: string, rd?: string) => {
   // step 2. 토큰 받기 https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token
   const kakaoToken = await getKakaoToken(authCode);
 
@@ -61,7 +66,8 @@ export const kakaoLogin = async (authCode: string) => {
       platform: 'kakao',
     });
 
-    window.location.href = '/';
+    const redirectUrl = rd || '/';
+    window.location.href = redirectUrl;
   } catch (error) {
     failLogin();
     throw error;
