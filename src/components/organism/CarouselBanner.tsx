@@ -88,7 +88,24 @@ export default function CarouselBanner() {
         ),
       ];
 
-      setBanners(selected);
+      setBanners([
+        {
+          id: 999,
+          type: 'PLAY',
+          title: '연말, 2025년 돌아보기: 여성서사 영수증',
+          sub_title: null,
+          intro:
+            '와카이브의 여성서사 영수증으로 올 한 해 함께했던 작품을 돌아보세요.',
+          image: 'https://i.ibb.co/32d3Cz4/receipt-banner.png',
+          url: 'https://article.womynarchive.com/receipt-her-story',
+          text_color: 'white',
+          bg_start_color: 'FF17FB',
+          bg_end_color: 'FF17FB00',
+          style: 'BLEND',
+          status: 'POSTED',
+        },
+        ...selected,
+      ]);
     };
 
     fetchBanners();
